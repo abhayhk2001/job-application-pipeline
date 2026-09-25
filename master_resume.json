@@ -1,0 +1,2266 @@
+{
+  "schema": {
+    "base": "JSON Resume Schema (https://jsonresume.org/schema/)",
+    "extension": "abhay-master-resume/v1",
+    "version": "1.0.0",
+    "last_updated": "2026-09-25",
+    "purpose": "Lossless, role-neutral career data lake. Injected wholesale into an LLM's context so a downstream agent can synthesize a job-specific resume. This file stores ATOMIC FACTS ONLY - never resume-ready bullet prose. It is self-contained: no external documents are referenced.",
+    "hard_rules": [
+      "No resume bullet points anywhere in this file. Bullets are written by the downstream generator, not stored here.",
+      "No role optimization. Ordering carries no emphasis. Nothing here is tuned for ML, systems, backend or research roles.",
+      "Nothing is invented. Unknown values are null and mirrored into metadata.needs_input.",
+      "All figures here are candidate-confirmed. Anything still uncertain is marked `confidence: \"needs_input\"` with a matching question in metadata.needs_input."
+    ]
+  },
+  "basics": {
+    "name": "Abhay Harish Kashyap",
+    "also_known_as": [
+      "Abhay H Kashyap"
+    ],
+    "email": "abhayhk2001@gmail.com",
+    "phone": "+1 217 305 1018",
+    "url": null,
+    "profiles": [
+      {
+        "network": "LinkedIn",
+        "username": "abhay-h-kashyap",
+        "url": "https://www.linkedin.com/in/abhay-h-kashyap/"
+      },
+      {
+        "network": "GitHub",
+        "username": "abhayhk2001",
+        "url": "https://github.com/abhayhk2001"
+      }
+    ],
+    "location": {
+      "city": "Champaign",
+      "region": "IL",
+      "countryCode": "USA",
+      "confidence": "needs_input",
+      "note": "Phone number is a US (+1 217, Champaign IL area) line and UIUC enrollment begins 2026-08; current city of residence is not recorded."
+    },
+    "work_authorization": {
+      "value": null,
+      "confidence": "needs_input"
+    },
+    "summaries": {
+      "note": "Length variants only. These are deliberately role-neutral; pick by available space, not by target role.",
+      "one_line": "Software engineer and published researcher whose work spans embedded firmware, distributed data systems and applied machine learning; incoming MS in Computer Science at the University of Illinois Urbana-Champaign.",
+      "short": "Software engineer at Qualcomm India (January 2023 - July 2026) on the Device Firmware Update team, with prior software engineering internships at Intel Solutions & Services India and Epsilon. Three peer-reviewed publications across computational biology, causal inference and document AI. B.E. in Computer Science from RV College of Engineering (GPA 9.22); incoming MS CS at UIUC, August 2026.",
+      "long": "Abhay Harish Kashyap is a software engineer whose experience covers three distinct layers of the stack. At Qualcomm India he worked on the Device Firmware Update team from January 2023 to July 2026, joining as an Associate Engineer and being promoted to Software Engineer, where he owned SoC upgrade solutions, a data-relay mechanism, a core DFU refactor delivered across two major client releases, and the upgrade framework used to deploy embedded ML models to hearable devices. At Intel Solutions & Services India he worked in Customer Engineering on EV-telemetry JSON processing, cryptographic acceleration for a national stock exchange, and a Spark/Kubernetes/Kafka ETL pipeline. At Epsilon he benchmarked and optimized HBase, Apache Phoenix and Solr for large-scale retrieval. In parallel he led and published research: biomarker prediction for non-small cell lung cancer (Cancer Informatics), conditional independence testing on HPCC Systems with LexisNexis (JAIT), and deep-learning business-document recognition and table extraction (ICAIC 2025). He also led a Samsung Research Institute Bengaluru collaboration on instant-app technology that won an Excellence Award, and co-built retrieval-augmented educational tooling now used by over 1,000 teachers across 270+ schools in southern Karnataka."
+    },
+    "stated_interests": {
+      "note": "Self-described direction. Aspirations, not accomplishments. Do not present as experience.",
+      "items": [
+        {
+          "statement": "Applying machine learning to improve quality of life, particularly in healthcare and education."
+        },
+        {
+          "statement": "Industry research roles that apply rigorous ML methods to practical, high-impact problems."
+        },
+        {
+          "statement": "Interpretable ML, motivated by observing the influence of bias and noise on model reasoning."
+        },
+        {
+          "statement": "Extending document-understanding research to unstructured and multi-page documents."
+        },
+        {
+          "statement": "Treating ML as a systems problem - how algorithmic ideas interact with computation, scale and real-world constraints."
+        }
+      ]
+    }
+  },
+  "education": [
+    {
+      "id": "edu.uiuc",
+      "institution": "University of Illinois Urbana-Champaign",
+      "location": "Champaign, USA",
+      "studyType": "Master of Science",
+      "area": "Computer Science",
+      "status": "Incoming student",
+      "startDate": "2026-08",
+      "endDate": null,
+      "score": null
+    },
+    {
+      "id": "edu.rvce",
+      "institution": "RV College of Engineering",
+      "location": "Bengaluru, India",
+      "studyType": "Bachelor of Engineering",
+      "area": "Computer Science and Engineering",
+      "score": {
+        "value": "9.22",
+        "scale": "10.0",
+        "label": "GPA"
+      },
+      "startDate": null,
+      "endDate": "2023-08",
+      "standing": {
+        "value": "Top 10% of cohort"
+      },
+      "academic_counselor": {
+        "name": "Dr. Shanta Rangaswamy",
+        "title": "Professor and Head, Department of Computer Science and Engineering",
+        "duration": "Four years"
+      },
+      "coursework": [
+        {
+          "name": "Data Structures and Algorithms"
+        },
+        {
+          "name": "Operating Systems"
+        },
+        {
+          "name": "Embedded Systems"
+        },
+        {
+          "name": "Mathematics for Machine Learning",
+          "note": "Introduced causal reasoning and its advantages over correlation-driven models; led directly to the RCoT work."
+        },
+        {
+          "name": "Database Design",
+          "note": "Taught by Dr. Shobha G; ranked among the top of the class. Experiential-learning component is recorded as proj.redis-sqlite-cache."
+        },
+        {
+          "name": "Big Data Analytics using Distributed Platforms",
+          "note": "Taught by Dr. Shobha G; ranked among the top of the class."
+        }
+      ],
+      "mooc": {
+        "platform": "NPTEL",
+        "courses": [
+          "Discrete Mathematics",
+          "Python for Data Science"
+        ],
+        "recognition": "NPTEL Believer Award"
+      }
+    }
+  ],
+  "work": [
+    {
+      "id": "work.qualcomm",
+      "name": "Qualcomm India Private Limited",
+      "location": "Bengaluru, India",
+      "employment_type": "Full-time",
+      "team": "Device Firmware Update (DFU)",
+      "startDate": "2023-01",
+      "endDate": "2026-07",
+      "positions": [
+        {
+          "title": "Associate Engineer",
+          "startDate": "2023-01",
+          "endDate": null,
+          "note": "Joining title. The end date is the promotion month, which is not yet supplied."
+        },
+        {
+          "title": "Software Engineer",
+          "startDate": null,
+          "endDate": "2026-07",
+          "note": "Promotion followed the independently delivered SoC upgrade work and contributions across multiple assignments. The promotion month is not yet recorded.",
+          "confidence": "needs_input"
+        }
+      ],
+      "manager": {
+        "name": "Himanshu Srivastava",
+        "title": "Engineer, Senior Staff / Manager",
+        "relationship": "Direct manager and mentor for approximately two years"
+      },
+      "domain_ramp_up": {
+        "note": "Subsystems learned on entering the organization; useful as domain context, not as an accomplishment.",
+        "areas": [
+          "Platform architecture",
+          "Transport protocols",
+          "Memory layout constraints",
+          "SoC-specific upgrade flows",
+          "Firmware fundamentals",
+          "Bootloader concepts"
+        ],
+        "approach": "Combined study with controlled experiments; expanded beyond the team's core firmware-upgrade functionality in order to design modules that integrate with parallel systems."
+      },
+      "working_practices": [
+        {
+          "practice": "End-to-end ownership of challenging projects, including navigating ambiguous requirements, proposing structured designs and executing them."
+        },
+        {
+          "practice": "Assumed software-architect responsibilities: leading design decisions and mentoring teammates through development."
+        },
+        {
+          "practice": "Acted as the point of contact when teammates needed to understand a subsystem or reproduce a difficult issue."
+        },
+        {
+          "practice": "Cross-team debugging collaboration focused on alignment with other components."
+        }
+      ],
+      "projects": [
+        {
+          "id": "work.qualcomm.soc-upgrade",
+          "title": "SoC component upgrade solution",
+          "role": "Individual owner",
+          "period": {
+            "start": null,
+            "end": null,
+            "note": "Assigned approximately four months after joining (joined 2023-01), so roughly mid-2023."
+          },
+          "situation": "A new SoC component required an upgrade solution in production.",
+          "constraints": [
+            "Strict deadline",
+            "Limited testing resources",
+            "Required cross-team communication and strong functional knowledge"
+          ],
+          "actions": [
+            {
+              "action": "Independently implemented the upgrade solution for the new SoC component."
+            },
+            {
+              "action": "Designed and delivered the solution as a production-ready SoC upgrade framework."
+            },
+            {
+              "action": "Made low-level firmware and application-level modifications as part of subsequent SoC upgrade enhancements."
+            }
+          ],
+          "technologies_used": [
+            "Embedded firmware",
+            "SoC upgrade flows"
+          ],
+          "metrics": [],
+          "outcomes": [
+            {
+              "outcome": "Contributed to promotion from Associate Engineer to Software Engineer."
+            },
+            {
+              "outcome": "Played an important role in stabilizing the team's upgrade process."
+            }
+          ],
+          "note": "No quantified metric. The 24% figure belongs to the data-relay work (work.qualcomm.data-relay), not to this project."
+        },
+        {
+          "id": "work.qualcomm.bug-triage",
+          "title": "Customer and internal defect analysis",
+          "role": "Individual contributor",
+          "period": {
+            "start": null,
+            "end": null
+          },
+          "situation": "Bugs were raised by customers and by internal testing teams against firmware upgrade flows.",
+          "constraints": [],
+          "actions": [
+            {
+              "action": "Resolved more than 20 bugs raised by customers or internal testing teams."
+            },
+            {
+              "action": "Produced comprehensive analyses consisting of annotated packet traces, trimmed logs paired with reasoning, and targeted hypotheses."
+            }
+          ],
+          "technologies_used": [
+            "Packet trace analysis",
+            "Log analysis"
+          ],
+          "metrics": [
+            {
+              "name": "Bugs resolved",
+              "value": 20,
+              "unit": "count",
+              "qualifier": "more than",
+              "baseline": null
+            }
+          ],
+          "outcomes": [
+            {
+              "outcome": "Significantly reduced debugging time for the entire team."
+            }
+          ]
+        },
+        {
+          "id": "work.qualcomm.data-relay",
+          "title": "Data relay mechanism",
+          "role": "Designer and implementer",
+          "period": {
+            "start": null,
+            "end": null
+          },
+          "situation": "Firmware upgrade payloads needed a data transfer path between components.",
+          "constraints": [],
+          "actions": [
+            {
+              "action": "Designed and implemented a new data relay mechanism."
+            },
+            {
+              "action": "Optimized the data-relay mechanism."
+            }
+          ],
+          "technologies_used": [
+            "Bluetooth",
+            "Embedded firmware",
+            "Transport protocols"
+          ],
+          "metrics": [
+            {
+              "name": "Bluetooth throughput increase",
+              "value": 24,
+              "unit": "percent",
+              "baseline": "Previous relay mechanism"
+            },
+            {
+              "name": "System load during upgrades",
+              "value": null,
+              "unit": "percent",
+              "direction": "reduced",
+              "baseline": null,
+              "note": "Reduction stated without a figure."
+            }
+          ],
+          "outcomes": []
+        },
+        {
+          "id": "work.qualcomm.dfu-refactor",
+          "title": "Core DFU module refactor",
+          "role": "Design and task-planning owner",
+          "period": {
+            "start": null,
+            "end": null
+          },
+          "situation": "A core component of the Device Firmware Update module required a complex refactoring effort.",
+          "constraints": [
+            "Two major client releases depended on the refactor landing on schedule"
+          ],
+          "actions": [
+            {
+              "action": "Refactored the core component of the DFU module."
+            },
+            {
+              "action": "Handled design and task planning for the refactoring of the upgrade feature."
+            },
+            {
+              "action": "Produced detailed Message Sequence Charts (MSCs) that clarified edge-case behavior and guided teammates through implementation."
+            }
+          ],
+          "technologies_used": [
+            "Embedded firmware",
+            "Message Sequence Charts (MSC)"
+          ],
+          "metrics": [
+            {
+              "name": "Major client releases delivered on schedule",
+              "value": 2,
+              "unit": "count",
+              "baseline": null
+            },
+            {
+              "name": "Integration defects",
+              "value": null,
+              "unit": null,
+              "direction": "reduced",
+              "baseline": null,
+              "note": "Reduction stated without a figure."
+            }
+          ],
+          "outcomes": [
+            {
+              "outcome": "Improved system robustness."
+            }
+          ]
+        },
+        {
+          "id": "work.qualcomm.multi-client-upgrade",
+          "title": "Multi-component upgrade procedure for two clients",
+          "role": "Module owner",
+          "period": {
+            "start": null,
+            "end": null
+          },
+          "situation": "A multi-component upgrade procedure had to serve two major clients, each with different system expectations.",
+          "constraints": [
+            "Demanding timeline",
+            "Two clients with divergent system expectations"
+          ],
+          "actions": [
+            {
+              "action": "Took responsibility for one of the modules in the upgrade procedure."
+            },
+            {
+              "action": "Redesigned key components of that module."
+            },
+            {
+              "action": "Delivered the flow in two phases without deviating from the timeline."
+            }
+          ],
+          "technologies_used": [
+            "Embedded firmware"
+          ],
+          "metrics": [],
+          "outcomes": [
+            {
+              "outcome": "Strengthened the robustness of the overall solution."
+            }
+          ],
+          "confidentiality": "Client names are not disclosed and must remain abstracted as 'two major clients'."
+        },
+        {
+          "id": "work.qualcomm.embedded-ml-framework",
+          "title": "Upgrade framework for embedded ML model deployment",
+          "role": "Independent owner",
+          "period": {
+            "start": null,
+            "end": null
+          },
+          "situation": "An upgrade framework was used to deploy embedded machine-learning models to hearable devices.",
+          "constraints": [
+            "Reliability, latency and deployment constraints characteristic of ML pipelines on constrained devices"
+          ],
+          "actions": [
+            {
+              "action": "Independently managed the upgrade framework used to deploy embedded ML models to hearable devices."
+            }
+          ],
+          "technologies_used": [
+            "Embedded ML model deployment",
+            "Hearable devices",
+            "Firmware upgrade framework"
+          ],
+          "metrics": [],
+          "outcomes": []
+        },
+        {
+          "id": "work.qualcomm.genai-tooling",
+          "title": "Internal GenAI tooling for log analysis and documentation",
+          "role": "Initiator, with support from colleagues",
+          "period": {
+            "start": null,
+            "end": null
+          },
+          "situation": "The team performed repeated, manual log-analysis tasks during triage.",
+          "constraints": [],
+          "actions": [
+            {
+              "action": "Took the initiative, with colleagues' support, to introduce internal GenAI-based tools that automate repeated log-analysis tasks."
+            },
+            {
+              "action": "Applied GenAI tooling to generating code documentation."
+            }
+          ],
+          "technologies_used": [
+            "Generative AI / LLM tooling",
+            "Log analysis automation"
+          ],
+          "metrics": [
+            {
+              "name": "Triage time",
+              "value": null,
+              "unit": null,
+              "direction": "reduced",
+              "baseline": null,
+              "note": "Reduction confirmed, but not quantified."
+            }
+          ],
+          "outcomes": []
+        },
+        {
+          "id": "work.qualcomm.developer-guides",
+          "title": "Developer guides for core modules",
+          "role": "Author",
+          "period": {
+            "start": null,
+            "end": null
+          },
+          "situation": "Core modules lacked written guidance on their behavior and modification.",
+          "constraints": [],
+          "actions": [
+            {
+              "action": "Wrote developer guides for core modules, documenting both how the modules work and how to modify them."
+            }
+          ],
+          "technologies_used": [
+            "Technical documentation"
+          ],
+          "metrics": [],
+          "outcomes": [
+            {
+              "outcome": "Strengthened team practices."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "work.intel",
+      "name": "Intel Solutions & Services India Pvt Ltd",
+      "location": "Bengaluru, India",
+      "employment_type": "Internship",
+      "team": "Customer Engineering",
+      "positions": [
+        {
+          "title": "Software Engineering Intern",
+          "startDate": "2022-08",
+          "endDate": "2023-01"
+        }
+      ],
+      "startDate": "2022-08",
+      "endDate": "2023-01",
+      "duration_stated": "Six months",
+      "mentor": {
+        "name": "Anand Kulkarni",
+        "title": "Multi-Cloud Solution Architect, Intel India"
+      },
+      "mission_context": "Developing and optimizing customer-specific solutions on Intel chipsets.",
+      "working_practices": [
+        {
+          "practice": "Wrote descriptive, technically accurate reports with clear summaries, and adapted communication for managerial versus technical audiences."
+        },
+        {
+          "practice": "Handled multiple customer projects simultaneously, breaking tasks into executable steps and following Intel's protocol for updates and task tracking."
+        },
+        {
+          "practice": "Took the initiative to unblock a peer stuck on Kafka data streaming, contributing research and trial programs and absorbing additional work to meet project deadlines."
+        }
+      ],
+      "projects": [
+        {
+          "id": "work.intel.ather-telemetry",
+          "title": "EV telemetry JSON processing pipeline",
+          "role": "Individual contributor",
+          "client": {
+            "name": "Ather",
+            "industry": "Electric vehicle manufacturer",
+            "note": "Recorded elsewhere as 'Aether'. 'Ather' is the commonly used spelling of the Bengaluru EV manufacturer, but the spelling is not confirmed.",
+            "confidence": "needs_input"
+          },
+          "period": {
+            "start": "2022-08",
+            "end": null,
+            "note": "First assignment of the internship."
+          },
+          "situation": "Millions of vehicles emitted 500 parameters every minute as JSON data, which had to be processed into a usable database for the customer to analyze and store.",
+          "constraints": [
+            "Customer's existing storage layout was inefficient for pivoting tabular data"
+          ],
+          "actions": [
+            {
+              "action": "Identified a critical inefficiency in how the customer stored data, which affected the time required to pivot tabular data, and fixed it."
+            },
+            {
+              "action": "Redesigned the JSON log data stream parser to use SIMD instructions."
+            },
+            {
+              "action": "Optimized the solution using Tablesaw, a Java dataframe and visualization library."
+            }
+          ],
+          "technologies_used": [
+            "JSON",
+            "SIMD instructions",
+            "Tablesaw (Java dataframe library)",
+            "Java",
+            "Intel chipsets"
+          ],
+          "metrics": [
+            {
+              "name": "Processing time reduction from correcting the customer's tabular-pivot storage",
+              "value": 40,
+              "unit": "percent",
+              "qualifier": "up to",
+              "baseline": "Customer's original storage layout"
+            },
+            {
+              "name": "JSON processing speed improvement",
+              "value": 25,
+              "unit": "percent",
+              "baseline": "Pre-optimization processing on the same Intel hardware",
+              "note": "Achieved using Tablesaw and SIMD instructions on the latest Intel chips at the time."
+            },
+            {
+              "name": "Benchmark dataset size",
+              "value": 1.8,
+              "unit": "GB",
+              "note": "100,000 records.",
+              "confidence": "needs_input",
+              "gap": "This scale was recorded alongside a withdrawn 80% figure; confirm it was the actual benchmark scale."
+            }
+          ],
+          "outcomes": [
+            {
+              "outcome": "Improved the customer's efficiency in handling JSON data."
+            }
+          ]
+        },
+        {
+          "id": "work.intel.crypto-acceleration",
+          "title": "Cryptographic acceleration on Intel silicon",
+          "role": "Individual contributor",
+          "client": {
+            "name": "National Stock Exchange",
+            "country": "India"
+          },
+          "period": {
+            "start": null,
+            "end": null
+          },
+          "situation": "New government guidelines required Indian stock exchanges to encrypt information shared with their users; the National Stock Exchange wanted the cryptographic overhead not to slow down its services. The work covered two parts: optimizing hashing, and accelerating the RSA and AES256 encryption path.",
+          "constraints": [
+            "Cryptographic overhead had to not degrade live service performance"
+          ],
+          "actions": [
+            {
+              "action": "Researched and identified an Intel optimization library suited to the requirement."
+            },
+            {
+              "action": "Accelerated RSA and AES256 algorithms using the Intel QAT OpenSSL Engine."
+            },
+            {
+              "action": "Used OpenSSL and Python to optimize hashing on Intel silicon."
+            }
+          ],
+          "technologies_used": [
+            "Intel QAT OpenSSL Engine",
+            "OpenSSL",
+            "RSA",
+            "AES256",
+            "Python"
+          ],
+          "metrics": [
+            {
+              "name": "Processing time reduction for RSA and AES256",
+              "value": 60,
+              "unit": "percent",
+              "baseline": "Unaccelerated RSA / AES256 path",
+              "note": "Achieved with the Intel QAT OpenSSL Engine."
+            },
+            {
+              "name": "Hashing performance improvement",
+              "value": 10,
+              "unit": "percent",
+              "qualifier": "up to",
+              "baseline": "Unoptimized hashing on the same Intel silicon",
+              "note": "Achieved with OpenSSL and Python."
+            }
+          ],
+          "outcomes": []
+        },
+        {
+          "id": "work.intel.etl-pipeline",
+          "title": "Distributed ETL pipeline on Kubernetes",
+          "role": "Contributor to design and implementation",
+          "period": {
+            "start": null,
+            "end": "2023-01",
+            "note": "Described as the last project of the internship."
+          },
+          "situation": "An ETL pipeline was required to process large data streams.",
+          "constraints": [
+            "The Spark application, Hive warehouse and S3 buckets worked independently but were difficult to synchronize, requiring persistent trial and error"
+          ],
+          "actions": [
+            {
+              "action": "Assisted in designing an ETL pipeline built on Apache Spark, Kubernetes and Kafka."
+            },
+            {
+              "action": "Built the Kubernetes data pipeline using Spark with storage in S3."
+            },
+            {
+              "action": "Automated deployment via Terraform and Ansible."
+            },
+            {
+              "action": "Benchmarked Intel-Optimized components on the pipeline."
+            },
+            {
+              "action": "Integrated the Spark application with the Hive warehouse and S3 buckets."
+            }
+          ],
+          "technologies_used": [
+            "Apache Spark",
+            "Apache Kafka",
+            "Kubernetes",
+            "Apache Hive",
+            "Amazon S3",
+            "Terraform",
+            "Ansible",
+            "Intel-Optimized libraries"
+          ],
+          "metrics": [
+            {
+              "name": "Data stream volume processed",
+              "value": "10-20",
+              "unit": "GB",
+              "baseline": null
+            }
+          ],
+          "outcomes": [
+            {
+              "outcome": "Pipeline delivered successfully despite the integration difficulty."
+            }
+          ]
+        },
+        {
+          "id": "work.intel.ml-benchmark-automation",
+          "title": "Automated ML benchmarking on Intel chips",
+          "role": "Individual contributor",
+          "period": {
+            "start": null,
+            "end": null
+          },
+          "situation": "Performance of standard machine-learning functions on Intel chips needed to be tracked consistently across projects.",
+          "constraints": [],
+          "actions": [
+            {
+              "action": "Automated benchmarking of standard machine-learning functions in NumPy and scikit-learn on Intel chips using Docker containers."
+            }
+          ],
+          "technologies_used": [
+            "NumPy",
+            "scikit-learn",
+            "Docker",
+            "Intel chipsets"
+          ],
+          "metrics": [],
+          "outcomes": [
+            {
+              "outcome": "Streamlined the benchmarking process and ensured consistent performance tracking across projects."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "work.epsilon",
+      "name": "Epsilon Pvt Ltd",
+      "location": "Bengaluru, India",
+      "employment_type": "Internship",
+      "team": null,
+      "positions": [
+        {
+          "title": "Software Engineering Intern",
+          "startDate": "2022-01",
+          "endDate": "2022-06"
+        }
+      ],
+      "startDate": "2022-01",
+      "endDate": "2022-06",
+      "note": "Note: ../Resume/src/experience.tex files this work under Aug 2022 - Jan 2023, which are Intel's dates. That file is stale on this point.",
+      "projects": [
+        {
+          "id": "work.epsilon.store-benchmarking",
+          "title": "Benchmarking HBase, Apache Phoenix and Solr",
+          "role": "Individual contributor",
+          "period": {
+            "start": "2022-01",
+            "end": "2022-06"
+          },
+          "situation": "Large-scale data retrieval and analytics workloads needed to be evaluated across candidate storage and query architectures.",
+          "constraints": [],
+          "actions": [
+            {
+              "action": "Benchmarked HBase, Apache Phoenix and Solr for large-scale data retrieval and analytics."
+            },
+            {
+              "action": "Evaluated filtering, aggregation and multi-condition queries across varying dataset sizes."
+            },
+            {
+              "action": "Documented benchmarking results for large datasets."
+            }
+          ],
+          "technologies_used": [
+            "Apache HBase",
+            "Apache Phoenix",
+            "Apache Solr"
+          ],
+          "metrics": [],
+          "outcomes": []
+        },
+        {
+          "id": "work.epsilon.query-optimization",
+          "title": "Database query performance optimization",
+          "role": "Individual contributor",
+          "period": {
+            "start": "2022-01",
+            "end": "2022-06"
+          },
+          "situation": "Query execution on the benchmarked stores was slower than required.",
+          "constraints": [],
+          "actions": [
+            {
+              "action": "Applied primary and secondary indexing."
+            },
+            {
+              "action": "Restructured queries."
+            },
+            {
+              "action": "Used selective column retrieval instead of full-row reads."
+            }
+          ],
+          "technologies_used": [
+            "Apache Phoenix",
+            "SQL",
+            "Apache HBase"
+          ],
+          "metrics": [
+            {
+              "name": "Representative Phoenix query execution time",
+              "value": 0.37,
+              "unit": "seconds",
+              "baseline": "19.4 seconds",
+              "derived_reduction_percent": 98.1
+            }
+          ],
+          "outcomes": []
+        },
+        {
+          "id": "work.epsilon.distributed-environment",
+          "title": "Distributed data-processing environment",
+          "role": "Individual contributor",
+          "period": {
+            "start": "2022-01",
+            "end": "2022-06"
+          },
+          "situation": "A distributed environment was needed to compare performance across storage and query architectures.",
+          "constraints": [],
+          "actions": [
+            {
+              "action": "Built and evaluated a distributed data-processing environment using Hadoop/HDFS, HBase, Phoenix, Solr and Docker."
+            },
+            {
+              "action": "Analyzed performance across storage and query architectures."
+            }
+          ],
+          "technologies_used": [
+            "Apache Hadoop",
+            "HDFS",
+            "Apache HBase",
+            "Apache Phoenix",
+            "Apache Solr",
+            "Docker"
+          ],
+          "metrics": [],
+          "outcomes": []
+        }
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "proj.nsclc-biomarkers",
+      "title": "Novel biomarker prediction for lung cancer using a Random Forest classifier",
+      "engagement_type": "Academic research",
+      "organization": "RV College of Engineering, Department of Biotechnology",
+      "role": "Led the machine learning and data analytics component",
+      "team_context": "Interdisciplinary biotechnology research team; represented the Computer Science department.",
+      "advisors": [
+        {
+          "name": "Dr. Vidya Niranjan",
+          "title": "Professor and Head, Department of Biotechnology, RV College of Engineering",
+          "relationship": "Project supervisor"
+        },
+        {
+          "name": "Dr. Shobha G",
+          "title": "Professor and Dean, School of Computer Science and Engineering, RV University",
+          "relationship": "Referred him to the project"
+        }
+      ],
+      "period": {
+        "start": null,
+        "end": null,
+        "duration_stated": "Six months",
+        "academic_stage": "Junior year of undergraduate study",
+        "confidence": "needs_input"
+      },
+      "situation": "Predict the involvement of specific genes in non-small cell lung cancer (NSCLC). Input was patient-derived transcriptomic data that had already undergone differential gene expression and pathway analyses; the goal was to apply machine learning to extract insights into NSCLC-associated biomarkers.",
+      "constraints": [
+        "The dataset was heavily skewed toward genes unrelated to NSCLC pathways",
+        "Genomics was outside his primary field, requiring self-study of genome sequencing and biochemical pathways",
+        "Four candidate models were producing only mediocre precision late in the project"
+      ],
+      "actions": [
+        {
+          "action": "Proposed analyzing the dataset to determine which features actually influence a gene's role in NSCLC pathways, rather than using all available features as the team initially assumed."
+        },
+        {
+          "action": "Analyzed and tested multiple under-sampling and over-sampling algorithms to address the class skew."
+        },
+        {
+          "action": "Selected the NearMiss method to under-sample the data, correcting the skew and avoiding a biased model."
+        },
+        {
+          "action": "Standardized the features before modelling."
+        },
+        {
+          "action": "Evaluated multiple machine learning and ensemble algorithms on the gene expression analysis data."
+        },
+        {
+          "action": "Used ROC curve analysis to narrow the four candidate models down to the Random Forest classifier."
+        },
+        {
+          "action": "Optimized the Random Forest classifier to identify critical genes linked to NSCLC."
+        },
+        {
+          "action": "Handled data cleaning, key-parameter identification and interpretation accuracy for the ML portion."
+        },
+        {
+          "action": "Produced presentations with visual aids so the wider team could follow the complex portions of the work, and contributed written sections to the research paper."
+        }
+      ],
+      "technologies_used": [
+        "Random Forest",
+        "Ensemble methods",
+        "NearMiss under-sampling",
+        "Over-sampling and under-sampling techniques",
+        "Feature standardization",
+        "ROC / AUC analysis",
+        "Transcriptomic data",
+        "Differential gene expression analysis",
+        "Pathway analysis"
+      ],
+      "metrics": [
+        {
+          "name": "AUC",
+          "value": 0.93,
+          "unit": "ratio"
+        },
+        {
+          "name": "Accuracy",
+          "value": 87,
+          "unit": "percent"
+        },
+        {
+          "name": "Citations",
+          "value": 10,
+          "unit": "count",
+          "window": "two years",
+          "confidence": "needs_input",
+          "note": "The as-of date for this count is unknown."
+        }
+      ],
+      "outcomes": [
+        {
+          "outcome": "Published in Cancer Informatics, a peer-reviewed journal."
+        },
+        {
+          "outcome": "The team presented the paper at a conference and received a Best Presentation award; a judge commended the clarity and graph/diagram support of his explanation."
+        },
+        {
+          "outcome": "Results advance the classification of biomarkers for NSCLC and small-cell lung cancer, with potential applications in drug discovery."
+        }
+      ],
+      "artifacts": [
+        {
+          "type": "publication",
+          "url": "https://journals.sagepub.com/doi/10.1177/11769351231167992",
+          "publication_ref": "pub.cancer-informatics"
+        }
+      ]
+    },
+    {
+      "id": "proj.document-extraction",
+      "title": "Business document data recognition and table extraction using deep learning",
+      "engagement_type": "Industry-driven academic project",
+      "organization": {
+        "name": null,
+        "note": "Recorded only as an industry-driven project; the sponsoring organization is not identified.",
+        "confidence": "needs_input"
+      },
+      "role": "Project lead",
+      "team_context": "Led a team; delegated tasks based on each member's strengths and absorbed extra work when the project demanded.",
+      "advisors": [
+        {
+          "name": "Dr. Shobha G",
+          "title": "Professor and Dean, School of Computer Science and Engineering, RV University",
+          "relationship": "Mentor"
+        }
+      ],
+      "period": {
+        "start": null,
+        "end": null,
+        "confidence": "needs_input"
+      },
+      "situation": "Detect and extract valuable information from invoices and other business documents - both discrete elements such as the date and invoice number, and full tabular data.",
+      "constraints": [
+        "Minimize the processing time for each invoice",
+        "The model had to accommodate new fields easily after training",
+        "Standard models had to be used for both detection and extraction"
+      ],
+      "actions": [
+        {
+          "action": "Separated element detection (date, invoice number) from table parsing so that each model could be hyper-tuned for its own function."
+        },
+        {
+          "action": "Fine-tuned YOLOv5 for object detection after extensive testing."
+        },
+        {
+          "action": "Fine-tuned DETR for table data extraction."
+        },
+        {
+          "action": "Integrated DETR-based table extraction with YOLOv5 object detection into a single pipeline."
+        },
+        {
+          "action": "Applied optimization techniques to meet the processing-time constraint."
+        }
+      ],
+      "technologies_used": [
+        "YOLOv5",
+        "DETR (Detection Transformer)",
+        "Object detection",
+        "Table structure extraction",
+        "Transfer learning / fine-tuning",
+        "Computer vision"
+      ],
+      "metrics": [
+        {
+          "name": "mean Average Precision (mAP), YOLOv5 object detection",
+          "value": 84.36,
+          "unit": "percent",
+          "note": "The prior resume listed 84.36% and 80.92% without clearly binding each figure to a model; the binding recorded here is YOLOv5 to 84.36% and DETR to 80.92%."
+        },
+        {
+          "name": "mean Average Precision (mAP), DETR table extraction",
+          "value": 80.92,
+          "unit": "percent"
+        }
+      ],
+      "outcomes": [
+        {
+          "outcome": "Presented at the International Conference of Artificial Intelligence and Computing (ICAIC) 2025."
+        },
+        {
+          "outcome": "Unlike existing approaches, the method integrates table data extraction and object detection while adapting to different document types."
+        },
+        {
+          "outcome": "Automates business document digitization."
+        }
+      ],
+      "stated_future_direction": "Extending the approach to unstructured and multi-page documents.",
+      "artifacts": [
+        {
+          "type": "publication",
+          "url": "https://rdcu.be/wZSePwoXqLVa",
+          "publication_ref": "pub.icaic-2025"
+        }
+      ]
+    },
+    {
+      "id": "proj.rcot-hpcc",
+      "title": "Conditional independence testing using RCoT on high-performance computing",
+      "engagement_type": "Industry-collaborative research",
+      "organization": "RV College of Engineering, in collaboration with LexisNexis",
+      "role": "Researcher (worked with one project partner)",
+      "advisors": [
+        {
+          "name": "Dr. Shobha G",
+          "title": "Professor and Dean, School of Computer Science and Engineering, RV University",
+          "relationship": "Supervisor; first collaboration with her, beginning in his third semester"
+        }
+      ],
+      "period": {
+        "start": null,
+        "end": null,
+        "academic_stage": "Began in the third semester of undergraduate study",
+        "confidence": "needs_input"
+      },
+      "situation": "Compare two models used for conditional independence testing - ProbSpace and the Randomized Conditional Correlation Test (RCoT) - and implement RCoT on HPCC Systems, a Data Analytics Supercomputer (DAS) designed for high-performance parallel processing.",
+      "constraints": [
+        "Required validating causal relationships under controlled noise and dimensionality"
+      ],
+      "actions": [
+        {
+          "action": "Implemented the RCoT algorithm on HPCC Systems."
+        },
+        {
+          "action": "Designed synthetic datasets to validate causal relationships under controlled noise and dimensionality."
+        },
+        {
+          "action": "Introduced vectorization into the algorithm."
+        },
+        {
+          "action": "Reformulated the algorithm's computations through matrices."
+        }
+      ],
+      "technologies_used": [
+        "HPCC Systems (Data Analytics Supercomputer)",
+        "RCoT (Randomized Conditional Correlation Test)",
+        "ProbSpace",
+        "Conditional independence testing",
+        "Causal inference",
+        "Vectorization",
+        "Matrix reformulation",
+        "Synthetic data generation"
+      ],
+      "metrics": [
+        {
+          "name": "Runtime reduction",
+          "value": 50,
+          "unit": "percent",
+          "baseline": "Unoptimized RCoT implementation, measured on synthetic data"
+        },
+        {
+          "name": "Speed advantage over ProbSpace",
+          "value": 50,
+          "unit": "percent",
+          "baseline": "The standard ProbSpace model used in industry",
+          "note": "Same magnitude as the runtime reduction above, but a different comparison; both are recorded rather than merged."
+        }
+      ],
+      "outcomes": [
+        {
+          "outcome": "Published in the Journal of Advances in Information Technology (JAIT)."
+        },
+        {
+          "outcome": "Enabled the method to scale to high-dimensional biological datasets for enhanced real-time causal inference."
+        }
+      ],
+      "artifacts": [
+        {
+          "type": "publication",
+          "url": "http://www.jait.us/shw-229-1347-1.html",
+          "publication_ref": "pub.jait"
+        }
+      ]
+    },
+    {
+      "id": "proj.samsung-instant-apps",
+      "title": "Instant app technology for the Samsung Galaxy App Store",
+      "engagement_type": "Industry collaboration (worklet)",
+      "organization": "Samsung Research Institute, Bengaluru (SRIB), in collaboration with RV College of Engineering",
+      "role": "Team lead",
+      "team_context": "Led a team of four students.",
+      "advisors": [
+        {
+          "name": "Dr. Shanta Rangaswamy",
+          "title": "Professor and Head, Department of Computer Science and Engineering, RV College of Engineering",
+          "relationship": "Mentor who assigned him the lead role"
+        }
+      ],
+      "period": {
+        "start": null,
+        "end": null,
+        "confidence": "needs_input"
+      },
+      "situation": "Adapt Google's instant app technology for use within the Samsung Galaxy App Store ecosystem.",
+      "constraints": [
+        "Google's proprietary backend created a deadlock the team could not work around directly"
+      ],
+      "actions": [
+        {
+          "action": "Set the project's strategic direction by first studying Google's instant app implementation and then identifying how it could be adapted to Samsung's constraints."
+        },
+        {
+          "action": "Assigned tasks based on individual team members' strengths and led structured discussions to work through stalled progress collectively."
+        },
+        {
+          "action": "Took on the hardest task personally: backtracking the instant app implementation by analyzing Android's open-source documentation."
+        },
+        {
+          "action": "Engineered a novel caching strategy to get past the proprietary-backend bottleneck, then guided the team through the solution."
+        },
+        {
+          "action": "Oversaw development of two applications in Kotlin demonstrating the practical benefits of instant apps."
+        },
+        {
+          "action": "Presented the final result to Samsung stakeholders, addressing both engineers and senior management."
+        }
+      ],
+      "technologies_used": [
+        "Kotlin",
+        "Android",
+        "Google Instant Apps",
+        "Caching strategy design",
+        "Android open-source documentation / AOSP"
+      ],
+      "metrics": [
+        {
+          "name": "Application bundle size reduction",
+          "value": 40,
+          "unit": "percent",
+          "baseline": "Conventional (non-instant) app bundles"
+        },
+        {
+          "name": "Download time",
+          "value": null,
+          "unit": null,
+          "direction": "reduced",
+          "note": "Stated without a figure."
+        },
+        {
+          "name": "Competing worklets",
+          "value": 17,
+          "unit": "count"
+        }
+      ],
+      "outcomes": [
+        {
+          "outcome": "The team won the Excellence Award among 17 other competing worklets.",
+          "award_ref": "award.samsung-excellence"
+        }
+      ],
+      "artifacts": []
+    },
+    {
+      "id": "proj.diet-ramanagara",
+      "title": "Retrieval-augmented educational content tooling for rural schools",
+      "engagement_type": "Curriculum volunteering / social impact",
+      "organization": "District Institute of Education and Training (DIET), Ramanagara",
+      "role": "Member of an eight-member interdisciplinary student team",
+      "period": {
+        "start": null,
+        "end": null,
+        "duration_stated": "Six months, including three months of stakeholder coordination",
+        "confidence": "needs_input"
+      },
+      "situation": "Support understaffed rural schools in southern Karnataka in their teaching efforts, as part of an undergraduate diversity-and-inclusion curriculum requirement.",
+      "constraints": [
+        "Resource-constrained schools with diverse needs",
+        "Primary-school teachers needed the tooling to be intuitive",
+        "Content had to align with the existing curriculum"
+      ],
+      "actions": [
+        {
+          "action": "Held regular meetings with rural teachers, district education coordinators and university faculty over three months of coordination."
+        },
+        {
+          "action": "Contributed to producing animated content for science, social studies and mathematics, created by students from different departments."
+        },
+        {
+          "action": "Built software that lets primary-school teachers generate story-based educational content from simple prompts."
+        },
+        {
+          "action": "Integrated existing animated content and syllabus data with an LLM using retrieval-augmented generation, so teachers could generate curriculum-aligned lessons from a topic and a brief description."
+        }
+      ],
+      "technologies_used": [
+        "Large language models",
+        "Retrieval-augmented generation (RAG)",
+        "Educational content generation"
+      ],
+      "metrics": [
+        {
+          "name": "Teachers who integrated the software into their courses",
+          "value": 1000,
+          "unit": "count",
+          "qualifier": "over"
+        },
+        {
+          "name": "Schools reached",
+          "value": 270,
+          "unit": "count",
+          "qualifier": "over",
+          "region": "Southern Karnataka"
+        }
+      ],
+      "outcomes": [
+        {
+          "outcome": "Early-adopter teachers reported shorter preparation times and increased classroom participation.",
+          "note": "Self-reported qualitative feedback, not measured."
+        }
+      ],
+      "artifacts": []
+    },
+    {
+      "id": "proj.blockchain-misinformation",
+      "title": "Blockchain social platform with transformer-based misinformation detection",
+      "engagement_type": "Hackathon project",
+      "organization": null,
+      "role": "Designer and developer",
+      "period": {
+        "start": null,
+        "end": null,
+        "confidence": "needs_input"
+      },
+      "situation": "Address growing misinformation on social platforms by building an end-to-end blockchain application resembling a social media site that assesses the validity (truth value) of posts in order to flag misinformation.",
+      "constraints": [
+        "Limited access to reliable labeled data",
+        "Target text was noisy, unstructured social-media content"
+      ],
+      "actions": [
+        {
+          "action": "Designed a transformer-based natural language processing approach to assess sentence credibility on unstructured data."
+        },
+        {
+          "action": "Built the NLP model to parse sentences, identify keywords and assess the truthfulness of statements."
+        },
+        {
+          "action": "Used prompt-based paraphrasing to expand training coverage given the scarcity of labeled data."
+        },
+        {
+          "action": "Built the surrounding end-to-end blockchain application."
+        }
+      ],
+      "technologies_used": [
+        "Transformers",
+        "Natural language processing",
+        "Prompt-based paraphrasing / data augmentation",
+        "Blockchain",
+        "Decentralized application (DApp)"
+      ],
+      "metrics": [
+        {
+          "name": "Accuracy",
+          "value": 89,
+          "unit": "percent",
+          "baseline": "Previously unseen, noisy social-media text"
+        }
+      ],
+      "outcomes": [
+        {
+          "outcome": "Won two national hackathons.",
+          "award_ref": "award.hackathons",
+          "note": "Hackathon names are not recorded; the prior resume referenced a 'Certificates' link with no URL."
+        },
+        {
+          "outcome": "Surfaced the influence of bias and noise on AI systems, which motivated his interest in interpretable ML."
+        }
+      ],
+      "artifacts": []
+    },
+    {
+      "id": "proj.ar-education-website",
+      "title": "AR-driven educational website for underprivileged children",
+      "engagement_type": "Student club project / social impact",
+      "organization": "RV College of Engineering coding club",
+      "role": "Team lead",
+      "period": {
+        "start": null,
+        "end": null,
+        "academic_stage": "Third year of undergraduate study",
+        "confidence": "needs_input"
+      },
+      "situation": "Provide engaging educational tools for underprivileged children.",
+      "constraints": [],
+      "actions": [
+        {
+          "action": "Led a team from the college coding club to develop an augmented-reality-driven educational website."
+        },
+        {
+          "action": "Conducted workshops to ensure teachers could use the tool effectively."
+        }
+      ],
+      "technologies_used": [
+        "Augmented reality",
+        "Web development"
+      ],
+      "metrics": [],
+      "outcomes": [],
+      "artifacts": []
+    },
+    {
+      "id": "proj.redis-sqlite-cache",
+      "title": "Durable client-server cache using Redis with SQLite",
+      "engagement_type": "Coursework (experiential learning)",
+      "organization": "RV College of Engineering - Database Design course",
+      "role": "Individual contributor",
+      "advisors": [
+        {
+          "name": "Dr. Shobha G",
+          "title": "Professor and Dean, School of Computer Science and Engineering, RV University",
+          "relationship": "Course instructor"
+        }
+      ],
+      "period": {
+        "start": null,
+        "end": null,
+        "confidence": "needs_input"
+      },
+      "situation": "Cache data between a server and a client needed to be stored reliably; Redis alone keeps data in RAM and therefore does not provide durability.",
+      "constraints": [
+        "Durability had to be added without compromising Redis's fast read and write speeds"
+      ],
+      "actions": [
+        {
+          "action": "Developed a method to store cache data between server and client by combining Redis with SQLite."
+        }
+      ],
+      "technologies_used": [
+        "Redis",
+        "SQLite",
+        "Caching"
+      ],
+      "metrics": [],
+      "outcomes": [
+        {
+          "outcome": "Achieved reliable data storage while preserving Redis's read and write performance."
+        }
+      ],
+      "artifacts": []
+    },
+    {
+      "id": "proj.silkworm-breeding",
+      "title": "Selective breeding of silkworms",
+      "engagement_type": "Academic research",
+      "organization": "RV College of Engineering, Department of Biotechnology",
+      "role": "Contributor",
+      "advisors": [
+        {
+          "name": "Dr. Vidya Niranjan",
+          "title": "Professor and Head, Department of Biotechnology, RV College of Engineering",
+          "relationship": "Supervisor"
+        }
+      ],
+      "period": {
+        "start": null,
+        "end": null,
+        "confidence": "needs_input"
+      },
+      "situation": "A project on the selective breeding of silkworms.",
+      "constraints": [],
+      "actions": [
+        {
+          "action": "Contributed to the project.",
+          "note": "The technical nature of the contribution is not recorded."
+        }
+      ],
+      "technologies_used": [],
+      "metrics": [],
+      "outcomes": [],
+      "artifacts": [],
+      "confidence": "needs_input",
+      "gap": "Only a passing mention survives. Technical scope, dates and outcome are unknown."
+    }
+  ],
+  "publications": [
+    {
+      "id": "pub.cancer-informatics",
+      "name": null,
+      "publisher": "Cancer Informatics (SAGE Publications)",
+      "type": "Peer-reviewed journal article",
+      "releaseDate": null,
+      "url": "https://journals.sagepub.com/doi/10.1177/11769351231167992",
+      "doi": "10.1177/11769351231167992",
+      "authors": null,
+      "project_ref": "proj.nsclc-biomarkers",
+      "summary": "Machine-learning identification of candidate biomarkers for non-small cell lung cancer from transcriptomic data using a Random Forest classifier.",
+      "confidence": "needs_input",
+      "gap": "Exact title, author list and publication year are not recorded."
+    },
+    {
+      "id": "pub.jait",
+      "name": null,
+      "publisher": "Journal of Advances in Information Technology (JAIT)",
+      "type": "Peer-reviewed journal article",
+      "releaseDate": null,
+      "url": "http://www.jait.us/shw-229-1347-1.html",
+      "doi": null,
+      "authors": null,
+      "project_ref": "proj.rcot-hpcc",
+      "summary": "Conditional independence testing with RCoT implemented on HPCC Systems, compared against ProbSpace.",
+      "confidence": "needs_input",
+      "gap": "Exact title, author list and publication year are not recorded."
+    },
+    {
+      "id": "pub.icaic-2025",
+      "name": null,
+      "publisher": "International Conference of Artificial Intelligence and Computing (ICAIC) 2025",
+      "type": "Conference paper",
+      "releaseDate": "2025",
+      "url": "https://rdcu.be/wZSePwoXqLVa",
+      "doi": null,
+      "authors": null,
+      "project_ref": "proj.document-extraction",
+      "summary": "Business document data recognition and table extraction combining YOLOv5 object detection with DETR-based table extraction.",
+      "confidence": "needs_input",
+      "gap": "Exact title and author list are not recorded."
+    }
+  ],
+  "awards": [
+    {
+      "id": "award.samsung-excellence",
+      "title": "Excellence Award",
+      "awarder": "Samsung Research Institute, Bengaluru (SRIB)",
+      "date": null,
+      "context": "Awarded to his four-person team for the instant-app worklet, selected among 17 other competing worklets.",
+      "project_ref": "proj.samsung-instant-apps"
+    },
+    {
+      "id": "award.hackathons",
+      "title": "Winner, two national hackathons",
+      "awarder": null,
+      "date": null,
+      "context": "Won with the blockchain misinformation-detection application.",
+      "project_ref": "proj.blockchain-misinformation",
+      "confidence": "needs_input",
+      "gap": "Hackathon names, dates and certificate links are not recorded."
+    },
+    {
+      "id": "award.nptel-believer",
+      "title": "NPTEL Believer Award",
+      "awarder": "NPTEL",
+      "date": null,
+      "context": "For consistently high performance across NPTEL courses including Discrete Mathematics and Python for Data Science."
+    },
+    {
+      "id": "award.best-presentation",
+      "title": "Best Presentation award",
+      "awarder": null,
+      "date": null,
+      "context": "Awarded to the team for presenting the NSCLC biomarker paper at a conference; a judge commended his elaboration of concepts, supported by graphs and diagrams.",
+      "project_ref": "proj.nsclc-biomarkers",
+      "confidence": "needs_input",
+      "gap": "Conference name and date are not recorded."
+    },
+    {
+      "id": "award.cohort-standing",
+      "title": "Top 10% of cohort",
+      "awarder": "RV College of Engineering",
+      "date": null,
+      "context": "Academic standing across the Computer Science and Engineering undergraduate cohort."
+    },
+    {
+      "id": "award.qualcomm-promotion",
+      "title": "Promotion from Associate Engineer to Software Engineer",
+      "awarder": "Qualcomm India Private Limited",
+      "date": null,
+      "context": "Followed the independently delivered SoC upgrade work and contributions across multiple assignments.",
+      "confidence": "needs_input",
+      "gap": "The promotion month is not recorded."
+    }
+  ],
+  "affiliations": [
+    {
+      "id": "affil.dhruva",
+      "organization": "Dhruva, the astrophysics club of RV College of Engineering",
+      "role": "Lead, data-driven astronomy research division",
+      "startDate": null,
+      "endDate": null
+    }
+  ],
+  "collaborating_organizations": {
+    "note": "Organizations he has worked with directly through employment or project collaboration.",
+    "items": [
+      "Samsung Research Institute Bengaluru",
+      "LexisNexis",
+      "Epsilon",
+      "SCII",
+      "Intel",
+      "Qualcomm",
+      "District Institute of Education and Training (DIET), Ramanagara"
+    ],
+    "gap": "SCII was named in the prior resume's achievements list, but the nature of the collaboration is not recorded."
+  },
+  "skills": {
+    "legend": {
+      "evidenced": "Demonstrated by a specific engagement in this file, listed in evidence_refs.",
+      "listed_only": "Claimed on the prior resume, but no engagement recorded here demonstrates it. Treat as a claim to confirm, not a demonstrated skill."
+    },
+    "languages": [
+      {
+        "name": "Python",
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.intel.crypto-acceleration",
+          "work.intel.ml-benchmark-automation",
+          "proj.nsclc-biomarkers",
+          "proj.document-extraction"
+        ]
+      },
+      {
+        "name": "Java",
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.intel.ather-telemetry"
+        ]
+      },
+      {
+        "name": "Kotlin",
+        "status": "evidenced",
+        "evidence_refs": [
+          "proj.samsung-instant-apps"
+        ]
+      },
+      {
+        "name": "SQL",
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.epsilon.query-optimization",
+          "proj.redis-sqlite-cache"
+        ]
+      },
+      {
+        "name": "C/C++",
+        "status": "listed_only",
+        "evidence_refs": [],
+        "note": "Plausibly used in the Qualcomm firmware work, but not recorded anywhere."
+      },
+      {
+        "name": "Dart",
+        "status": "listed_only",
+        "evidence_refs": []
+      },
+      {
+        "name": "R",
+        "status": "listed_only",
+        "evidence_refs": []
+      },
+      {
+        "name": "Rust",
+        "status": "listed_only",
+        "evidence_refs": []
+      }
+    ],
+    "machine_learning": [
+      {
+        "name": "Random Forest",
+        "status": "evidenced",
+        "evidence_refs": [
+          "proj.nsclc-biomarkers"
+        ]
+      },
+      {
+        "name": "Ensemble methods",
+        "status": "evidenced",
+        "evidence_refs": [
+          "proj.nsclc-biomarkers"
+        ]
+      },
+      {
+        "name": "Class-imbalance handling (NearMiss, under/over-sampling)",
+        "status": "evidenced",
+        "evidence_refs": [
+          "proj.nsclc-biomarkers"
+        ]
+      },
+      {
+        "name": "ROC / AUC model selection",
+        "status": "evidenced",
+        "evidence_refs": [
+          "proj.nsclc-biomarkers"
+        ]
+      },
+      {
+        "name": "Transformers",
+        "status": "evidenced",
+        "evidence_refs": [
+          "proj.blockchain-misinformation",
+          "proj.document-extraction"
+        ]
+      },
+      {
+        "name": "Object detection (YOLOv5)",
+        "status": "evidenced",
+        "evidence_refs": [
+          "proj.document-extraction"
+        ]
+      },
+      {
+        "name": "DETR / detection transformers",
+        "status": "evidenced",
+        "evidence_refs": [
+          "proj.document-extraction"
+        ]
+      },
+      {
+        "name": "Retrieval-augmented generation (RAG)",
+        "status": "evidenced",
+        "evidence_refs": [
+          "proj.diet-ramanagara"
+        ]
+      },
+      {
+        "name": "Prompt-based data augmentation",
+        "status": "evidenced",
+        "evidence_refs": [
+          "proj.blockchain-misinformation"
+        ]
+      },
+      {
+        "name": "Natural language processing",
+        "status": "evidenced",
+        "evidence_refs": [
+          "proj.blockchain-misinformation"
+        ]
+      },
+      {
+        "name": "Causal inference / conditional independence testing",
+        "status": "evidenced",
+        "evidence_refs": [
+          "proj.rcot-hpcc"
+        ]
+      },
+      {
+        "name": "scikit-learn",
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.intel.ml-benchmark-automation"
+        ]
+      },
+      {
+        "name": "NumPy",
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.intel.ml-benchmark-automation"
+        ]
+      },
+      {
+        "name": "Embedded ML model deployment",
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.qualcomm.embedded-ml-framework"
+        ]
+      },
+      {
+        "name": "GenAI tooling for engineering workflows",
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.qualcomm.genai-tooling"
+        ]
+      },
+      {
+        "name": "TensorFlow",
+        "status": "listed_only",
+        "evidence_refs": []
+      },
+      {
+        "name": "PyTorch",
+        "status": "listed_only",
+        "evidence_refs": []
+      },
+      {
+        "name": "Keras",
+        "status": "listed_only",
+        "evidence_refs": []
+      },
+      {
+        "name": "spaCy",
+        "status": "listed_only",
+        "evidence_refs": []
+      },
+      {
+        "name": "LangChain",
+        "status": "listed_only",
+        "evidence_refs": [],
+        "note": "RAG work is evidenced at proj.diet-ramanagara, but the framework used is not recorded."
+      },
+      {
+        "name": "CNN",
+        "status": "listed_only",
+        "evidence_refs": []
+      },
+      {
+        "name": "RNN",
+        "status": "listed_only",
+        "evidence_refs": []
+      },
+      {
+        "name": "LSTM",
+        "status": "listed_only",
+        "evidence_refs": []
+      },
+      {
+        "name": "BERT",
+        "status": "listed_only",
+        "evidence_refs": []
+      },
+      {
+        "name": "GAN",
+        "status": "listed_only",
+        "evidence_refs": []
+      },
+      {
+        "name": "VAE",
+        "status": "listed_only",
+        "evidence_refs": []
+      }
+    ],
+    "data_and_distributed_systems": [
+      {
+        "name": "Apache Spark",
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.intel.etl-pipeline"
+        ]
+      },
+      {
+        "name": "Apache Kafka",
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.intel.etl-pipeline"
+        ]
+      },
+      {
+        "name": "Apache Hadoop / HDFS",
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.epsilon.distributed-environment"
+        ]
+      },
+      {
+        "name": "Apache Hive",
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.intel.etl-pipeline"
+        ]
+      },
+      {
+        "name": "Apache HBase",
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.epsilon.store-benchmarking",
+          "work.epsilon.distributed-environment"
+        ]
+      },
+      {
+        "name": "Apache Phoenix",
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.epsilon.store-benchmarking",
+          "work.epsilon.query-optimization"
+        ]
+      },
+      {
+        "name": "Apache Solr",
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.epsilon.store-benchmarking"
+        ]
+      },
+      {
+        "name": "HPCC Systems",
+        "status": "evidenced",
+        "evidence_refs": [
+          "proj.rcot-hpcc"
+        ]
+      },
+      {
+        "name": "Tablesaw",
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.intel.ather-telemetry"
+        ]
+      },
+      {
+        "name": "ETL pipeline design",
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.intel.etl-pipeline"
+        ]
+      },
+      {
+        "name": "Query optimization and indexing",
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.epsilon.query-optimization"
+        ]
+      }
+    ],
+    "databases": [
+      {
+        "name": "Redis",
+        "status": "evidenced",
+        "evidence_refs": [
+          "proj.redis-sqlite-cache"
+        ]
+      },
+      {
+        "name": "SQLite",
+        "status": "evidenced",
+        "evidence_refs": [
+          "proj.redis-sqlite-cache"
+        ]
+      },
+      {
+        "name": "PostgreSQL",
+        "status": "listed_only",
+        "evidence_refs": []
+      },
+      {
+        "name": "MongoDB",
+        "status": "listed_only",
+        "evidence_refs": []
+      }
+    ],
+    "cloud_and_infrastructure": [
+      {
+        "name": "Kubernetes",
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.intel.etl-pipeline"
+        ]
+      },
+      {
+        "name": "Docker",
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.intel.ml-benchmark-automation",
+          "work.epsilon.distributed-environment"
+        ]
+      },
+      {
+        "name": "Terraform",
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.intel.etl-pipeline"
+        ]
+      },
+      {
+        "name": "Ansible",
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.intel.etl-pipeline"
+        ]
+      },
+      {
+        "name": "Amazon S3",
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.intel.etl-pipeline"
+        ]
+      },
+      {
+        "name": "AWS",
+        "status": "listed_only",
+        "evidence_refs": [
+          "work.intel.etl-pipeline"
+        ],
+        "note": "Only S3 usage is evidenced."
+      },
+      {
+        "name": "GCP",
+        "status": "listed_only",
+        "evidence_refs": []
+      }
+    ],
+    "systems_and_embedded": [
+      {
+        "name": "Device firmware update (DFU)",
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.qualcomm.dfu-refactor",
+          "work.qualcomm.soc-upgrade"
+        ]
+      },
+      {
+        "name": "SoC upgrade flows",
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.qualcomm.soc-upgrade"
+        ]
+      },
+      {
+        "name": "Bluetooth",
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.qualcomm.data-relay"
+        ]
+      },
+      {
+        "name": "Transport protocols",
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.qualcomm"
+        ]
+      },
+      {
+        "name": "Memory layout constraints",
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.qualcomm"
+        ]
+      },
+      {
+        "name": "Bootloader concepts",
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.qualcomm"
+        ]
+      },
+      {
+        "name": "SIMD instructions",
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.intel.ather-telemetry"
+        ]
+      },
+      {
+        "name": "OpenSSL / Intel QAT Engine",
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.intel.crypto-acceleration"
+        ]
+      },
+      {
+        "name": "Packet trace and log debugging",
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.qualcomm.bug-triage"
+        ]
+      },
+      {
+        "name": "Benchmarking and performance analysis",
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.intel.ml-benchmark-automation",
+          "work.epsilon.store-benchmarking"
+        ]
+      }
+    ],
+    "web_and_mobile": [
+      {
+        "name": "Android",
+        "status": "evidenced",
+        "evidence_refs": [
+          "proj.samsung-instant-apps"
+        ]
+      },
+      {
+        "name": "Augmented reality",
+        "status": "evidenced",
+        "evidence_refs": [
+          "proj.ar-education-website"
+        ]
+      },
+      {
+        "name": "Blockchain / DApp development",
+        "status": "evidenced",
+        "evidence_refs": [
+          "proj.blockchain-misinformation"
+        ]
+      },
+      {
+        "name": "ReactJS",
+        "status": "listed_only",
+        "evidence_refs": []
+      },
+      {
+        "name": "NodeJS",
+        "status": "listed_only",
+        "evidence_refs": []
+      }
+    ],
+    "tooling": [
+      {
+        "name": "Jira",
+        "status": "listed_only",
+        "evidence_refs": []
+      },
+      {
+        "name": "Git / GitHub",
+        "status": "listed_only",
+        "evidence_refs": []
+      },
+      {
+        "name": "Jenkins",
+        "status": "listed_only",
+        "evidence_refs": []
+      },
+      {
+        "name": "Perforce",
+        "status": "listed_only",
+        "evidence_refs": []
+      },
+      {
+        "name": "Shell scripting",
+        "status": "listed_only",
+        "evidence_refs": []
+      }
+    ],
+    "domains": [
+      {
+        "name": "Embedded firmware and device upgrade",
+        "evidence_refs": [
+          "work.qualcomm"
+        ]
+      },
+      {
+        "name": "Distributed data processing",
+        "evidence_refs": [
+          "work.intel",
+          "work.epsilon"
+        ]
+      },
+      {
+        "name": "Computational biology / genomics",
+        "evidence_refs": [
+          "proj.nsclc-biomarkers",
+          "proj.silkworm-breeding"
+        ]
+      },
+      {
+        "name": "Document AI",
+        "evidence_refs": [
+          "proj.document-extraction"
+        ]
+      },
+      {
+        "name": "Causal inference",
+        "evidence_refs": [
+          "proj.rcot-hpcc"
+        ]
+      },
+      {
+        "name": "Education technology",
+        "evidence_refs": [
+          "proj.diet-ramanagara",
+          "proj.ar-education-website"
+        ]
+      },
+      {
+        "name": "Cryptographic acceleration",
+        "evidence_refs": [
+          "work.intel.crypto-acceleration"
+        ]
+      }
+    ],
+    "practices": [
+      {
+        "name": "Technical leadership of small teams",
+        "evidence_refs": [
+          "proj.samsung-instant-apps",
+          "proj.document-extraction",
+          "proj.ar-education-website",
+          "proj.nsclc-biomarkers"
+        ]
+      },
+      {
+        "name": "Mentoring and unblocking teammates",
+        "evidence_refs": [
+          "work.qualcomm",
+          "work.intel"
+        ]
+      },
+      {
+        "name": "Design documentation (MSCs, developer guides)",
+        "evidence_refs": [
+          "work.qualcomm.dfu-refactor",
+          "work.qualcomm.developer-guides"
+        ]
+      },
+      {
+        "name": "Cross-team and cross-functional collaboration",
+        "evidence_refs": [
+          "work.qualcomm",
+          "work.intel"
+        ]
+      },
+      {
+        "name": "Stakeholder communication adapted to technical vs managerial audiences",
+        "evidence_refs": [
+          "work.intel",
+          "proj.samsung-instant-apps"
+        ]
+      },
+      {
+        "name": "Task delegation based on individual strengths",
+        "evidence_refs": [
+          "proj.samsung-instant-apps",
+          "proj.document-extraction"
+        ]
+      },
+      {
+        "name": "Interdisciplinary research collaboration",
+        "evidence_refs": [
+          "proj.nsclc-biomarkers",
+          "proj.diet-ramanagara"
+        ]
+      }
+    ]
+  },
+  "metadata": {
+    "role_optimization": "none - this file is role-neutral by design. Section and array ordering carries no emphasis. Do not infer that earlier entries are more important.",
+    "generation_directives": [
+      "This file contains facts, not bullets. Synthesize bullet points at generation time from `situation`, `constraints`, `actions`, `technologies_used`, `metrics` and `outcomes`. Never copy a field verbatim as a resume line.",
+      "Never state a value recorded as null, and never use a metric marked `confidence: \"needs_input\"` without checking with the candidate first.",
+      "Respect every entry in `confidentiality` below.",
+      "Skills with status `listed_only` may be included in a skills section if the job calls for them, but must never be used to generate an experience bullet, because no engagement recorded here demonstrates them.",
+      "Entries under basics.stated_interests are stated aspirations. They may inform a cover letter or summary but must never be presented as accomplishments."
+    ],
+    "confidentiality": [
+      {
+        "scope": "work.qualcomm",
+        "rule": "Client names are never disclosed. The only permitted phrasing is 'two major clients' or an equivalent abstraction."
+      },
+      {
+        "scope": "work.qualcomm",
+        "rule": "Specific SoC part numbers, internal module names and internal tool names are not recorded here and must not be invented."
+      },
+      {
+        "scope": "work.intel",
+        "rule": "Customer names Ather and National Stock Exchange have not been cleared for public use. Confirm with the candidate before naming either customer in a public resume; the safe abstraction is 'an electric vehicle manufacturer' and 'a national stock exchange'."
+      }
+    ],
+    "needs_input": [
+      {
+        "field": "work.qualcomm.positions[1].startDate",
+        "question": "In which month and year were you promoted from Associate Engineer to Software Engineer at Qualcomm?"
+      },
+      {
+        "field": "basics.location",
+        "question": "What city and country should the resume show as your current location?"
+      },
+      {
+        "field": "basics.work_authorization",
+        "question": "What US work authorization status should downstream applications assume (e.g. F-1/OPT after the UIUC program begins)?"
+      },
+      {
+        "field": "work.epsilon.team",
+        "question": "Which team or product did you work on at Epsilon, and who was your manager?"
+      },
+      {
+        "field": "proj.document-extraction.organization",
+        "question": "Which organization sponsored the invoice/business-document extraction project?"
+      },
+      {
+        "field": "proj.document-extraction.period",
+        "question": "What were the start and end dates of the document-extraction project?"
+      },
+      {
+        "field": "proj.nsclc-biomarkers.period",
+        "question": "What were the start and end months of the NSCLC biomarker project?"
+      },
+      {
+        "field": "proj.rcot-hpcc.period",
+        "question": "What were the start and end months of the RCoT / HPCC Systems project?"
+      },
+      {
+        "field": "proj.samsung-instant-apps.period",
+        "question": "What were the start and end months of the Samsung SRIB instant-apps worklet?"
+      },
+      {
+        "field": "proj.diet-ramanagara.period",
+        "question": "What were the start and end months of the DIET Ramanagara project?"
+      },
+      {
+        "field": "proj.blockchain-misinformation",
+        "question": "What were the names and dates of the two national hackathons you won, and is there a public certificate or repository link?"
+      },
+      {
+        "field": "proj.ar-education-website.period",
+        "question": "What were the start and end months of the AR education website project?"
+      },
+      {
+        "field": "proj.redis-sqlite-cache.period",
+        "question": "Which semester was the Database Design course project?"
+      },
+      {
+        "field": "proj.silkworm-breeding",
+        "question": "What exactly did you contribute to the silkworm selective-breeding project, and when? It is currently only a one-line mention with no detail."
+      },
+      {
+        "field": "publications[*].name",
+        "question": "What are the exact titles and author lists of the three papers, and the publication years for the Cancer Informatics and JAIT papers?"
+      },
+      {
+        "field": "proj.nsclc-biomarkers.metrics.citations",
+        "question": "What is the current citation count for the Cancer Informatics paper, and as of what date?"
+      },
+      {
+        "field": "award.best-presentation",
+        "question": "At which conference did the team receive the Best Presentation award, and in what year?"
+      },
+      {
+        "field": "collaborating_organizations",
+        "question": "What was the SCII collaboration listed in your resume achievements, and which project does it belong to?"
+      },
+      {
+        "field": "work.intel.ather-telemetry.client",
+        "question": "Is the EV manufacturer spelled 'Ather' or 'Aether', and are you permitted to name them publicly?"
+      },
+      {
+        "field": "affiliations.affil.dhruva",
+        "question": "What years did you lead the data-driven astronomy research division at Dhruva?"
+      },
+      {
+        "field": "basics.profiles",
+        "question": "Do you want a personal website, Google Scholar profile or portfolio added to basics.profiles?"
+      },
+      {
+        "field": "work.intel.ather-telemetry.metrics",
+        "question": "Was the 100,000-record / 1.8 GB figure the real benchmark scale for the Intel telemetry work? It was recorded next to the withdrawn 80% claim."
+      }
+    ],
+    "maintenance": {
+      "how_to_extend": "Add a new engagement as an object under work[].projects[] (if it happened at an employer) or under projects[] (if it did not), using the same field shape. Give it a stable `id` and reference it from any relevant skills[].evidence_refs entry.",
+      "invariant": "Every metric, date and named entity in this file must be something the candidate has confirmed, or be null with a matching metadata.needs_input entry. Nothing is inferred."
+    }
+  }
+}
