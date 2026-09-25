@@ -24,13 +24,13 @@ roles." Tailoring happens at generation time against a specific job description,
 | `basics` | Identity, contacts, three length-variant summaries, stated interests |
 | `education` | RVCE and UIUC, with coursework, standing and MOOC record |
 | `work` | Three employers, each with `positions[]` (title history) and nested `projects[]` |
-| `projects` | Nine non-employment engagements: research, industry collaborations, hackathon, volunteering, coursework |
-| `publications` | Three papers, cross-linked to their source project via `project_ref` |
+| `projects` | Seven non-employment engagements: research, industry collaborations, hackathon, volunteering, coursework |
+| `publications` | Three papers with full titles, author lists and DOIs, cross-linked via `project_ref` |
 | `awards` | Six entries, cross-linked via `project_ref` |
 | `affiliations` | Club and division leadership |
 | `collaborating_organizations` | Named partner organizations |
 | `skills` | Competency matrix, every skill carrying `evidence_refs` |
-| `metadata` | Directives, confidentiality rules, gaps, pending resume corrections |
+| `metadata` | Directives, confidentiality rules, presentation preferences, deliberate exclusions, gaps, pending resume corrections |
 
 Every object with an `id` can be cross-referenced. `evidence_refs`, `project_ref`, `publication_ref`
 and `award_ref` all point at those ids.
@@ -70,16 +70,22 @@ with a matching `metadata.needs_input` entry.** Nothing is inferred.
 
 ## Open questions
 
-`metadata.needs_input` currently holds 22 questions. **`NEEDS_INPUT.md` is the worksheet version** —
-the same 22 questions with answer blocks to fill in, grouped by area and marked High/Medium/Low by
-how much they block resume generation. Fill it in, hand it back, and the answers get merged here and
-the resolved entries dropped from `needs_input`.
-
-The High-priority ones are the Qualcomm promotion month, the three paper titles and author lists,
-the Intel benchmark scale, whether the Intel customers can be named, and your current location.
+`metadata.needs_input` holds **one** remaining question: the conference where the NSCLC paper won its
+Best Presentation award. `NEEDS_INPUT.md` carries the filled-in worksheet as the record of the other
+21 answers.
 
 `metadata.pending_resume_corrections` lists three things the live resume in `../Resume/` gets wrong
 and that this file now supersedes.
+
+## Two metadata blocks the generator must honour
+
+`metadata.presentation_preferences` — layout rules the candidate set: order projects by relevance and
+never chronologically, omit project dates, collapse the Qualcomm entry to one line when space is
+tight, drop the achievements section first, never print work authorization, and treat a future
+portfolio link as a replacement for GitHub rather than an addition.
+
+`metadata.deliberate_exclusions` — content that must never be reintroduced: a fourth publication
+(IEEE Access, 2025) that exists on ORCID but is excluded by choice, and a removed project.
 
 Validate after any edit:
 

@@ -35,13 +35,12 @@
     "location": {
       "city": "Champaign",
       "region": "IL",
-      "countryCode": "USA",
-      "confidence": "needs_input",
-      "note": "Phone number is a US (+1 217, Champaign IL area) line and UIUC enrollment begins 2026-08; current city of residence is not recorded."
+      "countryCode": "US"
     },
     "work_authorization": {
-      "value": null,
-      "confidence": "needs_input"
+      "value": "F-1 student",
+      "resume_visibility": "never - must not appear anywhere in the resume body",
+      "note": "Recorded only to answer work-authorization questions on application forms."
     },
     "summaries": {
       "note": "Length variants only. These are deliberately role-neutral; pick by available space, not by target role.",
@@ -68,7 +67,8 @@
           "statement": "Treating ML as a systems problem - how algorithmic ideas interact with computation, scale and real-world constraints."
         }
       ]
-    }
+    },
+    "profiles_policy": "LinkedIn and GitHub are sufficient. When a personal portfolio site exists it should replace the GitHub link rather than be added alongside it."
   },
   "education": [
     {
@@ -149,15 +149,14 @@
         {
           "title": "Associate Engineer",
           "startDate": "2023-01",
-          "endDate": null,
-          "note": "Joining title. The end date is the promotion month, which is not yet supplied."
+          "endDate": "2024-12",
+          "note": "Joining title."
         },
         {
           "title": "Software Engineer",
-          "startDate": null,
+          "startDate": "2025-01",
           "endDate": "2026-07",
-          "note": "Promotion followed the independently delivered SoC upgrade work and contributions across multiple assignments. The promotion month is not yet recorded.",
-          "confidence": "needs_input"
+          "note": "Promotion took effect 2025-01, following the independently delivered SoC upgrade work and contributions across multiple assignments."
         }
       ],
       "manager": {
@@ -515,14 +514,13 @@
       ],
       "projects": [
         {
-          "id": "work.intel.ather-telemetry",
+          "id": "work.intel.ev-telemetry",
           "title": "EV telemetry JSON processing pipeline",
           "role": "Individual contributor",
           "client": {
-            "name": "Ather",
-            "industry": "Electric vehicle manufacturer",
-            "note": "Recorded elsewhere as 'Aether'. 'Ather' is the commonly used spelling of the Bengaluru EV manufacturer, but the spelling is not confirmed.",
-            "confidence": "needs_input"
+            "name": null,
+            "descriptor": "An electric vehicle manufacturer",
+            "disclosure": "withheld - the candidate treats the customer identity as private information"
           },
           "period": {
             "start": "2022-08",
@@ -570,9 +568,7 @@
               "name": "Benchmark dataset size",
               "value": 1.8,
               "unit": "GB",
-              "note": "100,000 records.",
-              "confidence": "needs_input",
-              "gap": "This scale was recorded alongside a withdrawn 80% figure; confirm it was the actual benchmark scale."
+              "note": "100,000 records. Scale confirmed by the candidate."
             }
           ],
           "outcomes": [
@@ -586,14 +582,15 @@
           "title": "Cryptographic acceleration on Intel silicon",
           "role": "Individual contributor",
           "client": {
-            "name": "National Stock Exchange",
-            "country": "India"
+            "name": null,
+            "descriptor": "A national stock exchange",
+            "disclosure": "withheld - the candidate treats the customer identity as private information"
           },
           "period": {
             "start": null,
             "end": null
           },
-          "situation": "New government guidelines required Indian stock exchanges to encrypt information shared with their users; the National Stock Exchange wanted the cryptographic overhead not to slow down its services. The work covered two parts: optimizing hashing, and accelerating the RSA and AES256 encryption path.",
+          "situation": "Regulatory guidelines required the exchange to encrypt information shared with its users, and the customer wanted the cryptographic overhead not to slow down its services. The work covered two parts: optimizing hashing, and accelerating the RSA and AES256 encryption path.",
           "constraints": [
             "Cryptographic overhead had to not degrade live service performance"
           ],
@@ -733,7 +730,7 @@
       ],
       "startDate": "2022-01",
       "endDate": "2022-06",
-      "note": "Note: ../Resume/src/experience.tex files this work under Aug 2022 - Jan 2023, which are Intel's dates. That file is stale on this point.",
+      "note": "Note: ../Resume/src/experience.tex files this work under Aug 2022 - Jan 2023, which are Intel's dates. That file is stale on this point. Exploratory engagement with no dedicated product line and no reporting manager.",
       "projects": [
         {
           "id": "work.epsilon.store-benchmarking",
@@ -858,7 +855,7 @@
         "end": null,
         "duration_stated": "Six months",
         "academic_stage": "Junior year of undergraduate study",
-        "confidence": "needs_input"
+        "note": "Dates intentionally not tracked - the candidate orders projects by relevance to the target role rather than chronologically, and omits project dates to save space."
       },
       "situation": "Predict the involvement of specific genes in non-small cell lung cancer (NSCLC). Input was patient-derived transcriptomic data that had already undergone differential gene expression and pathway analyses; the goal was to apply machine learning to extract insights into NSCLC-associated biomarkers.",
       "constraints": [
@@ -919,11 +916,10 @@
         },
         {
           "name": "Citations",
-          "value": 10,
+          "value": 51,
           "unit": "count",
-          "window": "two years",
-          "confidence": "needs_input",
-          "note": "The as-of date for this count is unknown."
+          "as_of": "2026-09",
+          "note": "Count reported by the candidate on 2026-09-25."
         }
       ],
       "outcomes": [
@@ -950,9 +946,9 @@
       "title": "Business document data recognition and table extraction using deep learning",
       "engagement_type": "Industry-driven academic project",
       "organization": {
-        "name": null,
-        "note": "Recorded only as an industry-driven project; the sponsoring organization is not identified.",
-        "confidence": "needs_input"
+        "name": "SCII",
+        "role": "Funded and oversaw the project",
+        "disclosure": "cleared for public use"
       },
       "role": "Project lead",
       "team_context": "Led a team; delegated tasks based on each member's strengths and absorbed extra work when the project demanded.",
@@ -966,7 +962,7 @@
       "period": {
         "start": null,
         "end": null,
-        "confidence": "needs_input"
+        "note": "Dates intentionally not tracked - the candidate orders projects by relevance to the target role rather than chronologically, and omits project dates to save space."
       },
       "situation": "Detect and extract valuable information from invoices and other business documents - both discrete elements such as the date and invoice number, and full tabular data.",
       "constraints": [
@@ -1049,7 +1045,7 @@
         "start": null,
         "end": null,
         "academic_stage": "Began in the third semester of undergraduate study",
-        "confidence": "needs_input"
+        "note": "Dates intentionally not tracked - the candidate orders projects by relevance to the target role rather than chronologically, and omits project dates to save space."
       },
       "situation": "Compare two models used for conditional independence testing - ProbSpace and the Randomized Conditional Correlation Test (RCoT) - and implement RCoT on HPCC Systems, a Data Analytics Supercomputer (DAS) designed for high-performance parallel processing.",
       "constraints": [
@@ -1127,7 +1123,7 @@
       "period": {
         "start": null,
         "end": null,
-        "confidence": "needs_input"
+        "note": "Dates intentionally not tracked - the candidate orders projects by relevance to the target role rather than chronologically, and omits project dates to save space."
       },
       "situation": "Adapt Google's instant app technology for use within the Samsung Galaxy App Store ecosystem.",
       "constraints": [
@@ -1190,15 +1186,16 @@
     },
     {
       "id": "proj.diet-ramanagara",
-      "title": "Retrieval-augmented educational content tooling for rural schools",
+      "title": "Educational technology for understaffed rural schools: AR-driven website and RAG-based lesson generation",
       "engagement_type": "Curriculum volunteering / social impact",
       "organization": "District Institute of Education and Training (DIET), Ramanagara",
-      "role": "Member of an eight-member interdisciplinary student team",
+      "role": "Member of an eight-member interdisciplinary student team; led the coding-club team that built the AR-driven educational website.",
       "period": {
         "start": null,
         "end": null,
         "duration_stated": "Six months, including three months of stakeholder coordination",
-        "confidence": "needs_input"
+        "note": "Dates intentionally not tracked - the candidate orders projects by relevance to the target role rather than chronologically, and omits project dates to save space.",
+        "academic_stage": "Third year of undergraduate study"
       },
       "situation": "Support understaffed rural schools in southern Karnataka in their teaching efforts, as part of an undergraduate diversity-and-inclusion curriculum requirement.",
       "constraints": [
@@ -1218,12 +1215,20 @@
         },
         {
           "action": "Integrated existing animated content and syllabus data with an LLM using retrieval-augmented generation, so teachers could generate curriculum-aligned lessons from a topic and a brief description."
+        },
+        {
+          "action": "Led a team from the college coding club to develop an augmented-reality-driven educational website providing engaging educational tools for underprivileged children."
+        },
+        {
+          "action": "Conducted workshops so that teachers could use the tooling effectively."
         }
       ],
       "technologies_used": [
         "Large language models",
         "Retrieval-augmented generation (RAG)",
-        "Educational content generation"
+        "Educational content generation",
+        "Augmented reality",
+        "Web development"
       ],
       "metrics": [
         {
@@ -1246,7 +1251,8 @@
           "note": "Self-reported qualitative feedback, not measured."
         }
       ],
-      "artifacts": []
+      "artifacts": [],
+      "merge_note": "The AR-driven educational website and the teacher-facing content-generation software were parts of the same DIET Ramanagara engagement, previously recorded as two separate projects."
     },
     {
       "id": "proj.blockchain-misinformation",
@@ -1306,36 +1312,6 @@
       "artifacts": []
     },
     {
-      "id": "proj.ar-education-website",
-      "title": "AR-driven educational website for underprivileged children",
-      "engagement_type": "Student club project / social impact",
-      "organization": "RV College of Engineering coding club",
-      "role": "Team lead",
-      "period": {
-        "start": null,
-        "end": null,
-        "academic_stage": "Third year of undergraduate study",
-        "confidence": "needs_input"
-      },
-      "situation": "Provide engaging educational tools for underprivileged children.",
-      "constraints": [],
-      "actions": [
-        {
-          "action": "Led a team from the college coding club to develop an augmented-reality-driven educational website."
-        },
-        {
-          "action": "Conducted workshops to ensure teachers could use the tool effectively."
-        }
-      ],
-      "technologies_used": [
-        "Augmented reality",
-        "Web development"
-      ],
-      "metrics": [],
-      "outcomes": [],
-      "artifacts": []
-    },
-    {
       "id": "proj.redis-sqlite-cache",
       "title": "Durable client-server cache using Redis with SQLite",
       "engagement_type": "Coursework (experiential learning)",
@@ -1351,7 +1327,7 @@
       "period": {
         "start": null,
         "end": null,
-        "confidence": "needs_input"
+        "note": "Dates intentionally not tracked - the candidate orders projects by relevance to the target role rather than chronologically, and omits project dates to save space."
       },
       "situation": "Cache data between a server and a client needed to be stored reliably; Redis alone keeps data in RAM and therefore does not provide durability.",
       "constraints": [
@@ -1374,83 +1350,79 @@
         }
       ],
       "artifacts": []
-    },
-    {
-      "id": "proj.silkworm-breeding",
-      "title": "Selective breeding of silkworms",
-      "engagement_type": "Academic research",
-      "organization": "RV College of Engineering, Department of Biotechnology",
-      "role": "Contributor",
-      "advisors": [
-        {
-          "name": "Dr. Vidya Niranjan",
-          "title": "Professor and Head, Department of Biotechnology, RV College of Engineering",
-          "relationship": "Supervisor"
-        }
-      ],
-      "period": {
-        "start": null,
-        "end": null,
-        "confidence": "needs_input"
-      },
-      "situation": "A project on the selective breeding of silkworms.",
-      "constraints": [],
-      "actions": [
-        {
-          "action": "Contributed to the project.",
-          "note": "The technical nature of the contribution is not recorded."
-        }
-      ],
-      "technologies_used": [],
-      "metrics": [],
-      "outcomes": [],
-      "artifacts": [],
-      "confidence": "needs_input",
-      "gap": "Only a passing mention survives. Technical scope, dates and outcome are unknown."
     }
   ],
   "publications": [
     {
       "id": "pub.cancer-informatics",
-      "name": null,
+      "name": "Novel Biomarker Prediction for Lung Cancer Using Random Forest Classifiers",
       "publisher": "Cancer Informatics (SAGE Publications)",
       "type": "Peer-reviewed journal article",
-      "releaseDate": null,
+      "releaseDate": "2023-01",
       "url": "https://journals.sagepub.com/doi/10.1177/11769351231167992",
       "doi": "10.1177/11769351231167992",
-      "authors": null,
+      "authors": [
+        "C, L.",
+        "S, P.",
+        "Kashyap, A.H.",
+        "Rahaman, A.",
+        "Niranjan, S.",
+        "Niranjan, V."
+      ],
       "project_ref": "proj.nsclc-biomarkers",
       "summary": "Machine-learning identification of candidate biomarkers for non-small cell lung cancer from transcriptomic data using a Random Forest classifier.",
-      "confidence": "needs_input",
-      "gap": "Exact title, author list and publication year are not recorded."
+      "volume": "22",
+      "author_position": "3 of 6",
+      "note": "Author names as recorded on ORCID; the first two appear there only as initials."
     },
     {
       "id": "pub.jait",
-      "name": null,
+      "name": "Causal Inference and Conditional Independence Testing with RCoT",
       "publisher": "Journal of Advances in Information Technology (JAIT)",
       "type": "Peer-reviewed journal article",
-      "releaseDate": null,
+      "releaseDate": "2023",
       "url": "http://www.jait.us/shw-229-1347-1.html",
-      "doi": null,
-      "authors": null,
+      "doi": "10.12720/jait.14.3.495-500",
+      "authors": [
+        "Agarwal, M.",
+        "Kashyap, A.H.",
+        "Shobha, G.",
+        "Shetty, J.",
+        "Dev, R."
+      ],
       "project_ref": "proj.rcot-hpcc",
       "summary": "Conditional independence testing with RCoT implemented on HPCC Systems, compared against ProbSpace.",
-      "confidence": "needs_input",
-      "gap": "Exact title, author list and publication year are not recorded."
+      "volume": "14",
+      "issue": "3",
+      "pages": "495-500",
+      "author_position": "2 of 5"
     },
     {
       "id": "pub.icaic-2025",
-      "name": null,
-      "publisher": "International Conference of Artificial Intelligence and Computing (ICAIC) 2025",
-      "type": "Conference paper",
-      "releaseDate": "2025",
+      "name": "Business Documents Data Recognition and Table Extraction Using Deep Learning Techniques",
+      "publisher": "Springer Nature Singapore - Lecture Notes in Networks and Systems",
+      "type": "Book chapter in conference proceedings",
+      "releaseDate": "2026",
       "url": "https://rdcu.be/wZSePwoXqLVa",
-      "doi": null,
-      "authors": null,
+      "doi": "10.1007/978-981-95-7238-0_36",
+      "authors": [
+        "Abhay H. Kashyap",
+        "Rohan Maheshwari",
+        "V. A. Sriram Praveen",
+        "J. M. Anirudh",
+        "G. Shobha",
+        "N. Deepamala"
+      ],
       "project_ref": "proj.document-extraction",
       "summary": "Business document data recognition and table extraction combining YOLOv5 object detection with DETR-based table extraction.",
-      "confidence": "needs_input",
-      "gap": "Exact title and author list are not recorded."
+      "conference": "International Conference of Artificial Intelligence and Computing (ICAIC) 2025",
+      "pages": "503-520",
+      "isbn": [
+        "9789819572373",
+        "9789819572380"
+      ],
+      "author_position": "1 of 6 (first author)",
+      "note": "Presented at ICAIC 2025; published in the Springer proceedings volume in 2026."
     }
   ],
   "awards": [
@@ -1469,8 +1441,7 @@
       "date": null,
       "context": "Won with the blockchain misinformation-detection application.",
       "project_ref": "proj.blockchain-misinformation",
-      "confidence": "needs_input",
-      "gap": "Hackathon names, dates and certificate links are not recorded."
+      "gap": "Hackathon names, dates and certificate links are intentionally not tracked."
     },
     {
       "id": "award.nptel-believer",
@@ -1500,10 +1471,8 @@
       "id": "award.qualcomm-promotion",
       "title": "Promotion from Associate Engineer to Software Engineer",
       "awarder": "Qualcomm India Private Limited",
-      "date": null,
-      "context": "Followed the independently delivered SoC upgrade work and contributions across multiple assignments.",
-      "confidence": "needs_input",
-      "gap": "The promotion month is not recorded."
+      "date": "2025-01",
+      "context": "Followed the independently delivered SoC upgrade work and contributions across multiple assignments."
     }
   ],
   "affiliations": [
@@ -1511,8 +1480,8 @@
       "id": "affil.dhruva",
       "organization": "Dhruva, the astrophysics club of RV College of Engineering",
       "role": "Lead, data-driven astronomy research division",
-      "startDate": null,
-      "endDate": null
+      "startDate": "2021-08",
+      "endDate": "2022-08"
     }
   ],
   "collaborating_organizations": {
@@ -1526,7 +1495,9 @@
       "Qualcomm",
       "District Institute of Education and Training (DIET), Ramanagara"
     ],
-    "gap": "SCII was named in the prior resume's achievements list, but the nature of the collaboration is not recorded."
+    "notes": {
+      "SCII": "Funded and oversaw the business-document recognition and table-extraction project (proj.document-extraction)."
+    }
   },
   "skills": {
     "legend": {
@@ -1548,7 +1519,7 @@
         "name": "Java",
         "status": "evidenced",
         "evidence_refs": [
-          "work.intel.ather-telemetry"
+          "work.intel.ev-telemetry"
         ]
       },
       {
@@ -1815,7 +1786,7 @@
         "name": "Tablesaw",
         "status": "evidenced",
         "evidence_refs": [
-          "work.intel.ather-telemetry"
+          "work.intel.ev-telemetry"
         ]
       },
       {
@@ -1958,7 +1929,7 @@
         "name": "SIMD instructions",
         "status": "evidenced",
         "evidence_refs": [
-          "work.intel.ather-telemetry"
+          "work.intel.ev-telemetry"
         ]
       },
       {
@@ -1996,7 +1967,7 @@
         "name": "Augmented reality",
         "status": "evidenced",
         "evidence_refs": [
-          "proj.ar-education-website"
+          "proj.diet-ramanagara"
         ]
       },
       {
@@ -2061,8 +2032,7 @@
       {
         "name": "Computational biology / genomics",
         "evidence_refs": [
-          "proj.nsclc-biomarkers",
-          "proj.silkworm-breeding"
+          "proj.nsclc-biomarkers"
         ]
       },
       {
@@ -2080,8 +2050,7 @@
       {
         "name": "Education technology",
         "evidence_refs": [
-          "proj.diet-ramanagara",
-          "proj.ar-education-website"
+          "proj.diet-ramanagara"
         ]
       },
       {
@@ -2097,7 +2066,7 @@
         "evidence_refs": [
           "proj.samsung-instant-apps",
           "proj.document-extraction",
-          "proj.ar-education-website",
+          "proj.diet-ramanagara",
           "proj.nsclc-biomarkers"
         ]
       },
@@ -2157,7 +2126,7 @@
     "confidentiality": [
       {
         "scope": "work.qualcomm",
-        "rule": "Client names are never disclosed. The only permitted phrasing is 'two major clients' or an equivalent abstraction."
+        "rule": "Client names are not disclosed and must remain abstracted as 'two major clients'."
       },
       {
         "scope": "work.qualcomm",
@@ -2165,103 +2134,44 @@
       },
       {
         "scope": "work.intel",
-        "rule": "Customer names Ather and National Stock Exchange have not been cleared for public use. Confirm with the candidate before naming either customer in a public resume; the safe abstraction is 'an electric vehicle manufacturer' and 'a national stock exchange'."
+        "rule": "Both Intel customer identities are withheld as private information. Refer to them only as 'an electric vehicle manufacturer' and 'a national stock exchange'. Do not name or infer them."
+      },
+      {
+        "scope": "basics.work_authorization",
+        "rule": "Work authorization status must never appear in the resume body. It exists only to answer application-form questions."
       }
     ],
     "needs_input": [
       {
-        "field": "work.qualcomm.positions[1].startDate",
-        "question": "In which month and year were you promoted from Associate Engineer to Software Engineer at Qualcomm?"
-      },
-      {
-        "field": "basics.location",
-        "question": "What city and country should the resume show as your current location?"
-      },
-      {
-        "field": "basics.work_authorization",
-        "question": "What US work authorization status should downstream applications assume (e.g. F-1/OPT after the UIUC program begins)?"
-      },
-      {
-        "field": "work.epsilon.team",
-        "question": "Which team or product did you work on at Epsilon, and who was your manager?"
-      },
-      {
-        "field": "proj.document-extraction.organization",
-        "question": "Which organization sponsored the invoice/business-document extraction project?"
-      },
-      {
-        "field": "proj.document-extraction.period",
-        "question": "What were the start and end dates of the document-extraction project?"
-      },
-      {
-        "field": "proj.nsclc-biomarkers.period",
-        "question": "What were the start and end months of the NSCLC biomarker project?"
-      },
-      {
-        "field": "proj.rcot-hpcc.period",
-        "question": "What were the start and end months of the RCoT / HPCC Systems project?"
-      },
-      {
-        "field": "proj.samsung-instant-apps.period",
-        "question": "What were the start and end months of the Samsung SRIB instant-apps worklet?"
-      },
-      {
-        "field": "proj.diet-ramanagara.period",
-        "question": "What were the start and end months of the DIET Ramanagara project?"
-      },
-      {
-        "field": "proj.blockchain-misinformation",
-        "question": "What were the names and dates of the two national hackathons you won, and is there a public certificate or repository link?"
-      },
-      {
-        "field": "proj.ar-education-website.period",
-        "question": "What were the start and end months of the AR education website project?"
-      },
-      {
-        "field": "proj.redis-sqlite-cache.period",
-        "question": "Which semester was the Database Design course project?"
-      },
-      {
-        "field": "proj.silkworm-breeding",
-        "question": "What exactly did you contribute to the silkworm selective-breeding project, and when? It is currently only a one-line mention with no detail."
-      },
-      {
-        "field": "publications[*].name",
-        "question": "What are the exact titles and author lists of the three papers, and the publication years for the Cancer Informatics and JAIT papers?"
-      },
-      {
-        "field": "proj.nsclc-biomarkers.metrics.citations",
-        "question": "What is the current citation count for the Cancer Informatics paper, and as of what date?"
-      },
-      {
         "field": "award.best-presentation",
-        "question": "At which conference did the team receive the Best Presentation award, and in what year?"
-      },
-      {
-        "field": "collaborating_organizations",
-        "question": "What was the SCII collaboration listed in your resume achievements, and which project does it belong to?"
-      },
-      {
-        "field": "work.intel.ather-telemetry.client",
-        "question": "Is the EV manufacturer spelled 'Ather' or 'Aether', and are you permitted to name them publicly?"
-      },
-      {
-        "field": "affiliations.affil.dhruva",
-        "question": "What years did you lead the data-driven astronomy research division at Dhruva?"
-      },
-      {
-        "field": "basics.profiles",
-        "question": "Do you want a personal website, Google Scholar profile or portfolio added to basics.profiles?"
-      },
-      {
-        "field": "work.intel.ather-telemetry.metrics",
-        "question": "Was the 100,000-record / 1.8 GB figure the real benchmark scale for the Intel telemetry work? It was recorded next to the withdrawn 80% claim."
+        "question": "At which conference did the team receive the Best Presentation award for the NSCLC paper, and in what year?"
       }
     ],
     "needs_input_worksheet": "NEEDS_INPUT.md - the same 22 questions with answer blocks to fill in. Answers there get merged back into this file and the resolved entries removed from needs_input.",
     "maintenance": {
       "how_to_extend": "Add a new engagement as an object under work[].projects[] (if it happened at an employer) or under projects[] (if it did not), using the same field shape. Give it a stable `id` and reference it from any relevant skills[].evidence_refs entry.",
       "invariant": "Every metric, date and named entity in this file must be something the candidate has confirmed, or be null with a matching metadata.needs_input entry. Nothing is inferred."
-    }
+    },
+    "presentation_preferences": {
+      "note": "Rendering preferences stated by the candidate. These govern layout and space, NOT which content is relevant - that is still decided per job description at generation time.",
+      "project_ordering": "Order projects by relevance to the target role, never chronologically.",
+      "project_dates": "Omit project dates entirely; they consume space the candidate would rather spend on content.",
+      "qualcomm_titles": "A single 'Software Engineer' line for 2023-01 to 2026-07 is preferred when space is tight. The Associate Engineer (2023-01 to 2024-12) to Software Engineer (from 2025-01) split is available but optional.",
+      "achievements_section": "Lowest priority section. Drop it first when space is tight.",
+      "work_authorization": "Never print in the resume.",
+      "profile_links": "LinkedIn and GitHub. A future personal portfolio replaces the GitHub link rather than joining it."
+    },
+    "deliberate_exclusions": [
+      {
+        "item": "'Bridging Language Barriers in Coding: An NLP-Powered Tool for Programming Education in Regional Languages', IEEE Access, 2025, DOI 10.1109/ACCESS.2025.3587056",
+        "reason": "The candidate's ORCID record lists four publications; this is the fourth and is excluded on their instruction.",
+        "directive": "Do not add this publication to any generated resume."
+      },
+      {
+        "item": "Silkworm selective-breeding project",
+        "reason": "Removed from the data lake on the candidate's instruction.",
+        "directive": "Do not reintroduce it."
+      }
+    ]
   }
 }

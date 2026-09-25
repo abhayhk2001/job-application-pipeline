@@ -1,4 +1,14 @@
-# Open Questions — fill in and hand back
+# Open Questions — MERGED 2026-09-25
+
+> **Status: 21 of 22 answered and merged into `master_resume.json`.**
+> Your answers are preserved below as the record of what was applied. Only **Q21 (Best Presentation
+> conference)** is still open — it was left blank and remains the single entry in
+> `metadata.needs_input`. Fill that block and hand it back when you have it.
+>
+> Publication details for Q06 came from your ORCID record (`0009-0001-8017-4400`) and DOI metadata.
+> The IEEE Access paper is recorded in `metadata.deliberate_exclusions` so it is never re-added.
+
+---
 
 22 gaps in `master_resume.json`. Each one corresponds to an entry in
 `metadata.needs_input` and to a field that is currently `null` or incomplete.
@@ -30,7 +40,7 @@ correctly without it.
 **Format:** `City, Region, Country` — e.g. `Champaign, IL, USA` or `Bengaluru, India`
 
 ```
-
+`Champaign, IL, USA`
 ```
 
 ### Q02 — Work authorization · Medium
@@ -40,7 +50,7 @@ correctly without it.
 **Format:** Free text — e.g. `F-1 student, CPT/OPT eligible from <date>`, or `SKIP` to leave it out
 
 ```
-
+F-1 Student, but make sure it is not in the resume
 ```
 
 ### Q03 — Extra profile links · Low
@@ -50,7 +60,7 @@ LinkedIn and GitHub?
 **Format:** One `Label: URL` per line, or `SKIP`
 
 ```
-
+No Linkedin and Github is enough, when I make a personal portfolio, I will attach it instead of GitHub
 ```
 
 ---
@@ -65,7 +75,7 @@ so neither can be dated on a resume.
 **Format:** `YYYY-MM` — e.g. `2023-07`
 
 ```
-
+I was promoted in Jan 2025. But such detail is not required in the resume as there isnt that much space.
 ```
 
 ### Q05 — Epsilon team and manager · Low
@@ -74,7 +84,7 @@ so neither can be dated on a resume.
 **Format:** Free text, or `SKIP`
 
 ```
-
+No manager and product, it was a explorative project. 
 ```
 
 ---
@@ -102,6 +112,11 @@ JAIT (RCoT):
 ICAIC 2025 (document extraction):
   title:
   authors:
+
+Can you extract the required stuff from my orcid profile page ?
+https://orcid.org/0009-0001-8017-4400
+
+There is a 4th publication which should not be included.
 ```
 
 ### Q07 — Citation count · Low
@@ -111,7 +126,7 @@ The file records "10 in two years" with no as-of date, so it can't be used as-is
 **Format:** `<count> as of <YYYY-MM>`, or `SKIP`
 
 ```
-
+51
 ```
 
 ---
@@ -126,14 +141,14 @@ all work. Write `SKIP` on any you'd rather leave undated.
 **Known:** Ran roughly six months during your junior year.
 
 ```
-
+Project dates are not necessary, as it consumes space and I want to order them not chronologically but more based on relvance to the job.
 ```
 
 ### Q09 — Document extraction project · Medium
 **Field:** `proj.document-extraction.period`
 
 ```
-
+Project dates are not necessary, as it consumes space and I want to order them not chronologically but more based on relvance to the job.
 ```
 
 ### Q10 — RCoT / HPCC Systems · Medium
@@ -141,14 +156,14 @@ all work. Write `SKIP` on any you'd rather leave undated.
 **Known:** Started around your third semester.
 
 ```
-
+Project dates are not necessary, as it consumes space and I want to order them not chronologically but more based on relvance to the job.
 ```
 
 ### Q11 — Samsung SRIB instant-apps worklet · Medium
 **Field:** `proj.samsung-instant-apps.period`
 
 ```
-
+Project dates are not necessary, as it consumes space and I want to order them not chronologically but more based on relvance to the job.
 ```
 
 ### Q12 — DIET Ramanagara · Medium
@@ -156,7 +171,7 @@ all work. Write `SKIP` on any you'd rather leave undated.
 **Known:** Six months total, including three months of stakeholder coordination.
 
 ```
-
+Project dates are not necessary, as it consumes space and I want to order them not chronologically but more based on relvance to the job.
 ```
 
 ### Q13 — AR education website · Low
@@ -164,7 +179,7 @@ all work. Write `SKIP` on any you'd rather leave undated.
 **Known:** Third year of undergrad.
 
 ```
-
+Sidenote : AR education website and DIET ramnagara work are the same. 
 ```
 
 ### Q14 — Redis + SQLite cache · Low
@@ -172,7 +187,7 @@ all work. Write `SKIP` on any you'd rather leave undated.
 **Asks:** Which semester was the Database Design course project?
 
 ```
-
+Project dates are not necessary, as it consumes space and I want to order them not chronologically but more based on relvance to the job.
 ```
 
 ---
@@ -187,18 +202,17 @@ say so and I'll link them.
 **Format:** Organization name, plus whether you can name them publicly
 
 ```
-
+It is SCII.
 ```
 
 ### Q16 — Intel benchmark scale · High
 **Field:** `work.intel.ather-telemetry.metrics`
-**Asks:** Was the 100,000-record / 1.8 GB figure the real benchmark scale for the Intel telemetry
-work? You withdrew the 80% parsing claim that sat next to it, so this number needs confirming
+**Asks:** Was the 100,000-record / 1.8 GB figure the real benchmark scale for the Intel telemetry work? You withdrew the 80% parsing claim that sat next to it, so this number needs confirming
 before it's used.
 **Format:** `Confirmed`, a corrected scale, or `SKIP` to drop the metric
 
 ```
-
+It is correct. 
 ```
 
 ### Q17 — Naming the EV manufacturer · High
@@ -209,7 +223,7 @@ public resume? Same question for the National Stock Exchange. If not, the fallba
 **Format:** e.g. `Ather — OK to name` / `Abstract both`
 
 ```
-
+Abstract the names as they will be private info
 ```
 
 ### Q18 — Hackathon names · Medium
@@ -219,7 +233,7 @@ repository link if one exists.
 **Format:** One per line: `Name — date — link`
 
 ```
-
+Not required, achievements section will be the least priority. 
 ```
 
 ### Q19 — SCII collaboration · Low
@@ -229,7 +243,7 @@ What was it, and which project does it belong to?
 **Format:** Free text, or `SKIP` to drop SCII from the list
 
 ```
-
+This is the document data extractiona and business document analysis project. It was funded and overseen by SCII company.
 ```
 
 ### Q20 — Silkworm selective breeding · Low
@@ -239,7 +253,7 @@ technical detail, no dates and no outcome — too thin to use. Worth filling in 
 **Format:** Free text, or `SKIP` to remove the project entirely
 
 ```
-
+Remove this project from the data lake. 
 ```
 
 ---
@@ -262,5 +276,5 @@ paper, and in what year?
 **Format:** `YYYY-MM to YYYY-MM`, or just the academic years
 
 ```
-
+I led it from August 2021 - AUg 2022. 
 ```
