@@ -2258,6 +2258,7 @@
         "question": "Was the 100,000-record / 1.8 GB figure the real benchmark scale for the Intel telemetry work? It was recorded next to the withdrawn 80% claim."
       }
     ],
+    "needs_input_worksheet": "NEEDS_INPUT.md - the same 22 questions with answer blocks to fill in. Answers there get merged back into this file and the resolved entries removed from needs_input.",
     "maintenance": {
       "how_to_extend": "Add a new engagement as an object under work[].projects[] (if it happened at an employer) or under projects[] (if it did not), using the same field shape. Give it a stable `id` and reference it from any relevant skills[].evidence_refs entry.",
       "invariant": "Every metric, date and named entity in this file must be something the candidate has confirmed, or be null with a matching metadata.needs_input entry. Nothing is inferred."

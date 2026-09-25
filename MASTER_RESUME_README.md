@@ -70,8 +70,13 @@ with a matching `metadata.needs_input` entry.** Nothing is inferred.
 
 ## Open questions
 
-`metadata.needs_input` currently holds 22 questions. The highest-value ones are the Qualcomm
-promotion month, the paper titles and author lists, and the missing project dates.
+`metadata.needs_input` currently holds 22 questions. **`NEEDS_INPUT.md` is the worksheet version** —
+the same 22 questions with answer blocks to fill in, grouped by area and marked High/Medium/Low by
+how much they block resume generation. Fill it in, hand it back, and the answers get merged here and
+the resolved entries dropped from `needs_input`.
+
+The High-priority ones are the Qualcomm promotion month, the three paper titles and author lists,
+the Intel benchmark scale, whether the Intel customers can be named, and your current location.
 
 `metadata.pending_resume_corrections` lists three things the live resume in `../Resume/` gets wrong
 and that this file now supersedes.
