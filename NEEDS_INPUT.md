@@ -1,280 +1,100 @@
-# Open Questions — MERGED 2026-09-25
+# Open Questions — `master_resume.json`
 
-> **Status: 21 of 22 answered and merged into `master_resume.json`.**
-> Your answers are preserved below as the record of what was applied. Only **Q21 (Best Presentation
-> conference)** is still open — it was left blank and remains the single entry in
-> `metadata.needs_input`. Fill that block and hand it back when you have it.
->
-> Publication details for Q06 came from your ORCID record (`0009-0001-8017-4400`) and DOI metadata.
-> The IEEE Access paper is recorded in `metadata.deliberate_exclusions` so it is never re-added.
+**Last updated:** 2026-09-26 · **1 open · 21 resolved**
 
----
+This file is the human-facing mirror of `metadata.needs_input` in `master_resume.json`, and it is kept
+current: the moment a question is answered or otherwise resolved it moves from **Open** to the
+**Resolved log**, and any new gap introduced while editing the master resume is added to **Open**. The
+two should never disagree — if `metadata.needs_input` has an entry, there is an open block for it here.
 
-22 gaps in `master_resume.json`. Each one corresponds to an entry in
-`metadata.needs_input` and to a field that is currently `null` or incomplete.
+Question numbers are stable and never reused, so `Q17` means the same thing in any conversation.
 
-## How to fill this in
+## How to answer
 
-Type your answer inside the fenced block under each question. Prose is fine — I'll
-normalize it into the right shape and field type.
+Type inside the fenced block under a question. Prose is fine — it gets normalized into the right field
+and type.
 
-- **Don't know / doesn't exist / don't want it in the resume?** Write `SKIP`. I'll delete the
-  field and its `needs_input` entry so it stops being an open question.
-- **Partial answers are fine.** Answer what you can and leave the rest empty; empty blocks stay
-  open and nothing is invented to fill them.
-- **Don't edit the `Field` lines** — that's how I map your answer back into the JSON.
+- **Don't know / doesn't exist / don't want it on the resume?** Write `SKIP`. The field is deleted and
+  the question closes for good.
+- **Partial is fine.** Blank blocks stay open; nothing is invented to fill them.
+- **Don't edit the `Field` lines** — they're the mapping back into the JSON.
 
-When you're done, tell me and I'll merge everything into `master_resume.json`, clear the resolved
-`needs_input` entries, and report anything still outstanding.
-
-Priority reflects how much it blocks resume generation: **High** means a resume can't be written
+Priority reflects how much a gap blocks resume generation. **High** means a resume can't be written
 correctly without it.
 
 ---
 
-## A. Identity and contact
-
-### Q01 — Current location · High
-**Field:** `basics.location`
-**Asks:** What city and country should the resume show as your current location?
-**Format:** `City, Region, Country` — e.g. `Champaign, IL, USA` or `Bengaluru, India`
-
-```
-`Champaign, IL, USA`
-```
-
-### Q02 — Work authorization · Medium
-**Field:** `basics.work_authorization`
-**Asks:** What US work authorization status should applications assume? This drives the
-"are you authorized to work" questions on application forms, not the resume body.
-**Format:** Free text — e.g. `F-1 student, CPT/OPT eligible from <date>`, or `SKIP` to leave it out
-
-```
-F-1 Student, but make sure it is not in the resume
-```
-
-### Q03 — Extra profile links · Low
-**Field:** `basics.profiles`
-**Asks:** Do you want a personal website, Google Scholar profile or portfolio added alongside
-LinkedIn and GitHub?
-**Format:** One `Label: URL` per line, or `SKIP`
-
-```
-No Linkedin and Github is enough, when I make a personal portfolio, I will attach it instead of GitHub
-```
-
----
-
-## B. Employment chronology
-
-### Q04 — Qualcomm promotion month · High
-**Field:** `work.qualcomm.positions[1].startDate`
-**Asks:** In which month and year were you promoted from Associate Engineer to Software Engineer?
-**Why it matters:** The Qualcomm entry currently shows two titles with no boundary between them,
-so neither can be dated on a resume.
-**Format:** `YYYY-MM` — e.g. `2023-07`
-
-```
-I was promoted in Jan 2025. But such detail is not required in the resume as there isnt that much space.
-```
-
-### Q05 — Epsilon team and manager · Low
-**Field:** `work.epsilon.team`
-**Asks:** Which team or product did you work on at Epsilon, and who was your manager?
-**Format:** Free text, or `SKIP`
-
-```
-No manager and product, it was a explorative project. 
-```
-
----
-
-## C. Publications
-
-### Q06 — Paper titles, authors and years · High
-**Field:** `publications[*].name`
-**Asks:** The exact title and author list for each of the three papers, plus publication years
-for the Cancer Informatics and JAIT papers. All three titles are currently `null`, so no
-publications section can be generated.
-**Format:** One block per paper, like:
-
-```
-Cancer Informatics:
-  title:
-  authors:
-  year:
-
-JAIT (RCoT):
-  title:
-  authors:
-  year:
-
-ICAIC 2025 (document extraction):
-  title:
-  authors:
-
-Can you extract the required stuff from my orcid profile page ?
-https://orcid.org/0009-0001-8017-4400
-
-There is a 4th publication which should not be included.
-```
-
-### Q07 — Citation count · Low
-**Field:** `proj.nsclc-biomarkers.metrics.citations`
-**Asks:** Current citation count for the Cancer Informatics paper, and the date you checked.
-The file records "10 in two years" with no as-of date, so it can't be used as-is.
-**Format:** `<count> as of <YYYY-MM>`, or `SKIP`
-
-```
-51
-```
-
----
-
-## D. Project dates
-
-All seven are `null`. Approximate is fine — `Spring 2022`, `late 2021`, a semester, or just a year
-all work. Write `SKIP` on any you'd rather leave undated.
-
-### Q08 — NSCLC biomarker project · Medium
-**Field:** `proj.nsclc-biomarkers.period`
-**Known:** Ran roughly six months during your junior year.
-
-```
-Project dates are not necessary, as it consumes space and I want to order them not chronologically but more based on relvance to the job.
-```
-
-### Q09 — Document extraction project · Medium
-**Field:** `proj.document-extraction.period`
-
-```
-Project dates are not necessary, as it consumes space and I want to order them not chronologically but more based on relvance to the job.
-```
-
-### Q10 — RCoT / HPCC Systems · Medium
-**Field:** `proj.rcot-hpcc.period`
-**Known:** Started around your third semester.
-
-```
-Project dates are not necessary, as it consumes space and I want to order them not chronologically but more based on relvance to the job.
-```
-
-### Q11 — Samsung SRIB instant-apps worklet · Medium
-**Field:** `proj.samsung-instant-apps.period`
-
-```
-Project dates are not necessary, as it consumes space and I want to order them not chronologically but more based on relvance to the job.
-```
-
-### Q12 — DIET Ramanagara · Medium
-**Field:** `proj.diet-ramanagara.period`
-**Known:** Six months total, including three months of stakeholder coordination.
-
-```
-Project dates are not necessary, as it consumes space and I want to order them not chronologically but more based on relvance to the job.
-```
-
-### Q13 — AR education website · Low
-**Field:** `proj.ar-education-website.period`
-**Known:** Third year of undergrad.
-
-```
-Sidenote : AR education website and DIET ramnagara work are the same. 
-```
-
-### Q14 — Redis + SQLite cache · Low
-**Field:** `proj.redis-sqlite-cache.period`
-**Asks:** Which semester was the Database Design course project?
-
-```
-Project dates are not necessary, as it consumes space and I want to order them not chronologically but more based on relvance to the job.
-```
-
----
-
-## E. Project details
-
-### Q15 — Document extraction sponsor · Medium
-**Field:** `proj.document-extraction.organization`
-**Asks:** Which organization sponsored the invoice/business-document extraction project? It's
-currently recorded only as "an industry-driven project". If it's the SCII collaboration in Q18,
-say so and I'll link them.
-**Format:** Organization name, plus whether you can name them publicly
-
-```
-It is SCII.
-```
-
-### Q16 — Intel benchmark scale · High
-**Field:** `work.intel.ather-telemetry.metrics`
-**Asks:** Was the 100,000-record / 1.8 GB figure the real benchmark scale for the Intel telemetry work? You withdrew the 80% parsing claim that sat next to it, so this number needs confirming
-before it's used.
-**Format:** `Confirmed`, a corrected scale, or `SKIP` to drop the metric
-
-```
-It is correct. 
-```
-
-### Q17 — Naming the EV manufacturer · High
-**Field:** `work.intel.ather-telemetry.client`
-**Asks:** Two things — is it spelled `Ather` or `Aether`, and are you permitted to name them on a
-public resume? Same question for the National Stock Exchange. If not, the fallbacks stay
-"an electric vehicle manufacturer" and "a national stock exchange".
-**Format:** e.g. `Ather — OK to name` / `Abstract both`
-
-```
-Abstract the names as they will be private info
-```
-
-### Q18 — Hackathon names · Medium
-**Field:** `proj.blockchain-misinformation`
-**Asks:** Names and dates of the two national hackathons you won, and a public certificate or
-repository link if one exists.
-**Format:** One per line: `Name — date — link`
-
-```
-Not required, achievements section will be the least priority. 
-```
-
-### Q19 — SCII collaboration · Low
-**Field:** `collaborating_organizations`
-**Asks:** Your old resume listed SCII among your collaborations but nothing records what it was.
-What was it, and which project does it belong to?
-**Format:** Free text, or `SKIP` to drop SCII from the list
-
-```
-This is the document data extractiona and business document analysis project. It was funded and overseen by SCII company.
-```
-
-### Q20 — Silkworm selective breeding · Low
-**Field:** `proj.silkworm-breeding`
-**Asks:** What exactly did you contribute, and when? This is currently a one-line entry with no
-technical detail, no dates and no outcome — too thin to use. Worth filling in or deleting.
-**Format:** Free text, or `SKIP` to remove the project entirely
-
-```
-Remove this project from the data lake. 
-```
-
----
-
-## F. Awards and affiliations
+# Open (1)
 
 ### Q21 — Best Presentation conference · Medium
 **Field:** `award.best-presentation`
-**Asks:** At which conference did the team receive the Best Presentation award for the NSCLC
-paper, and in what year?
+**Asks:** At which conference did the team receive the Best Presentation award for the NSCLC paper,
+and in what year?
+**Known:** A judge commended the clarity of the explanation and its graph/diagram support. The award
+went to the team, not to you individually.
 **Format:** `Conference name, year`
 
 ```
 
 ```
 
-### Q22 — Dhruva division lead dates · Low
-**Field:** `affiliations.affil.dhruva`
-**Asks:** Which years did you lead the data-driven astronomy research division at Dhruva?
-**Format:** `YYYY-MM to YYYY-MM`, or just the academic years
+---
 
-```
-I led it from August 2021 - AUg 2022. 
-```
+# Resolved log
+
+21 questions, all answered 2026-09-25 and merged the same day. Answers below are condensed; the
+verbatim originals are in the git history at commit `9d2850a`.
+
+## A. Identity and contact
+
+| # | Question | Answer | Applied |
+|---|---|---|---|
+| Q01 | Current location | Champaign, IL, USA | `basics.location` set |
+| Q02 | Work authorization | F-1 student — must not appear on the resume | `basics.work_authorization` set; hard rule added to `metadata.confidentiality` and `presentation_preferences` |
+| Q03 | Extra profile links | LinkedIn + GitHub are enough; a future portfolio replaces GitHub | `basics.profiles_policy` added; no new profiles |
+
+## B. Employment chronology
+
+| # | Question | Answer | Applied |
+|---|---|---|---|
+| Q04 | Qualcomm promotion month | Jan 2025; not needed on the resume, space is tight | Associate Engineer `2023-01`→`2024-12`, Software Engineer from `2025-01`; `award.qualcomm-promotion` dated; collapse-to-one-line preference recorded |
+| Q05 | Epsilon team and manager | Neither — it was an exploratory project | `work.epsilon.team` = null with a note |
+
+## C. Publications
+
+| # | Question | Answer | Applied |
+|---|---|---|---|
+| Q06 | Paper titles, authors, years | Pull from ORCID `0009-0001-8017-4400`; exclude the 4th paper | All three filled from ORCID + DOI metadata: titles, full author lists, author positions, venues, volumes, pages, DOIs, ISBNs. IEEE Access 2025 paper logged in `metadata.deliberate_exclusions` |
+| Q07 | Citation count | 51 | `proj.nsclc-biomarkers` citations metric = 51, `as_of: 2026-09` |
+
+## D. Project dates
+
+| # | Question | Answer | Applied |
+|---|---|---|---|
+| Q08, Q09, Q10, Q11, Q12, Q14 | Dates for NSCLC, document extraction, RCoT, Samsung, DIET, Redis+SQLite (one answer covered all six) | Not needed — they cost space, and projects should be ordered by relevance to the job, not chronologically | All six `period.start`/`period.end` left null with an explanatory note; `duration_stated` and `academic_stage` retained. Ordering rule recorded in `metadata.presentation_preferences` |
+| Q13 | AR education website dates | *Sidenote:* the AR website and the DIET Ramanagara work are the same thing | **Merged** into `proj.diet-ramanagara` (AR website, teacher workshops, animated content, RAG lesson generation all now one project). `proj.ar-education-website` deleted; skills `evidence_refs` retargeted |
+
+## E. Project details
+
+| # | Question | Answer | Applied |
+|---|---|---|---|
+| Q15 | Document extraction sponsor | SCII | `proj.document-extraction.organization` set to SCII, cleared for public use |
+| Q16 | Intel benchmark scale | Correct | 1.8 GB / 100,000 records confirmed; `needs_input` marker removed |
+| Q17 | Naming the EV manufacturer | Abstract both — private info | Both customer identities withheld. Project id renamed `work.intel.ather-telemetry` → **`work.intel.ev-telemetry`** because the id itself leaked the name. Only "an electric vehicle manufacturer" and "a national stock exchange" remain in the file |
+| Q18 | Hackathon names | Not required — achievements are lowest priority | Gap closed as intentionally untracked; achievements-droppable-first rule recorded |
+| Q19 | SCII collaboration | It's the document extraction project, funded and overseen by SCII | `collaborating_organizations.notes` records it; linked to `proj.document-extraction` |
+| Q20 | Silkworm selective breeding | Remove from the data lake | `proj.silkworm-breeding` deleted; reference pulled from the computational-biology domain; logged in `metadata.deliberate_exclusions` so it can't return |
+
+## F. Awards and affiliations
+
+| # | Question | Answer | Applied |
+|---|---|---|---|
+| Q22 | Dhruva division lead dates | August 2021 – August 2022 | `affil.dhruva` `2021-08` → `2022-08` |
+
+---
+
+## Note on two field paths
+
+Answers to **Q16** and **Q17** referenced `work.intel.ather-telemetry.*`; that project is now
+`work.intel.ev-telemetry`. **Q13** referenced `proj.ar-education-website.period`, which no longer
+exists — that project was merged into `proj.diet-ramanagara`.

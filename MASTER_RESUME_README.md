@@ -71,8 +71,24 @@ with a matching `metadata.needs_input` entry.** Nothing is inferred.
 ## Open questions
 
 `metadata.needs_input` holds **one** remaining question: the conference where the NSCLC paper won its
-Best Presentation award. `NEEDS_INPUT.md` carries the filled-in worksheet as the record of the other
-21 answers.
+Best Presentation award.
+
+`NEEDS_INPUT.md` is the human-facing mirror of that list and is **kept in sync** — a question moves
+from its Open block to the Resolved log in the same edit that applies the answer to this file, and new
+gaps get added to Open as they appear. The two must never disagree, so after editing
+`master_resume.json`, check the open blocks against `metadata.needs_input`:
+
+```bash
+python3 - <<'EOF'
+import json, re
+d = json.load(open('master_resume.json'))
+sheet = open('NEEDS_INPUT.md').read()
+opened = re.findall(r'^\*\*Field:\*\* `([^`]+)`', sheet[sheet.index('# Open ('):sheet.index('# Resolved log')], re.M)
+print("in sync:", sorted(opened) == sorted(q['field'] for q in d['metadata']['needs_input']))
+EOF
+```
+
+Question numbers there are stable and never reused, so `Q17` refers to the same gap permanently.
 
 `metadata.pending_resume_corrections` lists three things the live resume in `../Resume/` gets wrong
 and that this file now supersedes.
