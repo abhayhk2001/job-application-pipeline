@@ -28,10 +28,8 @@ correctly without it.
 
 ### Q21 — Best Presentation conference · Medium
 **Field:** `award.best-presentation`
-**Asks:** At which conference did the team receive the Best Presentation award for the NSCLC paper,
-and in what year?
-**Known:** A judge commended the clarity of the explanation and its graph/diagram support. The award
-went to the team, not to you individually.
+**Asks:** At which conference did the team receive the Best Presentation award for the NSCLC paper, and in what year?
+**Known:** A judge commended the clarity of the explanation and its graph/diagram support. The award went to the team, not to you individually.
 **Format:** `Conference name, year`
 
 ```

@@ -59,6 +59,17 @@ accomplishments; and obey `metadata.confidentiality` — Qualcomm client names s
 "two major clients", and Intel customer names need the candidate's clearance before appearing
 publicly.
 
+## `test_resume.json` — the output-shape fixture
+
+`master_resume.json` is the input to generation; `test_resume.json` is a worked example of the
+**output**: ordered `sections`, each entry carrying finished bullet prose and a `source_ref` back to
+the master id it was drawn from. It is the one place in this project where bullet strings are allowed.
+
+It is a verbatim capture of `resume.pdf` (the 2025-09-23 LaTeX build), typos and stale facts included,
+so it can be used as a parsing and rendering fixture. It is **not** a correct resume and must not be
+used as the expected output of a generator reading the corrected master — `_meta.deviations_from_master`
+lists all twelve differences, graded by severity.
+
 ## Extending it
 
 Add a new engagement as an object under `work[].projects[]` (if it happened at an employer) or under
