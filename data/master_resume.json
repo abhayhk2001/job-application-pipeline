@@ -730,7 +730,7 @@
       ],
       "startDate": "2022-01",
       "endDate": "2022-06",
-      "note": "Note: ../Resume/src/experience.tex files this work under Aug 2022 - Jan 2023, which are Intel's dates. That file is stale on this point. Exploratory engagement with no dedicated product line and no reporting manager.",
+      "note": "Note: ../Resume/src/experience.tex (relative to the repository root) files this work under Aug 2022 - Jan 2023, which are Intel's dates. That file is stale on this point. Exploratory engagement with no dedicated product line and no reporting manager.",
       "projects": [
         {
           "id": "work.epsilon.store-benchmarking",
@@ -2147,7 +2147,7 @@
         "question": "At which conference did the team receive the Best Presentation award for the NSCLC paper, and in what year?"
       }
     ],
-    "needs_input_worksheet": "NEEDS_INPUT.md - the same 22 questions with answer blocks to fill in. Answers there get merged back into this file and the resolved entries removed from needs_input.",
+    "needs_input_worksheet": "data/NEEDS_INPUT.md - the same questions with answer blocks to fill in. Answers there get merged back into this file and the resolved entries removed from needs_input.",
     "maintenance": {
       "how_to_extend": "Add a new engagement as an object under work[].projects[] (if it happened at an employer) or under projects[] (if it did not), using the same field shape. Give it a stable `id` and reference it from any relevant skills[].evidence_refs entry.",
       "invariant": "Every metric, date and named entity in this file must be something the candidate has confirmed, or be null with a matching metadata.needs_input entry. Nothing is inferred."

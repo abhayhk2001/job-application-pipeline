@@ -1,4 +1,4 @@
-# Master Resume — `master_resume.json`
+# Master Resume — `data/master_resume.json`
 
 The career data lake for the job-application pipeline. It is the **single source of truth** about
 Abhay Harish Kashyap's professional history, and it is injected wholesale into the context of the
@@ -59,13 +59,13 @@ accomplishments; and obey `metadata.confidentiality` — Qualcomm client names s
 "two major clients", and Intel customer names need the candidate's clearance before appearing
 publicly.
 
-## `test_resume.json` — the output-shape fixture
+## `tests/fixtures/test_resume.json` — the output-shape fixture
 
-`master_resume.json` is the input to generation; `test_resume.json` is a worked example of the
+`data/master_resume.json` is the input to generation; `tests/fixtures/test_resume.json` is a worked example of the
 **output**: ordered `sections`, each entry carrying finished bullet prose and a `source_ref` back to
 the master id it was drawn from. It is the one place in this project where bullet strings are allowed.
 
-It is a verbatim capture of `resume.pdf` (the 2025-09-23 LaTeX build), typos and stale facts included,
+It is a verbatim capture of `tests/fixtures/resume.pdf` (the 2025-09-23 LaTeX build), typos and stale facts included,
 so it can be used as a parsing and rendering fixture. It is **not** a correct resume and must not be
 used as the expected output of a generator reading the corrected master — `_meta.deviations_from_master`
 lists all twelve differences, graded by severity.
@@ -84,16 +84,16 @@ with a matching `metadata.needs_input` entry.** Nothing is inferred.
 `metadata.needs_input` holds **one** remaining question: the conference where the NSCLC paper won its
 Best Presentation award.
 
-`NEEDS_INPUT.md` is the human-facing mirror of that list and is **kept in sync** — a question moves
+`data/NEEDS_INPUT.md` is the human-facing mirror of that list and is **kept in sync** — a question moves
 from its Open block to the Resolved log in the same edit that applies the answer to this file, and new
 gaps get added to Open as they appear. The two must never disagree, so after editing
-`master_resume.json`, check the open blocks against `metadata.needs_input`:
+`data/master_resume.json`, check the open blocks against `metadata.needs_input`:
 
 ```bash
 python3 - <<'EOF'
 import json, re
-d = json.load(open('master_resume.json'))
-sheet = open('NEEDS_INPUT.md').read()
+d = json.load(open('data/master_resume.json'))
+sheet = open('data/NEEDS_INPUT.md').read()
 opened = re.findall(r'^\*\*Field:\*\* `([^`]+)`', sheet[sheet.index('# Open ('):sheet.index('# Resolved log')], re.M)
 print("in sync:", sorted(opened) == sorted(q['field'] for q in d['metadata']['needs_input']))
 EOF
@@ -101,7 +101,7 @@ EOF
 
 Question numbers there are stable and never reused, so `Q17` refers to the same gap permanently.
 
-`metadata.pending_resume_corrections` lists three things the live resume in `../Resume/` gets wrong
+`metadata.pending_resume_corrections` lists three things the live LaTeX resume in `../Resume/` (a sibling of this repository) gets wrong
 and that this file now supersedes.
 
 ## Two metadata blocks the generator must honour
@@ -117,5 +117,5 @@ portfolio link as a replacement for GitHub rather than an addition.
 Validate after any edit:
 
 ```bash
-python3 -m json.tool master_resume.json > /dev/null && echo OK
+python3 -m json.tool data/master_resume.json > /dev/null && echo OK
 ```

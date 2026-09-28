@@ -1,37 +1,99 @@
 {
   "_meta": {
-    "purpose": "Test fixture for the final stage of the pipeline: the render-ready shape a generated resume should take. Unlike master_resume.json, this file DOES contain finished bullet prose - it is the output, not the data lake.",
-    "captured_from": "resume.pdf (identical to ../Resume/resume.pdf, built 2025-09-23 from ../Resume/src/*.tex)",
+    "purpose": "Test fixture for the final stage of the pipeline: the render-ready shape a generated resume should take, and the input contract for the JSON-to-TeX renderer. Unlike data/master_resume.json, this file DOES contain finished bullet prose - it is the output, not the data lake.",
+    "captured_from": "tests/fixtures/resume.pdf - identical to ../Resume/resume.pdf (a sibling of this repository), built 2025-09-23 from ../Resume/src/*.tex",
     "captured_on": "2026-09-28",
     "fidelity": "Verbatim. Text matches the PDF exactly, including its typos and stale facts, so it can serve as a parsing/rendering fixture. It is NOT a correct resume and must not be used as the expected output of a generator reading master_resume.json - see deviations_from_master.",
-    "source_of_truth": "master_resume.json",
+    "source_of_truth": "data/master_resume.json",
     "deviations_from_master": [
-      { "severity": "high", "field": "sections[1].entries[1]", "issue": "The Aug 2022 - Jan 2023 internship is labelled Epsilon Pvt Ltd but carries Epsilon's content under Intel's dates. Per master_resume.json, Epsilon ran 2022-01 to 2022-06 and Intel ran 2022-08 to 2023-01." },
-      { "severity": "high", "field": "sections[1]", "issue": "The Intel Solutions & Services India internship is missing entirely. Three employers exist; two are shown." },
-      { "severity": "medium", "field": "sections[1].entries[0]", "issue": "Qualcomm shown as a single Software Engineer role. Master records Associate Engineer 2023-01 to 2024-12, then Software Engineer from 2025-01. Collapsing is allowed by presentation_preferences, so this is acceptable rendering, not an error." },
-      { "severity": "medium", "field": "sections[2].entries[0].name", "issue": "Reads 'Random Forest Classifier' (singular). The published title is 'Novel Biomarker Prediction for Lung Cancer Using Random Forest Classifiers'." },
-      { "severity": "medium", "field": "sections[2]", "issue": "Publications are reduced to a bare venue and URL. No author lists, volumes, pages or DOIs, and first authorship on the Springer chapter is not shown." },
-      { "severity": "medium", "field": "sections[2].entries[1].bullets[0]", "issue": "'Integrated DETR-based table extraction and YoloV5 object detection, achieving mAP values of 84.36% and 80.92%' does not bind each figure to its model. Master binds YOLOv5 to 84.36% and DETR to 80.92%." },
-      { "severity": "low", "field": "sections[1].entries[1].bullets[1]", "issue": "Typo: 'primary//secondary indexing' has a doubled slash." },
-      { "severity": "low", "field": "sections[2].entries[0].bullets[0]", "issue": "Broken grammar: 'and Random Forest predict potential biomarkers'." },
-      { "severity": "low", "field": "sections[4].items[0]", "issue": "Typo: 'DAap' should be 'DApp'. 'Certificates' was a hyperlink with no destination in the source." },
-      { "severity": "low", "field": "basics", "issue": "No location line. Master records Champaign, IL, USA." },
-      { "severity": "info", "field": "sections[2]", "issue": "Project dates are absent, which matches metadata.presentation_preferences.project_dates." },
-      { "severity": "info", "field": "sections[4]", "issue": "The achievements section is present and last, consistent with it being the first section to drop when space is tight." }
+      {
+        "severity": "high",
+        "field": "sections[1].entries[1]",
+        "issue": "The Aug 2022 - Jan 2023 internship is labelled Epsilon Pvt Ltd but carries Epsilon's content under Intel's dates. Per master_resume.json, Epsilon ran 2022-01 to 2022-06 and Intel ran 2022-08 to 2023-01."
+      },
+      {
+        "severity": "high",
+        "field": "sections[1]",
+        "issue": "The Intel Solutions & Services India internship is missing entirely. Three employers exist; two are shown."
+      },
+      {
+        "severity": "medium",
+        "field": "sections[1].entries[0]",
+        "issue": "Qualcomm shown as a single Software Engineer role. Master records Associate Engineer 2023-01 to 2024-12, then Software Engineer from 2025-01. Collapsing is allowed by presentation_preferences, so this is acceptable rendering, not an error."
+      },
+      {
+        "severity": "medium",
+        "field": "sections[2].entries[0].name",
+        "issue": "Reads 'Random Forest Classifier' (singular). The published title is 'Novel Biomarker Prediction for Lung Cancer Using Random Forest Classifiers'."
+      },
+      {
+        "severity": "medium",
+        "field": "sections[2]",
+        "issue": "Publications are reduced to a bare venue and URL. No author lists, volumes, pages or DOIs, and first authorship on the Springer chapter is not shown."
+      },
+      {
+        "severity": "medium",
+        "field": "sections[2].entries[1].bullets[0]",
+        "issue": "'Integrated DETR-based table extraction and YoloV5 object detection, achieving mAP values of 84.36% and 80.92%' does not bind each figure to its model. Master binds YOLOv5 to 84.36% and DETR to 80.92%."
+      },
+      {
+        "severity": "low",
+        "field": "sections[1].entries[1].bullets[1]",
+        "issue": "Typo: 'primary//secondary indexing' has a doubled slash."
+      },
+      {
+        "severity": "low",
+        "field": "sections[2].entries[0].bullets[0]",
+        "issue": "Broken grammar: 'and Random Forest predict potential biomarkers'."
+      },
+      {
+        "severity": "low",
+        "field": "sections[4].items[0]",
+        "issue": "Typo: 'DAap' should be 'DApp'. 'Certificates' was a hyperlink with no destination in the source."
+      },
+      {
+        "severity": "low",
+        "field": "basics",
+        "issue": "No location line. Master records Champaign, IL, USA."
+      },
+      {
+        "severity": "info",
+        "field": "sections[2]",
+        "issue": "Project dates are absent, which matches metadata.presentation_preferences.project_dates."
+      },
+      {
+        "severity": "info",
+        "field": "sections[4]",
+        "issue": "The achievements section is present and last, consistent with it being the first section to drop when space is tight."
+      }
     ]
   },
-
   "basics": {
     "name": "Abhay Harish Kashyap",
     "location": null,
     "contacts": [
-      { "type": "linkedin", "text": "https://www.linkedin.com/in/abhay-h-kashyap/", "url": "https://www.linkedin.com/in/abhay-h-kashyap/" },
-      { "type": "github", "text": "https://github.com/abhayhk2001", "url": "https://github.com/abhayhk2001" },
-      { "type": "phone", "text": "+12173051018", "url": "tel:+12173051018" },
-      { "type": "email", "text": "abhayhk2001@gmail.com", "url": "mailto:abhayhk2001@gmail.com" }
+      {
+        "type": "linkedin",
+        "text": "https://www.linkedin.com/in/abhay-h-kashyap/",
+        "url": "https://www.linkedin.com/in/abhay-h-kashyap/"
+      },
+      {
+        "type": "github",
+        "text": "https://github.com/abhayhk2001",
+        "url": "https://github.com/abhayhk2001"
+      },
+      {
+        "type": "phone",
+        "text": "+12173051018",
+        "url": "tel:+12173051018"
+      },
+      {
+        "type": "email",
+        "text": "abhayhk2001@gmail.com",
+        "url": "mailto:abhayhk2001@gmail.com"
+      }
     ]
   },
-
   "sections": [
     {
       "type": "education",
@@ -101,7 +163,10 @@
             "Published in Cancer Informatics. https://journals.sagepub.com/doi/10.1177/11769351231167992"
           ],
           "links": [
-            { "text": "https://journals.sagepub.com/doi/10.1177/11769351231167992", "url": "https://journals.sagepub.com/doi/10.1177/11769351231167992" }
+            {
+              "text": "https://journals.sagepub.com/doi/10.1177/11769351231167992",
+              "url": "https://journals.sagepub.com/doi/10.1177/11769351231167992"
+            }
           ]
         },
         {
@@ -112,7 +177,10 @@
             "Presented at International Conference of Artificial Intelligence and Computing (ICAIC) 2025. https://rdcu.be/wZSePwoXqLVa"
           ],
           "links": [
-            { "text": "https://rdcu.be/wZSePwoXqLVa", "url": "https://rdcu.be/wZSePwoXqLVa" }
+            {
+              "text": "https://rdcu.be/wZSePwoXqLVa",
+              "url": "https://rdcu.be/wZSePwoXqLVa"
+            }
           ]
         },
         {
@@ -123,7 +191,10 @@
             "Published in JAIT Journal. http://www.jait.us/shw-229-1347-1.html"
           ],
           "links": [
-            { "text": "http://www.jait.us/shw-229-1347-1.html", "url": "http://www.jait.us/shw-229-1347-1.html" }
+            {
+              "text": "http://www.jait.us/shw-229-1347-1.html",
+              "url": "http://www.jait.us/shw-229-1347-1.html"
+            }
           ]
         }
       ]
@@ -132,10 +203,64 @@
       "type": "skills",
       "heading": "Skills",
       "groups": [
-        { "label": "Programming Languages", "items": ["Python", "Java", "C/C++", "SQL", "Dart", "R", "Rust"] },
-        { "label": "Frameworks", "items": ["ReactJS", "NodeJS", "Kotlin", "Tensorflow", "OpenSSL", "Redis", "PostgreSQL", "SQLite", "MongoDB"] },
-        { "label": "Tools", "items": ["Jira", "Git/Github", "GCP", "AWS", "Shell Scripting", "Jenkins", "Perforce", "Kubernetes", "Terraform", "Ansible"] },
-        { "label": "Machine Learning", "items": ["CNN", "RNN", "LSTM BERT", "Transformers", "PyTorch", "Keras", "TensorFlow", "Spacy", "Langchain", "GAN", "VAE", "RAG"] }
+        {
+          "label": "Programming Languages",
+          "items": [
+            "Python",
+            "Java",
+            "C/C++",
+            "SQL",
+            "Dart",
+            "R",
+            "Rust"
+          ]
+        },
+        {
+          "label": "Frameworks",
+          "items": [
+            "ReactJS",
+            "NodeJS",
+            "Kotlin",
+            "Tensorflow",
+            "OpenSSL",
+            "Redis",
+            "PostgreSQL",
+            "SQLite",
+            "MongoDB"
+          ]
+        },
+        {
+          "label": "Tools",
+          "items": [
+            "Jira",
+            "Git/Github",
+            "GCP",
+            "AWS",
+            "Shell Scripting",
+            "Jenkins",
+            "Perforce",
+            "Kubernetes",
+            "Terraform",
+            "Ansible"
+          ]
+        },
+        {
+          "label": "Machine Learning",
+          "items": [
+            "CNN",
+            "RNN",
+            "LSTM BERT",
+            "Transformers",
+            "PyTorch",
+            "Keras",
+            "TensorFlow",
+            "Spacy",
+            "Langchain",
+            "GAN",
+            "VAE",
+            "RAG"
+          ]
+        }
       ]
     },
     {
@@ -145,7 +270,12 @@
         {
           "text": "Won two hackathons with Blockchain News DAap - Certificates",
           "source_ref": "award.hackathons",
-          "links": [{ "text": "Certificates", "url": null }]
+          "links": [
+            {
+              "text": "Certificates",
+              "url": null
+            }
+          ]
         },
         {
           "text": "Led the data-driven astronomy research division in RVCE's astrophysics club, Dhruva",
