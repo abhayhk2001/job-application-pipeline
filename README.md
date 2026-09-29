@@ -2,24 +2,24 @@
 
 An end-to-end job-application pipeline. A single role-neutral record of everything Abhay has done is
 kept as structured data; a job description is matched against it; and a tailored resume is rendered
-to LaTeX and compiled.
+to LaTeX and compiled with Tectonic.
 
 ```
-                data/master_resume.json          job description
-                   (the data lake)                     │
-                          │                            │
-                          └────────────┬───────────────┘
-                                       ▼
+                 data/master_resume.json          job description
+                    (the data lake)                     │
+                           │                            │
+                           └────────────┬───────────────┘
+                                        ▼
                               tailoring (LLM)
-                                       │
-                                       ▼
-                        rendered resume JSON  ◄── contract shown by
-                                       │          tests/fixtures/test_resume.json
-                                       ▼
-                              renderer (Python)
-                                       │
-                                       ▼
-                                    .tex ──► pdflatex ──► .pdf
+                                        │
+                                        ▼
+                         rendered resume JSON  ◄── contract shown by
+                                        │          tests/fixtures/test_resume.json
+                                        ▼
+                       renderer (Python + Jinja2)
+                                        │
+                                        ▼
+                                     .tex ──► tectonic ──► .pdf
 ```
 
 ## Layout
@@ -32,7 +32,8 @@ to LaTeX and compiled.
 | `docs/schema-rationale.md` | Why the data lake is structured JSON rather than vector retrieval. |
 | `tests/fixtures/test_resume.json` | A rendered resume in render-ready form — the renderer's **input contract**. |
 | `tests/fixtures/resume.pdf` | The PDF that fixture was captured from, verbatim, typos included. |
-| `src/resume_builder/` | The Python package. Currently resolves paths only. |
+| `src/resume_builder/` | The Python package: `renderer.py`, `pdf_compiler.py`, `cli.py`, Jinja2 templates. |
+| `src/resume_builder/templates/*.tex.j2` | One Jinja2 template per section, plus `resume.tex.j2`. |
 
 ## The two JSON shapes
 
@@ -51,30 +52,44 @@ Two metadata blocks in the master bind the renderer:
 section drops first, never print work authorization) and `metadata.confidentiality` (client
 identities stay abstracted).
 
-## Building the renderer
-
-Put the JSON-to-TeX conversion in `src/resume_builder/`. `__init__.py` already resolves the project
-paths, so a module can do:
+## Using the renderer
 
 ```python
-from resume_builder import TEST_RESUME, MASTER_RESUME
+import json
+from pathlib import Path
+from resume_builder.renderer import render_to_file
+from resume_builder.pdf_compiler import compile_pdf
+
+resume = json.loads(Path("rendered.json").read_text())
+tex_path = render_to_file(resume, Path("build/resume.tex"))
+pdf_path = compile_pdf(tex_path, Path("build"))
 ```
 
-Add a CLI entry point under `[project.scripts]` in `pyproject.toml` when there is one. Install for
-development with:
+Or from the CLI:
 
 ```bash
-pip install -e .
+resume-render --input tests/fixtures/test_resume.json --out build/resume.pdf
+resume-render --input rendered.json               --out build/resume.tex   # TeX only
 ```
 
-The LaTeX target lives in the sibling `../Resume/` project — `resume.tex` includes
-`src/{heading,education,experience,projects,skills,achievements}.tex` and `custom-commands.tex`
-defines `\resumeSubheading`, `\resumeItem` and friends. Note that those `.tex` sources are stale:
-`data/master_resume.json` supersedes them, and `metadata.pending_resume_corrections` says how.
+The renderer is deterministic: same JSON → same .tex → same PDF.
+
+## Installing
+
+```bash
+brew install tectonic             # one-time; the only external dep beyond Python
+pip install -e ".[dev]"           # editable install with pytest + ruff + pypdf
+```
+
+The LaTeX target lives in the sibling `../Resume/` project — its static `.tex` sources served as
+the reference port into Jinja2 templates here, but the renderer does not read them at runtime; the
+templates are self-contained under `src/resume_builder/templates/`.
 
 ## Checks
 
 ```bash
+pytest                            # 38 tests: linkify, latex_escape, per-section, full pipeline
+ruff check src tests              # lint
 python3 -m json.tool data/master_resume.json > /dev/null && echo OK
 python3 -m json.tool tests/fixtures/test_resume.json > /dev/null && echo OK
 ```
