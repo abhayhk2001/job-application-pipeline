@@ -7,7 +7,31 @@ name = "resume-builder"
 version = "0.1.0"
 description = "Job-application pipeline: a role-neutral career data lake, and tooling to render job-specific resumes from it."
 requires-python = ">=3.10"
-dependencies = []
+dependencies = [
+    "jinja2>=3.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8",
+    "ruff>=0.6",
+    "pypdf>=4",
+]
+
+[project.scripts]
+resume-render = "resume_builder.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
