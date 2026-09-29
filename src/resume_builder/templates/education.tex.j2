@@ -1,0 +1,11 @@
+%-----------EDUCATION-----------%
+\section{ {{- section.heading | latex_escape -}} }
+    \resumeSubHeadingListStart
+
+    {%- for entry in section.entries %}
+    \resumeSubheading
+    { {{- entry.institution | latex_escape -}} }{ {{- entry.location | latex_escape -}} }
+    { {{- entry.qualification | latex_escape -}} }{ {{- entry.date | latex_escape -}} }
+    {%- endfor %}
+
+    \resumeSubHeadingListEnd

@@ -1,0 +1,16 @@
+%-----------EXPERIENCE-----------%
+\section{ {{- section.heading | latex_escape -}} }
+\resumeSubHeadingListStart
+
+    {%- for entry in section['entries'] %}
+    \resumeSubheading
+    { {{- entry.organization | latex_escape -}} }{ {{- entry.location | latex_escape -}} }
+    { {{- entry.title | latex_escape -}} }{ {{- entry.dateRange | latex_escape -}} }
+    \resumeItemListStart
+        {%- for bullet in entry.bullets %}
+        \resumeItem{ {{- bullet | latex_escape | linkify }} }
+        {%- endfor %}
+    \resumeItemListEnd
+    {%- endfor %}
+
+\resumeSubHeadingListEnd

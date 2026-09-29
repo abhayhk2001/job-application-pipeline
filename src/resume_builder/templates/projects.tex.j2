@@ -1,0 +1,15 @@
+%-----------PROJECTS-----------%
+\section{ {{- section.heading | latex_escape -}} }
+\resumeSubHeadingListStart
+
+    {%- for entry in section['entries'] %}
+    \resumeProjectHeading
+    {\textbf{ {{- entry.name | latex_escape -}} }}{}
+    \resumeItemListStart
+        {%- for bullet in entry.bullets %}
+        \resumeItem{ {{- bullet | latex_escape | linkify }} }
+        {%- endfor %}
+    \resumeItemListEnd
+    {%- endfor %}
+
+\resumeSubHeadingListEnd
