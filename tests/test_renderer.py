@@ -1,4 +1,4 @@
-"""Integration test: render the fixture to a PDF and diff against the reference."""
+"""Integration tests: fixture -> TeX -> PDF, and parity with the base resume."""
 
 from __future__ import annotations
 
@@ -7,98 +7,111 @@ from pathlib import Path
 import pytest
 from pypdf import PdfReader
 
+from resume_builder.api import build_resume
 from resume_builder.pdf_compiler import compile_pdf
 from resume_builder.renderer import render_to_file
 
+# Differences we deliberately do NOT reproduce from ../Resume/resume.tex, as
+# normalised text. Each pair is (what the base says, what we emit). The parity
+# test applies these to the base and then demands an exact match, so a new
+# divergence cannot slip through unnoticed.
+KNOWN_BASE_DEFECTS = [
+    # the base dropped the country code
+    ("2173051018", "12173051018"),
+    # doubled degree phrase, and "Decemeber" misspelt
+    (
+        "masterofcomputerscienceincomputerscienceandengineeringaugust2026decemeber2027",
+        "masterofcomputerscienceaugust2026december2027",
+    ),
+    # the published paper title is plural
+    ("randomforestclassifier", "randomforestclassifiers"),
+]
+
 
 def _normalize(text: str) -> str:
-    """Strip whitespace, lowercase, drop non-alphanumerics, fold ligatures.
+    """Fold to comparable form: ligatures split, alphanumerics only, lowercased.
 
-    Different TeX engines (pdftex vs xetex) produce slightly different text
-    extraction: spaces between letters may be collapsed, ligatures may or may
-    not be split (e.g. ``fi`` vs ``ﬁ``). For content comparison we only care
-    about whether the same words appear in the same order, so we fold common
-    ligatures (``ﬁ`` ``ﬂ`` ``ﬀ`` ``ﬃ`` ``ﬄ``) to their component letters.
+    pdftex and xetex extract text differently -- inter-letter spacing and
+    ligature handling both vary -- so only the sequence of alphanumerics is
+    meaningfully comparable.
     """
-    text = (
-        text.replace("ﬁ", "fi")
-        .replace("ﬂ", "fl")
-        .replace("ﬀ", "ff")
-        .replace("ﬃ", "ffi")
-        .replace("ﬄ", "ffl")
-    )
+    for lig, plain in (("ﬁ", "fi"), ("ﬂ", "fl"), ("ﬀ", "ff"), ("ﬃ", "ffi"), ("ﬄ", "ffl")):
+        text = text.replace(lig, plain)
     return "".join(c.lower() for c in text if c.isalnum())
 
 
+def _pdf_text(path: Path) -> str:
+    return "".join(page.extract_text() or "" for page in PdfReader(str(path)).pages)
+
+
 def test_fixture_renders_to_tex(fixture_resume, tmp_path: Path):
-    out = tmp_path / "resume.tex"
-    render_to_file(fixture_resume, out)
-    assert out.exists()
+    out = render_to_file(fixture_resume, tmp_path / "resume.tex")
     body = out.read_text()
     assert "\\begin{document}" in body
     assert "\\end{document}" in body
-    assert "\\resumeSubheading" in body
-    assert "\\resumeProjectHeading" in body
+    assert "\\documentclass[letterpaper,10pt]{article}" in body
+    assert "\\usepackage[left=0.75in, right=0.75in, top=0.5in, bottom=0.5in]{geometry}" in body
+    assert "\\newcommand{\\resumesub}{\\small}" in body
+    # The pdfTeX-only ATS hook must stay guarded or tectonic/xetex will fail.
+    assert "\\ifdefined\\pdfgentounicode" in body
 
 
-def test_fixture_compiles_to_pdf(fixture_resume, tmp_path: Path, require_tectonic):
-    tex_path = tmp_path / "resume.tex"
-    render_to_file(fixture_resume, tex_path)
-    pdf_path = compile_pdf(tex_path, tmp_path)
-    assert pdf_path.exists()
-    assert pdf_path.stat().st_size > 1000  # not an empty/error PDF
+def test_build_resume_tex_only_needs_no_tectonic(fixture_resume, tmp_path: Path):
+    result = build_resume(fixture_resume, tmp_path, tex_only=True)
+    assert result.tex_path.exists()
+    assert result.pdf_path is None
 
 
-def test_pdf_text_matches_reference(fixture_resume, reference_pdf, tmp_path, require_tectonic):
-    """The text extracted from the rendered PDF should match the reference.
-
-    xetex (used by tectonic) and pdftex (used by the original build) produce
-    slightly different text-extraction output: spaces between letters may be
-    collapsed, ligatures may or may not be split (e.g. ``fi`` vs ``ﬁ``). The
-    test normalises both before comparing, and additionally verifies every
-    chunk of the reference appears in the output.
-    """
-    tex_path = tmp_path / "resume.tex"
-    render_to_file(fixture_resume, tex_path)
-    pdf_path = compile_pdf(tex_path, tmp_path)
-
-    ref_text = "".join(p.extract_text() for p in PdfReader(reference_pdf).pages)
-    out_text = "".join(p.extract_text() for p in PdfReader(pdf_path).pages)
-
-    ref_norm = _normalize(ref_text)
-    out_norm = _normalize(out_text)
-
-    # Sanity check: lengths should be within a few percent of each other.
-    len_ratio = min(len(out_norm), len(ref_norm)) / max(len(out_norm), len(ref_norm))
-    assert len_ratio >= 0.98, f"length ratio {len_ratio:.4f} too low"
-
-    # Every 20-char chunk of the reference (the smaller one) must appear in
-    # the output. This catches dropped sections or reordered content without
-    # being brittle to ligature/whitespace differences.
-    shorter, longer = sorted([ref_norm, out_norm], key=len)
-    chunk = 20
-    missing = []
-    for i in range(0, len(shorter) - chunk, chunk):
-        if shorter[i : i + chunk] not in longer:
-            missing.append(shorter[i : i + chunk])
-    assert not missing, f"missing chunks: {missing[:5]}"
+def test_build_resume_produces_a_single_page_pdf(fixture_resume, tmp_path: Path, require_tectonic):
+    result = build_resume(fixture_resume, tmp_path)
+    assert result.pdf_path is not None and result.pdf_path.exists()
+    assert result.pdf_path.stat().st_size > 1000
+    assert len(PdfReader(str(result.pdf_path)).pages) == 1, "the resume must stay on one page"
 
 
-@pytest.mark.parametrize(
-    "section_type,expected_heading",
-    [
-        ("education", "Education"),
-        ("experience", "WorkExperience"),  # xetex extraction collapses spaces
-        ("projects", "ProjectExperience"),
-        ("skills", "Skills"),
-        ("achievements", "Achievements"),
-    ],
-)
-def test_every_section_type_in_pdf(
-    fixture_resume, tmp_path: Path, require_tectonic, section_type: str, expected_heading: str
+def test_pdf_matches_the_base_resume_except_for_known_defects(
+    fixture_resume, reference_pdf, tmp_path: Path, require_tectonic
 ):
-    tex_path = tmp_path / "resume.tex"
-    render_to_file(fixture_resume, tex_path)
+    """Format parity: our PDF must read identically to the hand-built base.
+
+    This is the test that catches ../Resume/resume.tex drifting away from the
+    templates again. If it fails, either the base changed and the templates
+    need porting, or a template regressed.
+    """
+    result = build_resume(fixture_resume, tmp_path)
+    ours = _normalize(_pdf_text(result.pdf_path))
+    base = _normalize(_pdf_text(reference_pdf))
+
+    for base_text, our_text in KNOWN_BASE_DEFECTS:
+        assert base_text in base, f"base no longer contains {base_text!r}; update KNOWN_BASE_DEFECTS"
+        assert our_text in ours, f"our output no longer contains {our_text!r}"
+        base = base.replace(base_text, our_text)
+
+    assert ours == base
+
+
+def test_pdf_fonts_match_the_base_resume(fixture_resume, reference_pdf, tmp_path, require_tectonic):
+    """Same embedded font set as the base, so the visual result is the same."""
+
+    def fonts(path):
+        found = set()
+        for page in PdfReader(str(path)).pages:
+            resources = page.get("/Resources") or {}
+            for font in (resources.get("/Font") or {}).values():
+                base_font = font.get_object().get("/BaseFont")
+                if base_font:
+                    found.add(str(base_font))
+        return found
+
+    result = build_resume(fixture_resume, tmp_path)
+    assert fonts(result.pdf_path) == fonts(reference_pdf)
+
+
+@pytest.mark.parametrize("heading", ["Education", "WorkExperience", "ProjectExperience", "Skills"])
+def test_every_section_heading_reaches_the_pdf(
+    fixture_resume, tmp_path: Path, require_tectonic, heading: str
+):
+    tex_path = render_to_file(fixture_resume, tmp_path / "resume.tex")
     pdf_path = compile_pdf(tex_path, tmp_path)
-    text = "".join(p.extract_text() for p in PdfReader(pdf_path).pages)
-    assert expected_heading in text, f"{expected_heading!r} not in compiled PDF"
+    # xetex extraction collapses inter-letter spacing, hence the squashed headings.
+    assert heading in _pdf_text(pdf_path).replace(" ", "")

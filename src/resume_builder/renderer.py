@@ -14,7 +14,9 @@ from pathlib import Path
 from jinja2 import Environment
 
 from . import TEMPLATES_DIR
+from .exceptions import ValidationError
 from .jinja_env import build_environment
+from .validation import validate
 
 __all__ = ["render", "render_to_file"]
 
@@ -30,21 +32,18 @@ SECTION_TEMPLATE_NAMES = {
 MAIN_TEMPLATE = "resume.tex.j2"
 
 
-def _validate(resume: Mapping) -> None:
-    """Top-level shape check; per-section validation is delegated to templates."""
-    if "basics" not in resume:
-        raise ValueError("resume JSON is missing 'basics'")
-    if "sections" not in resume:
-        raise ValueError("resume JSON is missing 'sections'")
-    if not isinstance(resume["basics"].get("name"), str):
-        raise ValueError("resume.basics.name is required and must be a string")
-    if not isinstance(resume["sections"], list):
-        raise ValueError("resume.sections must be a list")
+def render(resume: Mapping, *, env: Environment | None = None, check: bool = True) -> str:
+    """Return the rendered LaTeX source as a string.
 
-
-def render(resume: Mapping, *, env: Environment | None = None) -> str:
-    """Return the rendered LaTeX source as a string."""
-    _validate(resume)
+    Validates against ``schemas/rendered_resume.schema.json`` first and raises
+    ``ValidationError`` listing every problem, so malformed JSON can never
+    produce TeX. Pass ``check=False`` only when the caller has already
+    validated.
+    """
+    if check:
+        problems = validate(resume)
+        if problems:
+            raise ValidationError(problems)
     env = env or build_environment(TEMPLATES_DIR)
 
     heading_tex = env.get_template(HEADING_TEMPLATE).render(basics=resume["basics"])
@@ -64,9 +63,11 @@ def render(resume: Mapping, *, env: Environment | None = None) -> str:
     )
 
 
-def render_to_file(resume: Mapping, out_path: Path, *, env: Environment | None = None) -> Path:
+def render_to_file(
+    resume: Mapping, out_path: Path, *, env: Environment | None = None, check: bool = True
+) -> Path:
     """Render ``resume`` to ``out_path`` and return ``out_path``."""
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(render(resume, env=env))
+    out_path.write_text(render(resume, env=env, check=check))
     return out_path

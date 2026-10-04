@@ -9,6 +9,7 @@ description = "Job-application pipeline: a role-neutral career data lake, and to
 requires-python = ">=3.10"
 dependencies = [
     "jinja2>=3.1",
+    "jsonschema>=4",
 ]
 
 [project.optional-dependencies]

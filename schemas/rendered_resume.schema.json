@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/abhayhk2001/resume-builder/schemas/rendered_resume.schema.json",
+  "title": "Rendered resume",
+  "description": "The render-ready shape consumed by resume_builder. This is the OUTPUT of tailoring, not the career data lake: every bullet is finished prose. Bullets and achievement items are plain strings that may contain markdown links, written [label](url).",
+  "type": "object",
+  "required": ["basics", "sections"],
+  "additionalProperties": false,
+  "properties": {
+    "_meta": {
+      "description": "Free-form provenance. Ignored by the renderer.",
+      "type": "object"
+    },
+    "basics": { "$ref": "#/$defs/basics" },
+    "sections": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/section" }
+    }
+  },
+  "$defs": {
+    "basics": {
+      "type": "object",
+      "required": ["name", "contacts"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "contacts": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/contact" }
+        }
+      }
+    },
+    "contact": {
+      "description": "One item on the heading line. 'label' is what the reader sees; a null url renders as plain text (used for the phone number).",
+      "type": "object",
+      "required": ["label"],
+      "additionalProperties": false,
+      "properties": {
+        "type": { "type": "string" },
+        "label": { "type": "string", "minLength": 1 },
+        "url": { "type": ["string", "null"] }
+      }
+    },
+    "bullets": {
+      "description": "Finished resume lines. Plain strings; markdown links allowed.",
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "section": {
+      "oneOf": [
+        { "$ref": "#/$defs/educationSection" },
+        { "$ref": "#/$defs/experienceSection" },
+        { "$ref": "#/$defs/projectsSection" },
+        { "$ref": "#/$defs/skillsSection" },
+        { "$ref": "#/$defs/achievementsSection" }
+      ]
+    },
+    "educationSection": {
+      "type": "object",
+      "required": ["type", "heading", "entries"],
+      "additionalProperties": false,
+      "properties": {
+        "type": { "const": "education" },
+        "heading": { "type": "string", "minLength": 1 },
+        "entries": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["institution", "location", "qualification", "date"],
+            "additionalProperties": false,
+            "properties": {
+              "source_ref": { "type": "string" },
+              "institution": { "type": "string", "minLength": 1 },
+              "location": { "type": "string" },
+              "qualification": { "type": "string", "minLength": 1 },
+              "date": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "experienceSection": {
+      "type": "object",
+      "required": ["type", "heading", "entries"],
+      "additionalProperties": false,
+      "properties": {
+        "type": { "const": "experience" },
+        "heading": { "type": "string", "minLength": 1 },
+        "entries": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["organization", "location", "title", "dateRange", "bullets"],
+            "additionalProperties": false,
+            "properties": {
+              "source_ref": { "type": "string" },
+              "organization": { "type": "string", "minLength": 1 },
+              "location": { "type": "string" },
+              "title": { "type": "string", "minLength": 1 },
+              "dateRange": { "type": "string" },
+              "bullets": { "$ref": "#/$defs/bullets" }
+            }
+          }
+        }
+      }
+    },
+    "projectsSection": {
+      "type": "object",
+      "required": ["type", "heading", "entries"],
+      "additionalProperties": false,
+      "properties": {
+        "type": { "const": "projects" },
+        "heading": { "type": "string", "minLength": 1 },
+        "entries": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["name", "bullets"],
+            "additionalProperties": false,
+            "properties": {
+              "source_ref": { "type": "string" },
+              "name": { "type": "string", "minLength": 1 },
+              "bullets": { "$ref": "#/$defs/bullets" }
+            }
+          }
+        }
+      }
+    },
+    "skillsSection": {
+      "type": "object",
+      "required": ["type", "heading", "groups"],
+      "additionalProperties": false,
+      "properties": {
+        "type": { "const": "skills" },
+        "heading": { "type": "string", "minLength": 1 },
+        "groups": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["label", "items"],
+            "additionalProperties": false,
+            "properties": {
+              "label": { "type": "string", "minLength": 1 },
+              "items": {
+                "type": "array",
+                "minItems": 1,
+                "items": { "type": "string", "minLength": 1 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "achievementsSection": {
+      "type": "object",
+      "required": ["type", "heading", "items"],
+      "additionalProperties": false,
+      "properties": {
+        "type": { "const": "achievements" },
+        "heading": { "type": "string", "minLength": 1 },
+        "items": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

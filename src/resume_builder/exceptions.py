@@ -15,3 +15,12 @@ class TectonicNotFound(ResumeBuilderError):
 
 class CompileError(ResumeBuilderError):
     """tectonic exited non-zero while compiling a .tex file."""
+
+
+class ValidationError(ResumeBuilderError):
+    """A resume JSON failed validation. Carries every problem found."""
+
+    def __init__(self, problems):
+        self.problems = list(problems)
+        detail = "\n".join(f"  {p}" for p in self.problems)
+        super().__init__(f"{len(self.problems)} validation problem(s):\n{detail}")

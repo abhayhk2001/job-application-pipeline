@@ -1,16 +1,15 @@
 %-----------EXPERIENCE-----------%
 \section{ {{- section.heading | latex_escape -}} }
-\resumeSubHeadingListStart
-
-    {%- for entry in section['entries'] %}
-    \resumeSubheading
-    { {{- entry.organization | latex_escape -}} }{ {{- entry.location | latex_escape -}} }
-    { {{- entry.title | latex_escape -}} }{ {{- entry.dateRange | latex_escape -}} }
-    \resumeItemListStart
-        {%- for bullet in entry.bullets %}
-        \resumeItem{ {{- bullet | latex_escape | linkify }} }
-        {%- endfor %}
-    \resumeItemListEnd
-    {%- endfor %}
-
-\resumeSubHeadingListEnd
+\begin{itemize}[leftmargin=0.15in, label={}]
+{% for entry in section.entries %}
+    \vspace{-2pt}\item\begin{tabular*}{\linewidth}[t]{@{\extracolsep{\fill}}lr}
+      \textbf{ {{- entry.organization | latex_escape -}} } & {{ entry.location | latex_escape }} \\
+      \textit{\resumesub {{ entry.title | latex_escape }}} & \textit{\resumesub {{ entry.dateRange | latex_escape }}} \\
+    \end{tabular*}\vspace{-7pt}
+    \begin{itemize}
+{%- for bullet in entry.bullets %}
+        \item \resumesub{ {{- bullet | richtext -}} }
+{%- endfor %}
+    \end{itemize}\vspace{-5pt}
+{% endfor -%}
+\end{itemize}

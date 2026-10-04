@@ -4,12 +4,45 @@
 % Inspired by: https://github.com/sb2nov/resume
 % License : MIT
 %------------------------
+% GENERATED FILE - do not edit by hand.
+% Produced by resume_builder from a render-ready resume JSON.
 
-\documentclass[letterpaper,11pt]{article}
+%----------FONT TABLE----------%
+% Master font table - modify these to change fonts throughout the resume.
+%
+% +---------------------+--------------+-------------------------------+
+% | Element             | Command      | Default                       |
+% +---------------------+--------------+-------------------------------+
+% | Font family (NFSS)  | \resumefam   | phv  (Helvetica)              |
+% | Heading shape       | \resumesc    | \scshape (small caps)         |
+% | Name size           | \resumename  | \Large  (14.4pt)              |
+% | Section size        | \resumesec   | \Large  (14.4pt)              |
+% | Sub/item size       | \resumesub   | \small  (10pt)                |
+% | Base body size      | (fixed)      | 10pt  (in \documentclass)     |
+% +---------------------+--------------+-------------------------------+
+%
+% NFSS font family codes (each needs its \usepackage loaded below):
+%   phv   : Helvetica (sans-serif, modern/tech - default)
+%   ptm   : Times       (serif, traditional/academic)
+%   lmr   : Latin Modern Roman (LaTeX default serif)
+%   lmss  : Latin Modern Sans  (LaTeX default sans)
+%
+% To switch font family:
+%   1. Change \resumefam below to the desired code.
+%   2. In the "Apply font family" block further down, swap the \usepackage
+%      line (e.g. \usepackage{helvet} -> \usepackage{mathptmx}).
+
+\newcommand{\resumefam}{phv}
+\newcommand{\resumesc}{\scshape}
+\newcommand{\resumename}{\Large\resumesc}
+\newcommand{\resumesec}{\Large\resumesc}
+\newcommand{\resumesub}{\small}
+
+\documentclass[letterpaper,10pt]{article}
 
 \usepackage{fontawesome5}
 \usepackage{latexsym}
-\usepackage[empty]{fullpage}
+\usepackage[left=0.75in, right=0.75in, top=0.5in, bottom=0.5in]{geometry}
 \usepackage{titlesec}
 \usepackage{marvosym}
 \usepackage[usenames,dvipsnames]{color}
@@ -19,24 +52,26 @@
 \usepackage{fancyhdr}
 \usepackage[english]{babel}
 \usepackage{tabularx}
+\usepackage{setspace}
 
+% pdfTeX-only ATS support (skipped under XeTeX/tectonic)
+\ifdefined\pdfgentounicode
+  \input{glyphtounicode}
+  \pdfgentounicode=1
+\fi
 
+% Apply font family: professional sans-serif (Helvetica)
+% To switch fonts, swap the \usepackage and the family code in \resumefam above.
+\usepackage{helvet}
+\renewcommand{\familydefault}{\resumefam}
 
-% Custom font
-\usepackage[default]{lato}
+\setstretch{1}
 
 \pagestyle{fancy}
 \fancyhf{} % clear all header and footer fields
 \fancyfoot{}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0pt}
-
-% Adjust margins
-\addtolength{\oddsidemargin}{-0.5in}
-\addtolength{\evensidemargin}{-0.5in}
-\addtolength{\textwidth}{1in}
-\addtolength{\topmargin}{-.5in}
-\addtolength{\textheight}{1.5in}
 
 \urlstyle{same}
 
@@ -46,65 +81,23 @@
 
 % Sections formatting
 \titleformat{\section}{
-  \vspace{-4pt}\scshape\raggedright\large
+  \vspace{-4pt}\resumesec\raggedright
 }{}{0em}{}[\color{black}\titlerule\vspace{-5pt}]
 
+% Restore filled-circle bullets (Helvetica defaults to en-dash)
+\renewcommand{\labelitemi}{$\bullet$}
+\renewcommand{\labelitemii}{$\bullet$}
+
 %-------------------------%
-% Custom commands (inlined from custom-commands.tex so the .tex is self-contained)
-{% raw %}
-\newcommand{\resumeItem}[1]{
-  \item\small{
-    {#1 \vspace{-2pt}}
-  }
-}
-
-\newcommand{\resumeSubheading}[4]{
-  \vspace{-2pt}\item
-    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
-      \textbf{#1} & #2 \\
-      \textit{\small#3} & \textit{\small #4} \\
-    \end{tabular*}\vspace{-7pt}
-}
-
-\newcommand{\resumeSubSubheading}[2]{
-    \item
-    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
-      \textit{\small#1} & \textit{\small #2} \\
-    \end{tabular*}\vspace{-7pt}
-}
-
-\newcommand{\resumeProjectHeading}[2]{
-    \item
-    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
-      \small#1 & #2 \\
-    \end{tabular*}\vspace{-7pt}
-}
-
-\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
-
-\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
-
-\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
-\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
-\newcommand{\resumeItemListStart}{\begin{itemize}}
-\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
-
-\definecolor{Black}{RGB}{0, 0, 0}
-\newcommand{\seticon}[1]{\textcolor{Black}{\csname #1\endcsname}}
-{% endraw %}
-
-%-------------------------------------------%
 \begin{document}
 
 %-------------------------------------------%
 %%%%%%  RESUME STARTS HERE  %%%%%
 
-%----------HEADING----------%
 {{ heading_tex }}
-
-{% for section_tex in sections_tex -%}
+{% for section_tex in sections_tex %}
 {{ section_tex }}
-{% endfor %}
+{%- endfor %}
 
 %-------------------------------------------%
 \end{document}

@@ -75,12 +75,13 @@
       "id": "edu.uiuc",
       "institution": "University of Illinois Urbana-Champaign",
       "location": "Champaign, USA",
-      "studyType": "Master of Science",
+      "studyType": "Master of Computer Science",
       "area": "Computer Science",
-      "status": "Incoming student",
+      "status": "Enrolled",
       "startDate": "2026-08",
-      "endDate": null,
-      "score": null
+      "endDate": "2027-12",
+      "score": null,
+      "note": "Degree, start and end taken from ../Resume/resume.tex. Master of Computer Science is the coursework degree; this entry previously said Master of Science."
     },
     {
       "id": "edu.rvce",
@@ -93,8 +94,8 @@
         "scale": "10.0",
         "label": "GPA"
       },
-      "startDate": null,
-      "endDate": "2023-08",
+      "startDate": "2019-08",
+      "endDate": "2023-05",
       "standing": {
         "value": "Top 10% of cohort"
       },
@@ -133,7 +134,8 @@
           "Python for Data Science"
         ],
         "recognition": "NPTEL Believer Award"
-      }
+      },
+      "note": "Dates taken from ../Resume/resume.tex. The end date supersedes an earlier value of 2023-08."
     }
   ],
   "work": [
@@ -2171,6 +2173,48 @@
         "item": "Silkworm selective-breeding project",
         "reason": "Removed from the data lake on the candidate's instruction.",
         "directive": "Do not reintroduce it."
+      }
+    ],
+    "pending_resume_corrections": [
+      {
+        "target": "../Resume/resume.tex",
+        "issue": "Education reads 'August 2026 - Decemeber 2027'.",
+        "correction": "'December'."
+      },
+      {
+        "target": "../Resume/resume.tex",
+        "issue": "The UIUC degree reads 'Master of Computer Science in Computer Science and Engineering' - the field of study is stated twice.",
+        "correction": "'Master of Computer Science'."
+      },
+      {
+        "target": "../Resume/resume.tex",
+        "issue": "Heading separators are uneven: no \\quad between the email and the phone, and a trailing \\quad after Github.",
+        "correction": "One \\quad between each pair of contacts and none after the last."
+      },
+      {
+        "target": "../Resume/resume.tex",
+        "issue": "The phone number is rendered as '2173051018', without the country code.",
+        "correction": "'+1 217 305 1018'."
+      },
+      {
+        "target": "../Resume/resume.tex",
+        "issue": "An Epsilon bullet reads 'primary//secondary indexing' with a doubled slash.",
+        "correction": "'primary/secondary indexing'."
+      },
+      {
+        "target": "../Resume/resume.tex",
+        "issue": "A project is titled 'Novel Biomarker Prediction for Lung Cancer Using Random Forest Classifier'.",
+        "correction": "The published title is plural: 'Random Forest Classifiers'."
+      },
+      {
+        "target": "../Resume/resume.tex",
+        "issue": "The Aug 2022 - Jan 2023 entry is labelled Epsilon Pvt Ltd but carries Epsilon's content, and the Intel internship is absent entirely.",
+        "correction": "Epsilon ran 2022-01 to 2022-06; Intel ran 2022-08 to 2023-01. Both belong on the resume."
+      },
+      {
+        "target": "../Resume/resume.tex",
+        "issue": "The font table declares Helvetica (\\resumefam = phv) but the switch has no effect under Tectonic: the compiled PDF embeds Latin Modern Roman, a serif. Verified by compiling \\usepackage{helvet} with \\renewcommand{\\familydefault}{phv}, and \\usepackage{tgheros} with qhv, under Tectonic 0.17 - both produce LMRoman; \\usepackage{fontspec} fails to build. ../Resume/resume.pdf has the same LMRoman font set, so the resume is serif today.",
+        "correction": "Unresolved. Either compile with pdflatex, where helvet works, or find a sans family Tectonic will honour."
       }
     ]
   }

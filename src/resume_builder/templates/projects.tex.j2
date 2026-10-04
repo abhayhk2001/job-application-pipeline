@@ -1,15 +1,12 @@
 %-----------PROJECTS-----------%
 \section{ {{- section.heading | latex_escape -}} }
-\resumeSubHeadingListStart
-
-    {%- for entry in section['entries'] %}
-    \resumeProjectHeading
-    {\textbf{ {{- entry.name | latex_escape -}} }}{}
-    \resumeItemListStart
-        {%- for bullet in entry.bullets %}
-        \resumeItem{ {{- bullet | latex_escape | linkify }} }
-        {%- endfor %}
-    \resumeItemListEnd
-    {%- endfor %}
-
-\resumeSubHeadingListEnd
+\begin{itemize}[leftmargin=0.15in, label={}]
+{%- for entry in section.entries %}
+    \item\noindent\resumesub\textbf{ {{- entry.name | latex_escape -}} }\vspace{-7pt}
+    \begin{itemize}
+{%- for bullet in entry.bullets %}
+        \item \resumesub{ {{- bullet | richtext -}} }
+{%- endfor %}
+    \end{itemize}\vspace{-5pt}
+{% endfor -%}
+\end{itemize}

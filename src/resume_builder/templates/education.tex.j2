@@ -1,11 +1,10 @@
 %-----------EDUCATION-----------%
 \section{ {{- section.heading | latex_escape -}} }
-    \resumeSubHeadingListStart
-
-    {%- for entry in section.entries %}
-    \resumeSubheading
-    { {{- entry.institution | latex_escape -}} }{ {{- entry.location | latex_escape -}} }
-    { {{- entry.qualification | latex_escape -}} }{ {{- entry.date | latex_escape -}} }
-    {%- endfor %}
-
-    \resumeSubHeadingListEnd
+    \begin{itemize}[leftmargin=0.15in, label={}]
+{%- for entry in section.entries %}
+    \vspace{-2pt}\item\begin{tabular*}{\linewidth}[t]{@{\extracolsep{\fill}}lr}
+      \textbf{ {{- entry.institution | latex_escape -}} } & {{ entry.location | latex_escape }} \\
+      \textit{\resumesub {{ entry.qualification | latex_escape }}} & \textit{\resumesub {{ entry.date | latex_escape }}} \\
+    \end{tabular*}\vspace{-7pt}
+{% endfor -%}
+    \end{itemize}

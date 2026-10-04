@@ -1,8 +1,7 @@
 %----------HEADING----------%
 \begin{center}
-    \textbf{\Huge \scshape {{ basics.name | latex_escape }}} \\ \vspace{1pt}
+    \textbf{\resumename {{ basics.name | latex_escape }}} \\ \vspace{1pt}
 {%- for contact in basics.contacts %}
-    {% if contact.url %}\href{ {{- contact.url -}} }{\underline{ {{- contact.text | latex_escape -}} }}{% else %}{{ contact.text | latex_escape }}{% endif -%}
-    {%- if not loop.last %} \quad{% endif %}
+    {% if contact.url %}\href{ {{- contact.url -}} }{\underline{ {{- contact.label | latex_escape -}} }}{% else %}{{ contact.label | latex_escape }}{% endif %}{% if not loop.last %} \quad{% endif %}
 {%- endfor %}
 \end{center}

@@ -1,7 +1,7 @@
 %-----------ACHIEVEMENTS-----------%
 \section{ {{- section.heading | latex_escape -}} }
-\resumeSubHeadingListStart
-    {%- for item in section['items'] %}
-    \resumeItem{ {{- render_achievement_item(item) }} }
-    {%- endfor %}
-\resumeSubHeadingListEnd
+\begin{itemize}[leftmargin=0.15in, label={}]
+{%- for item in section['items'] %}
+    \item \resumesub{ {{- item | richtext -}} }
+{%- endfor %}
+\end{itemize}

@@ -65,10 +65,14 @@ publicly.
 **output**: ordered `sections`, each entry carrying finished bullet prose and a `source_ref` back to
 the master id it was drawn from. It is the one place in this project where bullet strings are allowed.
 
-It is a verbatim capture of `tests/fixtures/resume.pdf` (the 2025-09-23 LaTeX build), typos and stale facts included,
-so it can be used as a parsing and rendering fixture. It is **not** a correct resume and must not be
-used as the expected output of a generator reading the corrected master — `_meta.deviations_from_master`
-lists all twelve differences, graded by severity.
+Its content follows the hand-written `../Resume/resume.tex` so that the format-parity test in
+`tests/test_renderer.py` is meaningful. Unambiguous typographic defects in the base are corrected
+there (`_meta.fixed_from_base`); substantive content errors are reproduced and logged
+(`_meta.deviations_from_master`). It is **not** a correct resume and must not be used as the expected
+output of a generator reading the corrected master.
+
+The render-ready shape itself is specified by `schemas/rendered_resume.schema.json` and explained for
+an LLM in `docs/render-contract.md`.
 
 ## Extending it
 
@@ -101,8 +105,10 @@ EOF
 
 Question numbers there are stable and never reused, so `Q17` refers to the same gap permanently.
 
-`metadata.pending_resume_corrections` lists three things the live LaTeX resume in `../Resume/` (a sibling of this repository) gets wrong
-and that this file now supersedes.
+`metadata.pending_resume_corrections` lists eight things the live LaTeX resume in `../Resume/` (a
+sibling of this repository) gets wrong and that this file now supersedes — six typographic, one
+substantive (the Epsilon/Intel date mix-up), and one unresolved: the font table declares Helvetica
+but the compiled PDF is Latin Modern Roman.
 
 ## Two metadata blocks the generator must honour
 

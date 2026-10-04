@@ -1,9 +1,9 @@
 %-----------SKILLS-----------%
 \section{ {{- section.heading | latex_escape -}} }
     \begin{itemize}[leftmargin=0.15in, label={}]
-	\small{\item{
-		{%- for group in section.groups %}
-			\textbf{ {{- group['label'] | latex_escape -}} }: {% for item in group['items'] %}{{ item | latex_escape }}{% if not loop.last %}, {% endif %}{% endfor %}{% if not loop.last %} \\{% endif %}
-		{%- endfor %}
+	\resumesub{\item{
+{%- for group in section.groups %}
+			\textbf{ {{- group.label | latex_escape -}} }: {% for item in group['items'] %}{{ item | latex_escape }}{% if not loop.last %}, {% endif %}{% endfor %}{% if not loop.last %} \\{% endif %}
+{%- endfor %}
 	}}
     \end{itemize}

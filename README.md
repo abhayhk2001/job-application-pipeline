@@ -13,8 +13,11 @@ to LaTeX and compiled with Tectonic.
                               tailoring (LLM)
                                         │
                                         ▼
-                         rendered resume JSON  ◄── contract shown by
-                                        │          tests/fixtures/test_resume.json
+                         rendered resume JSON  ◄── contract: docs/render-contract.md
+                                        │          schema:   schemas/rendered_resume.schema.json
+                                        ▼
+                          validate  ──► exit 3 + path: message
+                                        │          (the LLM's feedback loop)
                                         ▼
                        renderer (Python + Jinja2)
                                         │
@@ -30,9 +33,12 @@ to LaTeX and compiled with Tectonic.
 | `data/NEEDS_INPUT.md` | Living worksheet mirroring `metadata.needs_input`. One question open. |
 | `docs/master-resume.md` | The schema contract: what each section holds and the rules a generator must obey. |
 | `docs/schema-rationale.md` | Why the data lake is structured JSON rather than vector retrieval. |
+| `docs/render-contract.md` | **The page to paste into a tailoring prompt.** The exact JSON an LLM must emit. |
+| `schemas/rendered_resume.schema.json` | Machine-readable version of that contract; what `--validate-only` checks. |
 | `tests/fixtures/test_resume.json` | A rendered resume in render-ready form — the renderer's **input contract**. |
-| `tests/fixtures/resume.pdf` | The PDF that fixture was captured from, verbatim, typos included. |
-| `src/resume_builder/` | The Python package: `renderer.py`, `pdf_compiler.py`, `cli.py`, Jinja2 templates. |
+| `tests/fixtures/resume.pdf` | The base resume's compiled PDF, used for format-parity assertions. |
+| `tests/golden/resume.tex` | Expected render of the fixture. Generated, never hand-edited. |
+| `src/resume_builder/` | The Python package: `api.py`, `validation.py`, `renderer.py`, `pdf_compiler.py`, `cli.py`. |
 | `src/resume_builder/templates/*.tex.j2` | One Jinja2 template per section, plus `resume.tex.j2`. |
 
 ## The two JSON shapes
@@ -54,25 +60,58 @@ identities stay abstracted).
 
 ## Using the renderer
 
+One function does the work. Everything else is a shell over it.
+
 ```python
 import json
 from pathlib import Path
-from resume_builder.renderer import render_to_file
-from resume_builder.pdf_compiler import compile_pdf
+from resume_builder.api import build_resume
 
-resume = json.loads(Path("rendered.json").read_text())
-tex_path = render_to_file(resume, Path("build/resume.tex"))
-pdf_path = compile_pdf(tex_path, Path("build"))
+resume = json.loads(Path("custom_resume.json").read_text())
+result = build_resume(resume, Path("build"))
+print(result.tex_path, result.pdf_path)
 ```
 
-Or from the CLI:
+`build_resume` validates first and raises `ValidationError` carrying every problem, so malformed
+JSON can never reach LaTeX. Pass `tex_only=True` to skip Tectonic entirely — that path is pure
+Python.
+
+From the CLI:
 
 ```bash
-resume-render --input tests/fixtures/test_resume.json --out build/resume.pdf
-resume-render --input rendered.json               --out build/resume.tex   # TeX only
+resume-render -i custom_resume.json --validate-only --json   # check, write nothing
+resume-render -i custom_resume.json -o build/resume.pdf      # validate, render, compile
+resume-render -i custom_resume.json -o build/resume.tex      # TeX only, no Tectonic
 ```
 
-The renderer is deterministic: same JSON → same .tex → same PDF.
+Exit codes: `0` success, `1` render/compile failure, `2` missing or unparseable input, `3` invalid
+resume JSON. On `3`, each problem prints as `path: message` with `path` a JSON Pointer — that is the
+feedback an LLM iterates against. See `docs/render-contract.md`.
+
+The renderer is deterministic: same JSON → same `.tex` → same PDF. `tests/golden/resume.tex` pins
+that, and `tests/test_renderer.py` asserts the compiled PDF reads identically to the hand-written
+`../Resume/resume.pdf` apart from a short, explicit list of defects in the base that we decline to
+reproduce.
+
+## Serving it (not built yet)
+
+If the tailoring LLM is remote rather than a local agent, wrap `build_resume` rather than
+reimplementing it:
+
+- **A plain `POST /render` fits serverless better than MCP.** MCP is the right shape for *LLM calls a
+  tool* and gives typed schemas across clients, but a tool result is content blocks — a PDF has to be
+  base64 or a resource link, and 25 KB of PDF is ~34 KB of base64, roughly 8.5k tokens of bytes the
+  model cannot read. Return a reference, not the artefact, whatever the transport. MCP's
+  streamable-HTTP transport also carries session state, which is friction on a stateless function.
+  Build the REST route first; an MCP tool is then a ~40-line adapter over the same function.
+- **The deployment risk is Tectonic, not the protocol.** The binary is 19 MB and its package cache
+  after rendering this resume is 57 MB, fetched from the network on first run. Ship a **container
+  image**, not a zip: Lambda zip caps at 250 MB unzipped with a 512 MB `/tmp`, and a cold start that
+  downloads a TeX bundle will time out. Lambda container or Cloud Run are both comfortable at a
+  ~250-350 MB image. Pre-bake the cache and point `TECTONIC_CACHE_DIR` at it so no invocation
+  reaches the network; verify by building with networking disabled.
+- **Output location stays at the edge.** `BuildResult.pdf_path` is a local path today. When object
+  storage arrives, one function at the edge maps it to a URL — no renderer or template change.
 
 ## Installing
 
