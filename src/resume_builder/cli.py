@@ -5,7 +5,8 @@ Exit codes are the feedback signal for an automated caller:
 ====  ==========================================================
 0     success
 1     render or Tectonic compilation failed
-2     bad invocation: file missing, or not parseable as JSON
+2     bad invocation: file missing, not parseable as JSON, or an
+      unknown --template (stderr then names the valid ones)
 3     the resume JSON is invalid (one line per problem on stderr)
 ====  ==========================================================
 """
@@ -17,8 +18,9 @@ import json
 import sys
 from pathlib import Path
 
+from . import templates_registry
 from .api import build_resume
-from .exceptions import ValidationError
+from .exceptions import TemplateNotFound, ValidationError
 from .validation import validate
 
 __all__ = ["main", "build_parser"]
@@ -38,8 +40,8 @@ def build_parser() -> argparse.ArgumentParser:
         "--input",
         "-i",
         type=Path,
-        required=True,
-        help="Path to the render-ready resume JSON file.",
+        help="Path to the render-ready resume JSON file. "
+        "Required unless --list-templates is given.",
     )
     parser.add_argument(
         "--out",
@@ -54,6 +56,24 @@ def build_parser() -> argparse.ArgumentParser:
         type=Path,
         default=None,
         help="Where intermediate files live (default: a sibling of --out).",
+    )
+    parser.add_argument(
+        "--template",
+        "-t",
+        help="Name of the template to render with. Overrides the resume JSON's "
+        "own 'template' key. See --list-templates.",
+    )
+    parser.add_argument(
+        "--templates-dir",
+        type=Path,
+        default=None,
+        help="An extra directory of templates, searched before the project's "
+        "templates/ and the built-in ones.",
+    )
+    parser.add_argument(
+        "--list-templates",
+        action="store_true",
+        help="List the available templates and exit. Writes nothing; needs no --input.",
     )
     parser.add_argument(
         "--validate-only",
@@ -83,9 +103,35 @@ def _report(problems, as_json: bool) -> None:
         print(f"  {problem}", file=sys.stderr)
 
 
+def _list_templates(templates_dir, as_json: bool) -> int:
+    """Print the template menu. This is the list an agent chooses a name from."""
+    infos = templates_registry.list_templates(templates_dir)
+    if as_json:
+        print(
+            json.dumps(
+                {
+                    "ok": True,
+                    "default": templates_registry.DEFAULT_TEMPLATE,
+                    "templates": [i.as_dict() for i in infos],
+                },
+                indent=2,
+            )
+        )
+    else:
+        print(templates_registry.describe(infos))
+        print(f"\ndefault: {templates_registry.DEFAULT_TEMPLATE}")
+    return EXIT_OK
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
+
+    if args.list_templates:
+        return _list_templates(args.templates_dir, args.as_json)
+
+    if args.input is None:
+        parser.error("--input is required unless --list-templates is given")
 
     if not args.input.exists():
         print(f"error: input file not found: {args.input}", file=sys.stderr)
@@ -113,10 +159,19 @@ def main(argv: list[str] | None = None) -> int:
     workdir = args.workdir or out.parent
 
     try:
-        result = build_resume(resume, workdir, tex_only=tex_only)
+        result = build_resume(
+            resume,
+            workdir,
+            tex_only=tex_only,
+            template=args.template,
+            templates_dir=args.templates_dir,
+        )
     except ValidationError as e:
         _report(e.problems, args.as_json)
         return EXIT_INVALID
+    except TemplateNotFound as e:
+        print(f"error: {e}", file=sys.stderr)
+        return EXIT_BAD_INPUT
     except Exception as e:  # noqa: BLE001
         print(f"error: {e}", file=sys.stderr)
         return EXIT_FAILED
@@ -134,13 +189,14 @@ def main(argv: list[str] | None = None) -> int:
                     "tex_path": str(result.tex_path),
                     "pdf_path": str(result.pdf_path) if result.pdf_path else None,
                     "out": str(out),
+                    "template": result.template,
                     "warnings": list(result.warnings),
                 },
                 indent=2,
             )
         )
     else:
-        print(f"wrote {out}")
+        print(f"wrote {out} (template: {result.template})")
     return EXIT_OK
 
 

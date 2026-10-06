@@ -19,7 +19,7 @@ to LaTeX and compiled with Tectonic.
                           validate  ──► exit 3 + path: message
                                         │          (the LLM's feedback loop)
                                         ▼
-                       renderer (Python + Jinja2)
+                       renderer (Python + Jinja2)  ◄── template: docs/templates.md
                                         │
                                         ▼
                                      .tex ──► tectonic ──► .pdf
@@ -34,12 +34,15 @@ to LaTeX and compiled with Tectonic.
 | `docs/master-resume.md` | The schema contract: what each section holds and the rules a generator must obey. |
 | `docs/schema-rationale.md` | Why the data lake is structured JSON rather than vector retrieval. |
 | `docs/render-contract.md` | **The page to paste into a tailoring prompt.** The exact JSON an LLM must emit. |
+| `docs/templates.md` | How templates work: picking one, editing one, writing one. |
 | `schemas/rendered_resume.schema.json` | Machine-readable version of that contract; what `--validate-only` checks. |
 | `tests/fixtures/test_resume.json` | A rendered resume in render-ready form — the renderer's **input contract**. |
 | `tests/fixtures/resume.pdf` | The base resume's compiled PDF, used for format-parity assertions. |
 | `tests/golden/resume.tex` | Expected render of the fixture. Generated, never hand-edited. |
 | `src/resume_builder/` | The Python package: `api.py`, `validation.py`, `renderer.py`, `pdf_compiler.py`, `cli.py`. |
-| `src/resume_builder/templates/*.tex.j2` | One Jinja2 template per section, plus `resume.tex.j2`. |
+| `src/resume_builder/templates/<name>/` | One directory per template (`classic`, `serif`): its `resume.tex.j2` and any partial it overrides. |
+| `src/resume_builder/templates/_shared/` | The section partials every template inherits unless it overrides one. |
+| `templates/` (repo root) | Your own templates. Shadow a built-in by using its name. Optional; absent by default. |
 
 ## The two JSON shapes
 
@@ -79,19 +82,47 @@ Python.
 From the CLI:
 
 ```bash
+resume-render --list-templates                               # the available templates
 resume-render -i custom_resume.json --validate-only --json   # check, write nothing
 resume-render -i custom_resume.json -o build/resume.pdf      # validate, render, compile
 resume-render -i custom_resume.json -o build/resume.tex      # TeX only, no Tectonic
+resume-render -i custom_resume.json -o build/resume.pdf -t serif   # pick a template
 ```
 
-Exit codes: `0` success, `1` render/compile failure, `2` missing or unparseable input, `3` invalid
-resume JSON. On `3`, each problem prints as `path: message` with `path` a JSON Pointer — that is the
+Exit codes: `0` success, `1` render/compile failure, `2` missing or unparseable input or an unknown
+`--template`, `3` invalid resume JSON. On `3`, each problem prints as `path: message` with `path` a JSON Pointer — that is the
 feedback an LLM iterates against. See `docs/render-contract.md`.
 
 The renderer is deterministic: same JSON → same `.tex` → same PDF. `tests/golden/resume.tex` pins
 that, and `tests/test_renderer.py` asserts the compiled PDF reads identically to the hand-written
 `../Resume/resume.pdf` apart from a short, explicit list of defects in the base that we decline to
 reproduce.
+
+## Templates
+
+A template is a directory, not a file, and the LaTeX format is no longer hardcoded:
+
+```bash
+resume-render --list-templates
+  classic  Dense single-column Latin Modern, small-caps rule-underlined section headings.
+  serif    The classic layout set in Times; same geometry and spacing, traditional type.
+```
+
+Choose one with `--template serif`, or carry the choice in the resume JSON as a top-level
+`"template": "serif"` — the flag wins if both are given. **That string is the entire surface an
+LLM needs**; it never writes LaTeX, so it cannot produce a document that fails to compile.
+
+Add your own by copying one into `templates/` at the repo root and editing it:
+
+```bash
+cp -r src/resume_builder/templates/classic templates/mine
+resume-render -i custom_resume.json -o build/resume.pdf -t mine
+```
+
+A template owns the preamble (`resume.tex.j2`) and inherits the six section partials from
+`templates/_shared/`, so a variant that only changes fonts or margins is one file. The full
+contract — the three macros a preamble must define, the variables it receives, and which font
+packages actually take effect under Tectonic — is in **`docs/templates.md`**.
 
 ## Serving it (not built yet)
 
@@ -122,12 +153,12 @@ pip install -e ".[dev]"           # editable install with pytest + ruff + pypdf
 
 The LaTeX target lives in the sibling `../Resume/` project — its static `.tex` sources served as
 the reference port into Jinja2 templates here, but the renderer does not read them at runtime; the
-templates are self-contained under `src/resume_builder/templates/`.
+templates are self-contained under `src/resume_builder/templates/`, one directory per template.
 
 ## Checks
 
 ```bash
-pytest                            # 38 tests: linkify, latex_escape, per-section, full pipeline
+pytest                            # linkify, latex_escape, per-section, templates, full pipeline
 ruff check src tests              # lint
 python3 -m json.tool data/master_resume.json > /dev/null && echo OK
 python3 -m json.tool tests/fixtures/test_resume.json > /dev/null && echo OK

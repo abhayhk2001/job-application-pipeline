@@ -13,12 +13,14 @@ import pytest
 
 from resume_builder import TEMPLATES_DIR
 from resume_builder.jinja_env import build_environment
+from resume_builder.templates_registry import DEFAULT_TEMPLATE, resolve
 
 ENTRY_TABULAR = "\\begin{tabular*}{\\linewidth}[t]{@{\\extracolsep{\\fill}}lr}"
 
 
 def _render(template: str, **ctx) -> str:
-    return build_environment(TEMPLATES_DIR).get_template(template).render(**ctx)
+    env = build_environment(resolve(DEFAULT_TEMPLATE))
+    return env.get_template(template).render(**ctx)
 
 
 def _section(fixture_resume, section_type):
@@ -26,17 +28,15 @@ def _section(fixture_resume, section_type):
 
 
 def test_no_template_uses_the_deleted_custom_commands():
-    """The base dropped these macros; emitting them would not compile."""
-    for name in (
-        "heading.tex.j2",
-        "education.tex.j2",
-        "experience.tex.j2",
-        "projects.tex.j2",
-        "skills.tex.j2",
-        "achievements.tex.j2",
-        "resume.tex.j2",
-    ):
-        body = (TEMPLATES_DIR / name).read_text()
+    """The base dropped these macros; emitting them would not compile.
+
+    Globbed rather than listed, so a template added later is covered without
+    anyone remembering to extend this test.
+    """
+    files = sorted(TEMPLATES_DIR.glob("*/*.tex.j2"))
+    assert len(files) >= 7, f"expected the shared partials plus a root template, found {files}"
+    for path in files:
+        body = path.read_text()
         for macro in (
             "\\resumeSubheading",
             "\\resumeItem{",
@@ -44,6 +44,7 @@ def test_no_template_uses_the_deleted_custom_commands():
             "\\resumeSubHeadingListStart",
             "\\resumeItemListStart",
         ):
+            name = f"{path.parent.name}/{path.name}"
             assert macro not in body, f"{name} still uses {macro}"
 
 

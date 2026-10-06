@@ -113,3 +113,14 @@ def test_renderer_refuses_invalid_input(fixture_resume):
 def test_renderer_can_skip_validation_when_already_checked(fixture_resume):
     # check=False is the path build_resume uses after validating once.
     assert "\\begin{document}" in render(fixture_resume, check=False)
+
+
+def test_template_key_is_accepted(fixture_resume):
+    assert validate({**fixture_resume, "template": "serif"}) == []
+
+
+@pytest.mark.parametrize("value", ["../evil", "a/b", "", 7, None])
+def test_an_unusable_template_name_is_a_validation_problem(fixture_resume, value):
+    """The schema is the first line of defence on the name; resolution is the second."""
+    problems = validate({**fixture_resume, "template": value})
+    assert any(p.path == "/template" for p in problems), problems

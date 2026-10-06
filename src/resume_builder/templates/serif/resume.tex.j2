@@ -1,0 +1,108 @@
+%-------------------------
+% Resume in Latex
+% Author : Audric Serador
+% Inspired by: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
+% GENERATED FILE - do not edit by hand.
+% Produced by resume_builder from a render-ready resume JSON.
+%
+% Template: serif. The `classic` layout set in Times instead of Latin Modern.
+% Geometry, spacing and section formatting are identical, so this file is the
+% only difference between the two; both share templates/_shared/*.tex.j2.
+
+%----------FONT TABLE----------%
+% Master font table - modify these to change fonts throughout the resume.
+%
+% +---------------------+--------------+-------------------------------+
+% | Element             | Command      | Default                       |
+% +---------------------+--------------+-------------------------------+
+% | Text font           | (package)    | newtxtext (TeX Gyre Termes)   |
+% | Heading shape       | \resumesc    | \scshape (small caps)         |
+% | Name size           | \resumename  | \Large  (14.4pt)              |
+% | Section size        | \resumesec   | \Large  (14.4pt)              |
+% | Sub/item size       | \resumesub   | \small  (10pt)                |
+% | Base body size      | (fixed)      | 10pt  (in \documentclass)     |
+% +---------------------+--------------+-------------------------------+
+%
+% CHOOSING A FONT UNDER TECTONIC. The engine is XeTeX, and it silently falls
+% back to Latin Modern for the old Type1 NFSS families -- set \familydefault
+% to phv or ptm and you get a document that compiles cleanly and is still
+% Latin Modern. Verified to actually take effect (check with
+% `pypdf` on the output's /BaseFont, as tests/test_renderer.py does):
+%
+%   \usepackage{newtxtext}             : Times      (serif - used here)
+%   \usepackage[default]{sourcesanspro}: Source Sans (sans)
+%   \usepackage[default]{FiraSans}     : Fira Sans   (sans)
+%   \usepackage[default]{roboto}       : Roboto      (sans)
+%
+% To switch, swap the \usepackage line in the "Apply font family" block below.
+
+\newcommand{\resumesc}{\scshape}
+\newcommand{\resumename}{\Large\resumesc}
+\newcommand{\resumesec}{\Large\resumesc}
+\newcommand{\resumesub}{\small}
+
+\documentclass[letterpaper,10pt]{article}
+
+\usepackage{fontawesome5}
+\usepackage{latexsym}
+\usepackage[left=0.75in, right=0.75in, top=0.5in, bottom=0.5in]{geometry}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{setspace}
+
+% pdfTeX-only ATS support (skipped under XeTeX/tectonic)
+\ifdefined\pdfgentounicode
+  \input{glyphtounicode}
+  \pdfgentounicode=1
+\fi
+
+% Apply font family: traditional serif (Times, via TeX Gyre Termes).
+% See the font table above for the alternatives that work under Tectonic.
+\usepackage{newtxtext}
+
+\setstretch{1}
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-4pt}\resumesec\raggedright
+}{}{0em}{}[\color{black}\titlerule\vspace{-5pt}]
+
+% Filled-circle bullets, stated explicitly so the list markers do not depend
+% on the font family in use.
+\renewcommand{\labelitemi}{$\bullet$}
+\renewcommand{\labelitemii}{$\bullet$}
+
+%-------------------------%
+\begin{document}
+
+%-------------------------------------------%
+%%%%%%  RESUME STARTS HERE  %%%%%
+
+{{ heading_tex }}
+{% for section_tex in sections_tex %}
+{{ section_tex }}
+{%- endfor %}
+
+%-------------------------------------------%
+\end{document}

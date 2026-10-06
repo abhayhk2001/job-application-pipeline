@@ -11,6 +11,11 @@
       "description": "Free-form provenance. Ignored by the renderer.",
       "type": "object"
     },
+    "template": {
+      "description": "Name of the template to render with, as listed by `resume-render --list-templates`. Omit it for the default ('classic'). The --template flag overrides this. A name is a plain directory name: no slashes, no '..'.",
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$"
+    },
     "basics": { "$ref": "#/$defs/basics" },
     "sections": {
       "type": "array",

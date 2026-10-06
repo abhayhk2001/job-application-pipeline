@@ -20,11 +20,11 @@ resume-render -i custom_resume.json --validate-only --json
 resume-render -i custom_resume.json -o build/resume.pdf --json
           │
           ▼
-{"ok": true, "pdf_path": "...", "tex_path": "..."}
+{"ok": true, "pdf_path": "...", "tex_path": "...", "template": "classic"}
 ```
 
 Exit codes are the signal: `0` success, `1` render or LaTeX failure, `2` missing file or unparseable
-JSON, `3` the JSON is invalid. On `3`, every problem is printed as `path: message`, where `path` is a
+JSON or an unknown `template`, `3` the JSON is invalid. On `3`, every problem is printed as `path: message`, where `path` is a
 JSON Pointer into the document you submitted. Fix those paths and re-run.
 
 The authoritative shape is `schemas/rendered_resume.schema.json`. It sets
@@ -118,6 +118,37 @@ has nowhere to put it.
 `sections` is **ordered** — it is the order the sections print in. Every section needs a `heading`,
 which is the printed title. `source_ref` is optional everywhere but worth setting: it names the
 `data/master_resume.json` id a line was drawn from, which is how a reviewer traces a claim back.
+
+## Choosing a template
+
+The visual format is a template, picked by name. Do **not** write LaTeX: emit an optional top-level
+`"template"` key, or leave it out for the default.
+
+```bash
+resume-render --list-templates --json
+```
+
+```json
+{
+  "ok": true,
+  "default": "classic",
+  "templates": [
+    { "name": "classic", "description": "...", "best_for": "Software and other industry roles; ..." },
+    { "name": "serif",   "description": "...", "best_for": "Academic, research and research-lab ..." }
+  ]
+}
+```
+
+Match `best_for` against the job description and put the chosen `name` in the resume JSON:
+
+```json
+{ "template": "serif", "basics": { ... }, "sections": [ ... ] }
+```
+
+The name must be one the listing returned — anything else exits `2` and prints the valid names, so
+the recovery is to re-run the listing and pick again. A name is a plain directory name: no slashes
+and no `..`. A `--template` flag, if the caller passes one, overrides this key, and the render's
+`--json` output echoes the template actually used.
 
 ## Writing bullets
 

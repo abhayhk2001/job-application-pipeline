@@ -25,6 +25,11 @@ resume-render = "resume_builder.cli:main"
 [tool.setuptools.packages.find]
 where = ["src"]
 
+# Templates live in subdirectories now (one per template, plus _shared), so they
+# have to be named explicitly or a non-editable install would ship none.
+[tool.setuptools.package-data]
+resume_builder = ["templates/*/*.tex.j2", "templates/*/template.json"]
+
 [tool.ruff]
 line-length = 100
 target-version = "py310"
