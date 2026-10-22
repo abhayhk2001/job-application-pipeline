@@ -1,9 +1,9 @@
 {
   "schema": {
     "base": "JSON Resume Schema (https://jsonresume.org/schema/)",
-    "extension": "abhay-master-resume/v1",
-    "version": "1.0.0",
-    "last_updated": "2026-09-25",
+    "extension": "abhay-master-resume/v2",
+    "version": "2.0.0",
+    "last_updated": "2026-10-22",
     "purpose": "Lossless, role-neutral career data lake. Injected wholesale into an LLM's context so a downstream agent can synthesize a job-specific resume. This file stores ATOMIC FACTS ONLY - never resume-ready bullet prose. It is self-contained: no external documents are referenced.",
     "hard_rules": [
       "No resume bullet points anywhere in this file. Bullets are written by the downstream generator, not stored here.",
@@ -45,27 +45,16 @@
     "summaries": {
       "note": "Length variants only. These are deliberately role-neutral; pick by available space, not by target role.",
       "one_line": "Software engineer and published researcher whose work spans embedded firmware, distributed data systems and applied machine learning; incoming MS in Computer Science at the University of Illinois Urbana-Champaign.",
-      "short": "Software engineer at Qualcomm India (January 2023 - July 2026) on the Device Firmware Update team, with prior software engineering internships at Intel Solutions & Services India and Epsilon. Three peer-reviewed publications across computational biology, causal inference and document AI. B.E. in Computer Science from RV College of Engineering (GPA 9.22); incoming MS CS at UIUC, August 2026.",
+      "short": "Software engineer at Qualcomm India (January 2023 - July 2026) on the Device Firmware Update team, with prior software engineering internships at Intel Solutions & Services India and Epsilon. Three peer-reviewed publications across computational biology, causal inference and document AI. B.E. in Computer Science from RV College of Engineering (GPA 9.22); incoming Masters in CS at UIUC, August 2026.",
       "long": "Abhay Harish Kashyap is a software engineer whose experience covers three distinct layers of the stack. At Qualcomm India he worked on the Device Firmware Update team from January 2023 to July 2026, joining as an Associate Engineer and being promoted to Software Engineer, where he owned SoC upgrade solutions, a data-relay mechanism, a core DFU refactor delivered across two major client releases, and the upgrade framework used to deploy embedded ML models to hearable devices. At Intel Solutions & Services India he worked in Customer Engineering on EV-telemetry JSON processing, cryptographic acceleration for a national stock exchange, and a Spark/Kubernetes/Kafka ETL pipeline. At Epsilon he benchmarked and optimized HBase, Apache Phoenix and Solr for large-scale retrieval. In parallel he led and published research: biomarker prediction for non-small cell lung cancer (Cancer Informatics), conditional independence testing on HPCC Systems with LexisNexis (JAIT), and deep-learning business-document recognition and table extraction (ICAIC 2025). He also led a Samsung Research Institute Bengaluru collaboration on instant-app technology that won an Excellence Award, and co-built retrieval-augmented educational tooling now used by over 1,000 teachers across 270+ schools in southern Karnataka."
     },
     "stated_interests": {
       "note": "Self-described direction. Aspirations, not accomplishments. Do not present as experience.",
       "items": [
-        {
-          "statement": "Applying machine learning to improve quality of life, particularly in healthcare and education."
-        },
-        {
-          "statement": "Industry research roles that apply rigorous ML methods to practical, high-impact problems."
-        },
-        {
-          "statement": "Interpretable ML, motivated by observing the influence of bias and noise on model reasoning."
-        },
-        {
-          "statement": "Extending document-understanding research to unstructured and multi-page documents."
-        },
-        {
-          "statement": "Treating ML as a systems problem - how algorithmic ideas interact with computation, scale and real-world constraints."
-        }
+        "Applying machine learning to improve quality of life, particularly in healthcare and education.",
+        "Industry research roles that apply rigorous ML methods to practical, high-impact problems.",
+        "Interpretable ML, motivated by observing the influence of bias and noise on model reasoning.",
+        "Treating ML as a systems problem - how algorithmic ideas interact with computation, scale and real-world constraints."
       ]
     },
     "profiles_policy": "LinkedIn and GitHub are sufficient. When a personal portfolio site exists it should replace the GitHub link rather than be added alongside it."
@@ -75,19 +64,20 @@
       "id": "edu.uiuc",
       "institution": "University of Illinois Urbana-Champaign",
       "location": "Champaign, USA",
-      "studyType": "Master of Computer Science",
+      "degree": "Master of Computer Science",
       "area": "Computer Science",
       "status": "Enrolled",
       "startDate": "2026-08",
       "endDate": "2027-12",
+      "alternateEndDate": "2028-05",
       "score": null,
-      "note": "Degree, start and end taken from ../Resume/resume.tex. Master of Computer Science is the coursework degree; this entry previously said Master of Science."
+      "note": "endDate should be be automatically set based on the role"
     },
     {
       "id": "edu.rvce",
       "institution": "RV College of Engineering",
       "location": "Bengaluru, India",
-      "studyType": "Bachelor of Engineering",
+      "degree": "Bachelor of Engineering",
       "area": "Computer Science and Engineering",
       "score": {
         "value": "9.22",
@@ -164,7 +154,7 @@
       "manager": {
         "name": "Himanshu Srivastava",
         "title": "Engineer, Senior Staff / Manager",
-        "relationship": "Direct manager and mentor for approximately two years"
+        "relationship": "Direct manager and mentor for approximately three years"
       },
       "domain_ramp_up": {
         "note": "Subsystems learned on entering the organization; useful as domain context, not as an accomplishment.",
@@ -179,18 +169,10 @@
         "approach": "Combined study with controlled experiments; expanded beyond the team's core firmware-upgrade functionality in order to design modules that integrate with parallel systems."
       },
       "working_practices": [
-        {
-          "practice": "End-to-end ownership of challenging projects, including navigating ambiguous requirements, proposing structured designs and executing them."
-        },
-        {
-          "practice": "Assumed software-architect responsibilities: leading design decisions and mentoring teammates through development."
-        },
-        {
-          "practice": "Acted as the point of contact when teammates needed to understand a subsystem or reproduce a difficult issue."
-        },
-        {
-          "practice": "Cross-team debugging collaboration focused on alignment with other components."
-        }
+        "End-to-end ownership of challenging projects, including navigating ambiguous requirements, proposing structured designs and executing them.",
+        "Assumed software-architect responsibilities: leading design decisions and mentoring teammates through development.",
+        "Acted as the point of contact when teammates needed to understand a subsystem or reproduce a difficult issue.",
+        "Cross-team debugging collaboration focused on alignment with other components."
       ],
       "projects": [
         {
@@ -209,15 +191,9 @@
             "Required cross-team communication and strong functional knowledge"
           ],
           "actions": [
-            {
-              "action": "Independently implemented the upgrade solution for the new SoC component."
-            },
-            {
-              "action": "Designed and delivered the solution as a production-ready SoC upgrade framework."
-            },
-            {
-              "action": "Made low-level firmware and application-level modifications as part of subsequent SoC upgrade enhancements."
-            }
+            "Independently implemented the upgrade solution for the new SoC component.",
+            "Designed and delivered the solution as a production-ready SoC upgrade framework.",
+            "Made low-level firmware and application-level modifications as part of subsequent SoC upgrade enhancements."
           ],
           "technologies_used": [
             "Embedded firmware",
@@ -225,14 +201,10 @@
           ],
           "metrics": [],
           "outcomes": [
-            {
-              "outcome": "Contributed to promotion from Associate Engineer to Software Engineer."
-            },
-            {
-              "outcome": "Played an important role in stabilizing the team's upgrade process."
-            }
+            "Contributed to promotion from Associate Engineer to Software Engineer.",
+            "Played an important role in stabilizing the team's upgrade process."
           ],
-          "note": "No quantified metric. The 24% figure belongs to the data-relay work (work.qualcomm.data-relay), not to this project."
+          "note": "No quantified metric"
         },
         {
           "id": "work.qualcomm.bug-triage",
@@ -245,12 +217,8 @@
           "situation": "Bugs were raised by customers and by internal testing teams against firmware upgrade flows.",
           "constraints": [],
           "actions": [
-            {
-              "action": "Resolved more than 20 bugs raised by customers or internal testing teams."
-            },
-            {
-              "action": "Produced comprehensive analyses consisting of annotated packet traces, trimmed logs paired with reasoning, and targeted hypotheses."
-            }
+            "Resolved more than 20 bugs raised by customers or internal testing teams.",
+            "Produced comprehensive analyses consisting of annotated packet traces, trimmed logs paired with reasoning, and targeted hypotheses."
           ],
           "technologies_used": [
             "Packet trace analysis",
@@ -282,12 +250,8 @@
           "situation": "Firmware upgrade payloads needed a data transfer path between components.",
           "constraints": [],
           "actions": [
-            {
-              "action": "Designed and implemented a new data relay mechanism."
-            },
-            {
-              "action": "Optimized the data-relay mechanism."
-            }
+            "Designed and implemented a new data relay mechanism.",
+            "Optimized the data-relay mechanism."
           ],
           "technologies_used": [
             "Bluetooth",
@@ -325,15 +289,9 @@
             "Two major client releases depended on the refactor landing on schedule"
           ],
           "actions": [
-            {
-              "action": "Refactored the core component of the DFU module."
-            },
-            {
-              "action": "Handled design and task planning for the refactoring of the upgrade feature."
-            },
-            {
-              "action": "Produced detailed Message Sequence Charts (MSCs) that clarified edge-case behavior and guided teammates through implementation."
-            }
+            "Refactored the core component of the DFU module.",
+            "Handled design and task planning for the refactoring of the upgrade feature.",
+            "Produced detailed Message Sequence Charts (MSCs) that clarified edge-case behavior and guided teammates through implementation."
           ],
           "technologies_used": [
             "Embedded firmware",
@@ -375,15 +333,9 @@
             "Two clients with divergent system expectations"
           ],
           "actions": [
-            {
-              "action": "Took responsibility for one of the modules in the upgrade procedure."
-            },
-            {
-              "action": "Redesigned key components of that module."
-            },
-            {
-              "action": "Delivered the flow in two phases without deviating from the timeline."
-            }
+            "Took responsibility for one of the modules in the upgrade procedure.",
+            "Redesigned key components of that module.",
+            "Delivered the flow in two phases without deviating from the timeline."
           ],
           "technologies_used": [
             "Embedded firmware"
@@ -409,9 +361,7 @@
             "Reliability, latency and deployment constraints characteristic of ML pipelines on constrained devices"
           ],
           "actions": [
-            {
-              "action": "Independently managed the upgrade framework used to deploy embedded ML models to hearable devices."
-            }
+            "Independently managed the upgrade framework used to deploy embedded ML models to hearable devices."
           ],
           "technologies_used": [
             "Embedded ML model deployment",
@@ -432,12 +382,8 @@
           "situation": "The team performed repeated, manual log-analysis tasks during triage.",
           "constraints": [],
           "actions": [
-            {
-              "action": "Took the initiative, with colleagues' support, to introduce internal GenAI-based tools that automate repeated log-analysis tasks."
-            },
-            {
-              "action": "Applied GenAI tooling to generating code documentation."
-            }
+            "Took the initiative, with colleagues' support, to introduce internal GenAI-based tools that automate repeated log-analysis tasks.",
+            "Applied GenAI tooling to generating code documentation."
           ],
           "technologies_used": [
             "Generative AI / LLM tooling",
@@ -466,9 +412,7 @@
           "situation": "Core modules lacked written guidance on their behavior and modification.",
           "constraints": [],
           "actions": [
-            {
-              "action": "Wrote developer guides for core modules, documenting both how the modules work and how to modify them."
-            }
+            "Wrote developer guides for core modules, documenting both how the modules work and how to modify them."
           ],
           "technologies_used": [
             "Technical documentation"
@@ -504,15 +448,9 @@
       },
       "mission_context": "Developing and optimizing customer-specific solutions on Intel chipsets.",
       "working_practices": [
-        {
-          "practice": "Wrote descriptive, technically accurate reports with clear summaries, and adapted communication for managerial versus technical audiences."
-        },
-        {
-          "practice": "Handled multiple customer projects simultaneously, breaking tasks into executable steps and following Intel's protocol for updates and task tracking."
-        },
-        {
-          "practice": "Took the initiative to unblock a peer stuck on Kafka data streaming, contributing research and trial programs and absorbing additional work to meet project deadlines."
-        }
+        "Wrote descriptive, technically accurate reports with clear summaries, and adapted communication for managerial versus technical audiences.",
+        "Handled multiple customer projects simultaneously, breaking tasks into executable steps and following Intel's protocol for updates and task tracking.",
+        "Took the initiative to unblock a peer stuck on Kafka data streaming, contributing research and trial programs and absorbing additional work to meet project deadlines."
       ],
       "projects": [
         {
@@ -534,15 +472,9 @@
             "Customer's existing storage layout was inefficient for pivoting tabular data"
           ],
           "actions": [
-            {
-              "action": "Identified a critical inefficiency in how the customer stored data, which affected the time required to pivot tabular data, and fixed it."
-            },
-            {
-              "action": "Redesigned the JSON log data stream parser to use SIMD instructions."
-            },
-            {
-              "action": "Optimized the solution using Tablesaw, a Java dataframe and visualization library."
-            }
+            "Identified a critical inefficiency in how the customer stored data, which affected the time required to pivot tabular data, and fixed it.",
+            "Redesigned the JSON log data stream parser to use SIMD instructions.",
+            "Optimized the solution using Tablesaw, a Java dataframe and visualization library."
           ],
           "technologies_used": [
             "JSON",
@@ -597,15 +529,9 @@
             "Cryptographic overhead had to not degrade live service performance"
           ],
           "actions": [
-            {
-              "action": "Researched and identified an Intel optimization library suited to the requirement."
-            },
-            {
-              "action": "Accelerated RSA and AES256 algorithms using the Intel QAT OpenSSL Engine."
-            },
-            {
-              "action": "Used OpenSSL and Python to optimize hashing on Intel silicon."
-            }
+            "Researched and identified an Intel optimization library suited to the requirement.",
+            "Accelerated RSA and AES256 algorithms using the Intel QAT OpenSSL Engine.",
+            "Used OpenSSL and Python to optimize hashing on Intel silicon."
           ],
           "technologies_used": [
             "Intel QAT OpenSSL Engine",
@@ -647,21 +573,11 @@
             "The Spark application, Hive warehouse and S3 buckets worked independently but were difficult to synchronize, requiring persistent trial and error"
           ],
           "actions": [
-            {
-              "action": "Assisted in designing an ETL pipeline built on Apache Spark, Kubernetes and Kafka."
-            },
-            {
-              "action": "Built the Kubernetes data pipeline using Spark with storage in S3."
-            },
-            {
-              "action": "Automated deployment via Terraform and Ansible."
-            },
-            {
-              "action": "Benchmarked Intel-Optimized components on the pipeline."
-            },
-            {
-              "action": "Integrated the Spark application with the Hive warehouse and S3 buckets."
-            }
+            "Assisted in designing an ETL pipeline built on Apache Spark, Kubernetes and Kafka.",
+            "Built the Kubernetes data pipeline using Spark with storage in S3.",
+            "Automated deployment via Terraform and Ansible.",
+            "Benchmarked Intel-Optimized components on the pipeline.",
+            "Integrated the Spark application with the Hive warehouse and S3 buckets."
           ],
           "technologies_used": [
             "Apache Spark",
@@ -698,9 +614,7 @@
           "situation": "Performance of standard machine-learning functions on Intel chips needed to be tracked consistently across projects.",
           "constraints": [],
           "actions": [
-            {
-              "action": "Automated benchmarking of standard machine-learning functions in NumPy and scikit-learn on Intel chips using Docker containers."
-            }
+            "Automated benchmarking of standard machine-learning functions in NumPy and scikit-learn on Intel chips using Docker containers."
           ],
           "technologies_used": [
             "NumPy",
@@ -745,15 +659,9 @@
           "situation": "Large-scale data retrieval and analytics workloads needed to be evaluated across candidate storage and query architectures.",
           "constraints": [],
           "actions": [
-            {
-              "action": "Benchmarked HBase, Apache Phoenix and Solr for large-scale data retrieval and analytics."
-            },
-            {
-              "action": "Evaluated filtering, aggregation and multi-condition queries across varying dataset sizes."
-            },
-            {
-              "action": "Documented benchmarking results for large datasets."
-            }
+            "Benchmarked HBase, Apache Phoenix and Solr for large-scale data retrieval and analytics.",
+            "Evaluated filtering, aggregation and multi-condition queries across varying dataset sizes.",
+            "Documented benchmarking results for large datasets."
           ],
           "technologies_used": [
             "Apache HBase",
@@ -774,15 +682,9 @@
           "situation": "Query execution on the benchmarked stores was slower than required.",
           "constraints": [],
           "actions": [
-            {
-              "action": "Applied primary and secondary indexing."
-            },
-            {
-              "action": "Restructured queries."
-            },
-            {
-              "action": "Used selective column retrieval instead of full-row reads."
-            }
+            "Applied primary and secondary indexing.",
+            "Restructured queries.",
+            "Used selective column retrieval instead of full-row reads."
           ],
           "technologies_used": [
             "Apache Phoenix",
@@ -811,12 +713,8 @@
           "situation": "A distributed environment was needed to compare performance across storage and query architectures.",
           "constraints": [],
           "actions": [
-            {
-              "action": "Built and evaluated a distributed data-processing environment using Hadoop/HDFS, HBase, Phoenix, Solr and Docker."
-            },
-            {
-              "action": "Analyzed performance across storage and query architectures."
-            }
+            "Built and evaluated a distributed data-processing environment using Hadoop/HDFS, HBase, Phoenix, Solr and Docker.",
+            "Analyzed performance across storage and query architectures."
           ],
           "technologies_used": [
             "Apache Hadoop",
@@ -866,33 +764,15 @@
         "Four candidate models were producing only mediocre precision late in the project"
       ],
       "actions": [
-        {
-          "action": "Proposed analyzing the dataset to determine which features actually influence a gene's role in NSCLC pathways, rather than using all available features as the team initially assumed."
-        },
-        {
-          "action": "Analyzed and tested multiple under-sampling and over-sampling algorithms to address the class skew."
-        },
-        {
-          "action": "Selected the NearMiss method to under-sample the data, correcting the skew and avoiding a biased model."
-        },
-        {
-          "action": "Standardized the features before modelling."
-        },
-        {
-          "action": "Evaluated multiple machine learning and ensemble algorithms on the gene expression analysis data."
-        },
-        {
-          "action": "Used ROC curve analysis to narrow the four candidate models down to the Random Forest classifier."
-        },
-        {
-          "action": "Optimized the Random Forest classifier to identify critical genes linked to NSCLC."
-        },
-        {
-          "action": "Handled data cleaning, key-parameter identification and interpretation accuracy for the ML portion."
-        },
-        {
-          "action": "Produced presentations with visual aids so the wider team could follow the complex portions of the work, and contributed written sections to the research paper."
-        }
+        "Proposed analyzing the dataset to determine which features actually influence a gene's role in NSCLC pathways, rather than using all available features as the team initially assumed.",
+        "Analyzed and tested multiple under-sampling and over-sampling algorithms to address the class skew.",
+        "Selected the NearMiss method to under-sample the data, correcting the skew and avoiding a biased model.",
+        "Standardized the features before modelling.",
+        "Evaluated multiple machine learning and ensemble algorithms on the gene expression analysis data.",
+        "Used ROC curve analysis to narrow the four candidate models down to the Random Forest classifier.",
+        "Optimized the Random Forest classifier to identify critical genes linked to NSCLC.",
+        "Handled data cleaning, key-parameter identification and interpretation accuracy for the ML portion.",
+        "Produced presentations with visual aids so the wider team could follow the complex portions of the work, and contributed written sections to the research paper."
       ],
       "technologies_used": [
         "Random Forest",
@@ -973,21 +853,11 @@
         "Standard models had to be used for both detection and extraction"
       ],
       "actions": [
-        {
-          "action": "Separated element detection (date, invoice number) from table parsing so that each model could be hyper-tuned for its own function."
-        },
-        {
-          "action": "Fine-tuned YOLOv5 for object detection after extensive testing."
-        },
-        {
-          "action": "Fine-tuned DETR for table data extraction."
-        },
-        {
-          "action": "Integrated DETR-based table extraction with YOLOv5 object detection into a single pipeline."
-        },
-        {
-          "action": "Applied optimization techniques to meet the processing-time constraint."
-        }
+        "Separated element detection (date, invoice number) from table parsing so that each model could be hyper-tuned for its own function.",
+        "Fine-tuned YOLOv5 for object detection after extensive testing.",
+        "Fine-tuned DETR for table data extraction.",
+        "Integrated DETR-based table extraction with YOLOv5 object detection into a single pipeline.",
+        "Applied optimization techniques to meet the processing-time constraint."
       ],
       "technologies_used": [
         "YOLOv5",
@@ -1054,18 +924,10 @@
         "Required validating causal relationships under controlled noise and dimensionality"
       ],
       "actions": [
-        {
-          "action": "Implemented the RCoT algorithm on HPCC Systems."
-        },
-        {
-          "action": "Designed synthetic datasets to validate causal relationships under controlled noise and dimensionality."
-        },
-        {
-          "action": "Introduced vectorization into the algorithm."
-        },
-        {
-          "action": "Reformulated the algorithm's computations through matrices."
-        }
+        "Implemented the RCoT algorithm on HPCC Systems.",
+        "Designed synthetic datasets to validate causal relationships under controlled noise and dimensionality.",
+        "Introduced vectorization into the algorithm.",
+        "Reformulated the algorithm's computations through matrices."
       ],
       "technologies_used": [
         "HPCC Systems (Data Analytics Supercomputer)",
@@ -1132,24 +994,12 @@
         "Google's proprietary backend created a deadlock the team could not work around directly"
       ],
       "actions": [
-        {
-          "action": "Set the project's strategic direction by first studying Google's instant app implementation and then identifying how it could be adapted to Samsung's constraints."
-        },
-        {
-          "action": "Assigned tasks based on individual team members' strengths and led structured discussions to work through stalled progress collectively."
-        },
-        {
-          "action": "Took on the hardest task personally: backtracking the instant app implementation by analyzing Android's open-source documentation."
-        },
-        {
-          "action": "Engineered a novel caching strategy to get past the proprietary-backend bottleneck, then guided the team through the solution."
-        },
-        {
-          "action": "Oversaw development of two applications in Kotlin demonstrating the practical benefits of instant apps."
-        },
-        {
-          "action": "Presented the final result to Samsung stakeholders, addressing both engineers and senior management."
-        }
+        "Set the project's strategic direction by first studying Google's instant app implementation and then identifying how it could be adapted to Samsung's constraints.",
+        "Assigned tasks based on individual team members' strengths and led structured discussions to work through stalled progress collectively.",
+        "Took on the hardest task personally: backtracking the instant app implementation by analyzing Android's open-source documentation.",
+        "Engineered a novel caching strategy to get past the proprietary-backend bottleneck, then guided the team through the solution.",
+        "Oversaw development of two applications in Kotlin demonstrating the practical benefits of instant apps.",
+        "Presented the final result to Samsung stakeholders, addressing both engineers and senior management."
       ],
       "technologies_used": [
         "Kotlin",
@@ -1191,7 +1041,7 @@
       "title": "Educational technology for understaffed rural schools: AR-driven website and RAG-based lesson generation",
       "engagement_type": "Curriculum volunteering / social impact",
       "organization": "District Institute of Education and Training (DIET), Ramanagara",
-      "role": "Member of an eight-member interdisciplinary student team; led the coding-club team that built the AR-driven educational website.",
+      "role": "Member of an eight-member interdisciplinary student team; led team that built the AR-driven educational website.",
       "period": {
         "start": null,
         "end": null,
@@ -1206,24 +1056,12 @@
         "Content had to align with the existing curriculum"
       ],
       "actions": [
-        {
-          "action": "Held regular meetings with rural teachers, district education coordinators and university faculty over three months of coordination."
-        },
-        {
-          "action": "Contributed to producing animated content for science, social studies and mathematics, created by students from different departments."
-        },
-        {
-          "action": "Built software that lets primary-school teachers generate story-based educational content from simple prompts."
-        },
-        {
-          "action": "Integrated existing animated content and syllabus data with an LLM using retrieval-augmented generation, so teachers could generate curriculum-aligned lessons from a topic and a brief description."
-        },
-        {
-          "action": "Led a team from the college coding club to develop an augmented-reality-driven educational website providing engaging educational tools for underprivileged children."
-        },
-        {
-          "action": "Conducted workshops so that teachers could use the tooling effectively."
-        }
+        "Held regular meetings with rural teachers, district education coordinators and university faculty over three months of coordination.",
+        "Contributed to producing animated content for science, social studies and mathematics, created by students from different departments.",
+        "Built software that lets primary-school teachers generate story-based educational content from simple prompts.",
+        "Integrated existing animated content and syllabus data with an LLM using retrieval-augmented generation, so teachers could generate curriculum-aligned lessons from a topic and a brief description.",
+        "Led a team from the college coding club to develop an augmented-reality-driven educational website providing engaging educational tools for underprivileged children.",
+        "Conducted workshops so that teachers could use the tooling effectively."
       ],
       "technologies_used": [
         "Large language models",
@@ -1273,18 +1111,10 @@
         "Target text was noisy, unstructured social-media content"
       ],
       "actions": [
-        {
-          "action": "Designed a transformer-based natural language processing approach to assess sentence credibility on unstructured data."
-        },
-        {
-          "action": "Built the NLP model to parse sentences, identify keywords and assess the truthfulness of statements."
-        },
-        {
-          "action": "Used prompt-based paraphrasing to expand training coverage given the scarcity of labeled data."
-        },
-        {
-          "action": "Built the surrounding end-to-end blockchain application."
-        }
+        "Designed a transformer-based natural language processing approach to assess sentence credibility on unstructured data.",
+        "Built the NLP model to parse sentences, identify keywords and assess the truthfulness of statements.",
+        "Used prompt-based paraphrasing to expand training coverage given the scarcity of labeled data.",
+        "Built the surrounding end-to-end blockchain application."
       ],
       "technologies_used": [
         "Transformers",
@@ -1336,9 +1166,7 @@
         "Durability had to be added without compromising Redis's fast read and write speeds"
       ],
       "actions": [
-        {
-          "action": "Developed a method to store cache data between server and client by combining Redis with SQLite."
-        }
+        "Developed a method to store cache data between server and client by combining Redis with SQLite."
       ],
       "technologies_used": [
         "Redis",
@@ -2151,7 +1979,7 @@
     ],
     "needs_input_worksheet": "data/NEEDS_INPUT.md - the same questions with answer blocks to fill in. Answers there get merged back into this file and the resolved entries removed from needs_input.",
     "maintenance": {
-      "how_to_extend": "Add a new engagement as an object under work[].projects[] (if it happened at an employer) or under projects[] (if it did not), using the same field shape. Give it a stable `id` and reference it from any relevant skills[].evidence_refs entry.",
+      "how_to_extend": "Add a new engagement as an object under work[].projects[] (if it happened at an employer) or under projects[] (if it did not), using the same field shape. Give it a stable `id` and reference it from any relevant skills[].evidence_refs entry. Store project actions[], employer working_practices[], and basics.stated_interests.items[] as arrays of strings.",
       "invariant": "Every metric, date and named entity in this file must be something the candidate has confirmed, or be null with a matching metadata.needs_input entry. Nothing is inferred."
     },
     "presentation_preferences": {

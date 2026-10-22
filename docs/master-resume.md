@@ -35,6 +35,17 @@ roles." Tailoring happens at generation time against a specific job description,
 Every object with an `id` can be cross-referenced. `evidence_refs`, `project_ref`, `publication_ref`
 and `award_ref` all point at those ids.
 
+The `abhay-master-resume/v2` extension (version `2.0.0`) stores the following text lists as arrays
+of strings:
+
+- `work[].projects[].actions[]` and `projects[].actions[]`
+- `work[].working_practices[]`
+- `basics.stated_interests.items[]`
+
+For example, use `"actions": ["Implemented the upgrade solution."]`. Keep these lists as strings
+when adding entries. Outcomes and coursework retain their existing structures, including objects
+with notes or award references.
+
 ## Confidence and evidence
 
 The file is self-contained — it no longer references the recommendation letters, statement of purpose
