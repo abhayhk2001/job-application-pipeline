@@ -197,14 +197,17 @@
           ],
           "technologies_used": [
             "Embedded firmware",
-            "SoC upgrade flows"
+            "SoC upgrade flows",
+            "C/C++",
+            "Jenkins",
+            "Perforce",
+            "Jira"
           ],
-          "metrics": [],
+          "metrics": [{"note": "No quantified metric"}],
           "outcomes": [
             "Contributed to promotion from Associate Engineer to Software Engineer.",
             "Played an important role in stabilizing the team's upgrade process."
-          ],
-          "note": "No quantified metric"
+          ]
         },
         {
           "id": "work.qualcomm.bug-triage",
@@ -222,7 +225,11 @@
           ],
           "technologies_used": [
             "Packet trace analysis",
-            "Log analysis"
+            "Log analysis",
+            "C/C++",
+            "Jenkins",
+            "Perforce",
+            "Jira"
           ],
           "metrics": [
             {
@@ -234,9 +241,7 @@
             }
           ],
           "outcomes": [
-            {
-              "outcome": "Significantly reduced debugging time for the entire team."
-            }
+            "Significantly reduced debugging time for the entire team."
           ]
         },
         {
@@ -251,12 +256,18 @@
           "constraints": [],
           "actions": [
             "Designed and implemented a new data relay mechanism.",
-            "Optimized the data-relay mechanism."
+            "Introduced parallelism into host-to-device data transfer."
           ],
           "technologies_used": [
             "Bluetooth",
             "Embedded firmware",
-            "Transport protocols"
+            "Transport protocols",
+            "C/C++",
+            "Jenkins",
+            "Perforce",
+            "Jira",
+            "Memory layout constraints",
+            "Bootloader concepts"
           ],
           "metrics": [
             {
@@ -271,10 +282,12 @@
               "unit": "percent",
               "direction": "reduced",
               "baseline": null,
-              "note": "Reduction stated without a figure."
+              "note": "Reduction stated without a figure. Attributed to upgrade data being transferred in a single session."
             }
           ],
-          "outcomes": []
+          "outcomes": [
+            "Upgrade data could be transferred from host to device in a single session, which reduced system load during upgrades."
+          ]
         },
         {
           "id": "work.qualcomm.dfu-refactor",
@@ -295,7 +308,11 @@
           ],
           "technologies_used": [
             "Embedded firmware",
-            "Message Sequence Charts (MSC)"
+            "Message Sequence Charts (MSC)",
+            "C/C++",
+            "Jenkins",
+            "Perforce",
+            "Jira"
           ],
           "metrics": [
             {
@@ -314,9 +331,7 @@
             }
           ],
           "outcomes": [
-            {
-              "outcome": "Improved system robustness."
-            }
+            "Improved system robustness."
           ]
         },
         {
@@ -338,13 +353,15 @@
             "Delivered the flow in two phases without deviating from the timeline."
           ],
           "technologies_used": [
-            "Embedded firmware"
+            "Embedded firmware",
+            "C/C++",
+            "Jenkins",
+            "Perforce",
+            "Jira"
           ],
           "metrics": [],
           "outcomes": [
-            {
-              "outcome": "Strengthened the robustness of the overall solution."
-            }
+            "Strengthened the robustness of the overall solution."
           ],
           "confidentiality": "Client names are not disclosed and must remain abstracted as 'two major clients'."
         },
@@ -369,7 +386,10 @@
             "Firmware upgrade framework"
           ],
           "metrics": [],
-          "outcomes": []
+          "outcomes": [
+            "Optimized ML model delivery from users' phones to wearable and hearable devices: when model parameters changed, only the updated parameters were delivered instead of the entire model."
+          ],
+          "note": "This contribution was quite small compared to other improtant ones"
         },
         {
           "id": "work.qualcomm.genai-tooling",
@@ -387,7 +407,8 @@
           ],
           "technologies_used": [
             "Generative AI / LLM tooling",
-            "Log analysis automation"
+            "Log analysis automation",
+            "LangChain"
           ],
           "metrics": [
             {
@@ -399,7 +420,9 @@
               "note": "Reduction confirmed, but not quantified."
             }
           ],
-          "outcomes": []
+          "outcomes": [
+            "Root-cause analysis of bugs, which had required manual static analysis of the embedded C code, largely no longer needed that step once the tooling was introduced."
+          ]
         },
         {
           "id": "work.qualcomm.developer-guides",
@@ -419,9 +442,8 @@
           ],
           "metrics": [],
           "outcomes": [
-            {
-              "outcome": "Strengthened team practices."
-            }
+            "Strengthened team practices.",
+            "Used mainly to onboard new developers joining the team, helping them understand the existing work and build on it."
           ]
         }
       ]
@@ -485,15 +507,8 @@
           ],
           "metrics": [
             {
-              "name": "Processing time reduction from correcting the customer's tabular-pivot storage",
-              "value": 40,
-              "unit": "percent",
-              "qualifier": "up to",
-              "baseline": "Customer's original storage layout"
-            },
-            {
               "name": "JSON processing speed improvement",
-              "value": 25,
+              "value": 40,
               "unit": "percent",
               "baseline": "Pre-optimization processing on the same Intel hardware",
               "note": "Achieved using Tablesaw and SIMD instructions on the latest Intel chips at the time."
@@ -506,9 +521,7 @@
             }
           ],
           "outcomes": [
-            {
-              "outcome": "Improved the customer's efficiency in handling JSON data."
-            }
+            "Improved the customer's efficiency in handling JSON data."
           ]
         },
         {
@@ -587,7 +600,9 @@
             "Amazon S3",
             "Terraform",
             "Ansible",
-            "Intel-Optimized libraries"
+            "Intel-Optimized libraries",
+            "R",
+            "PostgreSQL"
           ],
           "metrics": [
             {
@@ -598,9 +613,7 @@
             }
           ],
           "outcomes": [
-            {
-              "outcome": "Pipeline delivered successfully despite the integration difficulty."
-            }
+            "Pipeline delivered successfully despite the integration difficulty."
           ]
         },
         {
@@ -620,13 +633,13 @@
             "NumPy",
             "scikit-learn",
             "Docker",
-            "Intel chipsets"
+            "Intel chipsets",
+            "Python"
           ],
           "metrics": [],
           "outcomes": [
-            {
-              "outcome": "Streamlined the benchmarking process and ensured consistent performance tracking across projects."
-            }
+            "Streamlined the benchmarking process and ensured consistent performance tracking across projects.",
+            "Used to evaluate ML frameworks on Intel chips optimized for specific GPU-oriented tasks, testing them consistently in a neutral containerized environment."
           ]
         }
       ]
@@ -646,7 +659,6 @@
       ],
       "startDate": "2022-01",
       "endDate": "2022-06",
-      "note": "Note: ../Resume/src/experience.tex (relative to the repository root) files this work under Aug 2022 - Jan 2023, which are Intel's dates. That file is stale on this point. Exploratory engagement with no dedicated product line and no reporting manager.",
       "projects": [
         {
           "id": "work.epsilon.store-benchmarking",
@@ -657,7 +669,9 @@
             "end": "2022-06"
           },
           "situation": "Large-scale data retrieval and analytics workloads needed to be evaluated across candidate storage and query architectures.",
-          "constraints": [],
+          "constraints": [
+            "HDFS suits write-once, read-many workloads and offers no random access; HBase adds random read/write access over HDFS but has no SQL support or query optimizer"
+          ],
           "actions": [
             "Benchmarked HBase, Apache Phoenix and Solr for large-scale data retrieval and analytics.",
             "Evaluated filtering, aggregation and multi-condition queries across varying dataset sizes.",
@@ -669,7 +683,10 @@
             "Apache Solr"
           ],
           "metrics": [],
-          "outcomes": []
+          "outcomes": [
+            "Showed that layering a query engine over HBase improved query performance: both Phoenix on HBase and Solr on HBase were faster than plain HBase.",
+            "Found Solr on HBase to be faster than Phoenix on HBase."
+          ]
         },
         {
           "id": "work.epsilon.query-optimization",
@@ -700,7 +717,10 @@
               "derived_reduction_percent": 98.1
             }
           ],
-          "outcomes": []
+          "outcomes": [
+            "Met the project goal of measuring how indexing, query restructuring and selective column retrieval affect query performance."
+          ],
+          "note": "The representative query was a test case for this analysis and had no significance beyond it. Do not present it as a production workload."
         },
         {
           "id": "work.epsilon.distributed-environment",
@@ -725,7 +745,9 @@
             "Docker"
           ],
           "metrics": [],
-          "outcomes": []
+          "outcomes": [
+            "Served as the test environment for the HBase, Phoenix and Solr benchmarking; its findings are recorded under work.epsilon.store-benchmarking."
+          ]
         }
       ]
     }
@@ -772,7 +794,8 @@
         "Used ROC curve analysis to narrow the four candidate models down to the Random Forest classifier.",
         "Optimized the Random Forest classifier to identify critical genes linked to NSCLC.",
         "Handled data cleaning, key-parameter identification and interpretation accuracy for the ML portion.",
-        "Produced presentations with visual aids so the wider team could follow the complex portions of the work, and contributed written sections to the research paper."
+        "Produced presentations with visual aids so the wider team could follow the complex portions of the work",
+        "Contributed written sections to the research paper"
       ],
       "technologies_used": [
         "Random Forest",
@@ -783,7 +806,10 @@
         "ROC / AUC analysis",
         "Transcriptomic data",
         "Differential gene expression analysis",
-        "Pathway analysis"
+        "Pathway analysis",
+        "Python",
+        "GAN",
+        "VAE"
       ],
       "metrics": [
         {
@@ -805,15 +831,9 @@
         }
       ],
       "outcomes": [
-        {
-          "outcome": "Published in Cancer Informatics, a peer-reviewed journal."
-        },
-        {
-          "outcome": "The team presented the paper at a conference and received a Best Presentation award; a judge commended the clarity and graph/diagram support of his explanation."
-        },
-        {
-          "outcome": "Results advance the classification of biomarkers for NSCLC and small-cell lung cancer, with potential applications in drug discovery."
-        }
+        "Published in Cancer Informatics, a peer-reviewed journal.",
+        "The team presented the paper at a conference and received a Best Presentation award; a judge commended the clarity and graph/diagram support of his explanation.",
+        "Results advance the classification of biomarkers for NSCLC and small-cell lung cancer, with potential applications in drug discovery."
       ],
       "artifacts": [
         {
@@ -865,7 +885,13 @@
         "Object detection",
         "Table structure extraction",
         "Transfer learning / fine-tuning",
-        "Computer vision"
+        "Computer vision",
+        "Python",
+        "TensorFlow",
+        "PyTorch",
+        "Keras",
+        "spaCy",
+        "CNN"
       ],
       "metrics": [
         {
@@ -881,21 +907,15 @@
         }
       ],
       "outcomes": [
-        {
-          "outcome": "Presented at the International Conference of Artificial Intelligence and Computing (ICAIC) 2025."
-        },
-        {
-          "outcome": "Unlike existing approaches, the method integrates table data extraction and object detection while adapting to different document types."
-        },
-        {
-          "outcome": "Automates business document digitization."
-        }
+        "Presented at the International Conference of Artificial Intelligence and Computing (ICAIC) 2025.",
+        "Unlike existing approaches, the method integrates table data extraction and object detection while adapting to different document types.",
+        "Automates business document digitization."
       ],
       "stated_future_direction": "Extending the approach to unstructured and multi-page documents.",
       "artifacts": [
         {
           "type": "publication",
-          "url": "https://rdcu.be/wZSePwoXqLVa",
+          "url": "https://doi.org/10.1007/978-981-95-7238-0_36",
           "publication_ref": "pub.icaic-2025"
         }
       ]
@@ -937,15 +957,10 @@
         "Causal inference",
         "Vectorization",
         "Matrix reformulation",
-        "Synthetic data generation"
+        "Synthetic data generation",
+        "R"
       ],
       "metrics": [
-        {
-          "name": "Runtime reduction",
-          "value": 50,
-          "unit": "percent",
-          "baseline": "Unoptimized RCoT implementation, measured on synthetic data"
-        },
         {
           "name": "Speed advantage over ProbSpace",
           "value": 50,
@@ -955,17 +970,13 @@
         }
       ],
       "outcomes": [
-        {
-          "outcome": "Published in the Journal of Advances in Information Technology (JAIT)."
-        },
-        {
-          "outcome": "Enabled the method to scale to high-dimensional biological datasets for enhanced real-time causal inference."
-        }
+        "Published in the Journal of Advances in Information Technology (JAIT).",
+        "Enabled the method to scale to high-dimensional biological datasets for enhanced real-time causal inference."
       ],
       "artifacts": [
         {
           "type": "publication",
-          "url": "http://www.jait.us/shw-229-1347-1.html",
+          "url": "https://doi.org/10.12720/jait.14.3.495-500",
           "publication_ref": "pub.jait"
         }
       ]
@@ -1029,70 +1040,9 @@
         }
       ],
       "outcomes": [
-        {
-          "outcome": "The team won the Excellence Award among 17 other competing worklets.",
-          "award_ref": "award.samsung-excellence"
-        }
+        "The team won the Excellence Award among 17 other competing worklets."
       ],
       "artifacts": []
-    },
-    {
-      "id": "proj.diet-ramanagara",
-      "title": "Educational technology for understaffed rural schools: AR-driven website and RAG-based lesson generation",
-      "engagement_type": "Curriculum volunteering / social impact",
-      "organization": "District Institute of Education and Training (DIET), Ramanagara",
-      "role": "Member of an eight-member interdisciplinary student team; led team that built the AR-driven educational website.",
-      "period": {
-        "start": null,
-        "end": null,
-        "duration_stated": "Six months, including three months of stakeholder coordination",
-        "note": "Dates intentionally not tracked - the candidate orders projects by relevance to the target role rather than chronologically, and omits project dates to save space.",
-        "academic_stage": "Third year of undergraduate study"
-      },
-      "situation": "Support understaffed rural schools in southern Karnataka in their teaching efforts, as part of an undergraduate diversity-and-inclusion curriculum requirement.",
-      "constraints": [
-        "Resource-constrained schools with diverse needs",
-        "Primary-school teachers needed the tooling to be intuitive",
-        "Content had to align with the existing curriculum"
-      ],
-      "actions": [
-        "Held regular meetings with rural teachers, district education coordinators and university faculty over three months of coordination.",
-        "Contributed to producing animated content for science, social studies and mathematics, created by students from different departments.",
-        "Built software that lets primary-school teachers generate story-based educational content from simple prompts.",
-        "Integrated existing animated content and syllabus data with an LLM using retrieval-augmented generation, so teachers could generate curriculum-aligned lessons from a topic and a brief description.",
-        "Led a team from the college coding club to develop an augmented-reality-driven educational website providing engaging educational tools for underprivileged children.",
-        "Conducted workshops so that teachers could use the tooling effectively."
-      ],
-      "technologies_used": [
-        "Large language models",
-        "Retrieval-augmented generation (RAG)",
-        "Educational content generation",
-        "Augmented reality",
-        "Web development"
-      ],
-      "metrics": [
-        {
-          "name": "Teachers who integrated the software into their courses",
-          "value": 1000,
-          "unit": "count",
-          "qualifier": "over"
-        },
-        {
-          "name": "Schools reached",
-          "value": 270,
-          "unit": "count",
-          "qualifier": "over",
-          "region": "Southern Karnataka"
-        }
-      ],
-      "outcomes": [
-        {
-          "outcome": "Early-adopter teachers reported shorter preparation times and increased classroom participation.",
-          "note": "Self-reported qualitative feedback, not measured."
-        }
-      ],
-      "artifacts": [],
-      "merge_note": "The AR-driven educational website and the teacher-facing content-generation software were parts of the same DIET Ramanagara engagement, previously recorded as two separate projects."
     },
     {
       "id": "proj.blockchain-misinformation",
@@ -1121,7 +1071,11 @@
         "Natural language processing",
         "Prompt-based paraphrasing / data augmentation",
         "Blockchain",
-        "Decentralized application (DApp)"
+        "Decentralized application (DApp)",
+        "BERT",
+        "MongoDB",
+        "ReactJS",
+        "NodeJS"
       ],
       "metrics": [
         {
@@ -1132,52 +1086,8 @@
         }
       ],
       "outcomes": [
-        {
-          "outcome": "Won two national hackathons.",
-          "award_ref": "award.hackathons",
-          "note": "Hackathon names are not recorded; the prior resume referenced a 'Certificates' link with no URL."
-        },
-        {
-          "outcome": "Surfaced the influence of bias and noise on AI systems, which motivated his interest in interpretable ML."
-        }
-      ],
-      "artifacts": []
-    },
-    {
-      "id": "proj.redis-sqlite-cache",
-      "title": "Durable client-server cache using Redis with SQLite",
-      "engagement_type": "Coursework (experiential learning)",
-      "organization": "RV College of Engineering - Database Design course",
-      "role": "Individual contributor",
-      "advisors": [
-        {
-          "name": "Dr. Shobha G",
-          "title": "Professor and Dean, School of Computer Science and Engineering, RV University",
-          "relationship": "Course instructor"
-        }
-      ],
-      "period": {
-        "start": null,
-        "end": null,
-        "note": "Dates intentionally not tracked - the candidate orders projects by relevance to the target role rather than chronologically, and omits project dates to save space."
-      },
-      "situation": "Cache data between a server and a client needed to be stored reliably; Redis alone keeps data in RAM and therefore does not provide durability.",
-      "constraints": [
-        "Durability had to be added without compromising Redis's fast read and write speeds"
-      ],
-      "actions": [
-        "Developed a method to store cache data between server and client by combining Redis with SQLite."
-      ],
-      "technologies_used": [
-        "Redis",
-        "SQLite",
-        "Caching"
-      ],
-      "metrics": [],
-      "outcomes": [
-        {
-          "outcome": "Achieved reliable data storage while preserving Redis's read and write performance."
-        }
+        "Won two national hackathons.",
+        "Surfaced the influence of bias and noise on AI systems, which motivated his interest in interpretable ML."
       ],
       "artifacts": []
     }
@@ -1289,20 +1199,6 @@
       "project_ref": "proj.nsclc-biomarkers",
       "confidence": "needs_input",
       "gap": "Conference name and date are not recorded."
-    },
-    {
-      "id": "award.cohort-standing",
-      "title": "Top 10% of cohort",
-      "awarder": "RV College of Engineering",
-      "date": null,
-      "context": "Academic standing across the Computer Science and Engineering undergraduate cohort."
-    },
-    {
-      "id": "award.qualcomm-promotion",
-      "title": "Promotion from Associate Engineer to Software Engineer",
-      "awarder": "Qualcomm India Private Limited",
-      "date": "2025-01",
-      "context": "Followed the independently delivered SoC upgrade work and contributions across multiple assignments."
     }
   ],
   "affiliations": [
@@ -1311,7 +1207,9 @@
       "organization": "Dhruva, the astrophysics club of RV College of Engineering",
       "role": "Lead, data-driven astronomy research division",
       "startDate": "2021-08",
-      "endDate": "2022-08"
+      "endDate": "2022-08",
+      "outcomes": [],
+      "note": "No specific outputs (projects, research, events) are recorded for this role. Low priority: include only rarely, when space allows and leadership experience is relevant."
     }
   ],
   "collaborating_organizations": {
@@ -1363,30 +1261,27 @@
         "name": "SQL",
         "status": "evidenced",
         "evidence_refs": [
-          "work.epsilon.query-optimization",
-          "proj.redis-sqlite-cache"
+          "work.epsilon.query-optimization"
         ]
       },
       {
         "name": "C/C++",
-        "status": "listed_only",
-        "evidence_refs": [],
-        "note": "Plausibly used in the Qualcomm firmware work, but not recorded anywhere."
-      },
-      {
-        "name": "Dart",
-        "status": "listed_only",
-        "evidence_refs": []
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.qualcomm.soc-upgrade",
+          "work.qualcomm.bug-triage",
+          "work.qualcomm.data-relay",
+          "work.qualcomm.dfu-refactor",
+          "work.qualcomm.multi-client-upgrade"
+        ]
       },
       {
         "name": "R",
-        "status": "listed_only",
-        "evidence_refs": []
-      },
-      {
-        "name": "Rust",
-        "status": "listed_only",
-        "evidence_refs": []
+        "status": "evidenced",
+        "evidence_refs": [
+          "proj.rcot-hpcc",
+          "work.intel.etl-pipeline"
+        ]
       }
     ],
     "machine_learning": [
@@ -1498,59 +1393,66 @@
       },
       {
         "name": "TensorFlow",
-        "status": "listed_only",
-        "evidence_refs": []
+        "status": "evidenced",
+        "evidence_refs": [
+          "proj.document-extraction"
+        ]
       },
       {
         "name": "PyTorch",
-        "status": "listed_only",
-        "evidence_refs": []
+        "status": "evidenced",
+        "evidence_refs": [
+          "proj.document-extraction"
+        ]
       },
       {
         "name": "Keras",
-        "status": "listed_only",
-        "evidence_refs": []
+        "status": "evidenced",
+        "evidence_refs": [
+          "proj.document-extraction"
+        ]
       },
       {
         "name": "spaCy",
-        "status": "listed_only",
-        "evidence_refs": []
+        "status": "evidenced",
+        "evidence_refs": [
+          "proj.document-extraction"
+        ]
       },
       {
         "name": "LangChain",
-        "status": "listed_only",
-        "evidence_refs": [],
-        "note": "RAG work is evidenced at proj.diet-ramanagara, but the framework used is not recorded."
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.qualcomm.genai-tooling"
+        ]
       },
       {
         "name": "CNN",
-        "status": "listed_only",
-        "evidence_refs": []
-      },
-      {
-        "name": "RNN",
-        "status": "listed_only",
-        "evidence_refs": []
-      },
-      {
-        "name": "LSTM",
-        "status": "listed_only",
-        "evidence_refs": []
+        "status": "evidenced",
+        "evidence_refs": [
+          "proj.document-extraction"
+        ]
       },
       {
         "name": "BERT",
-        "status": "listed_only",
-        "evidence_refs": []
+        "status": "evidenced",
+        "evidence_refs": [
+          "proj.blockchain-misinformation"
+        ]
       },
       {
         "name": "GAN",
-        "status": "listed_only",
-        "evidence_refs": []
+        "status": "evidenced",
+        "evidence_refs": [
+          "proj.nsclc-biomarkers"
+        ]
       },
       {
         "name": "VAE",
-        "status": "listed_only",
-        "evidence_refs": []
+        "status": "evidenced",
+        "evidence_refs": [
+          "proj.nsclc-biomarkers"
+        ]
       }
     ],
     "data_and_distributed_systems": [
@@ -1651,13 +1553,17 @@
       },
       {
         "name": "PostgreSQL",
-        "status": "listed_only",
-        "evidence_refs": []
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.intel.etl-pipeline"
+        ]
       },
       {
         "name": "MongoDB",
-        "status": "listed_only",
-        "evidence_refs": []
+        "status": "evidenced",
+        "evidence_refs": [
+          "proj.blockchain-misinformation"
+        ]
       }
     ],
     "cloud_and_infrastructure": [
@@ -1699,16 +1605,11 @@
       },
       {
         "name": "AWS",
-        "status": "listed_only",
+        "status": "evidenced",
         "evidence_refs": [
           "work.intel.etl-pipeline"
         ],
-        "note": "Only S3 usage is evidenced."
-      },
-      {
-        "name": "GCP",
-        "status": "listed_only",
-        "evidence_refs": []
+        "note": "Used in work.intel.etl-pipeline; only Amazon S3 is named. Other AWS services are not recorded."
       }
     ],
     "systems_and_embedded": [
@@ -1738,21 +1639,21 @@
         "name": "Transport protocols",
         "status": "evidenced",
         "evidence_refs": [
-          "work.qualcomm"
+          "work.qualcomm.data-relay"
         ]
       },
       {
         "name": "Memory layout constraints",
         "status": "evidenced",
         "evidence_refs": [
-          "work.qualcomm"
+          "work.qualcomm.data-relay"
         ]
       },
       {
         "name": "Bootloader concepts",
         "status": "evidenced",
         "evidence_refs": [
-          "work.qualcomm"
+          "work.qualcomm.data-relay"
         ]
       },
       {
@@ -1809,40 +1710,73 @@
       },
       {
         "name": "ReactJS",
-        "status": "listed_only",
-        "evidence_refs": []
+        "status": "evidenced",
+        "evidence_refs": [
+          "proj.blockchain-misinformation"
+        ]
       },
       {
         "name": "NodeJS",
-        "status": "listed_only",
-        "evidence_refs": []
+        "status": "evidenced",
+        "evidence_refs": [
+          "proj.blockchain-misinformation"
+        ]
       }
     ],
     "tooling": [
       {
         "name": "Jira",
-        "status": "listed_only",
-        "evidence_refs": []
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.qualcomm.soc-upgrade",
+          "work.qualcomm.bug-triage",
+          "work.qualcomm.data-relay",
+          "work.qualcomm.dfu-refactor",
+          "work.qualcomm.multi-client-upgrade"
+        ]
       },
       {
         "name": "Git / GitHub",
-        "status": "listed_only",
-        "evidence_refs": []
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.qualcomm",
+          "work.intel",
+          "work.epsilon",
+          "proj.nsclc-biomarkers",
+          "proj.document-extraction",
+          "proj.rcot-hpcc",
+          "proj.samsung-instant-apps",
+          "proj.blockchain-misinformation"
+        ],
+        "note": "Candidate-confirmed as used across all engagements."
       },
       {
         "name": "Jenkins",
-        "status": "listed_only",
-        "evidence_refs": []
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.qualcomm.soc-upgrade",
+          "work.qualcomm.bug-triage",
+          "work.qualcomm.data-relay",
+          "work.qualcomm.dfu-refactor",
+          "work.qualcomm.multi-client-upgrade"
+        ]
       },
       {
         "name": "Perforce",
-        "status": "listed_only",
-        "evidence_refs": []
+        "status": "evidenced",
+        "evidence_refs": [
+          "work.qualcomm.soc-upgrade",
+          "work.qualcomm.bug-triage",
+          "work.qualcomm.data-relay",
+          "work.qualcomm.dfu-refactor",
+          "work.qualcomm.multi-client-upgrade"
+        ]
       },
       {
         "name": "Shell scripting",
         "status": "listed_only",
-        "evidence_refs": []
+        "evidence_refs": [],
+        "note": "Self-taught; not tied to any engagement recorded here."
       }
     ],
     "domains": [
@@ -1979,7 +1913,7 @@
     ],
     "needs_input_worksheet": "data/NEEDS_INPUT.md - the same questions with answer blocks to fill in. Answers there get merged back into this file and the resolved entries removed from needs_input.",
     "maintenance": {
-      "how_to_extend": "Add a new engagement as an object under work[].projects[] (if it happened at an employer) or under projects[] (if it did not), using the same field shape. Give it a stable `id` and reference it from any relevant skills[].evidence_refs entry. Store project actions[], employer working_practices[], and basics.stated_interests.items[] as arrays of strings.",
+      "how_to_extend": "Add a new engagement as an object under work[].projects[] (if it happened at an employer) or under projects[] (if it did not), using the same field shape. Give it a stable `id` and reference it from any relevant skills[].evidence_refs entry. Store project actions[], employer working_practices[], and basics.stated_interests.items[] as arrays of strings. Store text-only project outcomes[] entries as strings; retain an object when an outcome carries additional metadata such as award_ref.",
       "invariant": "Every metric, date and named entity in this file must be something the candidate has confirmed, or be null with a matching metadata.needs_input entry. Nothing is inferred."
     },
     "presentation_preferences": {

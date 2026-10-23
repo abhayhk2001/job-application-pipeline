@@ -43,8 +43,11 @@ of strings:
 - `basics.stated_interests.items[]`
 
 For example, use `"actions": ["Implemented the upgrade solution."]`. Keep these lists as strings
-when adding entries. Outcomes and coursework retain their existing structures, including objects
-with notes or award references.
+when adding entries.
+
+Project `outcomes[]` entries containing only outcome text are also strings. Keep an outcome object
+when it carries additional metadata, such as `award_ref` or a note. Coursework retains its existing
+object structure, including course names and notes.
 
 ## Confidence and evidence
 
