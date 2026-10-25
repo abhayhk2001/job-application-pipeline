@@ -46,7 +46,7 @@
       "note": "Length variants only. These are deliberately role-neutral; pick by available space, not by target role.",
       "one_line": "Software engineer and published researcher whose work spans embedded firmware, distributed data systems and applied machine learning; incoming MS in Computer Science at the University of Illinois Urbana-Champaign.",
       "short": "Software engineer at Qualcomm India (January 2023 - July 2026) on the Device Firmware Update team, with prior software engineering internships at Intel Solutions & Services India and Epsilon. Three peer-reviewed publications across computational biology, causal inference and document AI. B.E. in Computer Science from RV College of Engineering (GPA 9.22); incoming Masters in CS at UIUC, August 2026.",
-      "long": "Abhay Harish Kashyap is a software engineer whose experience covers three distinct layers of the stack. At Qualcomm India he worked on the Device Firmware Update team from January 2023 to July 2026, joining as an Associate Engineer and being promoted to Software Engineer, where he owned SoC upgrade solutions, a data-relay mechanism, a core DFU refactor delivered across two major client releases, and the upgrade framework used to deploy embedded ML models to hearable devices. At Intel Solutions & Services India he worked in Customer Engineering on EV-telemetry JSON processing, cryptographic acceleration for a national stock exchange, and a Spark/Kubernetes/Kafka ETL pipeline. At Epsilon he benchmarked and optimized HBase, Apache Phoenix and Solr for large-scale retrieval. In parallel he led and published research: biomarker prediction for non-small cell lung cancer (Cancer Informatics), conditional independence testing on HPCC Systems with LexisNexis (JAIT), and deep-learning business-document recognition and table extraction (ICAIC 2025). He also led a Samsung Research Institute Bengaluru collaboration on instant-app technology that won an Excellence Award, and co-built retrieval-augmented educational tooling now used by over 1,000 teachers across 270+ schools in southern Karnataka."
+      "long": "Abhay Harish Kashyap is a software engineer whose experience covers three distinct layers of the stack. At Qualcomm India he worked on the Device Firmware Update team from January 2023 to July 2026, joining as an Associate Engineer and being promoted to Software Engineer, where he owned SoC upgrade solutions, a data-relay mechanism, a core DFU refactor delivered across two major client releases, and the upgrade framework used to deploy embedded ML models to hearable devices. At Intel Solutions & Services India he worked in Customer Engineering on EV-telemetry JSON processing, cryptographic acceleration for a national stock exchange, and a Spark/Kubernetes/Kafka ETL pipeline. At Epsilon he benchmarked and optimized HBase, Apache Phoenix and Solr for large-scale retrieval. In parallel he led and published research: biomarker prediction for non-small cell lung cancer (Cancer Informatics), conditional independence testing on HPCC Systems with LexisNexis (JAIT), and deep-learning business-document recognition and table extraction (ICAIC 2025). He also led a Samsung Research Institute Bengaluru collaboration on instant-app technology that won an Excellence Award."
     },
     "stated_interests": {
       "note": "Self-described direction. Aspirations, not accomplishments. Do not present as experience.",
@@ -110,7 +110,7 @@
         },
         {
           "name": "Database Design",
-          "note": "Taught by Dr. Shobha G; ranked among the top of the class. Experiential-learning component is recorded as proj.redis-sqlite-cache."
+          "note": "Taught by Dr. Shobha G; ranked among the top of the class."
         },
         {
           "name": "Big Data Analytics using Distributed Platforms",
@@ -203,7 +203,11 @@
             "Perforce",
             "Jira"
           ],
-          "metrics": [{"note": "No quantified metric"}],
+          "metrics": [
+            {
+              "note": "No quantified metric"
+            }
+          ],
           "outcomes": [
             "Contributed to promotion from Associate Engineer to Software Engineer.",
             "Played an important role in stabilizing the team's upgrade process."
@@ -1220,8 +1224,7 @@
       "Epsilon",
       "SCII",
       "Intel",
-      "Qualcomm",
-      "District Institute of Education and Training (DIET), Ramanagara"
+      "Qualcomm"
     ],
     "notes": {
       "SCII": "Funded and oversaw the business-document recognition and table-extraction project (proj.document-extraction)."
@@ -1333,13 +1336,6 @@
         "status": "evidenced",
         "evidence_refs": [
           "proj.document-extraction"
-        ]
-      },
-      {
-        "name": "Retrieval-augmented generation (RAG)",
-        "status": "evidenced",
-        "evidence_refs": [
-          "proj.diet-ramanagara"
         ]
       },
       {
@@ -1538,20 +1534,6 @@
     ],
     "databases": [
       {
-        "name": "Redis",
-        "status": "evidenced",
-        "evidence_refs": [
-          "proj.redis-sqlite-cache"
-        ]
-      },
-      {
-        "name": "SQLite",
-        "status": "evidenced",
-        "evidence_refs": [
-          "proj.redis-sqlite-cache"
-        ]
-      },
-      {
         "name": "PostgreSQL",
         "status": "evidenced",
         "evidence_refs": [
@@ -1695,13 +1677,6 @@
         ]
       },
       {
-        "name": "Augmented reality",
-        "status": "evidenced",
-        "evidence_refs": [
-          "proj.diet-ramanagara"
-        ]
-      },
-      {
         "name": "Blockchain / DApp development",
         "status": "evidenced",
         "evidence_refs": [
@@ -1812,12 +1787,6 @@
         ]
       },
       {
-        "name": "Education technology",
-        "evidence_refs": [
-          "proj.diet-ramanagara"
-        ]
-      },
-      {
         "name": "Cryptographic acceleration",
         "evidence_refs": [
           "work.intel.crypto-acceleration"
@@ -1830,7 +1799,6 @@
         "evidence_refs": [
           "proj.samsung-instant-apps",
           "proj.document-extraction",
-          "proj.diet-ramanagara",
           "proj.nsclc-biomarkers"
         ]
       },
@@ -1872,8 +1840,7 @@
       {
         "name": "Interdisciplinary research collaboration",
         "evidence_refs": [
-          "proj.nsclc-biomarkers",
-          "proj.diet-ramanagara"
+          "proj.nsclc-biomarkers"
         ]
       }
     ]
