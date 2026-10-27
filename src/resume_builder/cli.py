@@ -1,4 +1,4 @@
-"""Command-line entry point: ``resume-render``.
+"""Command-line entry points: ``resume-render`` and ``resume-builder``.
 
 Exit codes are the feedback signal for an automated caller:
 
@@ -9,26 +9,51 @@ Exit codes are the feedback signal for an automated caller:
       unknown --template (stderr then names the valid ones)
 3     the resume JSON is invalid (one line per problem on stderr)
 ====  ==========================================================
+
+Two commands share that contract:
+
+``resume-render``
+    The general one. It renders to whatever ``--out`` says -- a ``.tex``
+    suffix stops at the TeX source, anything else goes on to Tectonic --
+    or validates and writes nothing with ``--validate-only``.
+
+``resume-builder``
+    The one-shot one. It takes an input and nothing else, and writes the
+    PDF next to the input under the input's own name: ``r.json`` becomes
+    ``r.pdf`` in the same directory. The intermediate ``.tex`` and the
+    LaTeX log go to a temporary directory that is removed afterwards, so
+    the PDF is the only file left behind.
 """
 
 from __future__ import annotations
 
 import argparse
 import json
+import os
 import sys
+import tempfile
 from pathlib import Path
 
 from . import templates_registry
-from .api import build_resume
+from .api import BuildResult, build_resume
 from .exceptions import TemplateNotFound, ValidationError
 from .validation import validate
 
-__all__ = ["main", "build_parser"]
+__all__ = [
+    "main",
+    "main_builder",
+    "build_parser",
+    "build_builder_parser",
+]
 
 EXIT_OK = 0
 EXIT_FAILED = 1
 EXIT_BAD_INPUT = 2
 EXIT_INVALID = 3
+
+
+class _InputError(Exception):
+    """Something is wrong with the caller's input file: exit code 2."""
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -90,6 +115,50 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
+def build_builder_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="resume-builder",
+        description="Render a render-ready resume JSON to a PDF beside it: the "
+        "output is <input dir>/<input name>.pdf. The input is the only thing "
+        "you have to give.",
+    )
+    parser.add_argument(
+        "--input",
+        "-i",
+        type=Path,
+        required=True,
+        help="Path to the render-ready resume JSON file. The PDF is written "
+        "next to it, under the same name with a .pdf suffix.",
+    )
+    parser.add_argument(
+        "--template",
+        "-t",
+        help="Name of the template to render with. Overrides the resume JSON's "
+        "own 'template' key. See 'resume-render --list-templates'.",
+    )
+    parser.add_argument(
+        "--templates-dir",
+        type=Path,
+        default=None,
+        help="An extra directory of templates, searched before the project's "
+        "templates/ and the built-in ones.",
+    )
+    parser.add_argument(
+        "--workdir",
+        type=Path,
+        default=None,
+        help="Where the intermediate .tex and the LaTeX log live. Default: a "
+        "temporary directory, removed afterwards, leaving only the PDF.",
+    )
+    parser.add_argument(
+        "--json",
+        dest="as_json",
+        action="store_true",
+        help="Emit machine-readable JSON instead of human-readable lines.",
+    )
+    return parser
+
+
 def _report(problems, as_json: bool) -> None:
     if as_json:
         payload = {
@@ -123,6 +192,67 @@ def _list_templates(templates_dir, as_json: bool) -> int:
     return EXIT_OK
 
 
+def _read_input(path: Path) -> Path:
+    """Normalise the input path and check that it is a readable file."""
+    resolved = Path(os.path.abspath(path.expanduser()))
+    if not resolved.exists():
+        raise _InputError(f"input file not found: {path}")
+    if not resolved.is_file():
+        raise _InputError(f"input is not a file: {path}")
+    return resolved
+
+
+def _load_resume(path: Path) -> dict:
+    """Read and parse the resume JSON."""
+    try:
+        return json.loads(path.read_text())
+    except json.JSONDecodeError as e:
+        raise _InputError(f"input is not valid JSON: {e}") from e
+
+
+def _output_path(input_path: Path) -> Path:
+    """The PDF path for an input: same directory, same name, .pdf suffix.
+
+    ``r.json`` -> ``r.pdf`` beside it; ``my.resume.json`` -> ``my.resume.pdf``.
+    """
+    out = input_path.with_suffix(".pdf")
+    if out == input_path:
+        raise _InputError(f"input and output would be the same file: {input_path}")
+    return out
+
+
+def _build(
+    resume,
+    workdir: Path,
+    *,
+    tex_only: bool,
+    template: str | None,
+    templates_dir: Path | None,
+    as_json: bool,
+    stem: str = "resume",
+) -> tuple[BuildResult | None, int]:
+    """Run the build, mapping every failure onto the exit-code contract."""
+    try:
+        result = build_resume(
+            resume,
+            workdir,
+            tex_only=tex_only,
+            stem=stem,
+            template=template,
+            templates_dir=templates_dir,
+        )
+    except ValidationError as e:
+        _report(e.problems, as_json)
+        return None, EXIT_INVALID
+    except TemplateNotFound as e:
+        print(f"error: {e}", file=sys.stderr)
+        return None, EXIT_BAD_INPUT
+    except Exception as e:  # noqa: BLE001
+        print(f"error: {e}", file=sys.stderr)
+        return None, EXIT_FAILED
+    return result, EXIT_OK
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
@@ -133,14 +263,10 @@ def main(argv: list[str] | None = None) -> int:
     if args.input is None:
         parser.error("--input is required unless --list-templates is given")
 
-    if not args.input.exists():
-        print(f"error: input file not found: {args.input}", file=sys.stderr)
-        return EXIT_BAD_INPUT
-
     try:
-        resume = json.loads(args.input.read_text())
-    except json.JSONDecodeError as e:
-        print(f"error: input is not valid JSON: {e}", file=sys.stderr)
+        resume = _load_resume(_read_input(args.input))
+    except _InputError as e:
+        print(f"error: {e}", file=sys.stderr)
         return EXIT_BAD_INPUT
 
     if args.validate_only:
@@ -158,23 +284,16 @@ def main(argv: list[str] | None = None) -> int:
     tex_only = out.suffix == ".tex"
     workdir = args.workdir or out.parent
 
-    try:
-        result = build_resume(
-            resume,
-            workdir,
-            tex_only=tex_only,
-            template=args.template,
-            templates_dir=args.templates_dir,
-        )
-    except ValidationError as e:
-        _report(e.problems, args.as_json)
-        return EXIT_INVALID
-    except TemplateNotFound as e:
-        print(f"error: {e}", file=sys.stderr)
-        return EXIT_BAD_INPUT
-    except Exception as e:  # noqa: BLE001
-        print(f"error: {e}", file=sys.stderr)
-        return EXIT_FAILED
+    result, code = _build(
+        resume,
+        workdir,
+        tex_only=tex_only,
+        template=args.template,
+        templates_dir=args.templates_dir,
+        as_json=args.as_json,
+    )
+    if result is None:
+        return code
 
     produced = result.tex_path if tex_only else result.pdf_path
     if produced is not None and produced != out:
@@ -188,6 +307,60 @@ def main(argv: list[str] | None = None) -> int:
                     "ok": True,
                     "tex_path": str(result.tex_path),
                     "pdf_path": str(result.pdf_path) if result.pdf_path else None,
+                    "out": str(out),
+                    "template": result.template,
+                    "warnings": list(result.warnings),
+                },
+                indent=2,
+            )
+        )
+    else:
+        print(f"wrote {out} (template: {result.template})")
+    return EXIT_OK
+
+
+def main_builder(argv: list[str] | None = None) -> int:
+    """``resume-builder``: the input is all you give, the PDF lands beside it."""
+    parser = build_builder_parser()
+    args = parser.parse_args(argv)
+
+    try:
+        input_path = _read_input(args.input)
+        resume = _load_resume(input_path)
+        out = _output_path(input_path)
+    except _InputError as e:
+        print(f"error: {e}", file=sys.stderr)
+        return EXIT_BAD_INPUT
+
+    # The .tex and the LaTeX log are build noise: they go to a temporary
+    # directory unless the caller asks for them explicitly, so the input's
+    # directory ends up holding the PDF and nothing else.
+    with tempfile.TemporaryDirectory(prefix="resume-builder-") as tmp:
+        workdir = args.workdir or Path(tmp)
+        result, code = _build(
+            resume,
+            workdir,
+            tex_only=False,
+            template=args.template,
+            templates_dir=args.templates_dir,
+            as_json=args.as_json,
+            stem=input_path.stem,
+        )
+        if result is None:
+            return code
+        pdf = result.pdf_path
+        if pdf is None:
+            print("error: no PDF was produced", file=sys.stderr)
+            return EXIT_FAILED
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_bytes(pdf.read_bytes())
+
+    if args.as_json:
+        print(
+            json.dumps(
+                {
+                    "ok": True,
+                    "pdf_path": str(out),
                     "out": str(out),
                     "template": result.template,
                     "warnings": list(result.warnings),

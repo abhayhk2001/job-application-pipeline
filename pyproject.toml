@@ -21,6 +21,7 @@ dev = [
 
 [project.scripts]
 resume-render = "resume_builder.cli:main"
+resume-builder = "resume_builder.cli:main_builder"
 
 [tool.setuptools.packages.find]
 where = ["src"]

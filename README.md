@@ -89,6 +89,19 @@ resume-render -i custom_resume.json -o build/resume.tex      # TeX only, no Tect
 resume-render -i custom_resume.json -o build/resume.pdf -t serif   # pick a template
 ```
 
+`resume-builder` is the one-shot command: the input is all you give, and the PDF lands beside it
+under the input's own name. `custom_resume.json` becomes `custom_resume.pdf` in the same directory.
+
+```bash
+resume-builder -i custom_resume.json            # -> custom_resume.pdf, next to the input
+resume-builder -i custom_resume.json --json     # machine-readable
+resume-builder -i custom_resume.json -t serif   # pick a template
+resume-builder -i custom_resume.json --workdir build/   # keep the .tex and the LaTeX log
+```
+
+The intermediate `.tex` and the LaTeX log go to a temporary directory that is removed afterwards, so
+the only file `resume-builder` leaves next to the input is the PDF. Pass `--workdir` to keep them.
+
 Exit codes: `0` success, `1` render/compile failure, `2` missing or unparseable input or an unknown
 `--template`, `3` invalid resume JSON. On `3`, each problem prints as `path: message` with `path` a JSON Pointer — that is the
 feedback an LLM iterates against. See `docs/render-contract.md`.
@@ -149,6 +162,18 @@ reimplementing it:
 ```bash
 brew install tectonic             # one-time; the only external dep beyond Python
 pip install -e ".[dev]"           # editable install with pytest + ruff + pypdf
+```
+
+The editable install puts both commands on your `PATH` — `resume-render` and `resume-builder` — so
+they run from any directory, not just from this repo. The install points at this checkout, so moving
+or renaming the repo means reinstalling. If the console scripts are ever missing, the module
+invocation works too, as long as you use the interpreter the package is installed into
+(`python3.13` here):
+
+```bash
+python3.13 -m resume_builder render -i custom_resume.json -o build/resume.pdf   # == resume-render
+python3.13 -m resume_builder build  -i custom_resume.json                       # == resume-builder
+python3.13 -m resume_builder -i custom_resume.json -o build/resume.pdf           # render by default
 ```
 
 The LaTeX target lives in the sibling `../Resume/` project — its static `.tex` sources served as
