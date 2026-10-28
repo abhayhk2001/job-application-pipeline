@@ -159,6 +159,10 @@ Links are markdown: `[Paper Link](https://rdcu.be/wZSePwoXqLVa)` renders as an u
 hyperlink reading *Paper Link*. A bare URL also works and renders as its own label, but a label reads
 better and costs less width. An empty target (`[Paper Link]()`) is a validation error.
 
+`**bold**` renders as bold text: `**Kashyap, A.H.** et al. [Paper](https://doi.org/…)` bolds the
+author and links the paper. A bold span may wrap a link and a link label may contain bold; a lone or
+unclosed `**` is left as literal text.
+
 Do not write LaTeX. `%`, `&`, `$`, `#`, `_`, `{`, `}` are escaped for you, and URLs are escaped by
 different rules than prose, so hand-escaping actively breaks things.
 

@@ -96,11 +96,22 @@ under the input's own name. `custom_resume.json` becomes `custom_resume.pdf` in 
 resume-builder -i custom_resume.json            # -> custom_resume.pdf, next to the input
 resume-builder -i custom_resume.json --json     # machine-readable
 resume-builder -i custom_resume.json -t serif   # pick a template
-resume-builder -i custom_resume.json --workdir build/   # keep the .tex and the LaTeX log
+resume-builder -i custom_resume.json --workdir build/   # keep the intermediate .tex
 ```
 
-The intermediate `.tex` and the LaTeX log go to a temporary directory that is removed afterwards, so
-the only file `resume-builder` leaves next to the input is the PDF. Pass `--workdir` to keep them.
+The intermediate `.tex` goes to a temporary directory that is removed afterwards, so the only file
+`resume-builder` leaves next to the input is the PDF. Pass `--workdir` to keep it. Tectonic's `.log`
+is not kept: `compile_pdf(..., keep_logs=True)` asks for it, but the CLIs do not.
+
+Each compile is killed after 60 seconds (`--compile-timeout SECONDS` on either command; from Python,
+`build_resume(..., compile_timeout_seconds=...)` or `compile_pdf(..., timeout_seconds=...)`) and
+reported as `CompileTimeoutError`, a `CompileError` subtype, with exit code `1`. Tectonic downloads
+TeX packages on its first run, which can exceed that limit, so on a new machine run the warm-up once:
+
+```bash
+resume-render --warmup                         # compile a tiny resume per built-in template
+resume-render --warmup --compile-timeout 900   # a longer limit for each of those compiles
+```
 
 Exit codes: `0` success, `1` render/compile failure, `2` missing or unparseable input or an unknown
 `--template`, `3` invalid resume JSON. On `3`, each problem prints as `path: message` with `path` a JSON Pointer — that is the

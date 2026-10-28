@@ -4,7 +4,7 @@ Exit codes are the feedback signal for an automated caller:
 
 ====  ==========================================================
 0     success
-1     render or Tectonic compilation failed
+1     render or Tectonic compilation failed (including a compile timeout)
 2     bad invocation: file missing, not parseable as JSON, or an
       unknown --template (stderr then names the valid ones)
 3     the resume JSON is invalid (one line per problem on stderr)
@@ -15,7 +15,9 @@ Two commands share that contract:
 ``resume-render``
     The general one. It renders to whatever ``--out`` says -- a ``.tex``
     suffix stops at the TeX source, anything else goes on to Tectonic --
-    or validates and writes nothing with ``--validate-only``.
+    or validates and writes nothing with ``--validate-only``. ``--warmup``
+    compiles a tiny resume with every built-in template so Tectonic fetches
+    its TeX packages up front.
 
 ``resume-builder``
     The one-shot one. It takes an input and nothing else, and writes the
@@ -35,8 +37,9 @@ import tempfile
 from pathlib import Path
 
 from . import templates_registry
-from .api import BuildResult, build_resume
+from .api import WARMUP_TIMEOUT_SECONDS, BuildResult, build_resume, warmup
 from .exceptions import TemplateNotFound, ValidationError
+from .pdf_compiler import DEFAULT_COMPILE_TIMEOUT_SECONDS
 from .validation import validate
 
 __all__ = [
@@ -54,6 +57,29 @@ EXIT_INVALID = 3
 
 class _InputError(Exception):
     """Something is wrong with the caller's input file: exit code 2."""
+
+
+def _positive_seconds(value: str) -> float:
+    """argparse type for ``--compile-timeout``; a bad value is a usage error (exit 2)."""
+    try:
+        seconds = float(value)
+    except ValueError:
+        raise argparse.ArgumentTypeError(f"not a number: {value!r}") from None
+    if not seconds > 0 or seconds == float("inf"):
+        raise argparse.ArgumentTypeError(f"must be a positive number of seconds, got {value!r}")
+    return seconds
+
+
+def _add_compile_timeout(parser: argparse.ArgumentParser, *, extra: str = "") -> None:
+    parser.add_argument(
+        "--compile-timeout",
+        type=_positive_seconds,
+        default=None,
+        metavar="SECONDS",
+        help="Kill Tectonic and fail if one compile runs longer than this "
+        f"(default: {DEFAULT_COMPILE_TIMEOUT_SECONDS}). The first run on a machine "
+        "downloads TeX packages and may need more; see --warmup." + extra,
+    )
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -107,6 +133,15 @@ def build_parser() -> argparse.ArgumentParser:
         "Writes nothing.",
     )
     parser.add_argument(
+        "--warmup",
+        action="store_true",
+        help="Compile a tiny resume with every built-in template so Tectonic downloads "
+        "its TeX packages now, then exit. Writes nothing; needs no --input. With "
+        f"--compile-timeout, that limit applies to each compile (default: "
+        f"{WARMUP_TIMEOUT_SECONDS}).",
+    )
+    _add_compile_timeout(parser)
+    parser.add_argument(
         "--json",
         dest="as_json",
         action="store_true",
@@ -150,6 +185,7 @@ def build_builder_parser() -> argparse.ArgumentParser:
         help="Where the intermediate .tex and the LaTeX log live. Default: a "
         "temporary directory, removed afterwards, leaving only the PDF.",
     )
+    _add_compile_timeout(parser)
     parser.add_argument(
         "--json",
         dest="as_json",
@@ -229,6 +265,7 @@ def _build(
     template: str | None,
     templates_dir: Path | None,
     as_json: bool,
+    compile_timeout: float | None = None,
     stem: str = "resume",
 ) -> tuple[BuildResult | None, int]:
     """Run the build, mapping every failure onto the exit-code contract."""
@@ -240,6 +277,9 @@ def _build(
             stem=stem,
             template=template,
             templates_dir=templates_dir,
+            compile_timeout_seconds=(
+                DEFAULT_COMPILE_TIMEOUT_SECONDS if compile_timeout is None else compile_timeout
+            ),
         )
     except ValidationError as e:
         _report(e.problems, as_json)
@@ -253,6 +293,21 @@ def _build(
     return result, EXIT_OK
 
 
+def _warmup(compile_timeout: float | None, as_json: bool) -> int:
+    """Run ``--warmup``: compile a tiny resume per built-in template."""
+    timeout = WARMUP_TIMEOUT_SECONDS if compile_timeout is None else compile_timeout
+    try:
+        names = warmup(timeout_seconds=timeout)
+    except Exception as e:  # noqa: BLE001
+        print(f"error: {e}", file=sys.stderr)
+        return EXIT_FAILED
+    if as_json:
+        print(json.dumps({"ok": True, "warmed": names}, indent=2))
+    else:
+        print(f"tectonic is warm (templates: {', '.join(names)})")
+    return EXIT_OK
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
@@ -260,8 +315,11 @@ def main(argv: list[str] | None = None) -> int:
     if args.list_templates:
         return _list_templates(args.templates_dir, args.as_json)
 
+    if args.warmup:
+        return _warmup(args.compile_timeout, args.as_json)
+
     if args.input is None:
-        parser.error("--input is required unless --list-templates is given")
+        parser.error("--input is required unless --list-templates or --warmup is given")
 
     try:
         resume = _load_resume(_read_input(args.input))
@@ -291,6 +349,7 @@ def main(argv: list[str] | None = None) -> int:
         template=args.template,
         templates_dir=args.templates_dir,
         as_json=args.as_json,
+        compile_timeout=args.compile_timeout,
     )
     if result is None:
         return code
@@ -344,6 +403,7 @@ def main_builder(argv: list[str] | None = None) -> int:
             template=args.template,
             templates_dir=args.templates_dir,
             as_json=args.as_json,
+            compile_timeout=args.compile_timeout,
             stem=input_path.stem,
         )
         if result is None:

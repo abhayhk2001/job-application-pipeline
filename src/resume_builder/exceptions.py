@@ -32,6 +32,19 @@ class CompileError(ResumeBuilderError):
     """tectonic exited non-zero while compiling a .tex file."""
 
 
+class CompileTimeoutError(CompileError):
+    """tectonic ran past its time limit and was killed.
+
+    Distinct from a plain ``CompileError`` because the cause is usually the
+    environment, not the document: on a cold machine tectonic spends its first
+    run downloading TeX packages. ``timeout_seconds`` is the limit that was hit.
+    """
+
+    def __init__(self, message, *, timeout_seconds):
+        self.timeout_seconds = timeout_seconds
+        super().__init__(message)
+
+
 class ValidationError(ResumeBuilderError):
     """A resume JSON failed validation. Carries every problem found."""
 

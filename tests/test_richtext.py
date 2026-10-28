@@ -7,9 +7,20 @@ composition -- corrupts any URL containing ``_``, ``&``, ``#`` or ``%``.
 
 from __future__ import annotations
 
+import copy
+import re
+from pathlib import Path
+
 import pytest
 
-from resume_builder.url_filters import latex_escape, richtext
+from resume_builder.api import build_resume
+from resume_builder.url_filters import (
+    TRAILING_PUNCT,
+    _escape_url,
+    _href,
+    latex_escape,
+    richtext,
+)
 
 
 class TestMarkdownLinks:
@@ -81,3 +92,141 @@ class TestEdgeCases:
 
     def test_latex_escape_rejects_nothing_silently(self):
         assert latex_escape("a\\b") == "a\\textbackslash{}b"
+
+
+class TestBold:
+    def test_bold_span(self):
+        assert richtext("a **b** c") == "a \\textbf{b} c"
+
+    def test_two_spans(self):
+        assert richtext("**a** and **b**") == "\\textbf{a} and \\textbf{b}"
+
+    def test_bold_content_is_latex_escaped(self):
+        assert richtext("**R&D 100%** a_b") == "\\textbf{R\\&D 100\\%} a\\_b"
+
+    def test_author_name_alongside_a_markdown_link(self):
+        """The publication-item shape the generator emits."""
+        item = (
+            "C, L., S, P., **Kashyap, A.H.** et al. "
+            '"Novel Biomarker Prediction..." Cancer Informatics, 2023. '
+            "[Paper](https://doi.org/10.1177/11769351231167992)"
+        )
+        assert richtext(item) == (
+            "C, L., S, P., \\textbf{Kashyap, A.H.} et al. "
+            '"Novel Biomarker Prediction..." Cancer Informatics, 2023. '
+            "\\href{https://doi.org/10.1177/11769351231167992}{\\underline{Paper}}"
+        )
+
+    def test_bold_may_wrap_a_link(self):
+        assert richtext("**[Paper](https://x.io/a_b)**") == (
+            "\\textbf{\\href{https://x.io/a_b}{\\underline{Paper}}}"
+        )
+
+    def test_bold_may_wrap_a_bare_url(self):
+        out = richtext("**see https://x.io/a_b.**")
+        assert out == ("\\textbf{see \\href{https://x.io/a_b}{\\underline{https://x.io/a_b}}.}")
+
+    def test_link_label_may_be_bold(self):
+        assert richtext("[**Paper**](https://x.io/a_b)") == (
+            "\\href{https://x.io/a_b}{\\underline{\\textbf{Paper}}}"
+        )
+
+    def test_partly_bold_link_label(self):
+        assert richtext("[see **this** 100%](https://x.io)") == (
+            "\\href{https://x.io}{\\underline{see \\textbf{this} 100\\%}}"
+        )
+
+    def test_url_underscore_survives_next_to_bold(self):
+        out = richtext("**bold** https://x.io/a_b_c")
+        assert "\\href{https://x.io/a_b_c}" in out
+        assert "a\\_b" not in out
+
+    @pytest.mark.parametrize("text", ["unmatched ** here", "2 ** 3", "a ****", "**\n**"])
+    def test_unclosed_or_empty_markers_stay_literal(self, text):
+        assert "\\textbf" not in richtext(text)
+
+    def test_markers_never_leak_into_latex(self):
+        assert "**" not in richtext("**a** [**b**](https://x.io) **[c](https://y.io)**")
+
+
+def _legacy_richtext(text: str | None) -> str:
+    """``richtext`` exactly as it was before bold support, as the oracle."""
+    pattern = re.compile(
+        r"\[(?P<label>[^\]\n]*)\]\((?P<url>[^)\s]*)\)" + "|" + r"(?P<bare>https?://[^\s]+)"
+    )
+    if not text:
+        return "" if text is None else text
+    out: list[str] = []
+    pos = 0
+    for match in pattern.finditer(text):
+        out.append(latex_escape(text[pos : match.start()]))
+        bare = match.group("bare")
+        if bare is not None:
+            url = bare.rstrip(TRAILING_PUNCT)
+            out.append(_href(url, _escape_url(url)))
+            out.append(latex_escape(bare[len(url) :]))
+        else:
+            label = latex_escape(match.group("label"))
+            url = match.group("url")
+            out.append(_href(url, label) if url else "\\underline{" + label + "}")
+        pos = match.end()
+    out.append(latex_escape(text[pos:]))
+    return "".join(out)
+
+
+def _strings(node):
+    if isinstance(node, str):
+        yield node
+    elif isinstance(node, dict):
+        for value in node.values():
+            yield from _strings(value)
+    elif isinstance(node, list):
+        for value in node:
+            yield from _strings(value)
+
+
+TRICKY = [
+    "",
+    "100% of a_b & c # $ ~ ^ { } \\",
+    "star * alone and 5 * 3 and a*b*c",
+    "[label](https://x.io/a%20b#frag) and https://x.io/a_b_c.",
+    "[Certificates]() then [L](https://x.io)",
+    "(see https://x.io/a_b), done.",
+]
+
+
+def test_text_without_bold_markers_renders_exactly_as_before(fixture_resume):
+    """The fixture feeds the golden file; no string in it may change."""
+    corpus = [*_strings(fixture_resume), *TRICKY]
+    assert all("**" not in text for text in corpus)
+    assert len(corpus) > 50
+    for text in corpus:
+        assert richtext(text) == _legacy_richtext(text), text
+
+
+@pytest.mark.parametrize("template", ["classic", "serif"])
+def test_bold_publication_item_compiles_in_every_builtin_template(
+    fixture_resume, tmp_path: Path, template: str, require_tectonic
+):
+    from pypdf import PdfReader
+
+    resume = copy.deepcopy(fixture_resume)
+    resume["sections"].append(
+        {
+            "type": "achievements",
+            "heading": "Publications",
+            "items": [
+                "C, L., S, P., **Kashyap, A.H.** et al. Cancer Informatics, 2023. "
+                "[Paper](https://doi.org/10.1177/11769351231167992)"
+            ],
+        }
+    )
+
+    result = build_resume(resume, tmp_path, template=template)
+
+    assert "\\textbf{Kashyap, A.H.}" in result.tex_path.read_text()
+    reader = PdfReader(result.pdf_path)
+    assert len(reader.pages) == 1
+    text = "".join(page.extract_text() for page in reader.pages)
+    assert "Kashyap, A.H." in text
+    assert "**" not in text

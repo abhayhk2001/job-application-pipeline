@@ -107,47 +107,78 @@ def linkify(text: str) -> str:
 
 _MD_LINK = r"\[(?P<label>[^\]\n]*)\]\((?P<url>[^)\s]*)\)"
 _BARE_URL = r"(?P<bare>https?://[^\s]+)"
-_RICHTEXT_RE = re.compile(_MD_LINK + "|" + _BARE_URL)
+_BOLD = r"\*\*(?P<bold>[^*\n]+?)\*\*"
+_LINK_RE = re.compile(_MD_LINK + "|" + _BARE_URL)
+_BOLD_RE = re.compile(_BOLD)
+_RICHTEXT_RE = re.compile(_MD_LINK + "|" + _BARE_URL + "|" + _BOLD)
+
+
+def _escape_bold(text: str) -> str:
+    r"""Escape plain text that may hold ``**bold**`` spans but no links.
+
+    This is what a link label goes through, so ``[**Paper**](url)`` becomes an
+    underlined bold label rather than a label with literal asterisks.
+    """
+    out: list[str] = []
+    pos = 0
+    for match in _BOLD_RE.finditer(text):
+        out.append(latex_escape(text[pos : match.start()]))
+        out.append("\\textbf{" + latex_escape(match.group("bold")) + "}")
+        pos = match.end()
+    out.append(latex_escape(text[pos:]))
+    return "".join(out)
+
+
+def _render(text: str, *, bold: bool) -> str:
+    pattern = _RICHTEXT_RE if bold else _LINK_RE
+    out: list[str] = []
+    pos = 0
+    for match in pattern.finditer(text):
+        out.append(latex_escape(text[pos : match.start()]))
+        groups = match.groupdict()
+        if groups.get("bold") is not None:
+            # A bold span may wrap a link; it cannot wrap another bold span,
+            # because its content excludes ``*``.
+            out.append("\\textbf{" + _render(groups["bold"], bold=False) + "}")
+        elif groups["bare"] is not None:
+            bare = groups["bare"]
+            url = bare.rstrip(TRAILING_PUNCT)
+            trailing = bare[len(url) :]
+            out.append(_href(url, _escape_url(url)))
+            out.append(latex_escape(trailing))
+        else:
+            label = _escape_bold(groups["label"])
+            url = groups["url"]
+            out.append(_href(url, label) if url else "\\underline{" + label + "}")
+        pos = match.end()
+    out.append(latex_escape(text[pos:]))
+    return "".join(out)
 
 
 def richtext(text: str | None) -> str:
-    r"""Render prose that may contain links into LaTeX, in a single pass.
+    r"""Render prose that may contain links and bold into LaTeX, in a single pass.
 
     Handles two link forms:
 
     * markdown -- ``[Paper Link](https://example.com/x)``
     * bare -- ``https://example.com/x``
 
-    Both become ``\href{url}{\underline{label}}``.
+    Both become ``\href{url}{\underline{label}}``. A third form, ``**bold**``,
+    becomes ``\textbf{bold}``. A bold span may wrap a link and a link label may
+    contain a bold span; text with no ``**`` renders exactly as it did before
+    bold was supported.
 
     The single pass matters. Escaping first and linkifying second (the obvious
     composition, and what this package used to do) corrupts any URL containing
     ``_``, ``&``, ``#`` or ``%``, because the escape runs over the address as
-    though it were prose. Here prose and link *labels* are escaped with
-    :func:`latex_escape` while URLs go through :func:`_escape_url`, which
+    though it were prose. Here prose, link *labels* and bold text are escaped
+    with :func:`latex_escape` while URLs go through :func:`_escape_url`, which
     touches only what ``\href`` cannot swallow.
 
     A markdown link with an empty URL renders as plain underlined text; the
     validator flags it separately so the LLM gets told rather than silently
-    shipping a dead link.
+    shipping a dead link. An unmatched ``**`` is left as literal text.
     """
     if not text:
         return "" if text is None else text
-
-    out: list[str] = []
-    pos = 0
-    for match in _RICHTEXT_RE.finditer(text):
-        out.append(latex_escape(text[pos : match.start()]))
-        bare = match.group("bare")
-        if bare is not None:
-            url = bare.rstrip(TRAILING_PUNCT)
-            trailing = bare[len(url) :]
-            out.append(_href(url, _escape_url(url)))
-            out.append(latex_escape(trailing))
-        else:
-            label = latex_escape(match.group("label"))
-            url = match.group("url")
-            out.append(_href(url, label) if url else "\\underline{" + label + "}")
-        pos = match.end()
-    out.append(latex_escape(text[pos:]))
-    return "".join(out)
+    return _render(text, bold=True)
