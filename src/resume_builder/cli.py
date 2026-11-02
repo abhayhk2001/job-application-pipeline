@@ -228,7 +228,7 @@ def _list_templates(templates_dir, as_json: bool) -> int:
     return EXIT_OK
 
 
-def _read_input(path: Path) -> Path:
+def _resolve_input(path: Path) -> Path:
     """Normalise the input path and check that it is a readable file."""
     resolved = Path(os.path.abspath(path.expanduser()))
     if not resolved.exists():
@@ -322,7 +322,7 @@ def main(argv: list[str] | None = None) -> int:
         parser.error("--input is required unless --list-templates or --warmup is given")
 
     try:
-        resume = _load_resume(_read_input(args.input))
+        resume = _load_resume(_resolve_input(args.input))
     except _InputError as e:
         print(f"error: {e}", file=sys.stderr)
         return EXIT_BAD_INPUT
@@ -384,7 +384,7 @@ def main_builder(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     try:
-        input_path = _read_input(args.input)
+        input_path = _resolve_input(args.input)
         resume = _load_resume(input_path)
         out = _output_path(input_path)
     except _InputError as e:
