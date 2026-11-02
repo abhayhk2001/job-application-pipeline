@@ -33,7 +33,6 @@ SECTION_TEMPLATE_NAMES = {
     "skills": "skills.tex.j2",
     "achievements": "achievements.tex.j2",
 }
-MAIN_TEMPLATE = "resume.tex.j2"
 
 
 def render(
@@ -73,7 +72,7 @@ def render(
             raise ValueError(f"unknown section type: {section_type!r}")
         sections_tex.append(env.get_template(template_name).render(section=section))
 
-    return env.get_template(MAIN_TEMPLATE).render(
+    return env.get_template(templates_registry.ROOT_TEMPLATE).render(
         basics=resume["basics"],
         heading_tex=heading_tex,
         sections_tex=sections_tex,
