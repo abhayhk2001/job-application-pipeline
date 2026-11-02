@@ -70,7 +70,7 @@ def _positive_seconds(value: str) -> float:
     return seconds
 
 
-def _add_compile_timeout(parser: argparse.ArgumentParser, *, extra: str = "") -> None:
+def _add_compile_timeout(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         "--compile-timeout",
         type=_positive_seconds,
@@ -78,7 +78,7 @@ def _add_compile_timeout(parser: argparse.ArgumentParser, *, extra: str = "") ->
         metavar="SECONDS",
         help="Kill Tectonic and fail if one compile runs longer than this "
         f"(default: {DEFAULT_COMPILE_TIMEOUT_SECONDS}). The first run on a machine "
-        "downloads TeX packages and may need more; see --warmup." + extra,
+        "downloads TeX packages and may need more; see --warmup.",
     )
 
 
@@ -287,7 +287,7 @@ def _build(
     except TemplateNotFound as e:
         print(f"error: {e}", file=sys.stderr)
         return None, EXIT_BAD_INPUT
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         print(f"error: {e}", file=sys.stderr)
         return None, EXIT_FAILED
     return result, EXIT_OK
@@ -298,7 +298,7 @@ def _warmup(compile_timeout: float | None, as_json: bool) -> int:
     timeout = WARMUP_TIMEOUT_SECONDS if compile_timeout is None else compile_timeout
     try:
         names = warmup(timeout_seconds=timeout)
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         print(f"error: {e}", file=sys.stderr)
         return EXIT_FAILED
     if as_json:
@@ -355,7 +355,7 @@ def main(argv: list[str] | None = None) -> int:
         return code
 
     produced = result.tex_path if tex_only else result.pdf_path
-    if produced is not None and produced != out:
+    if produced != out:
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_bytes(produced.read_bytes())
 
@@ -408,12 +408,8 @@ def main_builder(argv: list[str] | None = None) -> int:
         )
         if result is None:
             return code
-        pdf = result.pdf_path
-        if pdf is None:
-            print("error: no PDF was produced", file=sys.stderr)
-            return EXIT_FAILED
         out.parent.mkdir(parents=True, exist_ok=True)
-        out.write_bytes(pdf.read_bytes())
+        out.write_bytes(result.pdf_path.read_bytes())
 
     if args.as_json:
         print(

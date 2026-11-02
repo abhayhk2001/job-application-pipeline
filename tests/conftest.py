@@ -4,7 +4,6 @@ from __future__ import annotations
 
 import json
 import os
-import shutil
 import time
 from pathlib import Path
 
@@ -33,17 +32,6 @@ def require_tectonic() -> None:
     """Skip the test if tectonic is not on PATH."""
     if not is_tectonic_available():
         pytest.skip("tectonic is not installed; install with `brew install tectonic`")
-
-
-@pytest.fixture
-def cleanup_build() -> None:
-    """Ensure the build directory is removed before/after tests that use it."""
-    build = Path.cwd() / "build"
-    if build.exists():
-        shutil.rmtree(build)
-    yield
-    if build.exists():
-        shutil.rmtree(build)
 
 
 # A stand-in for the tectonic binary. It is a /bin/sh script because the
