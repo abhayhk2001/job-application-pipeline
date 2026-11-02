@@ -20,8 +20,5 @@ venv/
 *.fls
 *.fdb_latexmk
 
-# Build output
-build/
-
 # Withheld client names used by the confidentiality check (never commit)
 data/confidential_terms.txt
