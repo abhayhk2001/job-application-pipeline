@@ -90,9 +90,6 @@ class TestEdgeCases:
     def test_plain_prose_is_just_escaped(self):
         assert richtext("No links here") == "No links here"
 
-    def test_latex_escape_rejects_nothing_silently(self):
-        assert latex_escape("a\\b") == "a\\textbackslash{}b"
-
 
 class TestBold:
     def test_bold_span(self):

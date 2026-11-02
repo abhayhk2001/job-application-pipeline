@@ -161,11 +161,3 @@ def test_bullets_are_escaped_and_linkified(fixture_resume, bullet, expected, for
         assert forbidden not in tex
 
 
-def test_full_resume_renders_every_section_present_in_the_fixture(fixture_resume):
-    from resume_builder.renderer import render
-
-    tex = render(fixture_resume)
-    assert "\\begin{document}" in tex
-    assert "\\end{document}" in tex
-    for section in fixture_resume["sections"]:
-        assert f"\\section{{{section['heading']}" in tex

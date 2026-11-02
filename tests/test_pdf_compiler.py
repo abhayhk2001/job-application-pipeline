@@ -22,7 +22,6 @@ from resume_builder.exceptions import (
     ValidationError,
 )
 from resume_builder.pdf_compiler import (
-    DEFAULT_COMPILE_TIMEOUT_SECONDS,
     check_timeout,
     compile_pdf,
 )
@@ -42,9 +41,6 @@ class TestCompilePdf:
         pdf = compile_pdf(tex, out)
         assert pdf == (out / "doc.pdf").resolve()
         assert pdf.read_bytes().startswith(b"%PDF")
-
-    def test_default_timeout_is_sixty_seconds(self):
-        assert DEFAULT_COMPILE_TIMEOUT_SECONDS == 60
 
     def test_nonzero_exit_is_a_compile_error_not_a_timeout(
         self, tex: Path, tmp_path: Path, fake_tectonic

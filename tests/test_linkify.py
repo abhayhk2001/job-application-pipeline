@@ -84,9 +84,7 @@ class TestLatexEscape:
     def test_caret(self):
         assert latex_escape("^") == r"\textasciicircum{}"
 
-    def test_backslash_must_be_first(self):
-        # Backslash must be escaped first, otherwise later replacements would
-        # double-escape the backslash they themselves introduce.
+    def test_backslash(self):
         assert latex_escape(r"a\b") == r"a\textbackslash{}b"
 
     def test_combined(self):
