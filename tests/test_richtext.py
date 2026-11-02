@@ -30,9 +30,7 @@ class TestMarkdownLinks:
         )
 
     def test_link_in_the_middle(self):
-        assert richtext("a [b](https://x.io) c") == (
-            "a \\href{https://x.io}{\\underline{b}} c"
-        )
+        assert richtext("a [b](https://x.io) c") == ("a \\href{https://x.io}{\\underline{b}} c")
 
     def test_two_links(self):
         out = richtext("[one](https://a.io) and [two](https://b.io)")

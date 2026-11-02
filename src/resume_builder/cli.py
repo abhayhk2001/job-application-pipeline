@@ -129,8 +129,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--validate-only",
         action="store_true",
-        help="Check the JSON against schemas/rendered_resume.schema.json and exit. "
-        "Writes nothing.",
+        help="Check the JSON against schemas/rendered_resume.schema.json and exit. Writes nothing.",
     )
     parser.add_argument(
         "--warmup",

@@ -99,7 +99,10 @@ def test_projects_render_bold_name_without_tabular(fixture_resume):
     assert tex.count("\\item \\resumesub{") == 6
     # Markdown links become labelled hrefs, not bare URLs.
     assert "\\href{https://rdcu.be/wZSePwoXqLVa}{\\underline{Paper Link}}" in tex
-    assert "\\href{https://journals.sagepub.com/doi/10.1177/11769351231167992}{\\underline{Paper Link}}" in tex
+    assert (
+        "\\href{https://journals.sagepub.com/doi/10.1177/11769351231167992}{\\underline{Paper Link}}"
+        in tex
+    )
     assert "\\href{http://www.jait.us/shw-229-1347-1.html}{\\underline{Paper Link}}" in tex
     assert "{\\underline{https://" not in tex
     # Business Documents first, matching the base ordering.
@@ -159,5 +162,3 @@ def test_bullets_are_escaped_and_linkified(fixture_resume, bullet, expected, for
     assert expected in tex
     if forbidden:
         assert forbidden not in tex
-
-

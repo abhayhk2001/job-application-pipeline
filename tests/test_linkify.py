@@ -18,9 +18,7 @@ class TestLinkify:
 
     def test_url_followed_by_period(self):
         out = linkify("See https://example.com.")
-        assert out == (
-            "See \\href{https://example.com}{\\underline{https://example.com}}."
-        )
+        assert out == ("See \\href{https://example.com}{\\underline{https://example.com}}.")
 
     def test_url_followed_by_comma(self):
         out = linkify("Tags: https://example.com, https://other.com")
@@ -32,16 +30,12 @@ class TestLinkify:
     def test_url_followed_by_closing_paren(self):
         # The trailing ")" must remain outside the \href{...}.
         out = linkify("(see https://example.com)")
-        assert out == (
-            "(see \\href{https://example.com}{\\underline{https://example.com}})"
-        )
+        assert out == ("(see \\href{https://example.com}{\\underline{https://example.com}})")
 
     def test_url_with_path_and_query(self):
         url = "https://journals.sagepub.com/doi/10.1177/11769351231167992"
         out = linkify(f"Published. {url}")
-        assert out == (
-            f"Published. \\href{{{url}}}{{\\underline{{{url}}}}}"
-        )
+        assert out == (f"Published. \\href{{{url}}}{{\\underline{{{url}}}}}")
 
     def test_no_url_passthrough(self):
         assert linkify("Plain text with no URLs") == "Plain text with no URLs"

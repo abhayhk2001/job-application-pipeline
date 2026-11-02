@@ -82,7 +82,9 @@ def test_pdf_matches_the_base_resume_except_for_known_defects(
     base = _normalize(_pdf_text(reference_pdf))
 
     for base_text, our_text in KNOWN_BASE_DEFECTS:
-        assert base_text in base, f"base no longer contains {base_text!r}; update KNOWN_BASE_DEFECTS"
+        assert base_text in base, (
+            f"base no longer contains {base_text!r}; update KNOWN_BASE_DEFECTS"
+        )
         assert our_text in ours, f"our output no longer contains {our_text!r}"
         base = base.replace(base_text, our_text)
 

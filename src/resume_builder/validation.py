@@ -169,7 +169,9 @@ def validate(resume: Any, *, schema: dict | None = None) -> list[Problem]:
     for pointer, text in _iter_prose(resume):
         if EMPTY_MD_LINK.search(text):
             problems.append(
-                Problem(pointer, "markdown link has an empty URL; give it a target or drop it", text)
+                Problem(
+                    pointer, "markdown link has an empty URL; give it a target or drop it", text
+                )
             )
         lowered = text.lower()
         for term in denylist:
