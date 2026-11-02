@@ -40,15 +40,14 @@ correctly without it.
 
 # Resolved log
 
-21 questions, all answered 2026-09-25 and merged the same day. Answers below are condensed; the
-verbatim originals are in the git history at commit `9d2850a`.
+21 questions, all answered 2026-09-25 and merged the same day. Answers below are condensed.
 
 ## A. Identity and contact
 
 | # | Question | Answer | Applied |
 |---|---|---|---|
 | Q01 | Current location | Champaign, IL, USA | `basics.location` set |
-| Q02 | Work authorization | F-1 student — must not appear on the resume | `basics.work_authorization` set; hard rule added to `metadata.confidentiality` and `presentation_preferences` |
+| Q02 | Work authorization | Must not appear on the resume | `basics.work_authorization` set; hard rule added to `metadata.confidentiality` and `presentation_preferences` |
 | Q03 | Extra profile links | LinkedIn + GitHub are enough; a future portfolio replaces GitHub | `basics.profiles_policy` added; no new profiles |
 
 ## B. Employment chronology
@@ -78,7 +77,7 @@ verbatim originals are in the git history at commit `9d2850a`.
 |---|---|---|---|
 | Q15 | Document extraction sponsor | SCII | `proj.document-extraction.organization` set to SCII, cleared for public use |
 | Q16 | Intel benchmark scale | Correct | 1.8 GB / 100,000 records confirmed; `needs_input` marker removed |
-| Q17 | Naming the EV manufacturer | Abstract both — private info | Both customer identities withheld. Project id renamed `work.intel.ather-telemetry` → **`work.intel.ev-telemetry`** because the id itself leaked the name. Only "an electric vehicle manufacturer" and "a national stock exchange" remain in the file |
+| Q17 | Naming the EV manufacturer | Abstract both — private info | Both customer identities withheld. Project id renamed to **`work.intel.ev-telemetry`** because the old id leaked the name. Only "an electric vehicle manufacturer" and "a national stock exchange" remain in the file |
 | Q18 | Hackathon names | Not required — achievements are lowest priority | Gap closed as intentionally untracked; achievements-droppable-first rule recorded |
 | Q19 | SCII collaboration | It's the document extraction project, funded and overseen by SCII | `collaborating_organizations.notes` records it; linked to `proj.document-extraction` |
 | Q20 | Silkworm selective breeding | Remove from the data lake | `proj.silkworm-breeding` deleted; reference pulled from the computational-biology domain; logged in `metadata.deliberate_exclusions` so it can't return |
@@ -93,6 +92,6 @@ verbatim originals are in the git history at commit `9d2850a`.
 
 ## Note on two field paths
 
-Answers to **Q16** and **Q17** referenced `work.intel.ather-telemetry.*`; that project is now
+Answers to **Q16** and **Q17** referenced that project under its old id; it is now
 `work.intel.ev-telemetry`. **Q13** referenced `proj.ar-education-website.period`, which no longer
 exists — that project was merged into `proj.diet-ramanagara`.

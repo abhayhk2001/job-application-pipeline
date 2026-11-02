@@ -21,13 +21,16 @@ Requires Python 3.10+ and Tectonic (`brew install tectonic`, or see its install 
 
 ```bash
 python3 -m venv .venv
-.venv/bin/pip install -e '.[dev]'
-.venv/bin/resume-render --warmup      # once per machine: lets Tectonic download its TeX packages
+source .venv/bin/activate
+pip install -e '.[dev]'
+resume-render --warmup      # once per machine: lets Tectonic download its TeX packages
 ```
 
 Install it editable: the schema lives at the repository root, outside the package, so a non-editable install cannot validate.
 
 ## Usage
+
+These assume the virtual environment is active. To try them, copy the fixture: `cp tests/fixtures/test_resume.json custom_resume.json`.
 
 ```bash
 resume-render --list-templates                               # the available templates
@@ -77,6 +80,7 @@ Choose one with `--template serif`, or set a top-level `"template": "serif"` in 
 Add your own by copying one into `templates/` at the repository root, or point `--templates-dir` at another directory:
 
 ```bash
+mkdir -p templates
 cp -r src/resume_builder/templates/classic templates/mine
 resume-render -i custom_resume.json -o build/resume.pdf -t mine
 ```
@@ -108,9 +112,9 @@ The master file and the rendered resume are different shapes. `data/master_resum
 ## Development
 
 ```bash
-.venv/bin/pytest
-.venv/bin/ruff check .
-.venv/bin/ruff format --check .
+pytest
+ruff check .
+ruff format --check .
 ```
 
 `docs/master-resume.md` has a check that `data/NEEDS_INPUT.md` is in sync with `metadata.needs_input`.

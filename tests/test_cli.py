@@ -157,9 +157,7 @@ def test_module_dispatch_reaches_both_commands(resume_copy: Path, tmp_path: Path
     assert out.exists()
 
 
-# --------------------------------------------------------------------------- #
 # --compile-timeout and --warmup
-# --------------------------------------------------------------------------- #
 
 
 @pytest.fixture

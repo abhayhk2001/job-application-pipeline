@@ -5,7 +5,7 @@ Strict structure guides the LLM through the candidate's history without the ambi
 ## Schema Section
 
 1. Core Identity (basics)
-Contains fundamental identity markers, contact information, and multiple generalized summaries. The agent leverages this section to select the most appropriate summary variation based on the cultural and technical tone of the target job description.
+Contains fundamental identity markers, contact information, and multiple generalized summaries. The agent uses this section to select the most appropriate summary variation based on the cultural and technical tone of the target job description.
 
 2. Professional Chronology (work)
 An array of objects detailing companies, titles, dates, and an array of granular projects. This hierarchical organization prevents the LLM from conflating tasks across different employers and preserves the timeline required for Applicant Tracking Systems (ATS).
