@@ -104,12 +104,12 @@ class TestBold:
     def test_author_name_alongside_a_markdown_link(self):
         """The publication-item shape the generator emits."""
         item = (
-            "C, L., S, P., **Kashyap, A.H.** et al. "
+            "C, L., S, P., **Doe, A.H.** et al. "
             '"Novel Biomarker Prediction..." Cancer Informatics, 2023. '
             "[Paper](https://doi.org/10.1177/11769351231167992)"
         )
         assert richtext(item) == (
-            "C, L., S, P., \\textbf{Kashyap, A.H.} et al. "
+            "C, L., S, P., \\textbf{Doe, A.H.} et al. "
             '"Novel Biomarker Prediction..." Cancer Informatics, 2023. '
             "\\href{https://doi.org/10.1177/11769351231167992}{\\underline{Paper}}"
         )
@@ -213,7 +213,7 @@ def test_bold_publication_item_compiles_in_every_builtin_template(
             "type": "achievements",
             "heading": "Publications",
             "items": [
-                "C, L., S, P., **Kashyap, A.H.** et al. Cancer Informatics, 2023. "
+                "C, L., S, P., **Doe, A.H.** et al. Cancer Informatics, 2023. "
                 "[Paper](https://doi.org/10.1177/11769351231167992)"
             ],
         }
@@ -221,9 +221,9 @@ def test_bold_publication_item_compiles_in_every_builtin_template(
 
     result = build_resume(resume, tmp_path, template=template)
 
-    assert "\\textbf{Kashyap, A.H.}" in result.tex_path.read_text()
+    assert "\\textbf{Doe, A.H.}" in result.tex_path.read_text()
     reader = PdfReader(result.pdf_path)
     assert len(reader.pages) == 1
     text = "".join(page.extract_text() for page in reader.pages)
-    assert "Kashyap, A.H." in text
+    assert "Doe, A.H." in text
     assert "**" not in text
