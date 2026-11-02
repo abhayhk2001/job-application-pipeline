@@ -114,8 +114,7 @@ why escaping must happen *inside* the link-aware pass rather than before it.
 Tectonic is XeTeX, and it **silently falls back to Latin Modern** for the old Type1 NFSS families.
 `\usepackage{helvet}` plus `\renewcommand{\familydefault}{phv}` compiles without a warning and
 changes nothing — which is exactly what `classic` does, so despite its font table `classic` renders
-in Latin Modern, not Helvetica. Packages that ship OpenType faces do take effect; these are
-verified on this machine:
+in Latin Modern, not Helvetica. Packages that ship OpenType faces do take effect; these were verified:
 
 | Package | Face |
 |---|---|

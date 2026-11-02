@@ -1,69 +1,54 @@
 # resume-builder
 
-An end-to-end job-application pipeline. A single role-neutral record of everything Abhay has done is
-kept as structured data; a job description is matched against it; and a tailored resume is rendered
-to LaTeX and compiled with Tectonic.
+Validates a render-ready resume JSON against a schema and renders it to LaTeX and PDF using Jinja2 and [Tectonic](https://tectonic-typesetting.github.io/). It is the rendering step of a job-application pipeline; [`resume_generator`](../resume_generator/) calls it in-process, and this repository also holds the career data that the generator reads.
 
 ```
-                 data/master_resume.json          job description
-                    (the data lake)                     │
-                           │                            │
-                           └────────────┬───────────────┘
-                                        ▼
-                              tailoring (LLM)
-                                        │
-                                        ▼
-                         rendered resume JSON  ◄── contract: docs/render-contract.md
-                                        │          schema:   schemas/rendered_resume.schema.json
-                                        ▼
-                          validate  ──► exit 3 + path: message
-                                        │          (the LLM's feedback loop)
-                                        ▼
-                       renderer (Python + Jinja2)  ◄── template: docs/templates.md
-                                        │
-                                        ▼
-                                     .tex ──► tectonic ──► .pdf
+rendered resume JSON  (contract: docs/render-contract.md, schema: schemas/rendered_resume.schema.json)
+        │
+        ▼
+validate  ──► exit 3 + path: message
+        │
+        ▼
+renderer (Python + Jinja2)  (templates: docs/templates.md)
+        │
+        ▼
+      .tex ──► tectonic ──► .pdf
 ```
 
-## Layout
+## Install
 
-| Path | What it is |
-|---|---|
-| `data/master_resume.json` | The career data lake. Atomic facts, never bullet prose, never tuned to a role. |
-| `data/NEEDS_INPUT.md` | Living worksheet mirroring `metadata.needs_input`. One question open. |
-| `docs/master-resume.md` | The schema contract: what each section holds and the rules a generator must obey. |
-| `docs/schema-rationale.md` | Why the data lake is structured JSON rather than vector retrieval. |
-| `docs/render-contract.md` | **The page to paste into a tailoring prompt.** The exact JSON an LLM must emit. |
-| `docs/templates.md` | How templates work: picking one, editing one, writing one. |
-| `schemas/rendered_resume.schema.json` | Machine-readable version of that contract; what `--validate-only` checks. |
-| `tests/fixtures/test_resume.json` | A rendered resume in render-ready form — the renderer's **input contract**. |
-| `tests/fixtures/resume.pdf` | The base resume's compiled PDF, used for format-parity assertions. |
-| `tests/golden/resume.tex` | Expected render of the fixture. Generated, never hand-edited. |
-| `src/resume_builder/` | The Python package: `api.py`, `validation.py`, `renderer.py`, `pdf_compiler.py`, `cli.py`. |
-| `src/resume_builder/templates/<name>/` | One directory per template (`classic`, `serif`): its `resume.tex.j2` and any partial it overrides. |
-| `src/resume_builder/templates/_shared/` | The section partials every template inherits unless it overrides one. |
-| `templates/` (repo root) | Your own templates. Shadow a built-in by using its name. Optional; absent by default. |
+Requires Python 3.10+ and Tectonic (`brew install tectonic`, or see its install docs).
 
-## The two JSON shapes
+```bash
+python3 -m venv .venv
+.venv/bin/pip install -e '.[dev]'
+.venv/bin/resume-render --warmup      # once per machine: lets Tectonic download its TeX packages
+```
 
-They are deliberately different and must not be conflated.
+Install it editable: the schema lives at the repository root, outside the package, so a non-editable install cannot validate.
 
-**`data/master_resume.json`** is the *input* to tailoring. Every engagement is decomposed into
-`situation`, `constraints`, `actions[]`, `technologies_used[]`, `metrics[]` and `outcomes[]`. There is
-no `bullets` field anywhere, and ordering carries no emphasis.
+## Usage
 
-**A rendered resume** — shaped like `tests/fixtures/test_resume.json` — is the *output*. Ordered
-`sections`, each entry carrying finished bullet strings plus a `source_ref` back to the master id it
-was drawn from. This is what the TeX renderer consumes.
+```bash
+resume-render --list-templates                               # the available templates
+resume-render -i custom_resume.json --validate-only --json   # check, write nothing
+resume-render -i custom_resume.json -o build/resume.pdf      # validate, render, compile
+resume-render -i custom_resume.json -o build/resume.tex      # TeX only, no Tectonic
+resume-render -i custom_resume.json -o build/resume.pdf -t serif   # pick a template
+```
 
-Two metadata blocks in the master bind the renderer:
-`metadata.presentation_preferences` (omit project dates, order projects by relevance, achievements
-section drops first, never print work authorization) and `metadata.confidentiality` (client
-identities stay abstracted).
+`resume-builder` is the one-shot command: `custom_resume.json` becomes `custom_resume.pdf` in the same directory. The intermediate `.tex` goes to a temporary directory unless you pass `--workdir`.
 
-## Using the renderer
+```bash
+resume-builder -i custom_resume.json            # -> custom_resume.pdf, next to the input
+resume-builder -i custom_resume.json --json     # machine-readable
+resume-builder -i custom_resume.json -t serif   # pick a template
+resume-builder -i custom_resume.json --workdir build/   # keep the intermediate .tex
+```
 
-One function does the work. Everything else is a shell over it.
+`python -m resume_builder render ...` and `python -m resume_builder build ...` run the same two commands, and `render` is the default.
+
+From Python:
 
 ```python
 import json
@@ -75,130 +60,69 @@ result = build_resume(resume, Path("build"))
 print(result.tex_path, result.pdf_path)
 ```
 
-`build_resume` validates first and raises `ValidationError` carrying every problem, so malformed
-JSON can never reach LaTeX. Pass `tex_only=True` to skip Tectonic entirely — that path is pure
-Python.
+`build_resume` validates first and raises `ValidationError` carrying every problem. Pass `tex_only=True` to skip Tectonic.
 
-From the CLI:
+Each compile is killed after 60 seconds and reported as `CompileTimeoutError` with exit code `1`. Change that with `--compile-timeout SECONDS`, or `build_resume(..., compile_timeout_seconds=...)` from Python.
 
-```bash
-resume-render --list-templates                               # the available templates
-resume-render -i custom_resume.json --validate-only --json   # check, write nothing
-resume-render -i custom_resume.json -o build/resume.pdf      # validate, render, compile
-resume-render -i custom_resume.json -o build/resume.tex      # TeX only, no Tectonic
-resume-render -i custom_resume.json -o build/resume.pdf -t serif   # pick a template
-```
+Exit codes: `0` success, `1` render or compile failure, `2` missing or unparseable input or an unknown `--template`, `3` invalid resume JSON. On `3`, each problem prints as `path: message`, with `path` a JSON Pointer. See `docs/render-contract.md`.
 
-`resume-builder` is the one-shot command: the input is all you give, and the PDF lands beside it
-under the input's own name. `custom_resume.json` becomes `custom_resume.pdf` in the same directory.
-
-```bash
-resume-builder -i custom_resume.json            # -> custom_resume.pdf, next to the input
-resume-builder -i custom_resume.json --json     # machine-readable
-resume-builder -i custom_resume.json -t serif   # pick a template
-resume-builder -i custom_resume.json --workdir build/   # keep the intermediate .tex
-```
-
-The intermediate `.tex` goes to a temporary directory that is removed afterwards, so the only file
-`resume-builder` leaves next to the input is the PDF. Pass `--workdir` to keep it. Tectonic's `.log`
-is not kept: `compile_pdf(..., keep_logs=True)` asks for it, but the CLIs do not.
-
-Each compile is killed after 60 seconds (`--compile-timeout SECONDS` on either command; from Python,
-`build_resume(..., compile_timeout_seconds=...)` or `compile_pdf(..., timeout_seconds=...)`) and
-reported as `CompileTimeoutError`, a `CompileError` subtype, with exit code `1`. Tectonic downloads
-TeX packages on its first run, which can exceed that limit, so on a new machine run the warm-up once:
-
-```bash
-resume-render --warmup                         # compile a tiny resume per built-in template
-resume-render --warmup --compile-timeout 900   # a longer limit for each of those compiles
-```
-
-Exit codes: `0` success, `1` render/compile failure, `2` missing or unparseable input or an unknown
-`--template`, `3` invalid resume JSON. On `3`, each problem prints as `path: message` with `path` a JSON Pointer — that is the
-feedback an LLM iterates against. See `docs/render-contract.md`.
-
-The renderer is deterministic: same JSON → same `.tex` → same PDF. `tests/golden/resume.tex` pins
-that, and `tests/test_renderer.py` asserts the compiled PDF reads identically to the hand-written
-`../Resume/resume.pdf` apart from a short, explicit list of defects in the base that we decline to
-reproduce.
+The same JSON always renders to the same `.tex`; `tests/golden/resume.tex` pins that, and `tests/test_renderer.py` checks the compiled PDF against `tests/fixtures/resume.pdf` apart from a short list of known defects in that base.
 
 ## Templates
 
-A template is a directory, not a file, and the LaTeX format is no longer hardcoded:
+A template is a directory holding a `resume.tex.j2` preamble and any section partial it overrides; the rest are inherited from `templates/_shared/`. The built-ins are `classic` and `serif`.
 
-```bash
-resume-render --list-templates
-  classic  Dense single-column Latin Modern, small-caps rule-underlined section headings.
-  serif    The classic layout set in Times; same geometry and spacing, traditional type.
-```
+Choose one with `--template serif`, or set a top-level `"template": "serif"` in the resume JSON. The flag wins if both are given.
 
-Choose one with `--template serif`, or carry the choice in the resume JSON as a top-level
-`"template": "serif"` — the flag wins if both are given. **That string is the entire surface an
-LLM needs**; it never writes LaTeX, so it cannot produce a document that fails to compile.
-
-Add your own by copying one into `templates/` at the repo root and editing it:
+Add your own by copying one into `templates/` at the repository root, or point `--templates-dir` at another directory:
 
 ```bash
 cp -r src/resume_builder/templates/classic templates/mine
 resume-render -i custom_resume.json -o build/resume.pdf -t mine
 ```
 
-A template owns the preamble (`resume.tex.j2`) and inherits the six section partials from
-`templates/_shared/`, so a variant that only changes fonts or margins is one file. The full
-contract — the three macros a preamble must define, the variables it receives, and which font
-packages actually take effect under Tectonic — is in **`docs/templates.md`**.
+The full contract is in `docs/templates.md`.
 
-## Serving it (not built yet)
+## Configuration
 
-If the tailoring LLM is remote rather than a local agent, wrap `build_resume` rather than
-reimplementing it:
+| Setting | Effect |
+| :--- | :--- |
+| `data/confidential_terms.txt` (gitignored, one term per line, `#` comments) | Validation rejects bullets and items containing these terms. If the file is absent, the check does not run. |
+| `RESUME_CONFIDENTIAL_TERMS` | Path that replaces the file above. |
 
-- **A plain `POST /render` fits serverless better than MCP.** MCP is the right shape for *LLM calls a
-  tool* and gives typed schemas across clients, but a tool result is content blocks — a PDF has to be
-  base64 or a resource link, and 25 KB of PDF is ~34 KB of base64, roughly 8.5k tokens of bytes the
-  model cannot read. Return a reference, not the artefact, whatever the transport. MCP's
-  streamable-HTTP transport also carries session state, which is friction on a stateless function.
-  Build the REST route first; an MCP tool is then a ~40-line adapter over the same function.
-- **The deployment risk is Tectonic, not the protocol.** The binary is 19 MB and its package cache
-  after rendering this resume is 57 MB, fetched from the network on first run. Ship a **container
-  image**, not a zip: Lambda zip caps at 250 MB unzipped with a 512 MB `/tmp`, and a cold start that
-  downloads a TeX bundle will time out. Lambda container or Cloud Run are both comfortable at a
-  ~250-350 MB image. Pre-bake the cache and point `TECTONIC_CACHE_DIR` at it so no invocation
-  reaches the network; verify by building with networking disabled.
-- **Output location stays at the edge.** `BuildResult.pdf_path` is a local path today. When object
-  storage arrives, one function at the edge maps it to a URL — no renderer or template change.
+## Layout
 
-## Installing
+| Path | What it is |
+| :--- | :--- |
+| `data/master_resume.json` | The career data lake: the author's real, role-neutral record, read by `resume_generator`. |
+| `data/NEEDS_INPUT.md` | Worksheet mirroring `metadata.needs_input`. |
+| `docs/` | The data lake contract (`master-resume.md`, `schema-rationale.md`), the JSON an LLM must emit (`render-contract.md`) and how templates work (`templates.md`). |
+| `schemas/rendered_resume.schema.json` | The machine-readable contract `--validate-only` checks. |
+| `src/resume_builder/` | `api.py` (`build_resume`), `validation.py`, `renderer.py`, `jinja_env.py`, `url_filters.py`, `templates_registry.py`, `pdf_compiler.py`, `cli.py`, `exceptions.py`. |
+| `src/resume_builder/templates/` | One directory per built-in template, plus the shared partials in `_shared/`. |
+| `tests/fixtures/test_resume.json` | A rendered resume in render-ready form. |
+| `tests/golden/resume.tex` | Expected render of that fixture. Generated, never hand-edited. |
 
-```bash
-brew install tectonic             # one-time; the only external dep beyond Python
-pip install -e ".[dev]"           # editable install with pytest + ruff + pypdf
-```
+The master file and the rendered resume are different shapes. `data/master_resume.json` decomposes each engagement into situation, actions, metrics and outcomes and has no bullets. A rendered resume has ordered `sections` of finished bullets, each with a `source_ref` back to its master id.
 
-The editable install puts both commands on your `PATH` — `resume-render` and `resume-builder` — so
-they run from any directory, not just from this repo. The install points at this checkout, so moving
-or renaming the repo means reinstalling. If the console scripts are ever missing, the module
-invocation works too, as long as you use the interpreter the package is installed into
-(`python3.13` here):
+## Development
 
 ```bash
-python3.13 -m resume_builder render -i custom_resume.json -o build/resume.pdf   # == resume-render
-python3.13 -m resume_builder build  -i custom_resume.json                       # == resume-builder
-python3.13 -m resume_builder -i custom_resume.json -o build/resume.pdf           # render by default
+.venv/bin/pytest
+.venv/bin/ruff check .
+.venv/bin/ruff format --check .
 ```
 
-The LaTeX target lives in the sibling `../Resume/` project — its static `.tex` sources served as
-the reference port into Jinja2 templates here, but the renderer does not read them at runtime; the
-templates are self-contained under `src/resume_builder/templates/`, one directory per template.
+`docs/master-resume.md` has a check that `data/NEEDS_INPUT.md` is in sync with `metadata.needs_input`.
 
-## Checks
+`resume_generator` hashes `jinja_env.py`, `url_filters.py` and every `.j2` file into its render profile, so any byte change to them, even a comment, gives a different profile.
 
-```bash
-pytest                            # linkify, latex_escape, per-section, templates, full pipeline
-ruff check src tests              # lint
-python3 -m json.tool data/master_resume.json > /dev/null && echo OK
-python3 -m json.tool tests/fixtures/test_resume.json > /dev/null && echo OK
-```
+## Limitations
 
-`docs/master-resume.md` carries the check that `data/NEEDS_INPUT.md` is still in sync with
-`metadata.needs_input`.
+- The tracked data lake and test fixtures hold the author's personal details. They are not sample data.
+- The confidentiality check covers bullets and achievement items only, and is silently off without a terms file.
+- Tectonic's first run needs network access to download packages.
+
+## License
+
+MIT. The `classic` template's layout credit is in its source. See [LICENSE](LICENSE).

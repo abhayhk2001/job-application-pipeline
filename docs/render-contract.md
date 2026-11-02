@@ -20,12 +20,12 @@ resume-render -i custom_resume.json --validate-only --json
 resume-render -i custom_resume.json -o build/resume.pdf --json
           │
           ▼
-{"ok": true, "pdf_path": "...", "tex_path": "...", "template": "classic"}
+{"ok": true, "tex_path": "...", "pdf_path": "...", "out": "...", "template": "classic", "warnings": []}
 ```
 
 Exit codes are the signal: `0` success, `1` render or LaTeX failure, `2` missing file or unparseable
-JSON or an unknown `template`, `3` the JSON is invalid. On `3`, every problem is printed as `path: message`, where `path` is a
-JSON Pointer into the document you submitted. Fix those paths and re-run.
+JSON or an unknown `template`, `3` the JSON is invalid. On `3`, every problem is printed as `path: message` on stderr, or under `problems` on stdout with
+`--json`, where `path` is a JSON Pointer into the document you submitted. Fix those paths and re-run.
 
 The authoritative shape is `schemas/rendered_resume.schema.json`. It sets
 `additionalProperties: false` everywhere, so an invented field is an error rather than something
@@ -37,12 +37,12 @@ has nowhere to put it.
 ```json
 {
   "basics": {
-    "name": "Abhay Harish Kashyap",
+    "name": "Jane Doe",
     "contacts": [
-      { "type": "email",    "label": "abhayhk2001@gmail.com", "url": "mailto:abhayhk2001@gmail.com" },
-      { "type": "phone",    "label": "+1 217 305 1018",       "url": null },
-      { "type": "linkedin", "label": "Linkedin",              "url": "https://www.linkedin.com/in/abhay-h-kashyap/" },
-      { "type": "github",   "label": "Github",                "url": "https://github.com/abhayhk2001" }
+      { "type": "email",    "label": "jane@example.com",      "url": "mailto:jane@example.com" },
+      { "type": "phone",    "label": "+1 555-555-0100",       "url": null },
+      { "type": "linkedin", "label": "Linkedin",              "url": "https://www.linkedin.com/in/jane-doe/" },
+      { "type": "github",   "label": "Github",                "url": "https://github.com/jane-doe" }
     ]
   },
   "sections": [
@@ -51,9 +51,9 @@ has nowhere to put it.
       "heading": "Education",
       "entries": [
         {
-          "source_ref": "edu.uiuc",
-          "institution": "University of Illinois Urbana-Champaign",
-          "location": "Champaign, USA",
+          "source_ref": "edu.example",
+          "institution": "Example University",
+          "location": "Springfield, USA",
           "qualification": "Master of Computer Science",
           "date": "August 2026 - December 2027"
         }
@@ -64,12 +64,12 @@ has nowhere to put it.
       "heading": "Work Experience",
       "entries": [
         {
-          "source_ref": "work.qualcomm",
-          "organization": "Qualcomm India Private Limited",
-          "location": "Bengaluru, India",
+          "source_ref": "work.example",
+          "organization": "Example Corp",
+          "location": "Springfield, USA",
           "title": "Software Engineer",
           "dateRange": "January 2023 - July 2026",
-          "bullets": ["Designed and delivered a production-ready SoC upgrade framework ..."]
+          "bullets": ["Designed and delivered an upgrade framework ..."]
         }
       ]
     },
@@ -78,11 +78,11 @@ has nowhere to put it.
       "heading": "Project Experience",
       "entries": [
         {
-          "source_ref": "proj.document-extraction",
-          "name": "Business Documents Data Recognition and Table Extraction using Deep Learning Techniques",
+          "source_ref": "proj.example",
+          "name": "Table Extraction from Business Documents",
           "bullets": [
-            "Integrated DETR-based table extraction and YoloV5 object detection ...",
-            "Presented at ICAIC 2025. [Paper Link](https://rdcu.be/wZSePwoXqLVa)"
+            "Integrated table extraction and object detection ...",
+            "Presented at an example conference. [Paper Link](https://example.com/paper)"
           ]
         }
       ]
@@ -97,7 +97,7 @@ has nowhere to put it.
     {
       "type": "achievements",
       "heading": "Achievements",
-      "items": ["Led the data-driven astronomy research division at Dhruva, RVCE's astrophysics club"]
+      "items": ["Led the research division of a university club"]
     }
   ]
 }
@@ -145,9 +145,9 @@ Match `best_for` against the job description and put the chosen `name` in the re
 { "template": "serif", "basics": { ... }, "sections": [ ... ] }
 ```
 
-The name must be one the listing returned — anything else exits `2` and prints the valid names, so
+The name must be one the listing returned. An unknown name exits `2` and prints the valid names, so
 the recovery is to re-run the listing and pick again. A name is a plain directory name: no slashes
-and no `..`. A `--template` flag, if the caller passes one, overrides this key, and the render's
+and no `..`; a key that breaks that rule fails the schema and exits `3`. A `--template` flag, if the caller passes one, overrides this key, and the render's
 `--json` output echoes the template actually used.
 
 ## Writing bullets
@@ -171,12 +171,11 @@ different rules than prose, so hand-escaping actively breaks things.
 Two `metadata` blocks in `data/master_resume.json` bind what you may produce:
 
 - **`presentation_preferences`** — order projects by relevance to the job and never
-  chronologically; omit project dates; a single collapsed Qualcomm entry is preferred when space is
+  chronologically; omit project dates; a single collapsed employer entry is preferred when space is
   tight; drop the achievements section first when space runs out; never print work authorization; and
   treat a future portfolio link as a replacement for the GitHub link rather than an addition.
-- **`confidentiality`** — the two Intel customer identities are withheld; refer to them only as
-  "an electric vehicle manufacturer" and "a national stock exchange". Qualcomm clients stay
-  abstracted as "two major clients". Validation enforces this against an optional local denylist at
+- **`confidentiality`** — withheld customer identities stay abstracted, using the descriptions in
+  that block. Validation enforces this against an optional local denylist at
   `data/confidential_terms.txt`, which is gitignored so the names never enter version control.
 
 Also honour `metadata.deliberate_exclusions`: one publication and one project are excluded by

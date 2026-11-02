@@ -1,7 +1,7 @@
 # Master Resume — `data/master_resume.json`
 
 The career data lake for the job-application pipeline. It is the **single source of truth** about
-Abhay Harish Kashyap's professional history, and it is injected wholesale into the context of the
+the candidate's professional history, and it is injected wholesale into the context of the
 agent that writes each job-specific resume.
 
 It is a biography, not a pitch.
@@ -22,11 +22,11 @@ roles." Tailoring happens at generation time against a specific job description,
 |---|---|
 | `schema` | Version, purpose, and the hard rules above |
 | `basics` | Identity, contacts, three length-variant summaries, stated interests |
-| `education` | RVCE and UIUC, with coursework, standing and MOOC record |
+| `education` | Two institutions, with coursework, standing and MOOC record |
 | `work` | Three employers, each with `positions[]` (title history) and nested `projects[]` |
-| `projects` | Seven non-employment engagements: research, industry collaborations, hackathon, volunteering, coursework |
+| `projects` | Five non-employment engagements: research, industry collaborations, hackathon, volunteering, coursework |
 | `publications` | Three papers with full titles, author lists and DOIs, cross-linked via `project_ref` |
-| `awards` | Six entries, cross-linked via `project_ref` |
+| `awards` | Four entries, cross-linked via `project_ref` |
 | `affiliations` | Club and division leadership |
 | `collaborating_organizations` | Named partner organizations |
 | `skills` | Competency matrix, every skill carrying `evidence_refs` |
@@ -51,8 +51,7 @@ object structure, including course names and notes.
 
 ## Confidence and evidence
 
-The file is self-contained — it no longer references the recommendation letters, statement of purpose
-or prior resumes it was built from. What remains is the candidate-confirmed record.
+The file is self-contained and holds only the candidate-confirmed record.
 
 A field carries `confidence: "needs_input"` when its value is `null` or incomplete; a matching
 question sits in `metadata.needs_input`. Anything without that marker is confirmed.
@@ -69,9 +68,7 @@ versus `listed_only` (claimed on the prior resume, but nothing recorded here dem
 
 Spelled out in `metadata.generation_directives`. In short: synthesize, never copy verbatim; never
 state a `null` or use a `needs_input` metric unchecked; never present `stated_interests` as
-accomplishments; and obey `metadata.confidentiality` — Qualcomm client names stay abstracted as
-"two major clients", and Intel customer names need the candidate's clearance before appearing
-publicly.
+accomplishments; and obey `metadata.confidentiality`, which keeps withheld client and customer names abstracted.
 
 ## `tests/fixtures/test_resume.json` — the output-shape fixture
 
@@ -79,8 +76,8 @@ publicly.
 **output**: ordered `sections`, each entry carrying finished bullet prose and a `source_ref` back to
 the master id it was drawn from. It is the one place in this project where bullet strings are allowed.
 
-Its content follows the hand-written `../Resume/resume.tex` so that the format-parity test in
-`tests/test_renderer.py` is meaningful. Unambiguous typographic defects in the base are corrected
+Its content follows the hand-written base resume (`tests/fixtures/resume.pdf`) so that the
+format-parity test in `tests/test_renderer.py` is meaningful. Unambiguous typographic defects in the base are corrected
 there (`_meta.fixed_from_base`); substantive content errors are reproduced and logged
 (`_meta.deviations_from_master`). It is **not** a correct resume and must not be used as the expected
 output of a generator reading the corrected master.
@@ -119,15 +116,14 @@ EOF
 
 Question numbers there are stable and never reused, so `Q17` refers to the same gap permanently.
 
-`metadata.pending_resume_corrections` lists eight things the live LaTeX resume in `../Resume/` (a
-sibling of this repository) gets wrong and that this file now supersedes — six typographic, one
-substantive (the Epsilon/Intel date mix-up), and one unresolved: the font table declares Helvetica
-but the compiled PDF is Latin Modern Roman.
+`metadata.pending_resume_corrections` lists eight things the base LaTeX resume gets wrong and that
+this file supersedes: six typographic, one substantive date error, and one unresolved: the font
+table declares Helvetica but the compiled PDF is Latin Modern Roman.
 
 ## Two metadata blocks the generator must honour
 
 `metadata.presentation_preferences` — layout rules the candidate set: order projects by relevance and
-never chronologically, omit project dates, collapse the Qualcomm entry to one line when space is
+never chronologically, omit project dates, collapse the main employer entry to one line when space is
 tight, drop the achievements section first, never print work authorization, and treat a future
 portfolio link as a replacement for GitHub rather than an addition.
 

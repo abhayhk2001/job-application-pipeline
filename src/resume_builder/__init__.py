@@ -1,4 +1,4 @@
-"""Job-application pipeline.
+"""Renderer for render-ready resume JSON.
 
 Layout:
     data/            the career data lake and its open-questions worksheet
