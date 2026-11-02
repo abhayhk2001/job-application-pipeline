@@ -26,8 +26,8 @@ resume-builder = "resume_builder.cli:main_builder"
 [tool.setuptools.packages.find]
 where = ["src"]
 
-# Templates live in subdirectories now (one per template, plus _shared), so they
-# have to be named explicitly or a non-editable install would ship none.
+# Templates live in subdirectories (one per template, plus _shared), so they have
+# to be named explicitly or a non-editable install would ship none.
 [tool.setuptools.package-data]
 resume_builder = ["templates/*/*.tex.j2", "templates/*/template.json"]
 

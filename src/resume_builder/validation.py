@@ -50,9 +50,8 @@ def load_schema(path: Path | None = None) -> dict:
 def confidential_terms() -> list[str]:
     """Terms that must never appear in a rendered resume.
 
-    ``data/master_resume.json`` deliberately no longer records the withheld
-    Intel customer identities, so the denylist cannot live there. It is read
-    from ``data/confidential_terms.txt`` (one term per line, ``#`` comments
+    ``data/master_resume.json`` deliberately omits withheld customer
+    identities, so the denylist cannot live there. It is read from ``data/confidential_terms.txt`` (one term per line, ``#`` comments
     allowed), which is gitignored precisely so the names stay out of version
     control. ``RESUME_CONFIDENTIAL_TERMS`` overrides the path.
 

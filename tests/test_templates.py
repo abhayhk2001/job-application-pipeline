@@ -1,10 +1,9 @@
 """Per-section template render tests.
 
 Each test renders one section partial against the render-ready fixture and
-asserts the LaTeX idiom used by the current base resume (``../Resume/resume.tex``):
+asserts the LaTeX idiom used by the base resume (``tests/fixtures/resume.pdf``):
 inline ``tabular*`` blocks sized to ``\\linewidth``, item text wrapped in
-``\\resumesub{...}``, and no ``\\resumeSubheading``-style custom commands, which
-that base deleted.
+``\\resumesub{...}``, and no ``\\resumeSubheading``-style custom commands.
 """
 
 from __future__ import annotations
@@ -118,7 +117,7 @@ def test_skills_uses_resumesub_block(fixture_resume):
 
 
 def test_achievements_render_as_plain_strings():
-    """Achievement items are plain strings now, with the same markdown-link rule."""
+    """Achievement items are plain strings, with the same markdown-link rule."""
     section = {
         "type": "achievements",
         "heading": "Achievements",

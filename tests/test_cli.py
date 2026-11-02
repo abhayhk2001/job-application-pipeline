@@ -1,7 +1,7 @@
 """CLI tests: the exit-code contract, and where the files land.
 
-``resume-render`` keeps its behaviour; ``resume-builder`` is the one-shot
-command that writes the PDF beside the input and leaves nothing else there.
+``resume-builder`` is the one-shot command that writes the PDF beside the input
+and leaves nothing else there.
 """
 
 from __future__ import annotations
@@ -129,8 +129,7 @@ def test_builder_workdir_keeps_the_intermediates(
     assert (tmp_path / "resume.pdf").exists()
 
 
-def test_render_still_writes_to_out(resume_copy: Path, tmp_path: Path, require_tectonic):
-    """The refactor must not have moved resume-render's output."""
+def test_render_writes_to_out(resume_copy: Path, tmp_path: Path, require_tectonic):
     out = tmp_path / "out.pdf"
     assert main(["-i", str(resume_copy), "-o", str(out)]) == EXIT_OK
     assert out.exists()

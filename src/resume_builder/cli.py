@@ -22,9 +22,9 @@ Two commands share that contract:
 ``resume-builder``
     The one-shot one. It takes an input and nothing else, and writes the
     PDF next to the input under the input's own name: ``r.json`` becomes
-    ``r.pdf`` in the same directory. The intermediate ``.tex`` and the
-    LaTeX log go to a temporary directory that is removed afterwards, so
-    the PDF is the only file left behind.
+    ``r.pdf`` in the same directory. The intermediate ``.tex`` goes to a
+    temporary directory that is removed afterwards, so the PDF is the only
+    file left behind.
 """
 
 from __future__ import annotations
@@ -391,9 +391,8 @@ def main_builder(argv: list[str] | None = None) -> int:
         print(f"error: {e}", file=sys.stderr)
         return EXIT_BAD_INPUT
 
-    # The .tex and the LaTeX log are build noise: they go to a temporary
-    # directory unless the caller asks for them explicitly, so the input's
-    # directory ends up holding the PDF and nothing else.
+    # The .tex goes to a temporary directory unless the caller asks to keep it,
+    # so the input's directory ends up holding the PDF and nothing else.
     with tempfile.TemporaryDirectory(prefix="resume-builder-") as tmp:
         workdir = args.workdir or Path(tmp)
         result, code = _build(

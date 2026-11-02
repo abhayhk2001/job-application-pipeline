@@ -11,7 +11,7 @@ from resume_builder.api import build_resume
 from resume_builder.pdf_compiler import compile_pdf
 from resume_builder.renderer import render_to_file
 
-# Differences we deliberately do NOT reproduce from ../Resume/resume.tex, as
+# Differences we deliberately do NOT reproduce from tests/fixtures/resume.pdf, as
 # normalised text. Each pair is (what the base says, what we emit). The parity
 # test applies these to the base and then demands an exact match, so a new
 # divergence cannot slip through unnoticed.
@@ -74,9 +74,8 @@ def test_pdf_matches_the_base_resume_except_for_known_defects(
 ):
     """Format parity: our PDF must read identically to the hand-built base.
 
-    This is the test that catches ../Resume/resume.tex drifting away from the
-    templates again. If it fails, either the base changed and the templates
-    need porting, or a template regressed.
+    If it fails, either the base changed and the templates need porting, or a
+    template regressed.
     """
     result = build_resume(fixture_resume, tmp_path)
     ours = _normalize(_pdf_text(result.pdf_path))

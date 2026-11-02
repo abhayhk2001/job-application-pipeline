@@ -53,8 +53,7 @@ def render(
 
     ``template`` names the template to use, overriding the resume's own
     ``template`` key; ``templates_dir`` adds a directory to the front of the
-    search path. An ``env`` passed explicitly wins over both -- that seam is
-    how the template tests render a single partial in isolation.
+    search path. An ``env`` passed explicitly wins over both.
     """
     if check:
         problems = validate(resume)

@@ -1,10 +1,4 @@
-"""The one function that knows how to turn resume JSON into artefacts.
-
-Everything else is a shell over this: the CLI today, and -- if the service in
-``README.md`` gets built -- a REST route or an MCP tool tomorrow. Nothing here
-imports a web framework, and nothing here decides where the artefacts should
-ultimately live; callers at the edge do that.
-"""
+"""The one function that knows how to turn resume JSON into artefacts."""
 
 from __future__ import annotations
 
@@ -30,9 +24,7 @@ WARMUP_TIMEOUT_SECONDS = 300
 class BuildResult:
     """What a build produced.
 
-    ``pdf_path`` is ``None`` for a TeX-only build. When object storage is
-    added, the edge adapter maps ``pdf_path`` to a URL; the renderer stays
-    unaware of it.
+    ``pdf_path`` is ``None`` for a TeX-only build.
 
     ``template`` is the name actually used, after the resume's own ``template``
     key and any override have been reconciled -- worth reporting back, because
