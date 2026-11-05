@@ -1091,6 +1091,743 @@
         "Surfaced the influence of bias and noise on AI systems, which motivated his interest in interpretable ML."
       ],
       "artifacts": []
+    },
+    {
+      "id": "proj.unifrost-lms",
+      "title": "Unifrost Drona learning management and assessment platform",
+      "engagement_type": "Personal venture (startup); listed under projects, not experience",
+      "organization": "Unifrost Eduverse",
+      "role": null,
+      "team_context": "3-member startup team; candidate responsible for backend and database management",
+      "period": {
+        "start": "2026-01",
+        "end": "ongoing"
+      },
+      "situation": "A multi-tenant learning management and assessment platform connects institute administration, staff/student web portals, a shared Android/iOS application, online/paper assessments, analytics and fee workflows. Supporting systems include AI-assisted question ingestion and approval-controlled engineering automation. Implementation is repository-observed. Candidate-confirmed pilot use involved one public school in Bengaluru, grades 11-12, for about 2 months. Live operating environments and broader impact remain unconfirmed.",
+      "constraints": [
+        "Institute data and role-specific workflows require tenant/context scoping.",
+        "Timed attempts must reconcile server windows with mobile interruptions and intermittent connectivity.",
+        "Paper recognition must preserve printed ordering, perspective calibration and human corrections.",
+        "Mathematics/diagrams require rendered-content ingestion and platform-aware display.",
+        "Model-generated plans/SQL and provider usage require validation and bounded execution/accounting.",
+        "Agent changes require human decision provenance, regression evidence and controlled integration."
+      ],
+      "actions": [
+        "Modeled tenant-owned academic, assessment and finance data with transaction-local tenant context, PostgreSQL RLS policies and separate runtime/platform database roles.",
+        "Implemented resource-based Express APIs with shared validation, response and transaction patterns, token authentication, account-activation checks and route-level database regression tests.",
+        "Built staff/student web workflows with shared API modules, reusable administrative UI, mathematical-content rendering and staged CSV onboarding into academic enrollment.",
+        "Implemented template-based, seeded assessment generation with topic/type/difficulty/mark constraints, shortfall reporting, previews, item replacement and repeated-confirmation lookup.",
+        "Implemented assessment lifecycle controls and shared online/paper scoring, protected manual corrections, written-PDF submission workflows and gated result/analytics access.",
+        "Shared student portal, assessment and result-review behavior across Android/iOS with Kotlin/Compose Multiplatform, platform networking, native credential storage and Ktor token refresh.",
+        "Connected server-windowed attempt APIs to a Kotlin state machine, Room-backed answer buffering, timestamp reconciliation and a server-anchored countdown for interruption recovery.",
+        "Added Android soft-proctoring controls and durable interruption telemetry, with iOS assessment-session bridges and a capability-dependent fallback connected to staff review.",
+        "Integrated marker-based optical mark recognition (OMR), quality/uncertainty checks, asynchronous upload processing and human correction with the shared paper/online grading model.",
+        "Implemented validated natural-language analytics plans, follow-up context, tenant/user/session workspace state and saved table/chart/insight views across backend and web.",
+        "Implemented SQL parsing, tenant/limit rewriting and bounded analytics execution; whole-AST validation and read-only transaction controls are present only in the newer cached backend revision.",
+        "Centralized LLM providers and token/cost accounting, separated failed-delivery costs from tenant billing, and added tenant budget checks, administration and usage views.",
+        "Built screenshot-based question ingestion with provenance, separate transcription/verification, resumable manifests and content/image validation; newer cached code adds atomic accepted-row database imports.",
+        "Implemented typed queue workers, retry/backoff policies, lifecycle-based reminders, notification records and email/SMS adapters with an isolated local delivery sink.",
+        "Modeled fees/installments and staff-reviewed UPI claims, added PhonePe integration code and encrypted tenant credentials, and connected payment/assessment documents to S3 storage.",
+        "Prepared local/test and deployment configurations, database backup/restore commands, tenant onboarding procedures and reproducible fixtures, with staging reports distinguished from confirmed operation.",
+        "Implemented a ledger-driven agent engineering cycle with human approval provenance, role/path push controls and a desktop review tool with atomic saves and conflict-aware decision synchronization.",
+        "Maintained specification-driven workflows, cross-repository OpenAPI checks and CI/regression gates, plus independent persona-journey observation across web/mobile surfaces."
+      ],
+      "technologies_used": [
+        "ADB tooling",
+        "Amazon S3",
+        "Android",
+        "Anthropic SDK",
+        "AWS EC2",
+        "BullMQ",
+        "Claude Code",
+        "Compose Multiplatform",
+        "Cursor",
+        "Docker",
+        "ElastiCache",
+        "Express",
+        "Faker",
+        "FastAPI",
+        "GitHub Actions",
+        "iOS Keychain",
+        "Jest",
+        "Kotlin",
+        "Next.js",
+        "Nginx",
+        "Node.js",
+        "OpenAI SDK",
+        "OpenCV",
+        "OpenSpec",
+        "Playwright",
+        "PostgreSQL",
+        "PostgreSQL RLS",
+        "Prisma",
+        "Python",
+        "Radix UI",
+        "Railway",
+        "React",
+        "Recharts",
+        "Redis",
+        "SMTP",
+        "SQL migrations",
+        "Supabase PostgreSQL",
+        "Tailwind CSS",
+        "Turbine",
+        "Twilio",
+        "TypeScript",
+        "UPI",
+        "Vercel"
+      ],
+      "metrics": [
+        {
+          "id": "metric.unifrost.users-served",
+          "name": "Real users served",
+          "value": "About 50 students and 7-8 teachers (approximate)",
+          "unit": "people",
+          "scope": "One public school in Bengaluru, grades 11-12, about 2 months of pilot use"
+        },
+        {
+          "id": "metric.unifrost.institutions-served",
+          "name": "Real institutions served",
+          "value": 1,
+          "unit": "institution",
+          "scope": "One public school in Bengaluru; institution name not required"
+        },
+        {
+          "id": "metric.unifrost.omr-accuracy",
+          "name": "Representative OMR recognition accuracy",
+          "value": "98% accuracy (IoU metric)",
+          "unit": "IoU accuracy on phone-captured OMR images",
+          "sample_size": "About 1,250 images from an OMR picture database, captured on phones",
+          "latency": "1-2 seconds"
+        },
+        {
+          "id": "metric.unifrost.time-saved",
+          "name": "Measured operational or engineering time saved",
+          "value": null,
+          "unit": "candidate-defined period and hours"
+        }
+      ],
+      "outcomes": [
+        "Repository code connects academic administration, assessment and fee workflows across staff/student surfaces.",
+        "Online and recognized paper responses feed shared scoring facts; manual corrections are retained.",
+        "Android/iOS source shares application behavior while platform-specific validation/release work remains open.",
+        "Analytics plans produce workspace blocks, and ingestion manifests retain source/verification state.",
+        "The engineering ledger records human decisions, agent work and verification states."
+      ],
+      "artifacts": [
+        {
+          "id": "artifact.unifrost.backend",
+          "type": "repository",
+          "path": "drona-gandiva",
+          "description": "Express API, Prisma schema and migrations, queue workers, OMR service, ingestion and operational tooling."
+        },
+        {
+          "id": "artifact.unifrost.web",
+          "type": "repository",
+          "path": "drona-shara",
+          "description": "Next.js staff and student portals, reusable UI, analytics and assessment surfaces."
+        },
+        {
+          "id": "artifact.unifrost.mobile",
+          "type": "repository",
+          "path": "drona-mobile",
+          "description": "Shared Kotlin/Compose Android and iOS student application and platform proctoring code."
+        },
+        {
+          "id": "artifact.unifrost.contract",
+          "type": "repository",
+          "path": "drona-yuddha-shastra",
+          "description": "Versioned OpenAPI contract, cross-file checks and manual QA checklists."
+        },
+        {
+          "id": "artifact.unifrost.review-tool",
+          "type": "desktop_tool_sources",
+          "path": "scripts",
+          "description": "Python/Tkinter bug-review application, parser, configuration, theme and tests."
+        }
+      ],
+      "technical_details": [
+        {
+          "id": "proj.unifrost-lms.tenant-persistence-and-roles",
+          "subsystem": "backend_and_database",
+          "purpose": "Scope academic, assessment and finance data to institutes.",
+          "implementation_description": "Prisma models carry tenant ownership and composite identifiers. executeWithTenant sets transaction-local app.current_tenant before queries. Migrations add PostgreSQL RLS policies and restricted runtime/platform roles; a separate platform client supports cross-tenant operations.",
+          "actions": [
+            "Applied tenant context within database transactions.",
+            "Separated ordinary tenant queries, privileged platform operations and migration ownership."
+          ],
+          "technologies_used": [
+            "PostgreSQL",
+            "PostgreSQL Row Level Security",
+            "Prisma",
+            "SQL migrations"
+          ],
+          "integration_points": [
+            "Academic records and enrollment",
+            "Authentication",
+            "Background jobs and platform administration"
+          ],
+          "implementation_status": "implemented_in_checkout",
+          "material_limitations": [
+            "Effective RLS depends on the deployed database role; owner/BYPASSRLS connections can bypass policies, and FORCE RLS/runtime-role assertions are not established.",
+            "Tenant isolation is an implementation intent, not a comprehensive security guarantee."
+          ]
+        },
+        {
+          "id": "proj.unifrost-lms.backend-api-and-validation",
+          "subsystem": "backend_and_database",
+          "purpose": "Expose validated resource APIs and authenticated user context.",
+          "implementation_description": "Express resource routers share response/pagination helpers, asynchronous exception handling, database-error mapping and Zod/semantic checks. token access/refresh flows resolve student identities; middleware rechecks account activation and applies role/context policies. Jest/Supertest suites exercise routes against PostgreSQL.",
+          "actions": [
+            "Standardized API responses and field/database error handling.",
+            "Connected account, role and student identity checks to request handling."
+          ],
+          "technologies_used": [
+            "Node.js",
+            "TypeScript",
+            "Express",
+            "Prisma",
+            "Zod",
+            "bcrypt",
+            "jsonwebtoken",
+            "Jest",
+            "Supertest"
+          ],
+          "integration_points": [
+            "Web and Ktor clients",
+            "Tenant persistence",
+            "OpenAPI contract"
+          ],
+          "implementation_status": "implemented_in_checkout",
+          "material_limitations": [
+            "Validation and authorization are not uniform across all routes.",
+            "Refresh tokens lack server-side rotation/revocation; default-secret fallbacks and flag-controlled first-password enforcement remain hardening gaps.",
+            "Newer login validation is in the cached backend revision, not the inspected checkout."
+          ]
+        },
+        {
+          "id": "proj.unifrost-lms.web-portals-and-api-client",
+          "subsystem": "web_application",
+          "purpose": "Connect staff and student academic workflows through shared browser components.",
+          "implementation_description": "Next.js 16/React 19 portals cover enrollment, syllabus planning, lectures, attendance, assessments and fees. Resource API modules share bearer-token requests and field errors. Tailwind semantic tokens and Radix primitives support tables, dialogs and charts; KaTeX renders mathematics. Student CSV onboarding stages editable rows, validation and enrollment.",
+          "actions": [
+            "Connected staff/student screens to academic and assessment resources.",
+            "Reused semantic tokens, responsive tables, dialogs and chart components.",
+            "Added formula rendering and row-level student-import feedback."
+          ],
+          "technologies_used": [
+            "Next.js",
+            "React",
+            "TypeScript",
+            "Tailwind CSS",
+            "Radix UI",
+            "Recharts",
+            "KaTeX",
+            "Papa Parse",
+            "CSV"
+          ],
+          "integration_points": [
+            "REST API and sessions",
+            "Academic plans, lectures and attendance",
+            "Student imports and enrollment"
+          ],
+          "implementation_status": "implemented_in_checkout",
+          "material_limitations": [
+            "The browser client redirects on 401; stored refresh tokens do not establish transparent browser refresh.",
+            "Responsive/accessibility issues remain; the token audit does not prove WCAG conformance.",
+            "Student imports buffer input in memory; large-file behavior is not established."
+          ]
+        },
+        {
+          "id": "proj.unifrost-lms.test-generation",
+          "subsystem": "assessments",
+          "purpose": "Assemble inspectable assessment drafts under authoring constraints.",
+          "implementation_description": "Question banks separate reusable content from test-item placement and marks. Templates and tag/topic eligibility feed seeded selection with a shared used-question set. Strict requests fail on shortfalls; non-strict requests return warnings/placeholders. Preview and item replacement precede confirmation; preview identity supports repeated-confirmation lookup.",
+          "actions": [
+            "Modeled reusable questions and question/section/test templates.",
+            "Validated eligibility and selected questions against count/mark constraints.",
+            "Exposed draft preview, replacement and confirmation operations."
+          ],
+          "technologies_used": [
+            "TypeScript",
+            "Prisma",
+            "PostgreSQL",
+            "React",
+            "Deterministic seeded selection"
+          ],
+          "integration_points": [
+            "Question bank and syllabus topics",
+            "Authoring UI",
+            "Draft test lifecycle"
+          ],
+          "implementation_status": "implemented_in_checkout",
+          "material_limitations": [
+            "Selection uses existing questions and rules, not generative model authorship.",
+            "Preview lookup does not establish race-free exactly-once creation; non-strict placeholders must be resolved before participation."
+          ]
+        },
+        {
+          "id": "proj.unifrost-lms.test-lifecycle-and-administration",
+          "subsystem": "assessments",
+          "purpose": "Coordinate assessment editing, scoring and released results.",
+          "implementation_description": "A shared lifecycle governs draft authoring, sealed structure, participation, evaluation and release. Online and OMR responses write common item scores/totals with bounded negative marks and protected manual overrides. Written-answer PDFs use presigned upload/completion and staff marking. Finalized score facts and interaction telemetry feed summaries and review screens.",
+          "actions": [
+            "Applied state-dependent edit, participation and result-release gates.",
+            "Shared marking rules and preserved manual overrides during regrading.",
+            "Connected written submissions and finalized score/interaction summaries to staff review."
+          ],
+          "technologies_used": [
+            "TypeScript",
+            "Express",
+            "Prisma",
+            "PostgreSQL",
+            "BullMQ",
+            "Amazon S3 presigned URLs",
+            "React"
+          ],
+          "integration_points": [
+            "Test authoring and attempts",
+            "OMR evaluation",
+            "Written marking and analytics"
+          ],
+          "implementation_status": "implemented_in_checkout",
+          "material_limitations": [
+            "Written PDFs require manual evaluation; they are not automatically recognized or graded.",
+            "Declared upload metadata/key scope does not verify PDF bytes; telemetry does not establish exam integrity.",
+            "Mock student-list sparklines are excluded from real analytics claims; no learning gain is established. Legacy penalty cleanup exists only in the newer cached ref."
+          ]
+        },
+        {
+          "id": "proj.unifrost-lms.mobile-shared-platform",
+          "subsystem": "mobile_application",
+          "purpose": "Share the student application while retaining native platform integrations.",
+          "implementation_description": "Kotlin Multiplatform separates domain, networking, storage and feature modules; Compose screens/ViewModels use Koin, Coroutines and StateFlow. Android and SwiftUI hosts embed the shared app. Ktor uses platform engines and bearer refresh. Portal/result views share behavior; Android Keystore-backed storage and iOS Keychain implement the token-store interface.",
+          "actions": [
+            "Shared mobile screens, navigation, ViewModels and domain behavior.",
+            "Bound networking and credential storage to Android/iOS implementations.",
+            "Connected portal, written-upload and question-result review flows."
+          ],
+          "technologies_used": [
+            "Kotlin",
+            "Kotlin Multiplatform",
+            "Compose Multiplatform",
+            "Koin",
+            "Coroutines",
+            "StateFlow",
+            "Ktor",
+            "SwiftUI",
+            "Android Keystore",
+            "iOS Keychain"
+          ],
+          "integration_points": [
+            "REST contract and authentication",
+            "Android/iOS hosts",
+            "Student portal and results"
+          ],
+          "implementation_status": "implemented_in_checkout",
+          "material_limitations": [
+            "Implemented shared/iOS source does not establish App Store release or complete physical-device parity; migration/release checks remain open.",
+            "Native storage does not fix backend token revocation/rotation gaps; some iOS sign-out/payment-return checks remain open."
+          ]
+        },
+        {
+          "id": "proj.unifrost-lms.mobile-attempt-recovery",
+          "subsystem": "mobile_application",
+          "purpose": "Recover timed assessment state across interruptions and intermittent connectivity.",
+          "implementation_description": "Server APIs define start/end/grace windows and classify stale/invalid answer writes. A pure Kotlin reducer drives attempt transitions. AnswerBuffer persists interactions to Room before debounced/explicit flushes under a mutex; local/server state merges by saved timestamp with server ties winning. ServerClock anchors countdowns to server time plus monotonic elapsed time.",
+          "actions": [
+            "Persisted answer changes before scheduling network flushes.",
+            "Reconciled local/server state on resume and separated stale/invalid writes.",
+            "Tested timing, answer merging and attempt transitions."
+          ],
+          "technologies_used": [
+            "Kotlin",
+            "Room",
+            "SQLite",
+            "Coroutines",
+            "Ktor",
+            "TypeScript",
+            "Prisma",
+            "kotlin.test",
+            "Turbine"
+          ],
+          "integration_points": [
+            "Attempt APIs",
+            "Local answer storage",
+            "Connectivity and proctoring lifecycle"
+          ],
+          "implementation_status": "checkout_implementation_with_newer_ref_hardening",
+          "material_limitations": [
+            "Recovery depends on server acceptance windows; lossless offline submission is not established.",
+            "The checkout late-flush path trusts client timestamps and can alter submitted scores; the newer cached ref adds bounded catch-up, finalized-state refusal and auditing while retaining limited timestamp trust.",
+            "The clean-buffer heartbeat path and release-build/device recovery checks remain qualified."
+          ]
+        },
+        {
+          "id": "proj.unifrost-lms.android-soft-proctoring",
+          "subsystem": "mobile_application",
+          "purpose": "Record attempt interruptions through platform-specific proctoring bindings.",
+          "implementation_description": "Android integrates permission/service-readiness gates, screen pinning, secure-window controls, a foreground watchdog and durable interruption telemetry. Swift/Kotlin bridges connect iOS assessment sessions, capture/call signals and restart markers. iOS falls back to weaker telemetry controls when assessment-session capability is unavailable; staff review events through the attempt API.",
+          "actions": [
+            "Added platform readiness gates, interruption signals and persisted event flushing.",
+            "Bridged iOS assessment/capture/call lifecycle behavior into shared Kotlin.",
+            "Kept explicit unproctored/fallback behavior distinct from stronger platform controls."
+          ],
+          "technologies_used": [
+            "Android",
+            "Kotlin",
+            "Foreground Service",
+            "UsageStats",
+            "WorkManager",
+            "Swift",
+            "Kotlin/Native",
+            "AEAssessmentSession",
+            "BGAppRefreshTask"
+          ],
+          "integration_points": [
+            "Shared attempt screen",
+            "Proctoring event API",
+            "Staff review timeline"
+          ],
+          "implementation_status": "implemented_with_open_platform_validation",
+          "material_limitations": [
+            "Soft proctoring does not establish cheating prevention or device-owner lockdown; OS/OEM restrictions affect behavior.",
+            "Apple entitlement approval, physical iPhone assessment/capture/call/reboot checks and TestFlight/App Store release remain open.",
+            "Earlier device reports do not establish post-migration release validation."
+          ]
+        },
+        {
+          "id": "proj.unifrost-lms.omr-computer-vision",
+          "subsystem": "paper_assessments",
+          "purpose": "Convert photographed paper responses into reviewable assessment scores.",
+          "implementation_description": "Printed ordering and template geometry align eligible MCQ rows. Browser capture/upload queues a Python FastAPI recognizer: OpenCV fiducial detection and four-point homography correct perspective, OMRChecker thresholds read bubbles, and blur/resolution/uncertainty checks flag problems. Stored reads feed later lifecycle-driven grading; staff corrections retain manual-override protection.",
+          "actions": [
+            "Aligned printed question order, sheet geometry and score mapping.",
+            "Implemented perspective correction and threshold-based bubble recognition.",
+            "Separated capture, recognition, review and deferred grading."
+          ],
+          "technologies_used": [
+            "Python",
+            "FastAPI",
+            "OpenCV",
+            "NumPy",
+            "OMRChecker",
+            "React",
+            "Canvas",
+            "BullMQ",
+            "Prisma"
+          ],
+          "integration_points": [
+            "Camera/file uploads and object storage",
+            "Printed test ordering",
+            "Staff review and shared scoring"
+          ],
+          "implementation_status": "implemented_with_open_device_validation",
+          "material_limitations": [
+            "Recognition is heuristic computer vision, not a trained model; confidence is not a calibrated probability. The candidate-confirmed 98% IoU measurement is scoped to the recorded phone-image dataset and does not establish general recognition accuracy.",
+            "Only the current 100-row single-sheet layout and eligible single-choice rows are evidenced; guided physical-phone capture remains unvalidated.",
+            "Upload/decode bounds and review photo access remain limited; local historical photo checks do not establish general device coverage."
+          ]
+        },
+        {
+          "id": "proj.unifrost-lms.ai-analytics-planning",
+          "subsystem": "product_ai",
+          "purpose": "Turn natural-language requests into persistent analytical workspaces.",
+          "implementation_description": "The LLM planner receives schema/conversation context and emits QUERY, VISUALIZE and INSIGHT steps validated by Zod. An orchestrator executes steps and returns typed blocks. Redis scopes active state by tenant/user/session; PostgreSQL stores named snapshots/history. React/Recharts render tables, charts and insights with follow-up context, restore and error states.",
+          "actions": [
+            "Validated structured execution plans before dispatch.",
+            "Connected follow-up prompts to prior workspace/query context.",
+            "Persisted saved views and rendered structured analytical blocks."
+          ],
+          "technologies_used": [
+            "TypeScript",
+            "Zod",
+            "Anthropic SDK",
+            "OpenAI SDK",
+            "Redis",
+            "Prisma",
+            "PostgreSQL",
+            "React",
+            "Recharts"
+          ],
+          "integration_points": [
+            "SQL engine",
+            "Provider usage accounting",
+            "Saved workspaces and analytics UI"
+          ],
+          "implementation_status": "implemented_in_checkout",
+          "material_limitations": [
+            "Provider integration/orchestration does not establish model training or analytical correctness.",
+            "Redis failure can interrupt session continuity; chart inference depends on data shape.",
+            "Teacher-scope and provider-context/data-minimization concerns remain; unrestricted access/privacy guarantees are not supported."
+          ]
+        },
+        {
+          "id": "proj.unifrost-lms.ai-analytics-sql-controls",
+          "subsystem": "product_ai",
+          "purpose": "Constrain model-generated SQL before tenant database execution.",
+          "implementation_description": "The checkout parses SELECT queries, checks top-level table access, rewrites tenant predicates/row limits and applies a statement timeout. The pinned newer backend ref separately adds whole-AST traversal, nested/schema-qualified query rejection, function allowlisting, parenthesized predicates and read-only transactions with focused regression tests.",
+          "actions": [
+            "Validated query shape and bounded result size/execution time.",
+            "Distinguished checkout controls from newer AST/read-only hardening."
+          ],
+          "technologies_used": [
+            "TypeScript",
+            "node-sql-parser",
+            "PostgreSQL",
+            "Prisma raw SQL",
+            "Jest",
+            "Supertest"
+          ],
+          "integration_points": [
+            "Analytics execution plans",
+            "Tenant database context",
+            "Result blocks"
+          ],
+          "implementation_status": "checkout_implementation_with_newer_ref_hardening",
+          "material_limitations": [
+            "The checkout has reported nested-expression and OR-precedence gaps; newer protections are not in its working tree.",
+            "Isolation depends on deployed RLS/runtime roles; focused controls/tests do not establish comprehensive SQL safety."
+          ]
+        },
+        {
+          "id": "proj.unifrost-lms.llm-provider-metering-and-failures",
+          "subsystem": "product_ai",
+          "purpose": "Account for AI usage, delivery failures and tenant budget settings.",
+          "implementation_description": "A common service normalizes Anthropic/OpenAI completions, token usage and request IDs. Decimal-based events/monthly aggregates distinguish provider cost, billable delivery and absorbed failures; requests become billable after delivery. Tenant settings and pre-request usage checks expose enablement, budget/overage thresholds and operator/tenant usage views.",
+          "actions": [
+            "Recorded per-call usage, aggregate costs and failure stages.",
+            "Marked delivered results billable separately from incurred provider cost.",
+            "Connected quota settings and operator controls to tenant usage screens."
+          ],
+          "technologies_used": [
+            "Anthropic SDK",
+            "OpenAI SDK",
+            "TypeScript",
+            "Prisma Decimal",
+            "PostgreSQL",
+            "Express",
+            "React",
+            "Recharts"
+          ],
+          "integration_points": [
+            "Analytics planner",
+            "Platform service-key routes",
+            "Tenant AI usage dashboard"
+          ],
+          "implementation_status": "implemented_in_checkout",
+          "material_limitations": [
+            "Configured prices are accounting inputs; actual spend, savings and billing reconciliation are unconfirmed.",
+            "Caps use billable cost, exclude absorbed failed-request cost and lack concurrent reservations; they are not strict provider-spend bounds."
+          ]
+        },
+        {
+          "id": "proj.unifrost-lms.vision-question-ingestion",
+          "subsystem": "question_ingestion",
+          "purpose": "Build question-bank data with provenance and resumable verification.",
+          "implementation_description": "Playwright captures rendered exam questions for Claude Code vision-assisted transcription into CSV/LaTeX. Manifests retain source/row identity and verification states; separate sessions compare transcription and captured answer keys. Shared linting, locked JSONL updates, image review and recapture support recovery. Only the newer cached ref adds a transaction covering accepted question rows and tags before asynchronous image jobs.",
+          "actions": [
+            "Separated capture, agent transcription, verification and flagged-row resolution.",
+            "Validated structured rows/math and serialized manifest updates.",
+            "Distinguished newer transactional database persistence from rejected rows and later image work."
+          ],
+          "technologies_used": [
+            "Playwright",
+            "TypeScript",
+            "Claude Code",
+            "CSV",
+            "JSONL",
+            "LaTeX",
+            "File locks",
+            "Amazon S3",
+            "Prisma",
+            "PostgreSQL"
+          ],
+          "integration_points": [
+            "Rendered educational sources",
+            "Question-bank imports",
+            "Image storage and syllabus mapping"
+          ],
+          "implementation_status": "checkout_implementation_with_newer_ref_hardening",
+          "material_limitations": [
+            "An agent reads screenshots; the scripts are not autonomous OCR, and verified status does not establish measured transcription accuracy.",
+            "Transactional import is only in the newer cached ref; it covers accepted database rows/tags, not rejected rows or asynchronous images. Repeated successful uploads can duplicate data.",
+            "Dataset/fixture counts and staging notes are not confirmed adoption or throughput metrics."
+          ]
+        },
+        {
+          "id": "proj.unifrost-lms.queues-reminders-and-notifications",
+          "subsystem": "queues_and_communications",
+          "purpose": "Separate background processing and communications from request handling.",
+          "implementation_description": "Typed BullMQ handlers run in a separate worker over Redis with retry/backoff/failure retention and cluster-compatible key prefixes. Schedules and lifecycle hooks drive reminders, OMR and report/image jobs; notification records retain recipient status. Nodemailer/SMTP and Twilio adapters share an opt-in test-only delivery sink that avoids real sends.",
+          "actions": [
+            "Registered typed workers and repeatable/lifecycle-triggered jobs.",
+            "Centralized provider delivery and observable test-only output."
+          ],
+          "technologies_used": [
+            "Node.js",
+            "TypeScript",
+            "BullMQ",
+            "Redis",
+            "ioredis",
+            "Nodemailer",
+            "SMTP",
+            "Twilio",
+            "JSONL"
+          ],
+          "integration_points": [
+            "Assessment lifecycle and OMR",
+            "Fee installments",
+            "Notifications and reports"
+          ],
+          "implementation_status": "checkout_implementation_with_newer_ref_hardening",
+          "material_limitations": [
+            "The checkout reminder IDs contain unsupported colon patterns; only the newer cached ref includes the ID/drift fix, despite the issue being closed.",
+            "Development JSON transport and the test sink do not establish live delivery, throughput or success rates."
+          ]
+        },
+        {
+          "id": "proj.unifrost-lms.fees-and-installments",
+          "subsystem": "finance_and_operations",
+          "purpose": "Connect fee obligations, payment review and supporting object storage.",
+          "implementation_description": "Batch configurations, student fees and dated installments feed staff/student views. UPI claims retain reference/photo evidence and staff verification/void states with conflict checks. PhonePe code initiates sessions, polls and verifies callback signatures; tenant secrets use AES-256-GCM. Shared S3 helpers store evidence and issue signed upload/download URLs.",
+          "actions": [
+            "Connected fee balances and installment states to staff/student actions.",
+            "Added claim verification, settlement conflict checks and encrypted payment settings.",
+            "Centralized object operations and signed URLs for uploaded evidence."
+          ],
+          "technologies_used": [
+            "TypeScript",
+            "Express",
+            "Prisma",
+            "PostgreSQL Decimal",
+            "PhonePe",
+            "UPI",
+            "AES-256-GCM",
+            "AWS SDK for JavaScript v3",
+            "Amazon S3"
+          ],
+          "integration_points": [
+            "Student/staff payment views",
+            "Fee reminders",
+            "Assessment and payment uploads"
+          ],
+          "implementation_status": "implemented_with_known_integration_gap",
+          "material_limitations": [
+            "PhonePe callbacks are blocked by router authentication in the checkout; signature code does not establish working end-to-end settlement or merchant activation.",
+            "Authorization/numeric validation, settlement concurrency, amount/merchant checks and key rotation remain qualified; no revenue or accounting-completeness claim is supported.",
+            "Object ownership, declared-size enforcement and external-image SSRF concerns prevent a comprehensive storage-safety claim."
+          ]
+        },
+        {
+          "id": "proj.unifrost-lms.deployment-and-backups",
+          "subsystem": "finance_and_operations",
+          "purpose": "Document deployment environments, recovery and repeatable onboarding.",
+          "implementation_description": "Local tooling uses Docker-backed PostgreSQL, pg_dump snapshots/restores, reproducible academic/mobile seeds and an S3-compatible endpoint. AWS templates/runbooks describe EC2 API/worker processes behind Nginx/systemd, Supabase PostgreSQL, ElastiCache Redis and a Vercel frontend; Railway provides a migration-before-start alternative. Onboarding sequences tenant/admin setup, syllabus, imports and enrollment. An AWS test-VM configuration supports agent testing; newer history reports a staging data rollout.",
+          "actions": [
+            "Documented runtime versus migration connections and API/worker deployment.",
+            "Provided local database snapshots/restores and targeted test fixtures.",
+            "Sequenced tenant setup, syllabus/question imports and enrollment."
+          ],
+          "technologies_used": [
+            "AWS EC2",
+            "ElastiCache",
+            "Supabase PostgreSQL",
+            "Vercel",
+            "Railway",
+            "Nginx",
+            "systemd",
+            "Docker",
+            "pg_dump",
+            "Prisma",
+            "Faker",
+            "S3-compatible storage"
+          ],
+          "integration_points": [
+            "Local development and automated testing",
+            "API/worker/database deployment",
+            "Tenant setup and recovery"
+          ],
+          "implementation_status": "configuration_and_runbooks_present",
+          "material_limitations": [
+            "These are configurations/runbooks and repository-reported staging events; actual running development/test/staging/production environments and production use remain unconfirmed.",
+            "No successful restoration, disaster recovery or availability is established.",
+            "Some seed paths reset demo tenants; fixtures are not real institutions/users and are not safe production onboarding by default."
+          ]
+        },
+        {
+          "id": "proj.unifrost-lms.automated-engineering-cycle",
+          "subsystem": "ai_assisted_engineering",
+          "purpose": "Coordinate agent changes with persistent human decisions and guarded integration.",
+          "implementation_description": "Claude Code reporter/fixer/QA/tester roles progress bugs through a resumable Markdown ledger under time/usage limits. Human decisions and Git-history provenance release work. Linux permissions and a push guard enforce role/path boundaries and coordinated API/spec checks. A Python/Tkinter review app displays evidence, saves decisions atomically and reapplies bug-ID decisions with backups during Git conflicts.",
+          "actions": [
+            "Orchestrated bug reporting, approved fixes, test maintenance and independent verification.",
+            "Enforced approval provenance and role-specific integration boundaries outside prompts.",
+            "Built evidence review and durable human-decision synchronization."
+          ],
+          "technologies_used": [
+            "Claude Code CLI",
+            "Bash",
+            "Python",
+            "Git",
+            "Linux permissions",
+            "Markdown ledger",
+            "Tkinter"
+          ],
+          "integration_points": [
+            "Human review",
+            "Regression suites and contracts",
+            "Guarded upstream integration"
+          ],
+          "implementation_status": "implemented_in_checkout",
+          "material_limitations": [
+            "Approval/push controls do not establish complete sandboxing; credential/environment exposure concerns remain.",
+            "Historical runs do not establish measured productivity or defect reduction; CLI authentication/usage limits affect operation.",
+            "The desktop app is ad-hoc signed and not notarized for general distribution; live synchronization/GUI behavior was not rerun. Historical Codex responsibilities remain unconfirmed."
+          ]
+        },
+        {
+          "id": "proj.unifrost-lms.quality-gates-and-contract-checks",
+          "subsystem": "ai_assisted_engineering",
+          "purpose": "Keep specifications, API contracts and behavioral checks aligned across surfaces.",
+          "implementation_description": "OpenSpec designs/tasks and Claude/Cursor instructions accompany a versioned OpenAPI repository consumed through submodules. Route/spec and operation-ownership checks complement backend PostgreSQL tests, web builds/Playwright journeys and mobile Kotlin/Android/iOS checks. Shipping scripts gate the final commit. A separate source-blind bubblewrap observer follows persona journeys and retains screenshots/friction evidence.",
+          "actions": [
+            "Connected specifications, task artifacts and API contracts to implementation checks.",
+            "Prepared repository-specific build/test gates and final-commit integration checks.",
+            "Added a source-blind observer path with retained user-journey evidence."
+          ],
+          "technologies_used": [
+            "OpenSpec",
+            "OpenAPI 3.1",
+            "Git submodules",
+            "Claude Code",
+            "Cursor",
+            "GitHub Actions",
+            "Jest",
+            "Supertest",
+            "Playwright",
+            "Gradle",
+            "kotlin.test",
+            "Xcodebuild",
+            "Redocly",
+            "bubblewrap",
+            "ADB tooling"
+          ],
+          "integration_points": [
+            "Backend/web/mobile repositories",
+            "Human PRs and agent push guard",
+            "Journey catalog and review ledger"
+          ],
+          "implementation_status": "implemented_in_checkout",
+          "material_limitations": [
+            "Archived tasks and gate configuration do not establish completed verification or currently passing builds/tests; guide/submodule versions can drift.",
+            "Cold-observer networking is shared for local testing, leaving residual local database reachability; some cross-surface/device acceptance remains open.",
+            "No complete acceptance pass or measured usability improvement is established."
+          ]
+        }
+      ],
+      "outcome_basis": "Repository-observed capabilities, plus candidate-stated pilot usage (one public school, about 2 months), approximate user counts, IoU OMR accuracy on about 1,250 phone-captured images, and the qualitative outcomes recorded in this entry. Time savings are not claimed.",
+      "note": "No formal title was held."
     }
   ],
   "publications": [
