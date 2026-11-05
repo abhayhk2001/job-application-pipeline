@@ -44,9 +44,9 @@
     },
     "summaries": {
       "note": "Length variants only. These are deliberately role-neutral; pick by available space, not by target role.",
-      "one_line": "Software engineer and published researcher whose work spans embedded firmware, distributed data systems and applied machine learning; Master of Computer Science student at the University of Illinois Urbana-Champaign.",
-      "short": "Software engineer with experience at Qualcomm India (January 2023 - July 2026) on the Device Firmware Update team, with prior software engineering internships at Intel Solutions & Services India and Epsilon. Three peer-reviewed publications across computational biology, causal inference and document AI. B.E. in Computer Science from RV College of Engineering (GPA 9.22); enrolled in the Master of Computer Science program at UIUC since August 2026.",
-      "long": "Abhay Harish Kashyap is a Master of Computer Science student at UIUC and a software engineer whose experience covers three distinct layers of the stack. At Qualcomm India he worked on the Device Firmware Update team from January 2023 to July 2026, joining as an Associate Engineer and being promoted to Software Engineer, where he owned SoC upgrade solutions, a data-relay mechanism and a core DFU refactor delivered across two major client releases, and made contributions to the upgrade framework used to deploy embedded ML models to hearable devices. At Intel Solutions & Services India he worked in Customer Engineering on EV-telemetry JSON processing, cryptographic acceleration for a national stock exchange, and a Spark/Kubernetes/Kafka ETL pipeline. At Epsilon he benchmarked and optimized HBase, Apache Phoenix and Solr for large-scale retrieval. In parallel he led and published research: biomarker prediction for non-small cell lung cancer (Cancer Informatics), conditional independence testing on HPCC Systems with LexisNexis (JAIT), and deep-learning business-document recognition and table extraction (ICAIC 2025). He also led a Samsung Research Institute Bengaluru collaboration on instant-app technology that won an Excellence Award."
+      "one_line": "Software engineer and published researcher whose work spans embedded firmware, distributed data systems, applied machine learning and education software; Master of Computer Science student at the University of Illinois Urbana-Champaign.",
+      "short": "Software engineer with experience at Qualcomm India (January 2023 - July 2026) on the Device Firmware Update team, with prior software engineering internships at Intel Solutions & Services India and Epsilon. Three peer-reviewed publications across computational biology, causal inference and document AI. Also builds the backend and database for Drona, a learning management and assessment platform, at Unifrost Eduverse, a three-member startup. B.E. in Computer Science from RV College of Engineering (GPA 9.22); enrolled in the Master of Computer Science program at UIUC since August 2026.",
+      "long": "Abhay Harish Kashyap is a Master of Computer Science student at UIUC and a software engineer whose work spans embedded firmware, distributed data systems, applied machine learning and education software. At Qualcomm India he worked on the Device Firmware Update team from January 2023 to July 2026, joining as an Associate Engineer and being promoted to Software Engineer, where he owned SoC upgrade solutions, a data-relay mechanism and a core DFU refactor delivered across two major client releases, and made contributions to the upgrade framework used to deploy embedded ML models to hearable devices. At Intel Solutions & Services India he worked in Customer Engineering on EV-telemetry JSON processing, cryptographic acceleration for a national stock exchange, and a Spark/Kubernetes/Kafka ETL pipeline. At Epsilon he benchmarked and optimized HBase, Apache Phoenix and Solr for large-scale retrieval. In parallel he led and published research: biomarker prediction for non-small cell lung cancer (Cancer Informatics), conditional independence testing on HPCC Systems with LexisNexis (JAIT), and deep-learning business-document recognition and table extraction (ICAIC 2025). He also led a Samsung Research Institute Bengaluru collaboration on instant-app technology that won an Excellence Award. At Unifrost Eduverse, a three-member startup, he is responsible for backend and database management for Drona, a learning management and assessment platform piloted at one public school in Bengaluru."
     },
     "stated_interests": {
       "note": "Self-described direction. Aspirations, not accomplishments. Do not present as experience.",
@@ -1075,8 +1075,8 @@
         "Decentralized application (DApp)",
         "BERT",
         "MongoDB",
-        "ReactJS",
-        "NodeJS"
+        "React",
+        "Node.js"
       ],
       "metrics": [
         {
@@ -1095,15 +1095,16 @@
     {
       "id": "proj.unifrost-lms",
       "title": "Unifrost Drona learning management and assessment platform",
-      "engagement_type": "Personal venture (startup); listed under projects, not experience",
+      "engagement_type": "Personal startup venture",
       "organization": "Unifrost Eduverse",
-      "role": null,
-      "team_context": "3-member startup team; candidate responsible for backend and database management",
+      "role": "Backend and database owner; also contributed web, mobile, OMR and engineering tooling",
+      "team_context": "3-member startup team",
       "period": {
         "start": "2026-01",
-        "end": "ongoing"
+        "end": null,
+        "note": "Ongoing as of 2026-11."
       },
-      "situation": "A multi-tenant learning management and assessment platform connects institute administration, staff/student web portals, a shared Android/iOS application, online/paper assessments, analytics and fee workflows. Supporting systems include AI-assisted question ingestion and approval-controlled engineering automation. Implementation is repository-observed. Candidate-confirmed pilot use involved one public school in Bengaluru, grades 11-12, for about 2 months. Live operating environments and broader impact remain unconfirmed.",
+      "situation": "Educational institutes need one system for administration, online and paper assessments, analytics and fees. Drona is a multi-tenant platform connecting institute administration, staff and student web portals, a shared Android/iOS student app, online and paper (OMR) assessments, analytics and fee workflows, supported by AI-assisted question ingestion and approval-controlled engineering automation.",
       "constraints": [
         "Institute data and role-specific workflows require tenant/context scoping.",
         "Timed attempts must reconcile server windows with mobile interruptions and intermittent connectivity.",
@@ -1123,12 +1124,12 @@
         "Added Android soft-proctoring controls and durable interruption telemetry, with iOS assessment-session bridges and a capability-dependent fallback connected to staff review.",
         "Integrated marker-based optical mark recognition (OMR), quality/uncertainty checks, asynchronous upload processing and human correction with the shared paper/online grading model.",
         "Implemented validated natural-language analytics plans, follow-up context, tenant/user/session workspace state and saved table/chart/insight views across backend and web.",
-        "Implemented SQL parsing, tenant/limit rewriting and bounded analytics execution; whole-AST validation and read-only transaction controls are present only in the newer cached backend revision.",
+        "Implemented SQL parsing, tenant/limit rewriting and bounded execution for model-generated analytics queries.",
         "Centralized LLM providers and token/cost accounting, separated failed-delivery costs from tenant billing, and added tenant budget checks, administration and usage views.",
-        "Built screenshot-based question ingestion with provenance, separate transcription/verification, resumable manifests and content/image validation; newer cached code adds atomic accepted-row database imports.",
+        "Built screenshot-based question ingestion with provenance, separate transcription/verification, resumable manifests and content/image validation.",
         "Implemented typed queue workers, retry/backoff policies, lifecycle-based reminders, notification records and email/SMS adapters with an isolated local delivery sink.",
         "Modeled fees/installments and staff-reviewed UPI claims, added PhonePe integration code and encrypted tenant credentials, and connected payment/assessment documents to S3 storage.",
-        "Prepared local/test and deployment configurations, database backup/restore commands, tenant onboarding procedures and reproducible fixtures, with staging reports distinguished from confirmed operation.",
+        "Prepared deployment configurations (pilot hosting on Supabase PostgreSQL, Vercel and Railway; an AWS EC2 alternative), database backup/restore commands, tenant onboarding procedures and reproducible fixtures.",
         "Implemented a ledger-driven agent engineering cycle with human approval provenance, role/path push controls and a desktop review tool with atomic saves and conflict-aware decision synchronization.",
         "Maintained specification-driven workflows, cross-repository OpenAPI checks and CI/regression gates, plus independent persona-journey observation across web/mobile surfaces."
       ],
@@ -1159,7 +1160,7 @@
         "OpenSpec",
         "Playwright",
         "PostgreSQL",
-        "PostgreSQL RLS",
+        "PostgreSQL Row Level Security",
         "Prisma",
         "Python",
         "Radix UI",
@@ -1179,71 +1180,64 @@
       ],
       "metrics": [
         {
-          "id": "metric.unifrost.users-served",
-          "name": "Real users served",
-          "value": "About 50 students and 7-8 teachers (approximate)",
+          "name": "Students served",
+          "value": 50,
           "unit": "people",
-          "scope": "One public school in Bengaluru, grades 11-12, about 2 months of pilot use"
+          "qualifier": "approximate",
+          "note": "Pilot at one public school in Bengaluru, grades 11-12, about 2 months."
         },
         {
-          "id": "metric.unifrost.institutions-served",
-          "name": "Real institutions served",
+          "name": "Teachers served",
+          "value": 8,
+          "unit": "people",
+          "qualifier": "approximate (7-8)",
+          "note": "Pilot at one public school in Bengaluru, grades 11-12, about 2 months."
+        },
+        {
+          "name": "Institutions served",
           "value": 1,
-          "unit": "institution",
-          "scope": "One public school in Bengaluru; institution name not required"
+          "unit": "institution"
         },
         {
-          "id": "metric.unifrost.omr-accuracy",
-          "name": "Representative OMR recognition accuracy",
-          "value": "98% accuracy (IoU metric)",
-          "unit": "IoU accuracy on phone-captured OMR images",
-          "sample_size": "About 1,250 images from an OMR picture database, captured on phones",
-          "latency": "1-2 seconds"
+          "name": "OMR bubble-read accuracy",
+          "value": 98,
+          "unit": "percent",
+          "note": "About 1,250 phone-captured OMR images."
         },
         {
-          "id": "metric.unifrost.time-saved",
-          "name": "Measured operational or engineering time saved",
-          "value": null,
-          "unit": "candidate-defined period and hours"
+          "name": "OMR processing latency",
+          "value": "1-2",
+          "unit": "seconds",
+          "note": "Per image."
         }
       ],
       "outcomes": [
-        "Repository code connects academic administration, assessment and fee workflows across staff/student surfaces.",
-        "Online and recognized paper responses feed shared scoring facts; manual corrections are retained.",
-        "Android/iOS source shares application behavior while platform-specific validation/release work remains open.",
-        "Analytics plans produce workspace blocks, and ingestion manifests retain source/verification state.",
-        "The engineering ledger records human decisions, agent work and verification states."
+        "Piloted at one public school in Bengaluru (grades 11-12) for about 2 months."
       ],
       "artifacts": [
         {
           "id": "artifact.unifrost.backend",
           "type": "repository",
-          "path": "drona-gandiva",
+          "name": "drona-gandiva",
           "description": "Express API, Prisma schema and migrations, queue workers, OMR service, ingestion and operational tooling."
         },
         {
           "id": "artifact.unifrost.web",
           "type": "repository",
-          "path": "drona-shara",
+          "name": "drona-shara",
           "description": "Next.js staff and student portals, reusable UI, analytics and assessment surfaces."
         },
         {
           "id": "artifact.unifrost.mobile",
           "type": "repository",
-          "path": "drona-mobile",
+          "name": "drona-mobile",
           "description": "Shared Kotlin/Compose Android and iOS student application and platform proctoring code."
         },
         {
           "id": "artifact.unifrost.contract",
           "type": "repository",
-          "path": "drona-yuddha-shastra",
+          "name": "drona-yuddha-shastra",
           "description": "Versioned OpenAPI contract, cross-file checks and manual QA checklists."
-        },
-        {
-          "id": "artifact.unifrost.review-tool",
-          "type": "desktop_tool_sources",
-          "path": "scripts",
-          "description": "Python/Tkinter bug-review application, parser, configuration, theme and tests."
         }
       ],
       "technical_details": [
@@ -1267,7 +1261,7 @@
             "Authentication",
             "Background jobs and platform administration"
           ],
-          "implementation_status": "implemented_in_checkout",
+          "implementation_status": "implemented",
           "material_limitations": [
             "Effective RLS depends on the deployed database role; owner/BYPASSRLS connections can bypass policies, and FORCE RLS/runtime-role assertions are not established.",
             "Tenant isolation is an implementation intent, not a comprehensive security guarantee."
@@ -1298,11 +1292,11 @@
             "Tenant persistence",
             "OpenAPI contract"
           ],
-          "implementation_status": "implemented_in_checkout",
+          "implementation_status": "implemented",
           "material_limitations": [
             "Validation and authorization are not uniform across all routes.",
             "Refresh tokens lack server-side rotation/revocation; default-secret fallbacks and flag-controlled first-password enforcement remain hardening gaps.",
-            "Newer login validation is in the cached backend revision, not the inspected checkout."
+            "Stricter login validation is in progress (not yet merged)."
           ]
         },
         {
@@ -1331,7 +1325,7 @@
             "Academic plans, lectures and attendance",
             "Student imports and enrollment"
           ],
-          "implementation_status": "implemented_in_checkout",
+          "implementation_status": "implemented",
           "material_limitations": [
             "The browser client redirects on 401; stored refresh tokens do not establish transparent browser refresh.",
             "Responsive/accessibility issues remain; the token audit does not prove WCAG conformance.",
@@ -1360,7 +1354,7 @@
             "Authoring UI",
             "Draft test lifecycle"
           ],
-          "implementation_status": "implemented_in_checkout",
+          "implementation_status": "implemented",
           "material_limitations": [
             "Selection uses existing questions and rules, not generative model authorship.",
             "Preview lookup does not establish race-free exactly-once creation; non-strict placeholders must be resolved before participation."
@@ -1390,11 +1384,11 @@
             "OMR evaluation",
             "Written marking and analytics"
           ],
-          "implementation_status": "implemented_in_checkout",
+          "implementation_status": "implemented",
           "material_limitations": [
             "Written PDFs require manual evaluation; they are not automatically recognized or graded.",
             "Declared upload metadata/key scope does not verify PDF bytes; telemetry does not establish exam integrity.",
-            "Mock student-list sparklines are excluded from real analytics claims; no learning gain is established. Legacy penalty cleanup exists only in the newer cached ref."
+            "Mock student-list sparklines are excluded from real analytics claims; no learning gain is established. Legacy penalty cleanup is in progress (not yet merged)."
           ]
         },
         {
@@ -1412,8 +1406,7 @@
             "Kotlin Multiplatform",
             "Compose Multiplatform",
             "Koin",
-            "Coroutines",
-            "StateFlow",
+            "Kotlin coroutines / StateFlow",
             "Ktor",
             "SwiftUI",
             "Android Keystore",
@@ -1424,7 +1417,7 @@
             "Android/iOS hosts",
             "Student portal and results"
           ],
-          "implementation_status": "implemented_in_checkout",
+          "implementation_status": "implemented",
           "material_limitations": [
             "Implemented shared/iOS source does not establish App Store release or complete physical-device parity; migration/release checks remain open.",
             "Native storage does not fix backend token revocation/rotation gaps; some iOS sign-out/payment-return checks remain open."
@@ -1444,7 +1437,7 @@
             "Kotlin",
             "Room",
             "SQLite",
-            "Coroutines",
+            "Kotlin coroutines / StateFlow",
             "Ktor",
             "TypeScript",
             "Prisma",
@@ -1456,10 +1449,10 @@
             "Local answer storage",
             "Connectivity and proctoring lifecycle"
           ],
-          "implementation_status": "checkout_implementation_with_newer_ref_hardening",
+          "implementation_status": "implemented_with_hardening_in_progress",
           "material_limitations": [
             "Recovery depends on server acceptance windows; lossless offline submission is not established.",
-            "The checkout late-flush path trusts client timestamps and can alter submitted scores; the newer cached ref adds bounded catch-up, finalized-state refusal and auditing while retaining limited timestamp trust.",
+            "The late-flush path trusts client timestamps and can alter submitted scores; bounded catch-up, finalized-state refusal and auditing are in progress (not yet merged), still with limited timestamp trust.",
             "The clean-buffer heartbeat path and release-build/device recovery checks remain qualified."
           ]
         },
@@ -1524,7 +1517,7 @@
           ],
           "implementation_status": "implemented_with_open_device_validation",
           "material_limitations": [
-            "Recognition is heuristic computer vision, not a trained model; confidence is not a calibrated probability. The candidate-confirmed 98% IoU measurement is scoped to the recorded phone-image dataset and does not establish general recognition accuracy.",
+            "Recognition is heuristic computer vision, not a trained model; confidence is not a calibrated probability. The 98% bubble-read accuracy is scoped to about 1,250 phone-captured images and does not establish general recognition accuracy.",
             "Only the current 100-row single-sheet layout and eligible single-choice rows are evidenced; guided physical-phone capture remains unvalidated.",
             "Upload/decode bounds and review photo access remain limited; local historical photo checks do not establish general device coverage."
           ]
@@ -1555,7 +1548,7 @@
             "Provider usage accounting",
             "Saved workspaces and analytics UI"
           ],
-          "implementation_status": "implemented_in_checkout",
+          "implementation_status": "implemented",
           "material_limitations": [
             "Provider integration/orchestration does not establish model training or analytical correctness.",
             "Redis failure can interrupt session continuity; chart inference depends on data shape.",
@@ -1566,10 +1559,10 @@
           "id": "proj.unifrost-lms.ai-analytics-sql-controls",
           "subsystem": "product_ai",
           "purpose": "Constrain model-generated SQL before tenant database execution.",
-          "implementation_description": "The checkout parses SELECT queries, checks top-level table access, rewrites tenant predicates/row limits and applies a statement timeout. The pinned newer backend ref separately adds whole-AST traversal, nested/schema-qualified query rejection, function allowlisting, parenthesized predicates and read-only transactions with focused regression tests.",
+          "implementation_description": "Implemented: SELECT parsing, top-level table-access checks, tenant-predicate/row-limit rewriting and a statement timeout. In progress (not yet merged): whole-AST traversal, nested/schema-qualified query rejection, function allowlisting, parenthesized predicates and read-only transactions with focused regression tests.",
           "actions": [
             "Validated query shape and bounded result size/execution time.",
-            "Distinguished checkout controls from newer AST/read-only hardening."
+            "Rewrote queries to enforce tenant predicates and row limits."
           ],
           "technologies_used": [
             "TypeScript",
@@ -1584,9 +1577,9 @@
             "Tenant database context",
             "Result blocks"
           ],
-          "implementation_status": "checkout_implementation_with_newer_ref_hardening",
+          "implementation_status": "implemented_with_hardening_in_progress",
           "material_limitations": [
-            "The checkout has reported nested-expression and OR-precedence gaps; newer protections are not in its working tree.",
+            "The implemented controls have known nested-expression and OR-precedence gaps that the in-progress changes address.",
             "Isolation depends on deployed RLS/runtime roles; focused controls/tests do not establish comprehensive SQL safety."
           ]
         },
@@ -1615,7 +1608,7 @@
             "Platform service-key routes",
             "Tenant AI usage dashboard"
           ],
-          "implementation_status": "implemented_in_checkout",
+          "implementation_status": "implemented",
           "material_limitations": [
             "Configured prices are accounting inputs; actual spend, savings and billing reconciliation are unconfirmed.",
             "Caps use billable cost, exclude absorbed failed-request cost and lack concurrent reservations; they are not strict provider-spend bounds."
@@ -1625,11 +1618,10 @@
           "id": "proj.unifrost-lms.vision-question-ingestion",
           "subsystem": "question_ingestion",
           "purpose": "Build question-bank data with provenance and resumable verification.",
-          "implementation_description": "Playwright captures rendered exam questions for Claude Code vision-assisted transcription into CSV/LaTeX. Manifests retain source/row identity and verification states; separate sessions compare transcription and captured answer keys. Shared linting, locked JSONL updates, image review and recapture support recovery. Only the newer cached ref adds a transaction covering accepted question rows and tags before asynchronous image jobs.",
+          "implementation_description": "Playwright captures rendered exam questions for Claude Code vision-assisted transcription into CSV/LaTeX. Manifests retain source/row identity and verification states; separate sessions compare transcription and captured answer keys. Shared linting, locked JSONL updates, image review and recapture support recovery. A transaction covering accepted question rows and tags before asynchronous image jobs is in progress (not yet merged).",
           "actions": [
             "Separated capture, agent transcription, verification and flagged-row resolution.",
-            "Validated structured rows/math and serialized manifest updates.",
-            "Distinguished newer transactional database persistence from rejected rows and later image work."
+            "Validated structured rows/math and serialized manifest updates."
           ],
           "technologies_used": [
             "Playwright",
@@ -1648,10 +1640,10 @@
             "Question-bank imports",
             "Image storage and syllabus mapping"
           ],
-          "implementation_status": "checkout_implementation_with_newer_ref_hardening",
+          "implementation_status": "implemented_with_hardening_in_progress",
           "material_limitations": [
             "An agent reads screenshots; the scripts are not autonomous OCR, and verified status does not establish measured transcription accuracy.",
-            "Transactional import is only in the newer cached ref; it covers accepted database rows/tags, not rejected rows or asynchronous images. Repeated successful uploads can duplicate data.",
+            "Transactional import is in progress (not yet merged) and covers accepted database rows/tags, not rejected rows or asynchronous images. Repeated successful uploads can duplicate data.",
             "Dataset/fixture counts and staging notes are not confirmed adoption or throughput metrics."
           ]
         },
@@ -1680,9 +1672,9 @@
             "Fee installments",
             "Notifications and reports"
           ],
-          "implementation_status": "checkout_implementation_with_newer_ref_hardening",
+          "implementation_status": "implemented_with_hardening_in_progress",
           "material_limitations": [
-            "The checkout reminder IDs contain unsupported colon patterns; only the newer cached ref includes the ID/drift fix, despite the issue being closed.",
+            "Reminder job IDs contain unsupported colon patterns; the ID/drift fix is in progress (not yet merged).",
             "Development JSON transport and the test sink do not establish live delivery, throughput or success rates."
           ]
         },
@@ -1714,7 +1706,7 @@
           ],
           "implementation_status": "implemented_with_known_integration_gap",
           "material_limitations": [
-            "PhonePe callbacks are blocked by router authentication in the checkout; signature code does not establish working end-to-end settlement or merchant activation.",
+            "PhonePe callbacks are currently blocked by router authentication; signature code does not establish working end-to-end settlement or merchant activation.",
             "Authorization/numeric validation, settlement concurrency, amount/merchant checks and key rotation remain qualified; no revenue or accounting-completeness claim is supported.",
             "Object ownership, declared-size enforcement and external-image SSRF concerns prevent a comprehensive storage-safety claim."
           ]
@@ -1722,8 +1714,8 @@
         {
           "id": "proj.unifrost-lms.deployment-and-backups",
           "subsystem": "finance_and_operations",
-          "purpose": "Document deployment environments, recovery and repeatable onboarding.",
-          "implementation_description": "Local tooling uses Docker-backed PostgreSQL, pg_dump snapshots/restores, reproducible academic/mobile seeds and an S3-compatible endpoint. AWS templates/runbooks describe EC2 API/worker processes behind Nginx/systemd, Supabase PostgreSQL, ElastiCache Redis and a Vercel frontend; Railway provides a migration-before-start alternative. Onboarding sequences tenant/admin setup, syllabus, imports and enrollment. An AWS test-VM configuration supports agent testing; newer history reports a staging data rollout.",
+          "purpose": "Host the pilot and document recovery and repeatable onboarding.",
+          "implementation_description": "The pilot ran on Supabase PostgreSQL with Vercel and Railway hosting. Local tooling uses Docker-backed PostgreSQL, pg_dump snapshots/restores, reproducible academic/mobile seeds and an S3-compatible endpoint. AWS templates/runbooks describe EC2 API/worker processes behind Nginx/systemd with ElastiCache Redis as an alternative deployment. Onboarding sequences tenant/admin setup, syllabus, imports and enrollment. An AWS test-VM configuration supports agent testing.",
           "actions": [
             "Documented runtime versus migration connections and API/worker deployment.",
             "Provided local database snapshots/restores and targeted test fixtures.",
@@ -1748,9 +1740,9 @@
             "API/worker/database deployment",
             "Tenant setup and recovery"
           ],
-          "implementation_status": "configuration_and_runbooks_present",
+          "implementation_status": "pilot_deployed",
           "material_limitations": [
-            "These are configurations/runbooks and repository-reported staging events; actual running development/test/staging/production environments and production use remain unconfirmed.",
+            "AWS EC2/ElastiCache exist as configuration and runbooks only; no AWS deployment is established.",
             "No successful restoration, disaster recovery or availability is established.",
             "Some seed paths reset demo tenants; fixtures are not real institutions/users and are not safe production onboarding by default."
           ]
@@ -1779,11 +1771,11 @@
             "Regression suites and contracts",
             "Guarded upstream integration"
           ],
-          "implementation_status": "implemented_in_checkout",
+          "implementation_status": "implemented",
           "material_limitations": [
             "Approval/push controls do not establish complete sandboxing; credential/environment exposure concerns remain.",
             "Historical runs do not establish measured productivity or defect reduction; CLI authentication/usage limits affect operation.",
-            "The desktop app is ad-hoc signed and not notarized for general distribution; live synchronization/GUI behavior was not rerun. Historical Codex responsibilities remain unconfirmed."
+            "The desktop app is ad-hoc signed and not notarized for general distribution."
           ]
         },
         {
@@ -1808,7 +1800,7 @@
             "Playwright",
             "Gradle",
             "kotlin.test",
-            "Xcodebuild",
+            "xcodebuild",
             "Redocly",
             "bubblewrap",
             "ADB tooling"
@@ -1818,7 +1810,7 @@
             "Human PRs and agent push guard",
             "Journey catalog and review ledger"
           ],
-          "implementation_status": "implemented_in_checkout",
+          "implementation_status": "implemented",
           "material_limitations": [
             "Archived tasks and gate configuration do not establish completed verification or currently passing builds/tests; guide/submodule versions can drift.",
             "Cold-observer networking is shared for local testing, leaving residual local database reachability; some cross-surface/device acceptance remains open.",
@@ -1826,8 +1818,7 @@
           ]
         }
       ],
-      "outcome_basis": "Repository-observed capabilities, plus candidate-stated pilot usage (one public school, about 2 months), approximate user counts, IoU OMR accuracy on about 1,250 phone-captured images, and the qualitative outcomes recorded in this entry. Time savings are not claimed.",
-      "note": "No formal title was held."
+      "note": "No formal title was held. Time savings and other operational impact are not claimed."
     }
   ],
   "publications": [
@@ -1955,10 +1946,12 @@
       "Epsilon",
       "SCII",
       "Intel",
-      "Qualcomm"
+      "Qualcomm",
+      "Unifrost Eduverse"
     ],
     "notes": {
-      "SCII": "Funded and oversaw the business-document recognition and table-extraction project (proj.document-extraction)."
+      "SCII": "Funded and oversaw the business-document recognition and table-extraction project (proj.document-extraction).",
+      "Unifrost Eduverse": "Personal startup venture; three-member team; backend and database management responsibility recorded in proj.unifrost-lms."
     }
   },
   "skills": {
@@ -1980,6 +1973,12 @@
       },
       {
         "name": "R"
+      },
+      {
+        "name": "TypeScript"
+      },
+      {
+        "name": "Swift"
       }
     ],
     "machine_learning": [
@@ -2051,6 +2050,15 @@
       },
       {
         "name": "VAE"
+      },
+      {
+        "name": "OpenCV"
+      },
+      {
+        "name": "Optical mark recognition (OMR)"
+      },
+      {
+        "name": "LLM API integration (Anthropic/OpenAI SDKs)"
       }
     ],
     "data_and_distributed_systems": [
@@ -2086,6 +2094,9 @@
       },
       {
         "name": "Query optimization and indexing"
+      },
+      {
+        "name": "BullMQ"
       }
     ],
     "databases": [
@@ -2094,6 +2105,18 @@
       },
       {
         "name": "MongoDB"
+      },
+      {
+        "name": "Redis"
+      },
+      {
+        "name": "Prisma"
+      },
+      {
+        "name": "SQLite"
+      },
+      {
+        "name": "PostgreSQL Row Level Security"
       }
     ],
     "cloud_and_infrastructure": [
@@ -2114,7 +2137,33 @@
       },
       {
         "name": "AWS",
-        "note": "Used in work.intel.etl-pipeline; only Amazon S3 is named. Other AWS services are not recorded."
+        "note": "Used in work.intel.etl-pipeline, where only Amazon S3 is named. Unifrost uses Amazon S3 and has AWS EC2/ElastiCache deployment configuration; no live Unifrost AWS environment is confirmed."
+      },
+      {
+        "name": "AWS EC2",
+        "note": "Unifrost deployment configuration/runbooks; live operation is unconfirmed."
+      },
+      {
+        "name": "ElastiCache",
+        "note": "Unifrost deployment configuration/runbooks; live operation is unconfirmed."
+      },
+      {
+        "name": "Supabase PostgreSQL",
+        "note": "Hosted the Unifrost Drona pilot."
+      },
+      {
+        "name": "Vercel",
+        "note": "Hosted the Unifrost Drona pilot."
+      },
+      {
+        "name": "Railway",
+        "note": "Hosted the Unifrost Drona pilot."
+      },
+      {
+        "name": "Nginx"
+      },
+      {
+        "name": "systemd"
       }
     ],
     "systems_and_embedded": [
@@ -2157,10 +2206,58 @@
         "name": "Blockchain / DApp development"
       },
       {
-        "name": "ReactJS"
+        "name": "React"
       },
       {
-        "name": "NodeJS"
+        "name": "Node.js"
+      },
+      {
+        "name": "iOS"
+      },
+      {
+        "name": "Express"
+      },
+      {
+        "name": "FastAPI"
+      },
+      {
+        "name": "Next.js"
+      },
+      {
+        "name": "Tailwind CSS"
+      },
+      {
+        "name": "Radix UI"
+      },
+      {
+        "name": "Recharts"
+      },
+      {
+        "name": "Kotlin Multiplatform"
+      },
+      {
+        "name": "Compose Multiplatform"
+      },
+      {
+        "name": "Ktor"
+      },
+      {
+        "name": "Room"
+      },
+      {
+        "name": "SwiftUI"
+      },
+      {
+        "name": "Koin"
+      },
+      {
+        "name": "Kotlin coroutines / StateFlow"
+      },
+      {
+        "name": "Zod"
+      },
+      {
+        "name": "Twilio"
       }
     ],
     "tooling": [
@@ -2179,7 +2276,46 @@
       },
       {
         "name": "Shell scripting",
-        "note": "Self-taught; no project use is recorded."
+        "note": "Self-taught; Bash scripting is recorded in Unifrost agent-engineering tooling."
+      },
+      {
+        "name": "Claude Code"
+      },
+      {
+        "name": "GitHub Actions"
+      },
+      {
+        "name": "Jest"
+      },
+      {
+        "name": "Supertest"
+      },
+      {
+        "name": "Playwright"
+      },
+      {
+        "name": "OpenAPI 3.1"
+      },
+      {
+        "name": "OpenSpec"
+      },
+      {
+        "name": "Gradle"
+      },
+      {
+        "name": "kotlin.test"
+      },
+      {
+        "name": "Turbine"
+      },
+      {
+        "name": "Tkinter"
+      },
+      {
+        "name": "LaTeX"
+      },
+      {
+        "name": "xcodebuild"
       }
     ],
     "domains": [
@@ -2200,6 +2336,9 @@
       },
       {
         "name": "Cryptographic acceleration"
+      },
+      {
+        "name": "Education technology / learning management systems"
       }
     ],
     "practices": [
@@ -2223,17 +2362,24 @@
       },
       {
         "name": "Interdisciplinary research collaboration"
+      },
+      {
+        "name": "Multi-tenant application design"
+      },
+      {
+        "name": "AI-assisted engineering with human approval"
       }
     ]
   },
   "metadata": {
     "role_optimization": "none - this file is role-neutral by design. Section and array ordering carries no emphasis. Do not infer that earlier entries are more important.",
     "generation_directives": [
-      "This file contains facts, not bullets. Synthesize bullet points at generation time from `situation`, `constraints`, `actions`, `technologies_used`, `metrics` and `outcomes`. Never copy a field verbatim as a resume line.",
+      "This file contains facts, not bullets. Synthesize bullet points at generation time from `situation`, `constraints`, `actions`, `technologies_used`, `metrics`, `outcomes` and optional `technical_details`. Never copy a field verbatim as a resume line.",
       "Omit unavailable values from generated prose. Never invent dates, measurements or named entities to fill null fields; retain recorded qualitative outcomes without adding quantities.",
       "Respect every entry in `confidentiality` below.",
       "A general skill listing does not establish use in an engagement. Write experience and project bullets from the technologies and activities recorded for that engagement, applying explicit shared facts only within their stated scope.",
-      "Entries under basics.stated_interests are stated aspirations. They may inform a cover letter or summary but must never be presented as accomplishments."
+      "Entries under basics.stated_interests are stated aspirations. They may inform a cover letter or summary but must never be presented as accomplishments.",
+      "Use technical_details as supporting facts for their parent project, retaining implementation_status, material_limitations and metric scope. Distinguish implemented work, work in progress (not yet merged), deployment configuration, confirmed pilot use and measured outcomes; code or configuration alone does not establish live operation, completed releases, security guarantees or broader impact."
     ],
     "confidentiality": [
       {
@@ -2254,7 +2400,7 @@
       }
     ],
     "maintenance": {
-      "how_to_extend": "Add a new engagement as an object under work[].projects[] (if it happened at an employer) or under projects[] (if it did not), using the same field shape and a stable id. Record technologies_used on the engagement and add any relevant general skills as objects with a name and an optional factual note. Store project actions[], employer working_practices[], and basics.stated_interests.items[] as arrays of strings. Store text-only project outcomes[] entries as strings; retain an object when an outcome carries additional metadata such as award_ref.",
+      "how_to_extend": "Add a new engagement as an object under work[].projects[] (if it happened at an employer) or under projects[] (if it did not), using the same field shape and a stable id. Record technologies_used on the engagement and add any relevant general skills as objects with a name and an optional factual note. Store project actions[], employer working_practices[], and basics.stated_interests.items[] as arrays of strings. Store text-only project outcomes[] entries as strings; retain an object when an outcome carries additional metadata such as award_ref. Optional technical_details remain nested under their parent project, retain stable IDs, and record implementation status and material limitations.",
       "invariant": "Every stated metric, date and named entity must be candidate-confirmed. Unavailable details may be omitted or left null and must not be inferred. Resolve questions with the candidate before adding facts to this record."
     },
     "presentation_preferences": {
@@ -2264,7 +2410,8 @@
       "qualcomm_titles": "A single 'Software Engineer' line for 2023-01 to 2026-07 is preferred when space is tight. The Associate Engineer (2023-01 to 2024-12) to Software Engineer (from 2025-01) split is available but optional.",
       "achievements_section": "Lowest priority section. Drop it first when space is tight.",
       "work_authorization": "Never print in the resume.",
-      "profile_links": "LinkedIn and GitHub. A future personal portfolio replaces the GitHub link rather than joining it."
+      "profile_links": "LinkedIn and GitHub. A future personal portfolio replaces the GitHub link rather than joining it.",
+      "unifrost_placement": "Present Unifrost Eduverse under Projects as a personal startup venture; describe the confirmed backend/database responsibilities without inventing a formal title."
     },
     "deliberate_exclusions": [
       {

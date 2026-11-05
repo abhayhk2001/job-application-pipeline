@@ -24,12 +24,12 @@ roles." Tailoring happens at generation time against a specific job description,
 | `basics` | Identity, contacts, three length-variant summaries, stated interests |
 | `education` | Two institutions, with coursework, standing and MOOC record |
 | `work` | Three employers, each with `positions[]` (title history) and nested `projects[]` |
-| `projects` | Five non-employment engagements: lung-cancer research, document extraction, RCoT, Samsung instant apps, and a misinformation-detection hackathon project |
+| `projects` | Six non-employment engagements: lung-cancer research, document extraction, RCoT, Samsung instant apps, a misinformation-detection hackathon project, and the Unifrost Drona startup platform (with optional `technical_details`) |
 | `publications` | Three papers with full titles, author lists and DOIs, cross-linked via `project_ref` |
 | `awards` | Four entries, cross-linked via `project_ref` |
 | `affiliations` | Club and division leadership |
 | `collaborating_organizations` | Named partner organizations |
-| `skills` | Ten categories containing 80 skills, each with a name and optional factual note |
+| `skills` | Ten categories containing 129 skills, each with a name and optional factual note |
 | `metadata` | Generation directives, confidentiality rules, maintenance instructions, presentation preferences, and deliberate exclusions |
 
 Every object with an `id` can be cross-referenced. `project_ref`, `publication_ref` and `award_ref`
