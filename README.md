@@ -98,9 +98,9 @@ The full contract is in `docs/templates.md`.
 
 | Path | What it is |
 | :--- | :--- |
-| `data/master_resume.json` | The career data lake: the author's real, role-neutral record, read by `resume_generator`. |
-| `data/NEEDS_INPUT.md` | Worksheet mirroring `metadata.needs_input`. |
-| `docs/` | The data lake contract (`master-resume.md`, `schema-rationale.md`), the JSON an LLM must emit (`render-contract.md`) and how templates work (`templates.md`). |
+| `data/master_resume.json` | The authoritative, role-neutral career record, using the v3 master contract. |
+| `docs/master-resume-migration.md` | Completed master changes, required `resume_generator` migration, and the legacy resume correction log. |
+| `docs/` | The career record contract (`master-resume.md`, `schema-rationale.md`), the JSON an LLM must emit (`render-contract.md`) and how templates work (`templates.md`). |
 | `schemas/rendered_resume.schema.json` | The machine-readable contract `--validate-only` checks. |
 | `src/resume_builder/` | `api.py` (`build_resume`), `validation.py`, `renderer.py`, `jinja_env.py`, `url_filters.py`, `templates_registry.py`, `pdf_compiler.py`, `cli.py`, `exceptions.py`. |
 | `src/resume_builder/templates/` | One directory per built-in template, plus the shared partials in `_shared/`. |
@@ -108,6 +108,9 @@ The full contract is in `docs/templates.md`.
 | `tests/golden/resume.tex` | Expected render of that fixture. Generated, never hand-edited. |
 
 The master file and the rendered resume are different shapes. `data/master_resume.json` decomposes each engagement into situation, actions, metrics and outcomes and has no bullets. A rendered resume has ordered `sections` of finished bullets, each with a `source_ref` back to its master id.
+
+The sibling `resume_generator` still requires the v2 master contract and must be migrated before
+it can read this v3 record. See the [migration handoff](docs/master-resume-migration.md).
 
 ## Development
 
@@ -117,13 +120,13 @@ ruff check .
 ruff format --check .
 ```
 
-`docs/master-resume.md` has a check that `data/NEEDS_INPUT.md` is in sync with `metadata.needs_input`.
+`pytest tests/test_master_resume.py` checks the master contract, record links and confirmed corrections.
 
 `resume_generator` hashes `jinja_env.py`, `url_filters.py` and every `.j2` file into its render profile, so any byte change to them, even a comment, gives a different profile.
 
 ## Limitations
 
-- The tracked data lake and test fixtures hold the author's personal details. They are not sample data.
+- The tracked career record and test fixtures hold the author's personal details. They are not sample data.
 - The confidentiality check covers bullets and achievement items only, and is silently off without a terms file.
 - Tectonic's first run needs network access to download packages.
 

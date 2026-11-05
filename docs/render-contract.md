@@ -181,6 +181,11 @@ Two `metadata` blocks in `data/master_resume.json` bind what you may produce:
 Also honour `metadata.deliberate_exclusions`: one publication and one project are excluded by
 choice and must not reappear.
 
+The master is the authoritative career record. Its general skills may appear in the skills section,
+but experience and project bullets must use the technologies and activities recorded for that
+engagement, including shared facts only within their stated scope. Omit unavailable values and
+retain qualitative outcomes without inventing measurements.
+
 ## One page
 
 The resume must stay on one page; the test suite asserts it. If content overflows, cut by the

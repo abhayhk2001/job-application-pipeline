@@ -1,7 +1,7 @@
 """Renderer for render-ready resume JSON.
 
 Layout:
-    data/            the career data lake and its open-questions worksheet
+    data/            the authoritative career record
     docs/            the schema contract and its rationale
     tests/fixtures/  a captured resume in render-ready form, plus the PDF it came from
     schemas/         JSON Schema for the render-ready resume shape
@@ -32,7 +32,6 @@ PROJECT_TEMPLATES_DIR = PROJECT_ROOT / "templates"
 SCHEMAS_DIR = PROJECT_ROOT / "schemas"
 
 MASTER_RESUME = DATA_DIR / "master_resume.json"
-NEEDS_INPUT = DATA_DIR / "NEEDS_INPUT.md"
 TEST_RESUME = FIXTURES_DIR / "test_resume.json"
 REFERENCE_PDF = FIXTURES_DIR / "resume.pdf"
 GOLDEN_TEX = PROJECT_ROOT / "tests" / "golden" / "resume.tex"
@@ -49,7 +48,6 @@ __all__ = [
     "PROJECT_TEMPLATES_DIR",
     "SCHEMAS_DIR",
     "MASTER_RESUME",
-    "NEEDS_INPUT",
     "TEST_RESUME",
     "REFERENCE_PDF",
     "GOLDEN_TEX",

@@ -1,6 +1,6 @@
 # Master Resume — `data/master_resume.json`
 
-The career data lake for the job-application pipeline. It is the **single source of truth** about
+The career record for the job-application pipeline. It is the **single source of truth** about
 the candidate's professional history, and it is injected wholesale into the context of the
 agent that writes each job-specific resume.
 
@@ -24,18 +24,18 @@ roles." Tailoring happens at generation time against a specific job description,
 | `basics` | Identity, contacts, three length-variant summaries, stated interests |
 | `education` | Two institutions, with coursework, standing and MOOC record |
 | `work` | Three employers, each with `positions[]` (title history) and nested `projects[]` |
-| `projects` | Five non-employment engagements: research, industry collaborations, hackathon, volunteering, coursework |
+| `projects` | Five non-employment engagements: lung-cancer research, document extraction, RCoT, Samsung instant apps, and a misinformation-detection hackathon project |
 | `publications` | Three papers with full titles, author lists and DOIs, cross-linked via `project_ref` |
 | `awards` | Four entries, cross-linked via `project_ref` |
 | `affiliations` | Club and division leadership |
 | `collaborating_organizations` | Named partner organizations |
-| `skills` | Competency matrix, every skill carrying `evidence_refs` |
-| `metadata` | Directives, confidentiality rules, presentation preferences, deliberate exclusions, gaps, pending resume corrections |
+| `skills` | Ten categories containing 80 skills, each with a name and optional factual note |
+| `metadata` | Generation directives, confidentiality rules, maintenance instructions, presentation preferences, and deliberate exclusions |
 
-Every object with an `id` can be cross-referenced. `evidence_refs`, `project_ref`, `publication_ref`
-and `award_ref` all point at those ids.
+Every object with an `id` can be cross-referenced. `project_ref`, `publication_ref` and `award_ref`
+point at those ids; a rendered resume can retain a `source_ref` back to its source record.
 
-The `abhay-master-resume/v2` extension (version `2.0.0`) stores the following text lists as arrays
+The `abhay-master-resume/v3` extension (version `3.0.0`) stores the following text lists as arrays
 of strings:
 
 - `work[].projects[].actions[]` and `projects[].actions[]`
@@ -49,25 +49,37 @@ Project `outcomes[]` entries containing only outcome text are also strings. Keep
 when it carries additional metadata, such as `award_ref` or a note. Coursework retains its existing
 object structure, including course names and notes.
 
-## Confidence and evidence
+## Authoritative facts and skills
 
-The file is self-contained and holds only the candidate-confirmed record.
+The file is self-contained and holds only candidate-confirmed facts. Add confirmed information
+directly; resolve questions with the candidate before recording new facts. Unavailable or
+intentionally omitted details may remain `null`. Never infer a date, measurement or named entity
+to fill an empty field. An unquantified outcome can still be described qualitatively.
 
-A field carries `confidence: "needs_input"` when its value is `null` or incomplete; a matching
-question sits in `metadata.needs_input`. Anything without that marker is confirmed.
+Each skills category is an array of objects with a required `name` and an optional factual `note`:
 
-All figures have been reconciled with the candidate, so there are no competing variants left in the
-file. Where reconciliation changed a number that the live LaTeX/PDF resume still shows,
-`metadata.pending_resume_corrections` records what that resume needs fixed.
+```json
+{
+  "name": "Shell scripting",
+  "note": "Self-taught; no project use is recorded."
+}
+```
 
-Skills use a separate axis: `evidenced` (demonstrated by a specific engagement, see `evidence_refs`)
-versus `listed_only` (claimed on the prior resume, but nothing recorded here demonstrates it).
-`listed_only` skills may appear in a skills section but must never generate an experience bullet.
+Every listed skill is confirmed and may appear in a relevant skills section. General competency
+does not establish use in a particular engagement. Experience and project bullets must draw from
+that engagement's recorded technologies and activities, with explicit shared facts applied only
+within their stated scope. Factual notes retain limits such as self-taught skills and AWS usage
+where only Amazon S3 is named.
+
+Both UIUC graduation alternatives remain valid: December 2027 and May 2028. The existing instruction
+selects the date based on the role. Summaries describe current enrollment in the Master of Computer
+Science program. The AIMLBIO 2022 Best Presentation award belongs to the team; GAN/VAE exploration
+is separate from the published Random Forest results; the RCoT metric is 50% faster than ProbSpace.
 
 ## Rules for the generating agent
 
 Spelled out in `metadata.generation_directives`. In short: synthesize, never copy verbatim; never
-state a `null` or use a `needs_input` metric unchecked; never present `stated_interests` as
+invent values to fill a `null`; keep skill use scoped to its engagement; never present `stated_interests` as
 accomplishments; and obey `metadata.confidentiality`, which keeps withheld client and customer names abstracted.
 
 ## `tests/fixtures/test_resume.json` — the output-shape fixture
@@ -88,37 +100,11 @@ an LLM in `docs/render-contract.md`.
 ## Extending it
 
 Add a new engagement as an object under `work[].projects[]` (if it happened at an employer) or under
-`projects[]` (if it did not), reusing the same field shape. Give it a stable `id` and reference it
-from any relevant `skills[].evidence_refs`.
+`projects[]` (if it did not), reusing the same field shape. Give it a stable `id`, record its
+`technologies_used`, and add relevant general skills as objects with a name and optional factual note.
 
-The invariant: **every metric, date and named entity is either candidate-confirmed, or it is `null`
-with a matching `metadata.needs_input` entry.** Nothing is inferred.
-
-## Open questions
-
-`metadata.needs_input` holds **one** remaining question: the conference where the NSCLC paper won its
-Best Presentation award.
-
-`data/NEEDS_INPUT.md` is the human-facing mirror of that list and is **kept in sync** — a question moves
-from its Open block to the Resolved log in the same edit that applies the answer to this file, and new
-gaps get added to Open as they appear. The two must never disagree, so after editing
-`data/master_resume.json`, check the open blocks against `metadata.needs_input`:
-
-```bash
-python3 - <<'EOF'
-import json, re
-d = json.load(open('data/master_resume.json'))
-sheet = open('data/NEEDS_INPUT.md').read()
-opened = re.findall(r'^\*\*Field:\*\* `([^`]+)`', sheet[sheet.index('# Open ('):sheet.index('# Resolved log')], re.M)
-print("in sync:", sorted(opened) == sorted(q['field'] for q in d['metadata']['needs_input']))
-EOF
-```
-
-Question numbers there are stable and never reused, so `Q17` refers to the same gap permanently.
-
-`metadata.pending_resume_corrections` lists eight things the base LaTeX resume gets wrong and that
-this file supersedes: six typographic, one substantive date error, and one unresolved: the font
-table declares Helvetica but the compiled PDF is Latin Modern Roman.
+The invariant: **every stated metric, date and named entity is candidate-confirmed.** Unavailable
+details may be omitted or left `null`; nothing is inferred.
 
 ## Two metadata blocks the generator must honour
 
@@ -130,8 +116,16 @@ portfolio link as a replacement for GitHub rather than an addition.
 `metadata.deliberate_exclusions` — content that must never be reintroduced: a fourth publication
 (IEEE Access, 2025) that exists on ORCID but is excluded by choice, and a removed project.
 
+## Compatibility and validation
+
+The v3 master contract requires a migration of the sibling `resume_generator`; its current v2
+reader cannot load this record. The [migration handoff](master-resume-migration.md) describes the
+completed changes and required downstream work, and preserves all eight legacy LaTeX/PDF correction
+notes. Those historical corrections do not belong in the career record.
+
 Validate after any edit:
 
 ```bash
 python3 -m json.tool data/master_resume.json > /dev/null && echo OK
+pytest tests/test_master_resume.py
 ```

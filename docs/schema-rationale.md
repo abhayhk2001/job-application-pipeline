@@ -1,6 +1,6 @@
 # Structured Knowledge Representation via Extended JSON
 Professional experience is stored as a structured data object rather than in a vector store, because retrieval can lose context. The format extends the open-source JSON Resume Schema with the detail an agent needs when it reads a career history.
-Strict structure guides the LLM through the candidate's history without the ambiguity of raw text. The data lives in one version-controlled file, the "career data lake".
+Strict structure guides the LLM through the candidate's history without the ambiguity of raw text. The data lives in one version-controlled file, the "career record".
 
 ## Schema Section
 

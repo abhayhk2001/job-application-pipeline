@@ -1,15 +1,15 @@
 {
   "schema": {
     "base": "JSON Resume Schema (https://jsonresume.org/schema/)",
-    "extension": "abhay-master-resume/v2",
-    "version": "2.0.0",
-    "last_updated": "2026-10-22",
-    "purpose": "Lossless, role-neutral career data lake. Injected wholesale into an LLM's context so a downstream agent can synthesize a job-specific resume. This file stores ATOMIC FACTS ONLY - never resume-ready bullet prose. It is self-contained: no external documents are referenced.",
+    "extension": "abhay-master-resume/v3",
+    "version": "3.0.0",
+    "last_updated": "2026-11-05",
+    "purpose": "Authoritative, role-neutral career record. Injected wholesale into an LLM's context so a downstream agent can synthesize a job-specific resume. This file stores atomic facts, never resume-ready bullet prose. It is self-contained: no external documents are needed to interpret the record.",
     "hard_rules": [
       "No resume bullet points anywhere in this file. Bullets are written by the downstream generator, not stored here.",
       "No role optimization. Ordering carries no emphasis. Nothing here is tuned for ML, systems, backend or research roles.",
-      "Nothing is invented. Unknown values are null and mirrored into metadata.needs_input.",
-      "All figures here are candidate-confirmed. Anything still uncertain is marked `confidence: \"needs_input\"` with a matching question in metadata.needs_input."
+      "Nothing is invented. Store only candidate-confirmed facts; unavailable values may remain null.",
+      "A listed skill does not by itself establish that it was used in a particular engagement."
     ]
   },
   "basics": {
@@ -44,9 +44,9 @@
     },
     "summaries": {
       "note": "Length variants only. These are deliberately role-neutral; pick by available space, not by target role.",
-      "one_line": "Software engineer and published researcher whose work spans embedded firmware, distributed data systems and applied machine learning; incoming MS in Computer Science at the University of Illinois Urbana-Champaign.",
-      "short": "Software engineer at Qualcomm India (January 2023 - July 2026) on the Device Firmware Update team, with prior software engineering internships at Intel Solutions & Services India and Epsilon. Three peer-reviewed publications across computational biology, causal inference and document AI. B.E. in Computer Science from RV College of Engineering (GPA 9.22); incoming Masters in CS at UIUC, August 2026.",
-      "long": "Abhay Harish Kashyap is a software engineer whose experience covers three distinct layers of the stack. At Qualcomm India he worked on the Device Firmware Update team from January 2023 to July 2026, joining as an Associate Engineer and being promoted to Software Engineer, where he owned SoC upgrade solutions, a data-relay mechanism, a core DFU refactor delivered across two major client releases, and the upgrade framework used to deploy embedded ML models to hearable devices. At Intel Solutions & Services India he worked in Customer Engineering on EV-telemetry JSON processing, cryptographic acceleration for a national stock exchange, and a Spark/Kubernetes/Kafka ETL pipeline. At Epsilon he benchmarked and optimized HBase, Apache Phoenix and Solr for large-scale retrieval. In parallel he led and published research: biomarker prediction for non-small cell lung cancer (Cancer Informatics), conditional independence testing on HPCC Systems with LexisNexis (JAIT), and deep-learning business-document recognition and table extraction (ICAIC 2025). He also led a Samsung Research Institute Bengaluru collaboration on instant-app technology that won an Excellence Award."
+      "one_line": "Software engineer and published researcher whose work spans embedded firmware, distributed data systems and applied machine learning; Master of Computer Science student at the University of Illinois Urbana-Champaign.",
+      "short": "Software engineer with experience at Qualcomm India (January 2023 - July 2026) on the Device Firmware Update team, with prior software engineering internships at Intel Solutions & Services India and Epsilon. Three peer-reviewed publications across computational biology, causal inference and document AI. B.E. in Computer Science from RV College of Engineering (GPA 9.22); enrolled in the Master of Computer Science program at UIUC since August 2026.",
+      "long": "Abhay Harish Kashyap is a Master of Computer Science student at UIUC and a software engineer whose experience covers three distinct layers of the stack. At Qualcomm India he worked on the Device Firmware Update team from January 2023 to July 2026, joining as an Associate Engineer and being promoted to Software Engineer, where he owned SoC upgrade solutions, a data-relay mechanism and a core DFU refactor delivered across two major client releases, and made contributions to the upgrade framework used to deploy embedded ML models to hearable devices. At Intel Solutions & Services India he worked in Customer Engineering on EV-telemetry JSON processing, cryptographic acceleration for a national stock exchange, and a Spark/Kubernetes/Kafka ETL pipeline. At Epsilon he benchmarked and optimized HBase, Apache Phoenix and Solr for large-scale retrieval. In parallel he led and published research: biomarker prediction for non-small cell lung cancer (Cancer Informatics), conditional independence testing on HPCC Systems with LexisNexis (JAIT), and deep-learning business-document recognition and table extraction (ICAIC 2025). He also led a Samsung Research Institute Bengaluru collaboration on instant-app technology that won an Excellence Award."
     },
     "stated_interests": {
       "note": "Self-described direction. Aspirations, not accomplishments. Do not present as experience.",
@@ -124,8 +124,7 @@
           "Python for Data Science"
         ],
         "recognition": "NPTEL Believer Award"
-      },
-      "note": "Dates taken from ../Resume/resume.tex. The end date supersedes an earlier value of 2023-08."
+      }
     }
   ],
   "work": [
@@ -203,11 +202,7 @@
             "Perforce",
             "Jira"
           ],
-          "metrics": [
-            {
-              "note": "No quantified metric"
-            }
-          ],
+          "metrics": [],
           "outcomes": [
             "Contributed to promotion from Associate Engineer to Software Engineer.",
             "Played an important role in stabilizing the team's upgrade process."
@@ -393,7 +388,7 @@
           "outcomes": [
             "Optimized ML model delivery from users' phones to wearable and hearable devices: when model parameters changed, only the updated parameters were delivered instead of the entire model."
           ],
-          "note": "This contribution was quite small compared to other improtant ones"
+          "note": "The model-delivery upgrade work was a small contribution."
         },
         {
           "id": "work.qualcomm.genai-tooling",
@@ -521,7 +516,7 @@
               "name": "Benchmark dataset size",
               "value": 1.8,
               "unit": "GB",
-              "note": "100,000 records. Scale confirmed by the candidate."
+              "note": "100,000 records."
             }
           ],
           "outcomes": [
@@ -799,7 +794,8 @@
         "Optimized the Random Forest classifier to identify critical genes linked to NSCLC.",
         "Handled data cleaning, key-parameter identification and interpretation accuracy for the ML portion.",
         "Produced presentations with visual aids so the wider team could follow the complex portions of the work",
-        "Contributed written sections to the research paper"
+        "Contributed written sections to the research paper",
+        "Conducted exploratory work with GAN and VAE models."
       ],
       "technologies_used": [
         "Random Forest",
@@ -819,24 +815,26 @@
         {
           "name": "AUC",
           "value": 0.93,
-          "unit": "ratio"
+          "unit": "ratio",
+          "note": "Result for the Random Forest classifier."
         },
         {
           "name": "Accuracy",
           "value": 87,
-          "unit": "percent"
+          "unit": "percent",
+          "note": "Result for the Random Forest classifier."
         },
         {
           "name": "Citations",
           "value": 51,
           "unit": "count",
           "as_of": "2026-09",
-          "note": "Count reported by the candidate on 2026-09-25."
+          "note": "Count recorded on 2026-09-25."
         }
       ],
       "outcomes": [
         "Published in Cancer Informatics, a peer-reviewed journal.",
-        "The team presented the paper at a conference and received a Best Presentation award; a judge commended the clarity and graph/diagram support of his explanation.",
+        "The team presented the paper at the International Conference on Artificial Intelligence and Machine Learning in Applied Biotechnology (AIMLBIO 2022) and received a Best Presentation award; a judge commended the clarity and graph/diagram support of his explanation.",
         "Results advance the classification of biomarkers for NSCLC and small-cell lung cancer, with potential applications in drug discovery."
       ],
       "artifacts": [
@@ -845,7 +843,8 @@
           "url": "https://journals.sagepub.com/doi/10.1177/11769351231167992",
           "publication_ref": "pub.cancer-informatics"
         }
-      ]
+      ],
+      "note": "GAN and VAE work was exploratory and separate from the published Random Forest results."
     },
     {
       "id": "proj.document-extraction",
@@ -901,8 +900,7 @@
         {
           "name": "mean Average Precision (mAP), YOLOv5 object detection",
           "value": 84.36,
-          "unit": "percent",
-          "note": "The prior resume listed 84.36% and 80.92% without clearly binding each figure to a model; the binding recorded here is YOLOv5 to 84.36% and DETR to 80.92%."
+          "unit": "percent"
         },
         {
           "name": "mean Average Precision (mAP), DETR table extraction",
@@ -911,7 +909,7 @@
         }
       ],
       "outcomes": [
-        "Presented at the International Conference of Artificial Intelligence and Computing (ICAIC) 2025.",
+        "Presented at the International Conference on Artificial Intelligence and Computing (ICAIC) 2025.",
         "Unlike existing approaches, the method integrates table data extraction and object detection while adapting to different document types.",
         "Automates business document digitization."
       ],
@@ -970,7 +968,7 @@
           "value": 50,
           "unit": "percent",
           "baseline": "The standard ProbSpace model used in industry",
-          "note": "Same magnitude as the runtime reduction above, but a different comparison; both are recorded rather than merged."
+          "note": "Measured as 50% faster than ProbSpace."
         }
       ],
       "outcomes": [
@@ -1056,8 +1054,7 @@
       "role": "Designer and developer",
       "period": {
         "start": null,
-        "end": null,
-        "confidence": "needs_input"
+        "end": null
       },
       "situation": "Address growing misinformation on social platforms by building an end-to-end blockchain application resembling a social media site that assesses the validity (truth value) of posts in order to flag misinformation.",
       "constraints": [
@@ -1102,12 +1099,12 @@
       "name": "Novel Biomarker Prediction for Lung Cancer Using Random Forest Classifiers",
       "publisher": "Cancer Informatics (SAGE Publications)",
       "type": "Peer-reviewed journal article",
-      "releaseDate": "2023-01",
+      "releaseDate": "2023-04",
       "url": "https://journals.sagepub.com/doi/10.1177/11769351231167992",
       "doi": "10.1177/11769351231167992",
       "authors": [
-        "C, L.",
-        "S, P.",
+        "Lavanya C",
+        "Pooja S",
         "Kashyap, A.H.",
         "Rahaman, A.",
         "Niranjan, S.",
@@ -1116,8 +1113,7 @@
       "project_ref": "proj.nsclc-biomarkers",
       "summary": "Machine-learning identification of candidate biomarkers for non-small cell lung cancer from transcriptomic data using a Random Forest classifier.",
       "volume": "22",
-      "author_position": "3 of 6",
-      "note": "Author names as recorded on ORCID; the first two appear there only as initials."
+      "author_position": "3 of 6"
     },
     {
       "id": "pub.jait",
@@ -1125,7 +1121,7 @@
       "publisher": "Journal of Advances in Information Technology (JAIT)",
       "type": "Peer-reviewed journal article",
       "releaseDate": "2023",
-      "url": "http://www.jait.us/shw-229-1347-1.html",
+      "url": "https://www.jait.us/show-229-1347-1.html",
       "doi": "10.12720/jait.14.3.495-500",
       "authors": [
         "Agarwal, M.",
@@ -1159,7 +1155,7 @@
       ],
       "project_ref": "proj.document-extraction",
       "summary": "Business document data recognition and table extraction combining YOLOv5 object detection with DETR-based table extraction.",
-      "conference": "International Conference of Artificial Intelligence and Computing (ICAIC) 2025",
+      "conference": "International Conference on Artificial Intelligence and Computing (ICAIC) 2025",
       "pages": "503-520",
       "isbn": [
         "9789819572373",
@@ -1185,7 +1181,7 @@
       "date": null,
       "context": "Won with the blockchain misinformation-detection application.",
       "project_ref": "proj.blockchain-misinformation",
-      "gap": "Hackathon names, dates and certificate links are intentionally not tracked."
+      "note": "Hackathon names, dates and certificate links are intentionally not tracked."
     },
     {
       "id": "award.nptel-believer",
@@ -1197,12 +1193,10 @@
     {
       "id": "award.best-presentation",
       "title": "Best Presentation award",
-      "awarder": null,
-      "date": null,
-      "context": "Awarded to the team for presenting the NSCLC biomarker paper at a conference; a judge commended his elaboration of concepts, supported by graphs and diagrams.",
-      "project_ref": "proj.nsclc-biomarkers",
-      "confidence": "needs_input",
-      "gap": "Conference name and date are not recorded."
+      "awarder": "International Conference on Artificial Intelligence and Machine Learning in Applied Biotechnology (AIMLBIO 2022)",
+      "date": "2022",
+      "context": "Awarded to the team for presenting the NSCLC biomarker paper at the International Conference on Artificial Intelligence and Machine Learning in Applied Biotechnology (AIMLBIO 2022); a judge commended his elaboration of concepts, supported by graphs and diagrams.",
+      "project_ref": "proj.nsclc-biomarkers"
     }
   ],
   "affiliations": [
@@ -1213,7 +1207,7 @@
       "startDate": "2021-08",
       "endDate": "2022-08",
       "outcomes": [],
-      "note": "No specific outputs (projects, research, events) are recorded for this role. Low priority: include only rarely, when space allows and leadership experience is relevant."
+      "note": "No specific outputs (projects, research, events) are recorded for this role."
     }
   ],
   "collaborating_organizations": {
@@ -1231,617 +1225,267 @@
     }
   },
   "skills": {
-    "legend": {
-      "evidenced": "Demonstrated by a specific engagement in this file, listed in evidence_refs.",
-      "listed_only": "Claimed on the prior resume, but no engagement recorded here demonstrates it. Treat as a claim to confirm, not a demonstrated skill."
-    },
     "languages": [
       {
-        "name": "Python",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.intel.crypto-acceleration",
-          "work.intel.ml-benchmark-automation",
-          "proj.nsclc-biomarkers",
-          "proj.document-extraction"
-        ]
+        "name": "Python"
       },
       {
-        "name": "Java",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.intel.ev-telemetry"
-        ]
+        "name": "Java"
       },
       {
-        "name": "Kotlin",
-        "status": "evidenced",
-        "evidence_refs": [
-          "proj.samsung-instant-apps"
-        ]
+        "name": "Kotlin"
       },
       {
-        "name": "SQL",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.epsilon.query-optimization"
-        ]
+        "name": "SQL"
       },
       {
-        "name": "C/C++",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.qualcomm.soc-upgrade",
-          "work.qualcomm.bug-triage",
-          "work.qualcomm.data-relay",
-          "work.qualcomm.dfu-refactor",
-          "work.qualcomm.multi-client-upgrade"
-        ]
+        "name": "C/C++"
       },
       {
-        "name": "R",
-        "status": "evidenced",
-        "evidence_refs": [
-          "proj.rcot-hpcc",
-          "work.intel.etl-pipeline"
-        ]
+        "name": "R"
       }
     ],
     "machine_learning": [
       {
-        "name": "Random Forest",
-        "status": "evidenced",
-        "evidence_refs": [
-          "proj.nsclc-biomarkers"
-        ]
+        "name": "Random Forest"
       },
       {
-        "name": "Ensemble methods",
-        "status": "evidenced",
-        "evidence_refs": [
-          "proj.nsclc-biomarkers"
-        ]
+        "name": "Ensemble methods"
       },
       {
-        "name": "Class-imbalance handling (NearMiss, under/over-sampling)",
-        "status": "evidenced",
-        "evidence_refs": [
-          "proj.nsclc-biomarkers"
-        ]
+        "name": "Class-imbalance handling (NearMiss, under/over-sampling)"
       },
       {
-        "name": "ROC / AUC model selection",
-        "status": "evidenced",
-        "evidence_refs": [
-          "proj.nsclc-biomarkers"
-        ]
+        "name": "ROC / AUC model selection"
       },
       {
-        "name": "Transformers",
-        "status": "evidenced",
-        "evidence_refs": [
-          "proj.blockchain-misinformation",
-          "proj.document-extraction"
-        ]
+        "name": "Transformers"
       },
       {
-        "name": "Object detection (YOLOv5)",
-        "status": "evidenced",
-        "evidence_refs": [
-          "proj.document-extraction"
-        ]
+        "name": "Object detection (YOLOv5)"
       },
       {
-        "name": "DETR / detection transformers",
-        "status": "evidenced",
-        "evidence_refs": [
-          "proj.document-extraction"
-        ]
+        "name": "DETR / detection transformers"
       },
       {
-        "name": "Prompt-based data augmentation",
-        "status": "evidenced",
-        "evidence_refs": [
-          "proj.blockchain-misinformation"
-        ]
+        "name": "Prompt-based data augmentation"
       },
       {
-        "name": "Natural language processing",
-        "status": "evidenced",
-        "evidence_refs": [
-          "proj.blockchain-misinformation"
-        ]
+        "name": "Natural language processing"
       },
       {
-        "name": "Causal inference / conditional independence testing",
-        "status": "evidenced",
-        "evidence_refs": [
-          "proj.rcot-hpcc"
-        ]
+        "name": "Causal inference / conditional independence testing"
       },
       {
-        "name": "scikit-learn",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.intel.ml-benchmark-automation"
-        ]
+        "name": "scikit-learn"
       },
       {
-        "name": "NumPy",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.intel.ml-benchmark-automation"
-        ]
+        "name": "NumPy"
       },
       {
-        "name": "Embedded ML model deployment",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.qualcomm.embedded-ml-framework"
-        ]
+        "name": "Embedded ML model deployment"
       },
       {
-        "name": "GenAI tooling for engineering workflows",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.qualcomm.genai-tooling"
-        ]
+        "name": "GenAI tooling for engineering workflows"
       },
       {
-        "name": "TensorFlow",
-        "status": "evidenced",
-        "evidence_refs": [
-          "proj.document-extraction"
-        ]
+        "name": "TensorFlow"
       },
       {
-        "name": "PyTorch",
-        "status": "evidenced",
-        "evidence_refs": [
-          "proj.document-extraction"
-        ]
+        "name": "PyTorch"
       },
       {
-        "name": "Keras",
-        "status": "evidenced",
-        "evidence_refs": [
-          "proj.document-extraction"
-        ]
+        "name": "Keras"
       },
       {
-        "name": "spaCy",
-        "status": "evidenced",
-        "evidence_refs": [
-          "proj.document-extraction"
-        ]
+        "name": "spaCy"
       },
       {
-        "name": "LangChain",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.qualcomm.genai-tooling"
-        ]
+        "name": "LangChain"
       },
       {
-        "name": "CNN",
-        "status": "evidenced",
-        "evidence_refs": [
-          "proj.document-extraction"
-        ]
+        "name": "CNN"
       },
       {
-        "name": "BERT",
-        "status": "evidenced",
-        "evidence_refs": [
-          "proj.blockchain-misinformation"
-        ]
+        "name": "BERT"
       },
       {
-        "name": "GAN",
-        "status": "evidenced",
-        "evidence_refs": [
-          "proj.nsclc-biomarkers"
-        ]
+        "name": "GAN"
       },
       {
-        "name": "VAE",
-        "status": "evidenced",
-        "evidence_refs": [
-          "proj.nsclc-biomarkers"
-        ]
+        "name": "VAE"
       }
     ],
     "data_and_distributed_systems": [
       {
-        "name": "Apache Spark",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.intel.etl-pipeline"
-        ]
+        "name": "Apache Spark"
       },
       {
-        "name": "Apache Kafka",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.intel.etl-pipeline"
-        ]
+        "name": "Apache Kafka"
       },
       {
-        "name": "Apache Hadoop / HDFS",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.epsilon.distributed-environment"
-        ]
+        "name": "Apache Hadoop / HDFS"
       },
       {
-        "name": "Apache Hive",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.intel.etl-pipeline"
-        ]
+        "name": "Apache Hive"
       },
       {
-        "name": "Apache HBase",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.epsilon.store-benchmarking",
-          "work.epsilon.distributed-environment"
-        ]
+        "name": "Apache HBase"
       },
       {
-        "name": "Apache Phoenix",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.epsilon.store-benchmarking",
-          "work.epsilon.query-optimization"
-        ]
+        "name": "Apache Phoenix"
       },
       {
-        "name": "Apache Solr",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.epsilon.store-benchmarking"
-        ]
+        "name": "Apache Solr"
       },
       {
-        "name": "HPCC Systems",
-        "status": "evidenced",
-        "evidence_refs": [
-          "proj.rcot-hpcc"
-        ]
+        "name": "HPCC Systems"
       },
       {
-        "name": "Tablesaw",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.intel.ev-telemetry"
-        ]
+        "name": "Tablesaw"
       },
       {
-        "name": "ETL pipeline design",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.intel.etl-pipeline"
-        ]
+        "name": "ETL pipeline design"
       },
       {
-        "name": "Query optimization and indexing",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.epsilon.query-optimization"
-        ]
+        "name": "Query optimization and indexing"
       }
     ],
     "databases": [
       {
-        "name": "PostgreSQL",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.intel.etl-pipeline"
-        ]
+        "name": "PostgreSQL"
       },
       {
-        "name": "MongoDB",
-        "status": "evidenced",
-        "evidence_refs": [
-          "proj.blockchain-misinformation"
-        ]
+        "name": "MongoDB"
       }
     ],
     "cloud_and_infrastructure": [
       {
-        "name": "Kubernetes",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.intel.etl-pipeline"
-        ]
+        "name": "Kubernetes"
       },
       {
-        "name": "Docker",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.intel.ml-benchmark-automation",
-          "work.epsilon.distributed-environment"
-        ]
+        "name": "Docker"
       },
       {
-        "name": "Terraform",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.intel.etl-pipeline"
-        ]
+        "name": "Terraform"
       },
       {
-        "name": "Ansible",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.intel.etl-pipeline"
-        ]
+        "name": "Ansible"
       },
       {
-        "name": "Amazon S3",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.intel.etl-pipeline"
-        ]
+        "name": "Amazon S3"
       },
       {
         "name": "AWS",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.intel.etl-pipeline"
-        ],
         "note": "Used in work.intel.etl-pipeline; only Amazon S3 is named. Other AWS services are not recorded."
       }
     ],
     "systems_and_embedded": [
       {
-        "name": "Device firmware update (DFU)",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.qualcomm.dfu-refactor",
-          "work.qualcomm.soc-upgrade"
-        ]
+        "name": "Device firmware update (DFU)"
       },
       {
-        "name": "SoC upgrade flows",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.qualcomm.soc-upgrade"
-        ]
+        "name": "SoC upgrade flows"
       },
       {
-        "name": "Bluetooth",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.qualcomm.data-relay"
-        ]
+        "name": "Bluetooth"
       },
       {
-        "name": "Transport protocols",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.qualcomm.data-relay"
-        ]
+        "name": "Transport protocols"
       },
       {
-        "name": "Memory layout constraints",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.qualcomm.data-relay"
-        ]
+        "name": "Memory layout constraints"
       },
       {
-        "name": "Bootloader concepts",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.qualcomm.data-relay"
-        ]
+        "name": "Bootloader concepts"
       },
       {
-        "name": "SIMD instructions",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.intel.ev-telemetry"
-        ]
+        "name": "SIMD instructions"
       },
       {
-        "name": "OpenSSL / Intel QAT Engine",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.intel.crypto-acceleration"
-        ]
+        "name": "OpenSSL / Intel QAT Engine"
       },
       {
-        "name": "Packet trace and log debugging",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.qualcomm.bug-triage"
-        ]
+        "name": "Packet trace and log debugging"
       },
       {
-        "name": "Benchmarking and performance analysis",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.intel.ml-benchmark-automation",
-          "work.epsilon.store-benchmarking"
-        ]
+        "name": "Benchmarking and performance analysis"
       }
     ],
     "web_and_mobile": [
       {
-        "name": "Android",
-        "status": "evidenced",
-        "evidence_refs": [
-          "proj.samsung-instant-apps"
-        ]
+        "name": "Android"
       },
       {
-        "name": "Blockchain / DApp development",
-        "status": "evidenced",
-        "evidence_refs": [
-          "proj.blockchain-misinformation"
-        ]
+        "name": "Blockchain / DApp development"
       },
       {
-        "name": "ReactJS",
-        "status": "evidenced",
-        "evidence_refs": [
-          "proj.blockchain-misinformation"
-        ]
+        "name": "ReactJS"
       },
       {
-        "name": "NodeJS",
-        "status": "evidenced",
-        "evidence_refs": [
-          "proj.blockchain-misinformation"
-        ]
+        "name": "NodeJS"
       }
     ],
     "tooling": [
       {
-        "name": "Jira",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.qualcomm.soc-upgrade",
-          "work.qualcomm.bug-triage",
-          "work.qualcomm.data-relay",
-          "work.qualcomm.dfu-refactor",
-          "work.qualcomm.multi-client-upgrade"
-        ]
+        "name": "Jira"
       },
       {
         "name": "Git / GitHub",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.qualcomm",
-          "work.intel",
-          "work.epsilon",
-          "proj.nsclc-biomarkers",
-          "proj.document-extraction",
-          "proj.rcot-hpcc",
-          "proj.samsung-instant-apps",
-          "proj.blockchain-misinformation"
-        ],
-        "note": "Candidate-confirmed as used across all engagements."
+        "note": "Used across all recorded engagements."
       },
       {
-        "name": "Jenkins",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.qualcomm.soc-upgrade",
-          "work.qualcomm.bug-triage",
-          "work.qualcomm.data-relay",
-          "work.qualcomm.dfu-refactor",
-          "work.qualcomm.multi-client-upgrade"
-        ]
+        "name": "Jenkins"
       },
       {
-        "name": "Perforce",
-        "status": "evidenced",
-        "evidence_refs": [
-          "work.qualcomm.soc-upgrade",
-          "work.qualcomm.bug-triage",
-          "work.qualcomm.data-relay",
-          "work.qualcomm.dfu-refactor",
-          "work.qualcomm.multi-client-upgrade"
-        ]
+        "name": "Perforce"
       },
       {
         "name": "Shell scripting",
-        "status": "listed_only",
-        "evidence_refs": [],
-        "note": "Self-taught; not tied to any engagement recorded here."
+        "note": "Self-taught; no project use is recorded."
       }
     ],
     "domains": [
       {
-        "name": "Embedded firmware and device upgrade",
-        "evidence_refs": [
-          "work.qualcomm"
-        ]
+        "name": "Embedded firmware and device upgrade"
       },
       {
-        "name": "Distributed data processing",
-        "evidence_refs": [
-          "work.intel",
-          "work.epsilon"
-        ]
+        "name": "Distributed data processing"
       },
       {
-        "name": "Computational biology / genomics",
-        "evidence_refs": [
-          "proj.nsclc-biomarkers"
-        ]
+        "name": "Computational biology / genomics"
       },
       {
-        "name": "Document AI",
-        "evidence_refs": [
-          "proj.document-extraction"
-        ]
+        "name": "Document AI"
       },
       {
-        "name": "Causal inference",
-        "evidence_refs": [
-          "proj.rcot-hpcc"
-        ]
+        "name": "Causal inference"
       },
       {
-        "name": "Cryptographic acceleration",
-        "evidence_refs": [
-          "work.intel.crypto-acceleration"
-        ]
+        "name": "Cryptographic acceleration"
       }
     ],
     "practices": [
       {
-        "name": "Technical leadership of small teams",
-        "evidence_refs": [
-          "proj.samsung-instant-apps",
-          "proj.document-extraction",
-          "proj.nsclc-biomarkers"
-        ]
+        "name": "Technical leadership of small teams"
       },
       {
-        "name": "Mentoring and unblocking teammates",
-        "evidence_refs": [
-          "work.qualcomm",
-          "work.intel"
-        ]
+        "name": "Mentoring and unblocking teammates"
       },
       {
-        "name": "Design documentation (MSCs, developer guides)",
-        "evidence_refs": [
-          "work.qualcomm.dfu-refactor",
-          "work.qualcomm.developer-guides"
-        ]
+        "name": "Design documentation (MSCs, developer guides)"
       },
       {
-        "name": "Cross-team and cross-functional collaboration",
-        "evidence_refs": [
-          "work.qualcomm",
-          "work.intel"
-        ]
+        "name": "Cross-team and cross-functional collaboration"
       },
       {
-        "name": "Stakeholder communication adapted to technical vs managerial audiences",
-        "evidence_refs": [
-          "work.intel",
-          "proj.samsung-instant-apps"
-        ]
+        "name": "Stakeholder communication adapted to technical vs managerial audiences"
       },
       {
-        "name": "Task delegation based on individual strengths",
-        "evidence_refs": [
-          "proj.samsung-instant-apps",
-          "proj.document-extraction"
-        ]
+        "name": "Task delegation based on individual strengths"
       },
       {
-        "name": "Interdisciplinary research collaboration",
-        "evidence_refs": [
-          "proj.nsclc-biomarkers"
-        ]
+        "name": "Interdisciplinary research collaboration"
       }
     ]
   },
@@ -1849,9 +1493,9 @@
     "role_optimization": "none - this file is role-neutral by design. Section and array ordering carries no emphasis. Do not infer that earlier entries are more important.",
     "generation_directives": [
       "This file contains facts, not bullets. Synthesize bullet points at generation time from `situation`, `constraints`, `actions`, `technologies_used`, `metrics` and `outcomes`. Never copy a field verbatim as a resume line.",
-      "Never state a value recorded as null, and never use a metric marked `confidence: \"needs_input\"` without checking with the candidate first.",
+      "Omit unavailable values from generated prose. Never invent dates, measurements or named entities to fill null fields; retain recorded qualitative outcomes without adding quantities.",
       "Respect every entry in `confidentiality` below.",
-      "Skills with status `listed_only` may be included in a skills section if the job calls for them, but must never be used to generate an experience bullet, because no engagement recorded here demonstrates them.",
+      "A general skill listing does not establish use in an engagement. Write experience and project bullets from the technologies and activities recorded for that engagement, applying explicit shared facts only within their stated scope.",
       "Entries under basics.stated_interests are stated aspirations. They may inform a cover letter or summary but must never be presented as accomplishments."
     ],
     "confidentiality": [
@@ -1872,16 +1516,9 @@
         "rule": "Work authorization status must never appear in the resume body. It exists only to answer application-form questions."
       }
     ],
-    "needs_input": [
-      {
-        "field": "award.best-presentation",
-        "question": "At which conference did the team receive the Best Presentation award for the NSCLC paper, and in what year?"
-      }
-    ],
-    "needs_input_worksheet": "data/NEEDS_INPUT.md - the same questions with answer blocks to fill in. Answers there get merged back into this file and the resolved entries removed from needs_input.",
     "maintenance": {
-      "how_to_extend": "Add a new engagement as an object under work[].projects[] (if it happened at an employer) or under projects[] (if it did not), using the same field shape. Give it a stable `id` and reference it from any relevant skills[].evidence_refs entry. Store project actions[], employer working_practices[], and basics.stated_interests.items[] as arrays of strings. Store text-only project outcomes[] entries as strings; retain an object when an outcome carries additional metadata such as award_ref.",
-      "invariant": "Every metric, date and named entity in this file must be something the candidate has confirmed, or be null with a matching metadata.needs_input entry. Nothing is inferred."
+      "how_to_extend": "Add a new engagement as an object under work[].projects[] (if it happened at an employer) or under projects[] (if it did not), using the same field shape and a stable id. Record technologies_used on the engagement and add any relevant general skills as objects with a name and an optional factual note. Store project actions[], employer working_practices[], and basics.stated_interests.items[] as arrays of strings. Store text-only project outcomes[] entries as strings; retain an object when an outcome carries additional metadata such as award_ref.",
+      "invariant": "Every stated metric, date and named entity must be candidate-confirmed. Unavailable details may be omitted or left null and must not be inferred. Resolve questions with the candidate before adding facts to this record."
     },
     "presentation_preferences": {
       "note": "Rendering preferences stated by the candidate. These govern layout and space, NOT which content is relevant - that is still decided per job description at generation time.",
@@ -1902,48 +1539,6 @@
         "item": "Silkworm selective-breeding project",
         "reason": "Removed from the data lake on the candidate's instruction.",
         "directive": "Do not reintroduce it."
-      }
-    ],
-    "pending_resume_corrections": [
-      {
-        "target": "../Resume/resume.tex",
-        "issue": "Education reads 'August 2026 - Decemeber 2027'.",
-        "correction": "'December'."
-      },
-      {
-        "target": "../Resume/resume.tex",
-        "issue": "The UIUC degree reads 'Master of Computer Science in Computer Science and Engineering' - the field of study is stated twice.",
-        "correction": "'Master of Computer Science'."
-      },
-      {
-        "target": "../Resume/resume.tex",
-        "issue": "Heading separators are uneven: no \\quad between the email and the phone, and a trailing \\quad after Github.",
-        "correction": "One \\quad between each pair of contacts and none after the last."
-      },
-      {
-        "target": "../Resume/resume.tex",
-        "issue": "The phone number is rendered as '2173051018', without the country code.",
-        "correction": "'+1 217 305 1018'."
-      },
-      {
-        "target": "../Resume/resume.tex",
-        "issue": "An Epsilon bullet reads 'primary//secondary indexing' with a doubled slash.",
-        "correction": "'primary/secondary indexing'."
-      },
-      {
-        "target": "../Resume/resume.tex",
-        "issue": "A project is titled 'Novel Biomarker Prediction for Lung Cancer Using Random Forest Classifier'.",
-        "correction": "The published title is plural: 'Random Forest Classifiers'."
-      },
-      {
-        "target": "../Resume/resume.tex",
-        "issue": "The Aug 2022 - Jan 2023 entry is labelled Epsilon Pvt Ltd but carries Epsilon's content, and the Intel internship is absent entirely.",
-        "correction": "Epsilon ran 2022-01 to 2022-06; Intel ran 2022-08 to 2023-01. Both belong on the resume."
-      },
-      {
-        "target": "../Resume/resume.tex",
-        "issue": "The font table declares Helvetica (\\resumefam = phv) but the switch has no effect under Tectonic: the compiled PDF embeds Latin Modern Roman, a serif. Verified by compiling \\usepackage{helvet} with \\renewcommand{\\familydefault}{phv}, and \\usepackage{tgheros} with qhv, under Tectonic 0.17 - both produce LMRoman; \\usepackage{fontspec} fails to build. ../Resume/resume.pdf has the same LMRoman font set, so the resume is serif today.",
-        "correction": "Unresolved. Either compile with pdflatex, where helvet works, or find a sans family Tectonic will honour."
       }
     ]
   }
