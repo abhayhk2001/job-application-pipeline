@@ -834,7 +834,10 @@
       ],
       "outcomes": [
         "Published in Cancer Informatics, a peer-reviewed journal.",
-        "The team presented the paper at the International Conference on Artificial Intelligence and Machine Learning in Applied Biotechnology (AIMLBIO 2022) and received a Best Presentation award; a judge commended the clarity and graph/diagram support of his explanation.",
+        {
+          "text": "The team presented the paper at the International Conference on Artificial Intelligence and Machine Learning in Applied Biotechnology (AIMLBIO 2022) and received a Best Presentation award; a judge commended the clarity and graph/diagram support of his explanation.",
+          "award_ref": "award.best-presentation"
+        },
         "Results advance the classification of biomarkers for NSCLC and small-cell lung cancer, with potential applications in drug discovery."
       ],
       "artifacts": [
@@ -1182,21 +1185,20 @@
         {
           "name": "Students served",
           "value": 50,
-          "unit": "people",
-          "qualifier": "approximate",
+          "unit": "count",
+          "qualifier": "about",
           "note": "Pilot at one public school in Bengaluru, grades 11-12, about 2 months."
         },
         {
           "name": "Teachers served",
-          "value": 8,
-          "unit": "people",
-          "qualifier": "approximate (7-8)",
+          "value": "7-8",
+          "unit": "count",
           "note": "Pilot at one public school in Bengaluru, grades 11-12, about 2 months."
         },
         {
           "name": "Institutions served",
           "value": 1,
-          "unit": "institution"
+          "unit": "count"
         },
         {
           "name": "OMR bubble-read accuracy",
