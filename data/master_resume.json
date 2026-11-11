@@ -3,7 +3,7 @@
     "base": "JSON Resume Schema (https://jsonresume.org/schema/)",
     "extension": "abhay-master-resume/v3",
     "version": "3.0.0",
-    "last_updated": "2026-11-05",
+    "last_updated": "2026-11-09",
     "purpose": "Authoritative, role-neutral career record. Injected wholesale into an LLM's context so a downstream agent can synthesize a job-specific resume. This file stores atomic facts, never resume-ready bullet prose. It is self-contained: no external documents are needed to interpret the record.",
     "hard_rules": [
       "No resume bullet points anywhere in this file. Bullets are written by the downstream generator, not stored here.",
@@ -1091,9 +1091,10 @@
       ],
       "outcomes": [
         "Won two national hackathons.",
-        "Surfaced the influence of bias and noise on AI systems, which motivated his interest in interpretable ML."
+        "Surfaced the influence of bias and noise on AI systems."
       ],
-      "artifacts": []
+      "artifacts": [],
+      "note": "Interest in interpretable ML is motivation, not evidence of completed interpretability work."
     },
     {
       "id": "proj.unifrost-lms",
@@ -1132,7 +1133,7 @@
         "Built screenshot-based question ingestion with provenance, separate transcription/verification, resumable manifests and content/image validation.",
         "Implemented typed queue workers, retry/backoff policies, lifecycle-based reminders, notification records and email/SMS adapters with an isolated local delivery sink.",
         "Modeled fees/installments and staff-reviewed UPI claims, added PhonePe integration code and encrypted tenant credentials, and connected payment/assessment documents to S3 storage.",
-        "Prepared deployment configurations (pilot hosting on Supabase PostgreSQL, Vercel and Railway; an AWS EC2 alternative), database backup/restore commands, tenant onboarding procedures and reproducible fixtures.",
+        "Used AWS EC2 for development and prepared deployment configurations; production pilot hosting ran on Supabase PostgreSQL, Vercel and Railway; provided database backup/restore commands, tenant onboarding procedures and reproducible fixtures.",
         "Implemented a ledger-driven agent engineering cycle with human approval provenance, role/path push controls and a desktop review tool with atomic saves and conflict-aware decision synchronization.",
         "Maintained specification-driven workflows, cross-repository OpenAPI checks and CI/regression gates, plus independent persona-journey observation across web/mobile surfaces."
       ],
@@ -1721,7 +1722,8 @@
           "actions": [
             "Documented runtime versus migration connections and API/worker deployment.",
             "Provided local database snapshots/restores and targeted test fixtures.",
-            "Sequenced tenant setup, syllabus/question imports and enrollment."
+            "Sequenced tenant setup, syllabus/question imports and enrollment.",
+            "Used AWS EC2 for development; production pilot hosting ran on Supabase PostgreSQL, Vercel and Railway."
           ],
           "technologies_used": [
             "AWS EC2",
