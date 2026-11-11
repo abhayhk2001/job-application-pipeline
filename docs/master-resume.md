@@ -29,7 +29,7 @@ roles." Tailoring happens at generation time against a specific job description,
 | `awards` | Four entries, cross-linked via `project_ref` |
 | `affiliations` | Club and division leadership |
 | `collaborating_organizations` | Named partner organizations |
-| `skills` | Ten categories containing 129 skills, each with a name and optional factual note |
+| `skills` | Eleven categories containing 145 skills, each with a name and optional factual note |
 | `metadata` | Generation directives, confidentiality rules, maintenance instructions, presentation preferences, and deliberate exclusions |
 
 Every object with an `id` can be cross-referenced. `project_ref`, `publication_ref` and `award_ref`

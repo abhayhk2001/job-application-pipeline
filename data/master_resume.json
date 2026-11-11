@@ -44,9 +44,9 @@
     },
     "summaries": {
       "note": "Length variants only. These are deliberately role-neutral; pick by available space, not by target role.",
-      "one_line": "Software engineer and published researcher whose work spans embedded firmware, distributed data systems, applied machine learning and education software; Master of Computer Science student at the University of Illinois Urbana-Champaign.",
-      "short": "Software engineer with experience at Qualcomm India (January 2023 - July 2026) on the Device Firmware Update team, with prior software engineering internships at Intel Solutions & Services India and Epsilon. Three peer-reviewed publications across computational biology, causal inference and document AI. Also builds the backend and database for Drona, a learning management and assessment platform, at Unifrost Eduverse, a three-member startup. B.E. in Computer Science from RV College of Engineering (GPA 9.22); enrolled in the Master of Computer Science program at UIUC since August 2026.",
-      "long": "Abhay Harish Kashyap is a Master of Computer Science student at UIUC and a software engineer whose work spans embedded firmware, distributed data systems, applied machine learning and education software. At Qualcomm India he worked on the Device Firmware Update team from January 2023 to July 2026, joining as an Associate Engineer and being promoted to Software Engineer, where he owned SoC upgrade solutions, a data-relay mechanism and a core DFU refactor delivered across two major client releases, and made contributions to the upgrade framework used to deploy embedded ML models to hearable devices. At Intel Solutions & Services India he worked in Customer Engineering on EV-telemetry JSON processing, cryptographic acceleration for a national stock exchange, and a Spark/Kubernetes/Kafka ETL pipeline. At Epsilon he benchmarked and optimized HBase, Apache Phoenix and Solr for large-scale retrieval. In parallel he led and published research: biomarker prediction for non-small cell lung cancer (Cancer Informatics), conditional independence testing on HPCC Systems with LexisNexis (JAIT), and deep-learning business-document recognition and table extraction (ICAIC 2025). He also led a Samsung Research Institute Bengaluru collaboration on instant-app technology that won an Excellence Award. At Unifrost Eduverse, a three-member startup, he is responsible for backend and database management for Drona, a learning management and assessment platform piloted at one public school in Bengaluru."
+      "one_line": "Software engineer and published researcher whose work spans embedded firmware, distributed data systems, applied machine learning, agentic LLM systems and education software; Master of Computer Science student at the University of Illinois Urbana-Champaign.",
+      "short": "Software engineer with experience at Qualcomm India (January 2023 - July 2026) on the Device Firmware Update team, including building agentic LLM tooling for defect triage; prior software engineering internships at Intel Solutions & Services India and Epsilon. Three peer-reviewed publications across computational biology, causal inference and document AI. Also builds the backend, database and LLM-powered analytics for Drona, a learning management and assessment platform, at Unifrost Eduverse, a three-member startup. B.E. in Computer Science from RV College of Engineering (GPA 9.22); enrolled in the Master of Computer Science program at UIUC since August 2026.",
+      "long": "Abhay Harish Kashyap is a Master of Computer Science student at UIUC and a software engineer whose work spans embedded firmware, distributed data systems, applied machine learning and education software. At Qualcomm India he worked on the Device Firmware Update team from January 2023 to July 2026, joining as an Associate Engineer and being promoted to Software Engineer, where he owned SoC upgrade solutions, a data-relay mechanism and a core DFU refactor delivered across two major client releases, and made contributions to the upgrade framework used to deploy embedded ML models to hearable devices. He initiated agentic LLM tooling there, built with LangChain/LangGraph, CrewAI and Neo4j, that automated log analysis for defect triage. At Intel Solutions & Services India he worked in Customer Engineering on EV-telemetry JSON processing, cryptographic acceleration for a national stock exchange, and a Spark/Kubernetes/Kafka ETL pipeline. At Epsilon he benchmarked and optimized HBase, Apache Phoenix and Solr for large-scale retrieval. In parallel he led and published research: biomarker prediction for non-small cell lung cancer (Cancer Informatics), conditional independence testing on HPCC Systems with LexisNexis (JAIT), and deep-learning business-document recognition and table extraction (ICAIC 2025). He also led a Samsung Research Institute Bengaluru collaboration on instant-app technology that won an Excellence Award. At Unifrost Eduverse, a three-member startup, he is responsible for backend and database management for Drona, a learning management and assessment platform piloted at one public school in Bengaluru, and built its LLM-powered natural-language analytics assistant and a multi-agent engineering workflow with human approval."
     },
     "stated_interests": {
       "note": "Self-described direction. Aspirations, not accomplishments. Do not present as experience.",
@@ -392,7 +392,7 @@
         },
         {
           "id": "work.qualcomm.genai-tooling",
-          "title": "Internal GenAI tooling for log analysis and documentation",
+          "title": "Agentic LLM tooling for defect triage, log analysis and documentation",
           "role": "Initiator, with support from colleagues",
           "period": {
             "start": null,
@@ -402,12 +402,27 @@
           "constraints": [],
           "actions": [
             "Took the initiative, with colleagues' support, to introduce internal GenAI-based tools that automate repeated log-analysis tasks.",
-            "Applied GenAI tooling to generating code documentation."
+            "Applied GenAI tooling to generating code documentation.",
+            "Extended the tooling into agentic LLM workflows built with LangChain and LangGraph, with CrewAI orchestrating multiple agents across log-analysis and root-cause tasks.",
+            "Ingested logs through a Datadog Vector pipeline that collected, transformed and routed them to the analysis agents.",
+            "Stored analysis results in a Neo4j graph that agents queried to reuse earlier findings.",
+            "Gave agents Model Context Protocol (MCP) tool access to internal documentation on registers and chip specifications.",
+            "Applied Guardrails AI validation to LLM outputs before they were used in analyses."
           ],
           "technologies_used": [
             "Generative AI / LLM tooling",
             "Log analysis automation",
-            "LangChain"
+            "LangChain",
+            "Large language models",
+            "LangGraph",
+            "CrewAI",
+            "Guardrails AI",
+            "Datadog Vector",
+            "Neo4j",
+            "Model Context Protocol (MCP)",
+            "Agentic workflows",
+            "Multi-agent orchestration",
+            "LLM output validation"
           ],
           "metrics": [
             {
@@ -421,7 +436,8 @@
           ],
           "outcomes": [
             "Root-cause analysis of bugs, which had required manual static analysis of the embedded C code, largely no longer needed that step once the tooling was introduced."
-          ]
+          ],
+          "note": "Specific LLMs are intentionally not named."
         },
         {
           "id": "work.qualcomm.developer-guides",
@@ -1101,14 +1117,14 @@
       "title": "Unifrost Drona learning management and assessment platform",
       "engagement_type": "Personal startup venture",
       "organization": "Unifrost Eduverse",
-      "role": "Backend and database owner; also contributed web, mobile, OMR and engineering tooling",
+      "role": "Backend and database owner; built LLM-powered analytics and agentic engineering tooling; also contributed web, mobile and OMR",
       "team_context": "3-member startup team",
       "period": {
         "start": "2026-01",
         "end": null,
         "note": "Ongoing as of 2026-11."
       },
-      "situation": "Educational institutes need one system for administration, online and paper assessments, analytics and fees. Drona is a multi-tenant platform connecting institute administration, staff and student web portals, a shared Android/iOS student app, online and paper (OMR) assessments, analytics and fee workflows, supported by AI-assisted question ingestion and approval-controlled engineering automation.",
+      "situation": "Educational institutes need one system for administration, online and paper assessments, analytics and fees. Drona is a multi-tenant platform connecting institute administration, staff and student web portals, a shared Android/iOS student app, online and paper (OMR) assessments, analytics and fee workflows, supported by an LLM-powered natural-language analytics assistant, AI-assisted question ingestion and approval-controlled multi-agent engineering automation.",
       "constraints": [
         "Institute data and role-specific workflows require tenant/context scoping.",
         "Timed attempts must reconcile server windows with mobile interruptions and intermittent connectivity.",
@@ -1127,18 +1143,20 @@
         "Connected server-windowed attempt APIs to a Kotlin state machine, Room-backed answer buffering, timestamp reconciliation and a server-anchored countdown for interruption recovery.",
         "Added Android soft-proctoring controls and durable interruption telemetry, with iOS assessment-session bridges and a capability-dependent fallback connected to staff review.",
         "Integrated marker-based optical mark recognition (OMR), quality/uncertainty checks, asynchronous upload processing and human correction with the shared paper/online grading model.",
-        "Implemented validated natural-language analytics plans, follow-up context, tenant/user/session workspace state and saved table/chart/insight views across backend and web.",
-        "Implemented SQL parsing, tenant/limit rewriting and bounded execution for model-generated analytics queries.",
+        "Built an LLM-powered natural-language analytics assistant (chatbot) whose planner turns prompts into Zod-validated query, visualization and insight plans, with follow-up context, tenant/user/session workspace state and saved table/chart/insight views.",
+        "Applied prompt engineering to the analytics planner, supplying schema and conversation context so the LLM emits structured, validated execution plans.",
+        "Implemented text-to-SQL safety controls for LLM-generated queries: SQL parsing, tenant-predicate/row-limit rewriting and bounded execution.",
         "Centralized LLM providers and token/cost accounting, separated failed-delivery costs from tenant billing, and added tenant budget checks, administration and usage views.",
-        "Built screenshot-based question ingestion with provenance, separate transcription/verification, resumable manifests and content/image validation.",
+        "Built LLM vision-assisted question ingestion, where Claude Code transcribes rendered-question screenshots, with provenance, separate transcription/verification, resumable manifests and content/image validation.",
         "Implemented typed queue workers, retry/backoff policies, lifecycle-based reminders, notification records and email/SMS adapters with an isolated local delivery sink.",
         "Modeled fees/installments and staff-reviewed UPI claims, added PhonePe integration code and encrypted tenant credentials, and connected payment/assessment documents to S3 storage.",
         "Used AWS EC2 for development and prepared deployment configurations; production pilot hosting ran on Supabase PostgreSQL, Vercel and Railway; provided database backup/restore commands, tenant onboarding procedures and reproducible fixtures.",
-        "Implemented a ledger-driven agent engineering cycle with human approval provenance, role/path push controls and a desktop review tool with atomic saves and conflict-aware decision synchronization.",
+        "Built a multi-agent engineering workflow in which Claude Code reporter, fixer, QA and tester agents progress bugs through a resumable ledger, with human approval provenance, role/path push controls and a desktop review tool with atomic saves and conflict-aware decision synchronization.",
         "Maintained specification-driven workflows, cross-repository OpenAPI checks and CI/regression gates, plus independent persona-journey observation across web/mobile surfaces."
       ],
       "technologies_used": [
         "ADB tooling",
+        "Agentic workflows",
         "Amazon S3",
         "Android",
         "Anthropic SDK",
@@ -1156,8 +1174,13 @@
         "iOS Keychain",
         "Jest",
         "Kotlin",
+        "Large language models",
+        "LLM output validation",
+        "LLM usage and cost metering",
+        "Multi-agent orchestration",
         "Next.js",
         "Nginx",
+        "node-sql-parser",
         "Node.js",
         "OpenAI SDK",
         "OpenCV",
@@ -1166,6 +1189,7 @@
         "PostgreSQL",
         "PostgreSQL Row Level Security",
         "Prisma",
+        "Prompt engineering",
         "Python",
         "Radix UI",
         "Railway",
@@ -1176,11 +1200,13 @@
         "SQL migrations",
         "Supabase PostgreSQL",
         "Tailwind CSS",
+        "Text-to-SQL",
         "Turbine",
         "Twilio",
         "TypeScript",
         "UPI",
-        "Vercel"
+        "Vercel",
+        "Zod"
       ],
       "metrics": [
         {
@@ -1533,7 +1559,8 @@
           "actions": [
             "Validated structured execution plans before dispatch.",
             "Connected follow-up prompts to prior workspace/query context.",
-            "Persisted saved views and rendered structured analytical blocks."
+            "Persisted saved views and rendered structured analytical blocks.",
+            "Engineered planner prompts with schema and conversation context to produce structured plans."
           ],
           "technologies_used": [
             "TypeScript",
@@ -1544,7 +1571,8 @@
             "Prisma",
             "PostgreSQL",
             "React",
-            "Recharts"
+            "Recharts",
+            "Prompt engineering"
           ],
           "integration_points": [
             "SQL engine",
@@ -2026,9 +2054,6 @@
         "name": "Embedded ML model deployment"
       },
       {
-        "name": "GenAI tooling for engineering workflows"
-      },
-      {
         "name": "TensorFlow"
       },
       {
@@ -2039,9 +2064,6 @@
       },
       {
         "name": "spaCy"
-      },
-      {
-        "name": "LangChain"
       },
       {
         "name": "CNN"
@@ -2060,9 +2082,68 @@
       },
       {
         "name": "Optical mark recognition (OMR)"
+      }
+    ],
+    "generative_ai_and_agents": [
+      {
+        "name": "Large language models"
+      },
+      {
+        "name": "Agentic workflows"
+      },
+      {
+        "name": "Multi-agent orchestration",
+        "note": "CrewAI/LangGraph agents in work.qualcomm.genai-tooling; Claude Code role agents in proj.unifrost-lms."
+      },
+      {
+        "name": "LangChain"
+      },
+      {
+        "name": "LangGraph"
+      },
+      {
+        "name": "CrewAI"
+      },
+      {
+        "name": "Guardrails AI"
+      },
+      {
+        "name": "Model Context Protocol (MCP)",
+        "note": "Qualcomm agents retrieved internal register and chip-specification documentation."
+      },
+      {
+        "name": "Prompt engineering",
+        "note": "Used for the Unifrost natural-language analytics assistant."
+      },
+      {
+        "name": "Text-to-SQL"
+      },
+      {
+        "name": "LLM output validation",
+        "note": "Guardrails AI at Qualcomm; Zod-validated plans in Unifrost."
       },
       {
         "name": "LLM API integration (Anthropic/OpenAI SDKs)"
+      },
+      {
+        "name": "LLM usage and cost metering"
+      },
+      {
+        "name": "GenAI tooling for engineering workflows"
+      },
+      {
+        "name": "Retrieval-augmented generation (RAG)",
+        "note": "General competency; no recorded engagement use."
+      },
+      {
+        "name": "Embeddings",
+        "note": "General competency; no recorded engagement use."
+      },
+      {
+        "name": "Claude Code"
+      },
+      {
+        "name": "Cursor"
       }
     ],
     "data_and_distributed_systems": [
@@ -2101,6 +2182,9 @@
       },
       {
         "name": "BullMQ"
+      },
+      {
+        "name": "Datadog Vector"
       }
     ],
     "databases": [
@@ -2121,6 +2205,9 @@
       },
       {
         "name": "PostgreSQL Row Level Security"
+      },
+      {
+        "name": "Neo4j"
       }
     ],
     "cloud_and_infrastructure": [
@@ -2281,9 +2368,6 @@
       {
         "name": "Shell scripting",
         "note": "Self-taught; Bash scripting is recorded in Unifrost agent-engineering tooling."
-      },
-      {
-        "name": "Claude Code"
       },
       {
         "name": "GitHub Actions"
