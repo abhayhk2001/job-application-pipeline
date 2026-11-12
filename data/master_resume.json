@@ -71,7 +71,24 @@
       "endDate": "2027-12",
       "alternateEndDate": "2028-05",
       "score": null,
-      "note": "endDate should be be automatically set based on the role"
+      "note": "endDate should be be automatically set based on the role",
+      "coursework": [
+        {
+          "name": "Applied Machine Learning"
+        },
+        {
+          "name": "Introduction to Bioinformatics"
+        },
+        {
+          "name": "Natural Language Processing"
+        },
+        {
+          "name": "Computer Security 1"
+        },
+        {
+          "name": "Causal Methods in Human Computer Interface"
+        }
+      ]
     },
     {
       "id": "edu.rvce",

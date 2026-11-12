@@ -49,6 +49,12 @@ Project `outcomes[]` entries containing only outcome text are also strings. Keep
 when it carries additional metadata, such as `award_ref` or a note. Coursework retains its existing
 object structure, including course names and notes.
 
+### UIUC coursework
+
+The UIUC entry (`id: edu.uiuc`) in [the master record](../data/master_resume.json) contains five
+course names supplied by the candidate. Titles are recorded as provided, without inferred
+course codes, dates, grades or completion status.
+
 ### RVCE coursework
 
 The RVCE entry (`id: edu.rvce`) in [the master record](../data/master_resume.json) contains
