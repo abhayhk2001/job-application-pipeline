@@ -3,7 +3,7 @@
     "base": "JSON Resume Schema (https://jsonresume.org/schema/)",
     "extension": "abhay-master-resume/v3",
     "version": "3.0.0",
-    "last_updated": "2026-11-09",
+    "last_updated": "2026-11-11",
     "purpose": "Authoritative, role-neutral career record. Injected wholesale into an LLM's context so a downstream agent can synthesize a job-specific resume. This file stores atomic facts, never resume-ready bullet prose. It is self-contained: no external documents are needed to interpret the record.",
     "hard_rules": [
       "No resume bullet points anywhere in this file. Bullets are written by the downstream generator, not stored here.",
@@ -96,25 +96,94 @@
       },
       "coursework": [
         {
-          "name": "Data Structures and Algorithms"
+          "name": "Linear Algebra Laplace Transform and Combinatorics"
+        },
+        {
+          "name": "Environmental Technology"
+        },
+        {
+          "name": "Data Structures and Its Applications"
         },
         {
           "name": "Operating Systems"
         },
         {
-          "name": "Embedded Systems"
+          "name": "Foundations of Computer Systems Design"
         },
         {
-          "name": "Mathematics for Machine Learning",
-          "note": "Introduced causal reasoning and its advantages over correlation-driven models; led directly to the RCoT work."
+          "name": "Discrete Mathematical Structures"
+        },
+        {
+          "name": "Graph Theory Statistics and Probability Theory"
+        },
+        {
+          "name": "Biology for Engineers"
+        },
+        {
+          "name": "Design and Analysis of Algorithms"
+        },
+        {
+          "name": "Microcontrollers and Embedded Systems"
+        },
+        {
+          "name": "Object Oriented Programming Using Java"
+        },
+        {
+          "name": "Computer Networks"
+        },
+        {
+          "name": "Finite Automata Formal Languages"
         },
         {
           "name": "Database Design",
           "note": "Taught by Dr. Shobha G; ranked among the top of the class."
         },
         {
-          "name": "Big Data Analytics using Distributed Platforms",
+          "name": "Network Programming and Security"
+        },
+        {
+          "name": "Software Engineering"
+        },
+        {
+          "name": "The Joy of Computing Using Python (MOOC)"
+        },
+        {
+          "name": "Mathematics for Machine Learning",
+          "note": "Introduced causal reasoning and its advantages over correlation-driven models; led directly to the RCoT work."
+        },
+        {
+          "name": "Artificial Intelligence and Machine Learning"
+        },
+        {
+          "name": "Compiler Design"
+        },
+        {
+          "name": "Minor Project"
+        },
+        {
+          "name": "Big Data Analytics Using Distributed Platforms",
           "note": "Taught by Dr. Shobha G; ranked among the top of the class."
+        },
+        {
+          "name": "Artificial Neural Networks"
+        },
+        {
+          "name": "Mathematical Modelling"
+        },
+        {
+          "name": "Computer Graphics and Virtual Reality"
+        },
+        {
+          "name": "Parallel Architecture and Distributed Programming"
+        },
+        {
+          "name": "Internship"
+        },
+        {
+          "name": "Information Storage Management"
+        },
+        {
+          "name": "Application Delivery Controller and Virtualization"
         }
       ],
       "mooc": {

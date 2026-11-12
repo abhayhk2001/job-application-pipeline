@@ -49,6 +49,17 @@ Project `outcomes[]` entries containing only outcome text are also strings. Keep
 when it carries additional metadata, such as `award_ref` or a note. Coursework retains its existing
 object structure, including course names and notes.
 
+### RVCE coursework
+
+The RVCE entry (`id: edu.rvce`) in [the master record](../data/master_resume.json) contains
+29 selected course names from RVCE's Consolidated Grade Card for Bachelor of Engineering
+(`Transcript.pdf`). The selection omits all first- and second-semester courses and the additional
+courses excluded by the candidate. Entries retain official course titles and existing factual
+notes; course codes, semesters, credits and grades are not stored. The separate NPTEL courses
+remain under `mooc`.
+
+The current `resume_generator` omits coursework from rendered resumes.
+
 ## Authoritative facts and skills
 
 The file is self-contained and holds only candidate-confirmed facts. Add confirmed information
