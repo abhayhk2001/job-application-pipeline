@@ -5,10 +5,6 @@ class ResumeBuilderError(Exception):
     """Base error for the resume_builder package."""
 
 
-class TemplateRenderError(ResumeBuilderError):
-    """A Jinja2 template failed to render."""
-
-
 class TemplateNotFound(ResumeBuilderError):
     """No template by that name is on the search path.
 
