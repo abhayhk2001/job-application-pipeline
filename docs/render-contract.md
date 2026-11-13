@@ -109,7 +109,7 @@ has nowhere to put it.
 
 | `type` | Collection | Required per item |
 |---|---|---|
-| `education` | `entries` | `institution`, `location`, `qualification`, `date` |
+| `education` | `entries` | `institution`, `location`, `qualification`, `date` (optional `coursework`: 1–5 course titles, printed as one "Relevant Coursework:" line under the entry) |
 | `experience` | `entries` | `organization`, `location`, `title`, `dateRange`, `bullets` |
 | `projects` | `entries` | `name`, `bullets` |
 | `skills` | `groups` | `label`, `items` |

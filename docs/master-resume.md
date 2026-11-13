@@ -64,7 +64,17 @@ courses excluded by the candidate. Entries retain official course titles and exi
 notes; course codes, semesters, credits and grades are not stored. The separate NPTEL courses
 remain under `mooc`.
 
-The current `resume_generator` omits coursework from rendered resumes.
+### How coursework reaches a resume
+
+Each course is `{name, display?, note?}`. `name` is the recorded title and the source of the
+course's stable ID (`<education id>.<slug of name>`), so renaming a course changes its ID.
+`display` is an optional shorter or clearer title written by the candidate (for example
+`"Computer Security"` for `"Computer Security 1"`); when set it is the only text printed.
+`note` is private context and is never printed.
+
+For each tailored job, `resume_generator` asks the LLM whether a "Relevant Coursework" line helps,
+which 2–5 courses to list, and whether the line is worth more than a project's second bullet when
+the page is full. The LLM chooses IDs only; the printed titles come from this file.
 
 ## Authoritative facts and skills
 

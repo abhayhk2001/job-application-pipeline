@@ -98,7 +98,7 @@ That contract is what makes inheritance safe across different fonts and geometry
 | Partial | Reads |
 |---|---|
 | `heading.tex.j2` | `basics.name`, `basics.contacts[].label/.url` |
-| `education.tex.j2` | `section.entries[].institution/.location/.qualification/.date` |
+| `education.tex.j2` | `section.entries[].institution/.location/.qualification/.date`, optional `.coursework[]` |
 | `experience.tex.j2` | `section.entries[].organization/.location/.title/.dateRange/.bullets[]` |
 | `projects.tex.j2` | `section.entries[].name/.bullets[]` |
 | `skills.tex.j2` | `section.groups[].label/.items[]` |

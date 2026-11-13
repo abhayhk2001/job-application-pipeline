@@ -133,3 +133,26 @@ def test_an_unusable_template_name_is_a_validation_problem(fixture_resume, value
     """The schema is the first line of defence on the name; resolution is the second."""
     problems = validate({**fixture_resume, "template": value})
     assert any(p.path == "/template" for p in problems), problems
+
+
+def _education(resume):
+    return next(s for s in resume["sections"] if s["type"] == "education")["entries"][0]
+
+
+def test_education_coursework_is_optional_and_bounded(fixture_resume):
+    resume = copy.deepcopy(fixture_resume)
+    _education(resume)["coursework"] = ["Operating Systems", "Compiler Design"]
+    assert validate(resume) == []
+    for bad in ([], [""], [f"Course {i}" for i in range(6)]):
+        _education(resume)["coursework"] = bad
+        assert validate(resume), bad
+
+
+def test_coursework_renders_one_escaped_line_under_its_entry(fixture_resume):
+    resume = copy.deepcopy(fixture_resume)
+    _education(resume)["coursework"] = ["Data Structures & Algorithms", "Operating Systems"]
+    tex = render(resume)
+    assert (
+        r"\textbf{Relevant Coursework:} Data Structures \& Algorithms, Operating Systems}" in tex
+    )
+    assert tex.count("Relevant Coursework") == 1
