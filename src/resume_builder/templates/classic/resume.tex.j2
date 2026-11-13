@@ -13,7 +13,7 @@
 % +---------------------+--------------+-------------------------------+
 % | Element             | Command      | Default                       |
 % +---------------------+--------------+-------------------------------+
-% | Font family (NFSS)  | \resumefam   | phv  (Helvetica)              |
+% | Font family (NFSS)  | \resumefam   | phv  (see note below)         |
 % | Heading shape       | \resumesc    | \scshape (small caps)         |
 % | Name size           | \resumename  | \Large  (14.4pt)              |
 % | Section size        | \resumesec   | \Large  (14.4pt)              |
@@ -22,7 +22,7 @@
 % +---------------------+--------------+-------------------------------+
 %
 % NFSS font family codes (each needs its \usepackage loaded below):
-%   phv   : Helvetica (sans-serif, modern/tech - default)
+%   phv   : Helvetica (sans-serif) - requested by default, but see the note below
 %   ptm   : Times       (serif, traditional/academic)
 %   lmr   : Latin Modern Roman (LaTeX default serif)
 %   lmss  : Latin Modern Sans  (LaTeX default sans)
@@ -60,7 +60,9 @@
   \pdfgentounicode=1
 \fi
 
-% Apply font family: professional sans-serif (Helvetica)
+% Apply font family. Under Tectonic (XeTeX) the Type 1 phv/ptm families are
+% not available, so this silently renders in Latin Modern; that is what every
+% PDF this template produces actually uses. See serif/resume.tex.j2.
 % To switch fonts, swap the \usepackage and the family code in \resumefam above.
 \usepackage{helvet}
 \renewcommand{\familydefault}{\resumefam}
@@ -84,7 +86,7 @@
   \vspace{-4pt}\resumesec\raggedright
 }{}{0em}{}[\color{black}\titlerule\vspace{-5pt}]
 
-% Restore filled-circle bullets (Helvetica defaults to en-dash)
+% Filled-circle bullets instead of the default en-dash
 \renewcommand{\labelitemi}{$\bullet$}
 \renewcommand{\labelitemii}{$\bullet$}
 

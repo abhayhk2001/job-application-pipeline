@@ -10,15 +10,21 @@ from __future__ import annotations
 import re
 from re import Match
 
-__all__ = ["richtext", "linkify", "latex_escape"]
+__all__ = [
+    "richtext",
+    "linkify",
+    "latex_escape",
+    "split_trailing_punct",
+    "LINK_RE",
+    "BOLD_RE",
+    "RICHTEXT_RE",
+]
 
 URL_PATTERN = re.compile(r"https?://\S+")
 TRAILING_PUNCT = ".,;)!?'\"]"
 
 
-# --------------------------------------------------------------------------- #
 # LaTeX escaping
-# --------------------------------------------------------------------------- #
 
 _LATEX_ESCAPE_RE = re.compile(r"[\\&%$#_{}~^]")
 _LATEX_REPL = {
@@ -54,9 +60,7 @@ def latex_escape(text: str | None) -> str:
     return _LATEX_ESCAPE_RE.sub(_latex_repl, text)
 
 
-# --------------------------------------------------------------------------- #
 # URLs
-# --------------------------------------------------------------------------- #
 
 
 def _escape_url(url: str) -> str:
@@ -73,6 +77,12 @@ def _escape_url(url: str) -> str:
     """
     url = url.replace("\\", "%5C")
     return url.replace("%", r"\%").replace("#", r"\#")
+
+
+def split_trailing_punct(raw: str) -> tuple[str, str]:
+    """Split sentence punctuation that ``\\S`` swallowed off the end of a bare URL."""
+    url = raw.rstrip(TRAILING_PUNCT)
+    return url, raw[len(url) :]
 
 
 def _href(url: str, label_tex: str) -> str:
@@ -93,24 +103,21 @@ def linkify(text: str) -> str:
         return text
 
     def replace(match: Match[str]) -> str:
-        raw = match.group(0)
-        url = raw.rstrip(TRAILING_PUNCT)
-        trailing = raw[len(url) :]
-        return _href(url, url) + trailing
+        url, trailing = split_trailing_punct(match.group(0))
+        return _href(url, _escape_url(url)) + trailing
 
     return URL_PATTERN.sub(replace, text)
 
 
-# --------------------------------------------------------------------------- #
 # richtext
-# --------------------------------------------------------------------------- #
 
 _MD_LINK = r"\[(?P<label>[^\]\n]*)\]\((?P<url>[^)\s]*)\)"
 _BARE_URL = r"(?P<bare>https?://[^\s]+)"
 _BOLD = r"\*\*(?P<bold>[^*\n]+?)\*\*"
-_LINK_RE = re.compile(_MD_LINK + "|" + _BARE_URL)
-_BOLD_RE = re.compile(_BOLD)
-_RICHTEXT_RE = re.compile(_MD_LINK + "|" + _BARE_URL + "|" + _BOLD)
+# Public so resume_generator can measure the exact text this module renders.
+LINK_RE = re.compile(_MD_LINK + "|" + _BARE_URL)
+BOLD_RE = re.compile(_BOLD)
+RICHTEXT_RE = re.compile(_MD_LINK + "|" + _BARE_URL + "|" + _BOLD)
 
 
 def _escape_bold(text: str) -> str:
@@ -121,7 +128,7 @@ def _escape_bold(text: str) -> str:
     """
     out: list[str] = []
     pos = 0
-    for match in _BOLD_RE.finditer(text):
+    for match in BOLD_RE.finditer(text):
         out.append(latex_escape(text[pos : match.start()]))
         out.append("\\textbf{" + latex_escape(match.group("bold")) + "}")
         pos = match.end()
@@ -130,7 +137,7 @@ def _escape_bold(text: str) -> str:
 
 
 def _render(text: str, *, bold: bool) -> str:
-    pattern = _RICHTEXT_RE if bold else _LINK_RE
+    pattern = RICHTEXT_RE if bold else LINK_RE
     out: list[str] = []
     pos = 0
     for match in pattern.finditer(text):
@@ -141,9 +148,7 @@ def _render(text: str, *, bold: bool) -> str:
             # because its content excludes ``*``.
             out.append("\\textbf{" + _render(groups["bold"], bold=False) + "}")
         elif groups["bare"] is not None:
-            bare = groups["bare"]
-            url = bare.rstrip(TRAILING_PUNCT)
-            trailing = bare[len(url) :]
+            url, trailing = split_trailing_punct(groups["bare"])
             out.append(_href(url, _escape_url(url)))
             out.append(latex_escape(trailing))
         else:
