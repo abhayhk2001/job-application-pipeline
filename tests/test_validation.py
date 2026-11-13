@@ -8,7 +8,7 @@ import pytest
 
 from resume_builder.exceptions import ValidationError
 from resume_builder.renderer import render
-from resume_builder.validation import validate
+from resume_builder.validation import SECTION_TYPES, load_schema, validate
 
 
 def paths(problems):
@@ -21,6 +21,15 @@ def messages(problems):
 
 def test_the_fixture_is_valid(fixture_resume):
     assert validate(fixture_resume) == []
+
+
+def test_section_types_match_the_schema():
+    defs = load_schema()["$defs"]
+    branches = defs["section"]["oneOf"]
+    consts = tuple(
+        defs[b["$ref"].rsplit("/", 1)[-1]]["properties"]["type"]["const"] for b in branches
+    )
+    assert consts == SECTION_TYPES
 
 
 def test_top_level_must_be_an_object():

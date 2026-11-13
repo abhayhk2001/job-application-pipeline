@@ -135,10 +135,10 @@ portfolio link as a replacement for GitHub rather than an addition.
 
 ## Compatibility and validation
 
-The v3 master contract requires a migration of the sibling `resume_generator`; its current v2
-reader cannot load this record. The [migration handoff](master-resume-migration.md) describes the
-completed changes and required downstream work, and preserves all eight legacy LaTeX/PDF correction
-notes. Those historical corrections do not belong in the career record.
+The sibling `resume_generator` reads the v3 contract (migrated 2026-11-05). The
+[migration handoff](master-resume-migration.md) describes the completed changes and preserves all
+eight legacy LaTeX/PDF correction notes.
+Those historical corrections do not belong in the career record.
 
 Validate after any edit:
 

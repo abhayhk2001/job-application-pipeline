@@ -20,19 +20,13 @@ from jinja2 import Environment
 from . import templates_registry
 from .exceptions import ValidationError
 from .jinja_env import build_environment
-from .validation import validate
+from .validation import SECTION_TYPES, validate
 
 __all__ = ["render", "render_to_file"]
 
 
 HEADING_TEMPLATE = "heading.tex.j2"
-SECTION_TEMPLATE_NAMES = {
-    "education": "education.tex.j2",
-    "experience": "experience.tex.j2",
-    "projects": "projects.tex.j2",
-    "skills": "skills.tex.j2",
-    "achievements": "achievements.tex.j2",
-}
+SECTION_TEMPLATE_NAMES = {name: f"{name}.tex.j2" for name in SECTION_TYPES}
 
 
 def render(
@@ -98,6 +92,7 @@ def render_to_file(
             templates_dir=templates_dir,
             env=env,
             check=check,
-        )
+        ),
+        encoding="utf-8",
     )
     return out_path

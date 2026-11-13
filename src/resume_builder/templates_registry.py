@@ -91,7 +91,7 @@ def _read_manifest(directory: Path) -> dict:
     if not manifest.is_file():
         return {}
     try:
-        data = json.loads(manifest.read_text())
+        data = json.loads(manifest.read_text(encoding="utf-8"))
     except json.JSONDecodeError:
         return {}
     return data if isinstance(data, dict) else {}

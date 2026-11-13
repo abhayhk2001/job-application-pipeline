@@ -29,7 +29,9 @@ def test_warmup_compiles_each_builtin_template_once(fake_tectonic):
 
 
 def test_warmup_covers_whatever_templates_ship_with_the_package(fake_tectonic):
-    shipped = [i.name for i in templates_registry.list_templates(TEMPLATES_DIR)]
+    shipped = [
+        i.name for i in templates_registry.list_templates(TEMPLATES_DIR) if i.source == "explicit"
+    ]
     assert warmup() == shipped
 
 
@@ -57,6 +59,15 @@ def test_a_project_template_cannot_stand_in_for_a_builtin(
     project = tmp_path / "templates"
     (project / "classic").mkdir(parents=True)
     (project / "classic" / "resume.tex.j2").write_text("{{ no_such_function() }}")
+    monkeypatch.setattr(templates_registry, "PROJECT_TEMPLATES_DIR", project)
+
+    assert warmup() == ["classic", "serif"]
+
+
+def test_a_project_only_template_is_not_warmed(fake_tectonic, tmp_path: Path, monkeypatch):
+    project = tmp_path / "templates"
+    (project / "mine").mkdir(parents=True)
+    (project / "mine" / "resume.tex.j2").write_text("{{ no_such_function() }}")
     monkeypatch.setattr(templates_registry, "PROJECT_TEMPLATES_DIR", project)
 
     assert warmup() == ["classic", "serif"]

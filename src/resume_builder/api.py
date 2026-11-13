@@ -34,6 +34,7 @@ class BuildResult:
     tex_path: Path
     pdf_path: Path | None
     template: str = ""
+    # Reserved: always empty today, but part of the CLI's JSON output.
     warnings: tuple[str, ...] = ()
 
 
@@ -154,7 +155,11 @@ def warmup(*, timeout_seconds: float = WARMUP_TIMEOUT_SECONDS) -> list[str]:
     pinned to them, so a project template that shadows a built-in name cannot
     stand in for it. Nothing is kept; the output lives in a temporary directory.
     """
-    names = [info.name for info in templates_registry.list_templates(TEMPLATES_DIR)]
+    names = [
+        info.name
+        for info in templates_registry.list_templates(TEMPLATES_DIR)
+        if info.source == "explicit"
+    ]
     with tempfile.TemporaryDirectory(prefix="resume-builder-warmup-") as tmp:
         for name in names:
             build_resume(

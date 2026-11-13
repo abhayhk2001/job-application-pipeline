@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "Validate render-ready resume JSON and render it to LaTeX and PDF with Jinja2 and Tectonic."
 readme = "README.md"
 license = "MIT"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 dependencies = [
     "jinja2>=3.1",
     "jsonschema>=4",
@@ -38,7 +38,7 @@ resume_builder = ["templates/*/*.tex.j2", "templates/*/template.json"]
 
 [tool.ruff]
 line-length = 100
-target-version = "py310"
+target-version = "py311"
 
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "B", "UP"]

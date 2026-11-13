@@ -181,7 +181,7 @@ def build_builder_parser() -> argparse.ArgumentParser:
         "--workdir",
         type=Path,
         default=None,
-        help="Where the intermediate .tex and the LaTeX log live. Default: a "
+        help="Where the intermediate .tex lives. Default: a "
         "temporary directory, removed afterwards, leaving only the PDF.",
     )
     _add_compile_timeout(parser)
@@ -240,7 +240,7 @@ def _resolve_input(path: Path) -> Path:
 def _load_resume(path: Path) -> dict:
     """Read and parse the resume JSON."""
     try:
-        return json.loads(path.read_text())
+        return json.loads(path.read_text(encoding="utf-8"))
     except json.JSONDecodeError as e:
         raise _InputError(f"input is not valid JSON: {e}") from e
 

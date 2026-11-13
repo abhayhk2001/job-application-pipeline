@@ -43,7 +43,7 @@ _schema_cache: dict[Path, dict] = {}
 def load_schema(path: Path | None = None) -> dict:
     path = Path(path or RENDERED_SCHEMA)
     if path not in _schema_cache:
-        _schema_cache[path] = json.loads(path.read_text())
+        _schema_cache[path] = json.loads(path.read_text(encoding="utf-8"))
     return _schema_cache[path]
 
 

@@ -6,13 +6,17 @@ Layout:
     tests/fixtures/  a captured resume in render-ready form, plus the PDF it came from
     schemas/         JSON Schema for the render-ready resume shape
     src/resume_builder/
+        api.py           build_resume (validate, render, compile) and warmup
         validation.py    render-ready JSON -> list[Problem]
         renderer.py      JSON -> TeX
+        jinja_env.py     the Jinja environment and its filters
+        url_filters.py   LaTeX escaping and Markdown-ish rich text
         pdf_compiler.py  TeX -> PDF via tectonic
-        cli.py           resume-render entry point
+        cli.py           resume-render and resume-builder entry points
+        exceptions.py    the errors callers can catch
         templates_registry.py  which template a render uses
         templates/       one directory per template, plus _shared/ partials
-    templates/       your own templates; shadow the built-ins by name
+    templates/       optional, not shipped: your own templates; shadow the built-ins by name
 
 This module resolves paths only. Loading, rendering and TeX compilation live in
 sibling modules.
@@ -24,7 +28,6 @@ PACKAGE_ROOT = Path(__file__).resolve().parent
 PROJECT_ROOT = PACKAGE_ROOT.parents[1]
 
 DATA_DIR = PROJECT_ROOT / "data"
-DOCS_DIR = PROJECT_ROOT / "docs"
 FIXTURES_DIR = PROJECT_ROOT / "tests" / "fixtures"
 TEMPLATES_DIR = PACKAGE_ROOT / "templates"
 SHARED_TEMPLATES_DIR = TEMPLATES_DIR / "_shared"
@@ -41,7 +44,6 @@ __all__ = [
     "PACKAGE_ROOT",
     "PROJECT_ROOT",
     "DATA_DIR",
-    "DOCS_DIR",
     "FIXTURES_DIR",
     "TEMPLATES_DIR",
     "SHARED_TEMPLATES_DIR",

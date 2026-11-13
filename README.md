@@ -17,7 +17,7 @@ renderer (Python + Jinja2)  (templates: docs/templates.md)
 
 ## Install
 
-Requires Python 3.10+ and Tectonic (`brew install tectonic`, or see its install docs).
+Requires Python 3.11+ and Tectonic (`brew install tectonic`, or see its install docs).
 
 ```bash
 python3 -m venv .venv
@@ -109,8 +109,8 @@ The full contract is in `docs/templates.md`.
 
 The master file and the rendered resume are different shapes. `data/master_resume.json` decomposes each engagement into situation, actions, metrics and outcomes and has no bullets. A rendered resume has ordered `sections` of finished bullets, each with a `source_ref` back to its master id.
 
-The sibling `resume_generator` still requires the v2 master contract and must be migrated before
-it can read this v3 record. See the [migration handoff](docs/master-resume-migration.md).
+The sibling `resume_generator` reads this v3 record (migrated 2026-11-05). See the
+[migration handoff](docs/master-resume-migration.md).
 
 ## Development
 

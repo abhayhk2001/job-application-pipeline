@@ -3,11 +3,11 @@
 The authoritative career record is now `data/master_resume.json`, using
 `abhay-master-resume/v3`, version `3.0.0`. The sibling `resume_generator` has
 since been migrated (see "Generator migration status" below); the record now
-also holds the Unifrost Drona project (`proj.unifrost-lms`) and 129 skills.
+also holds the Unifrost Drona project (`proj.unifrost-lms`) and 145 skills in 11 categories.
 
 ## Generator migration status (2026-11-05)
 
-Done. `resume_generator` reads v3 (`--audit-data-lake`: 20 units, 129 skills,
+Done. `resume_generator` reads v3 (`--audit-data-lake` at the time: 20 units, 129 skills,
 zero warnings). Departures from the plan below, and later additions:
 
 - A skill links to a unit when the unit's `technologies_used` (including
