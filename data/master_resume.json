@@ -3,7 +3,7 @@
     "base": "JSON Resume Schema (https://jsonresume.org/schema/)",
     "extension": "abhay-master-resume/v3",
     "version": "3.0.0",
-    "last_updated": "2026-11-11",
+    "last_updated": "2026-11-13",
     "purpose": "Authoritative, role-neutral career record. Injected wholesale into an LLM's context so a downstream agent can synthesize a job-specific resume. This file stores atomic facts, never resume-ready bullet prose. It is self-contained: no external documents are needed to interpret the record.",
     "hard_rules": [
       "No resume bullet points anywhere in this file. Bullets are written by the downstream generator, not stored here.",
@@ -871,11 +871,10 @@
         }
       ],
       "period": {
-        "start": null,
-        "end": null,
+        "start": "2021-06",
+        "end": "2022-03",
         "duration_stated": "Six months",
-        "academic_stage": "Junior year of undergraduate study",
-        "note": "Dates intentionally not tracked - the candidate orders projects by relevance to the target role rather than chronologically, and omits project dates to save space."
+        "academic_stage": "Junior year of undergraduate study"
       },
       "situation": "Predict the involvement of specific genes in non-small cell lung cancer (NSCLC). Input was patient-derived transcriptomic data that had already undergone differential gene expression and pathway analyses; the goal was to apply machine learning to extract insights into NSCLC-associated biomarkers.",
       "constraints": [
@@ -967,9 +966,8 @@
         }
       ],
       "period": {
-        "start": null,
-        "end": null,
-        "note": "Dates intentionally not tracked - the candidate orders projects by relevance to the target role rather than chronologically, and omits project dates to save space."
+        "start": "2021-08",
+        "end": "2022-06"
       },
       "situation": "Detect and extract valuable information from invoices and other business documents - both discrete elements such as the date and invoice number, and full tabular data.",
       "constraints": [
@@ -1038,10 +1036,9 @@
         }
       ],
       "period": {
-        "start": null,
-        "end": null,
-        "academic_stage": "Began in the third semester of undergraduate study",
-        "note": "Dates intentionally not tracked - the candidate orders projects by relevance to the target role rather than chronologically, and omits project dates to save space."
+        "start": "2020-12",
+        "end": "2021-12",
+        "academic_stage": "Began in the third semester of undergraduate study"
       },
       "situation": "Compare two models used for conditional independence testing - ProbSpace and the Randomized Conditional Correlation Test (RCoT) - and implement RCoT on HPCC Systems, a Data Analytics Supercomputer (DAS) designed for high-performance parallel processing.",
       "constraints": [
@@ -1100,9 +1097,8 @@
         }
       ],
       "period": {
-        "start": null,
-        "end": null,
-        "note": "Dates intentionally not tracked - the candidate orders projects by relevance to the target role rather than chronologically, and omits project dates to save space."
+        "start": "2021-06",
+        "end": "2021-12"
       },
       "situation": "Adapt Google's instant app technology for use within the Samsung Galaxy App Store ecosystem.",
       "constraints": [
@@ -1155,8 +1151,8 @@
       "organization": null,
       "role": "Designer and developer",
       "period": {
-        "start": null,
-        "end": null
+        "start": "2021-04",
+        "end": "2022-07"
       },
       "situation": "Address growing misinformation on social platforms by building an end-to-end blockchain application resembling a social media site that assesses the validity (truth value) of posts in order to flag misinformation.",
       "constraints": [
@@ -2053,6 +2049,39 @@
       "note": "No specific outputs (projects, research, events) are recorded for this role."
     }
   ],
+  "referees": {
+    "note": "Referees for academic CVs; resumes do not list them.",
+    "items": [
+      {
+        "id": "ref.shobha",
+        "name": "Dr. Shobha G",
+        "title": "Professor and Dean, School of Computer Science and Engineering",
+        "institution": "RV University",
+        "email": "gshobha@rvu.edu.in",
+        "phone": null,
+        "relationship": "Supervisor (RCoT research) and mentor (document extraction project)"
+      },
+      {
+        "id": "ref.niranjan",
+        "name": "Dr. Vidya Niranjan",
+        "title": "Pro Vice Chancellor",
+        "institution": "MIT Vishwaprayag University",
+        "email": "vidya.n@mitvpu.ac.in",
+        "phone": null,
+        "relationship": "Supervisor of the NSCLC biomarker research at RV College of Engineering",
+        "note": "proj.nsclc-biomarkers.advisors keeps her title at the time of the project (Professor and Head, Department of Biotechnology, RV College of Engineering)."
+      },
+      {
+        "id": "ref.rangaswamy",
+        "name": "Dr. Shanta Rangaswamy",
+        "title": "Professor and Head, Department of Computer Science and Engineering",
+        "institution": "RV College of Engineering",
+        "email": "shantharangaswamy@rvce.edu.in",
+        "phone": null,
+        "relationship": "Academic counselor for four years; mentor for the Samsung instant-app project"
+      }
+    ]
+  },
   "collaborating_organizations": {
     "note": "Organizations he has worked with directly through employment or project collaboration.",
     "items": [
@@ -2577,7 +2606,7 @@
     "presentation_preferences": {
       "note": "Rendering preferences stated by the candidate. These govern layout and space, NOT which content is relevant - that is still decided per job description at generation time.",
       "project_ordering": "Order projects by relevance to the target role, never chronologically.",
-      "project_dates": "Omit project dates entirely; they consume space the candidate would rather spend on content.",
+      "project_dates": "Resumes: omit project dates entirely; they consume space the candidate would rather spend on content. Academic CVs (cv/): print a project's period when start and end are recorded.",
       "qualcomm_titles": "A single 'Software Engineer' line for 2023-01 to 2026-07 is preferred when space is tight. The Associate Engineer (2023-01 to 2024-12) to Software Engineer (from 2025-01) split is available but optional.",
       "achievements_section": "Lowest priority section. Drop it first when space is tight.",
       "work_authorization": "Never print in the resume.",
