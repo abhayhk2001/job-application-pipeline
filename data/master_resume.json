@@ -3,7 +3,7 @@
     "base": "JSON Resume Schema (https://jsonresume.org/schema/)",
     "extension": "abhay-master-resume/v3",
     "version": "3.0.0",
-    "last_updated": "2026-11-13",
+    "last_updated": "2026-11-16",
     "purpose": "Authoritative, role-neutral career record. Injected wholesale into an LLM's context so a downstream agent can synthesize a job-specific resume. This file stores atomic facts, never resume-ready bullet prose. It is self-contained: no external documents are needed to interpret the record.",
     "hard_rules": [
       "No resume bullet points anywhere in this file. Bullets are written by the downstream generator, not stored here.",
@@ -23,8 +23,8 @@
     "profiles": [
       {
         "network": "LinkedIn",
-        "username": "abhay-h-kashyap",
-        "url": "https://www.linkedin.com/in/abhay-h-kashyap/"
+        "username": "ahkashyap",
+        "url": "https://www.linkedin.com/in/ahkashyap"
       },
       {
         "network": "GitHub",
@@ -641,7 +641,7 @@
           ],
           "actions": [
             "Researched and identified an Intel optimization library suited to the requirement.",
-            "Accelerated RSA and AES256 algorithms using the Intel QAT OpenSSL Engine.",
+            "Accelerated the RSA and AES256 cryptographic algorithms using the Intel QAT OpenSSL Engine.",
             "Used OpenSSL and Python to optimize hashing on Intel silicon."
           ],
           "technologies_used": [
@@ -688,7 +688,8 @@
             "Built the Kubernetes data pipeline using Spark with storage in S3.",
             "Automated deployment via Terraform and Ansible.",
             "Benchmarked Intel-Optimized components on the pipeline.",
-            "Integrated the Spark application with the Hive warehouse and S3 buckets."
+            "Integrated the Spark application with the Hive warehouse and S3 buckets.",
+            "Ran the pipeline on Azure Kubernetes Service (AKS) and Azure Virtual Machines."
           ],
           "technologies_used": [
             "Apache Spark",
@@ -700,7 +701,9 @@
             "Ansible",
             "Intel-Optimized libraries",
             "R",
-            "PostgreSQL"
+            "PostgreSQL",
+            "Azure Kubernetes Service (AKS)",
+            "Azure Virtual Machines"
           ],
           "metrics": [
             {
@@ -1231,7 +1234,8 @@
         "Modeled fees/installments and staff-reviewed UPI claims, added PhonePe integration code and encrypted tenant credentials, and connected payment/assessment documents to S3 storage.",
         "Used AWS EC2 for development and prepared deployment configurations; production pilot hosting ran on Supabase PostgreSQL, Vercel and Railway; provided database backup/restore commands, tenant onboarding procedures and reproducible fixtures.",
         "Built a multi-agent engineering workflow in which Claude Code reporter, fixer, QA and tester agents progress bugs through a resumable ledger, with human approval provenance, role/path push controls and a desktop review tool with atomic saves and conflict-aware decision synchronization.",
-        "Maintained specification-driven workflows, cross-repository OpenAPI checks and CI/regression gates, plus independent persona-journey observation across web/mobile surfaces."
+        "Maintained specification-driven workflows, cross-repository OpenAPI checks and CI/regression gates, plus independent persona-journey observation across web/mobile surfaces.",
+        "Handled cloud security, user authentication and authorization: token authentication with account-activation checks and Ktor token refresh, tenant-scoped PostgreSQL row-level security with separate runtime/platform database roles, encrypted tenant payment credentials, and native credential storage on mobile."
       ],
       "technologies_used": [
         "ADB tooling",
@@ -1939,7 +1943,7 @@
       "publisher": "Cancer Informatics (SAGE Publications)",
       "type": "Peer-reviewed journal article",
       "releaseDate": "2023-04",
-      "url": "https://journals.sagepub.com/doi/10.1177/11769351231167992",
+      "url": "https://tinyurl.com/nsclcpaper",
       "doi": "10.1177/11769351231167992",
       "authors": [
         "Lavanya C",
@@ -1960,7 +1964,7 @@
       "publisher": "Journal of Advances in Information Technology (JAIT)",
       "type": "Peer-reviewed journal article",
       "releaseDate": "2023",
-      "url": "https://www.jait.us/show-229-1347-1.html",
+      "url": "https://tinyurl.com/hpccpaper",
       "doi": "10.12720/jait.14.3.495-500",
       "authors": [
         "Agarwal, M.",
@@ -1982,7 +1986,7 @@
       "publisher": "Springer Nature Singapore - Lecture Notes in Networks and Systems",
       "type": "Book chapter in conference proceedings",
       "releaseDate": "2026",
-      "url": "https://rdcu.be/wZSePwoXqLVa",
+      "url": "https://tinyurl.com/CompVisionPaper",
       "doi": "10.1007/978-981-95-7238-0_36",
       "authors": [
         "Abhay H. Kashyap",
@@ -2367,6 +2371,16 @@
       },
       {
         "name": "systemd"
+      },
+      {
+        "name": "Azure",
+        "note": "Used in work.intel.etl-pipeline, which ran on Azure Kubernetes Service and Azure Virtual Machines. Shown only when a job keyword names Azure (normalization rule gated.azure)."
+      },
+      {
+        "name": "Azure Kubernetes Service (AKS)"
+      },
+      {
+        "name": "Azure Virtual Machines"
       }
     ],
     "systems_and_embedded": [
