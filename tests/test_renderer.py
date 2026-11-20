@@ -9,15 +9,13 @@ from pypdf import PdfReader
 
 from resume_builder.api import build_resume
 from resume_builder.pdf_compiler import compile_pdf
-from resume_builder.renderer import render_to_file
+from resume_builder.renderer import render, render_to_file
 
 # Differences we deliberately do NOT reproduce from tests/fixtures/resume.pdf, as
 # normalised text. Each pair is (what the base says, what we emit). The parity
 # test applies these to the base and then demands an exact match, so a new
 # divergence cannot slip through unnoticed.
 KNOWN_BASE_DEFECTS = [
-    # the base dropped the country code
-    ("2173051018", "12173051018"),
     # doubled degree phrase, and "Decemeber" misspelt
     (
         "masterofcomputerscienceincomputerscienceandengineeringaugust2026decemeber2027",
@@ -62,11 +60,31 @@ def test_build_resume_tex_only_needs_no_tectonic(fixture_resume, tmp_path: Path)
     assert result.pdf_path is None
 
 
+@pytest.mark.parametrize(
+    ("label", "display"),
+    [
+        ("2125550123", "(212) 555-0123"),
+        ("+1 212 555 0123", "(212) 555-0123"),
+        ("1-212-555-0123", "(212) 555-0123"),
+        ("(212) 555-0123", "(212) 555-0123"),
+        ("+44 20 7946 0958", "+44 20 7946 0958"),
+        ("212-555-0123 ext. 4", "212-555-0123 ext. 4"),
+    ],
+)
+def test_phone_label_is_formatted_without_changing_the_contact(fixture_resume, label, display):
+    contact = {"label": label, "url": "tel:+12125550123"}
+    resume = {**fixture_resume, "basics": {**fixture_resume["basics"], "contacts": [contact]}}
+
+    assert f"\\href{{tel:+12125550123}}{{\\underline{{{display}}}}}" in render(resume)
+    assert resume["basics"]["contacts"] == [{"label": label, "url": "tel:+12125550123"}]
+
+
 def test_build_resume_produces_a_single_page_pdf(fixture_resume, tmp_path: Path, require_tectonic):
     result = build_resume(fixture_resume, tmp_path)
     assert result.pdf_path is not None and result.pdf_path.exists()
     assert result.pdf_path.stat().st_size > 1000
     assert len(PdfReader(str(result.pdf_path)).pages) == 1, "the resume must stay on one page"
+    assert "(217) 305-1018" in _pdf_text(result.pdf_path)
 
 
 def test_pdf_matches_the_base_resume_except_for_known_defects(

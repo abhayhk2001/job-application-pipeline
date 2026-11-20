@@ -20,6 +20,7 @@ from jinja2 import Environment
 from . import templates_registry
 from .exceptions import ValidationError
 from .jinja_env import build_environment
+from .phone import format_us_phone, is_phone_contact
 from .validation import SECTION_TYPES, validate
 
 __all__ = ["render", "render_to_file"]
@@ -56,7 +57,14 @@ def render(
         name = templates_registry.choose(resume, template)
         env = build_environment(templates_registry.resolve(name, templates_dir))
 
-    heading_tex = env.get_template(HEADING_TEMPLATE).render(basics=resume["basics"])
+    basics = dict(resume["basics"])
+    basics["contacts"] = [
+        {**contact, "label": format_us_phone(contact["label"])}
+        if is_phone_contact(contact)
+        else contact
+        for contact in basics["contacts"]
+    ]
+    heading_tex = env.get_template(HEADING_TEMPLATE).render(basics=basics)
 
     sections_tex = []
     for section in resume["sections"]:
@@ -67,7 +75,7 @@ def render(
         sections_tex.append(env.get_template(template_name).render(section=section))
 
     return env.get_template(templates_registry.ROOT_TEMPLATE).render(
-        basics=resume["basics"],
+        basics=basics,
         heading_tex=heading_tex,
         sections_tex=sections_tex,
     )
